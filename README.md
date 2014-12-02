@@ -1,9 +1,15 @@
 Interview problems from:
-* Elements of Programming Interviews
-* Cracking the Coding Interview
-* Programming Interviews Exposed
-* Quant Job Interview Questions & Answers
-* Codility
+
+* Books:
+  * Elements of Programming Interviews
+  * Cracking the Coding Interview
+  * Quant Job Interview Questions & Answers
+  * Programming Interviews Exposed
+
+* Websites:
+  * codility.com
+  * glassdoor.com
+  * careercup.com
 
 * Real interviews with:
   * Google
