@@ -1,0 +1,28 @@
+[src ip, dst ip, src port, dst port, proto]
+
+TCP
+
+// client side
+
+// TODO
+
+// server side
+
+// create a socket
+socket()
+
+// bind created socket to an IP and port #
+bind()
+
+// start listening for connection requests
+listen()
+
+// accept connection
+accept()
+
+// transmit/receive data
+send()
+recv()
+
+// close TCP connection
+close()

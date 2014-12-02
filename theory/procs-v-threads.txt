@@ -1,0 +1,15 @@
+process:
+- an instance of a program in execution
+- independent entity with dedicated system resources
+- separate address space (can't access vars of another proc)
+- use IPC (pipes, files, sockets) for that
+
+thread:
+- execution path of a proc
+- changes to proc resource by one thread are visible by other threads
+- same stack space of a proc
+- multiple threads per proc
+- multiple threads share parts of their state
+- multiple threads can read/write same mem
+- own registers
+- own stack, but write-able by other threads

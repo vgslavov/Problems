@@ -1,0 +1,201 @@
+--[ Programming Interviews Exposed
+
+interface:
+- declares a set of related methods
+- defines an API
+- in C++: a class w/o data members and only pure virtual f.
+- implement an interface by deriving from the class
+- invoke conceptually related functionality
+
+abstract class:
+- declares but does not define all its methods
+- proper class
+- behavior left to be defined by subclasses
+- can’t instantiate, only instances of concrete subclasses can be
+- in C++: no constructor?
+- in C++: any class which contains a pure virtual f. or inherits one w/o redefining it?
+- implement “is-a” relationship
+
+polymorphism:
+
+virtual functions:
+- override (redefine, not overload!) methods defined by ancestors
+- method definition determined at run time based on actual type/class of obj. on which it is invoked
+  non-virtual determined at compile time based on type of ref./ptr.
+- used for polymorphism
+- a single method call invokes different method definitions based on the class of the obj.
+- pure virtual: a method declared but explicitly not defined
+- overhead
+
+inheritance:
+
+--[ cplusplus.com
+
+a pointer to a derived class is type-compatible with a pointer to its base class:
+
+Base *b = new Derived();
+
+non-virtual members of derived classes cannot be accessed through a reference of the base class
+
+what the virtual keyword does is to allow a member of a derived class with the same name as
+one in the base class to be appropriately called from a pointer
+and more precisely when the type of the pointer is a pointer to
+the base class that is pointing to an object of the derived class
+
+Base *b = new Derived();
+
+A class that declares or inherits a virtual function is called a polymorphic class.
+
+Classes that contain at least one pure virtual function are known as abstract base classes
+
+Abstract base classes cannot be used to instantiate objects. It can be used to create pointers to it
+
+objects of different but related types are referred to using a unique type of pointer (Polygon*)
+and the proper member function is called every time, just because they are virtual
+
+—-[ Quant Job Interview Questions & Answers
+
+polymorphism:
+- means "many shapes"
+- describes the process of having a base class with virtual f.
+  defined in inherited classes
+- client code can treat an obj as a base class obj but its behaviour can vary
+  according to which inherited class it is from
+
+abstract class:
+- contains a pure virtual method (virtual & ends with =0)
+- inherited from a pure virtual class & doesn't override the pure virtual f.
+- cannot be instantiated
+- can only be used through an inherited class which is concrete
+- pure virtual method need not be defined (but can be)
+
+virtual f:
+- allow to defer the implementation of a f. declared in a base class
+  to an inherited class
+- the virtual f. for the right object type is called automatically
+- virtual keyword in inherited classes is optional
+- overriding f. in CallOption and PutOption has different implementations
+- user of Option object doesn't know which payoff() is called,
+  the virtual f. of right one is called
+
+example:
+class VanillaOption {
+    virtual void payoff();
+};
+
+class CallOption: public Option {
+    void payoff() { cout << "CallOption called"; }
+};
+
+class PutOption: public Option {
+    void payoff() { cout << "PutOption called"; }
+};
+
+VanillaOption *vopt = new CallOption();
+vopt.payoff();  // prints "CallOption called"
+
+virtual dtors:
+- when deleting an inherited class obj (allocated dynamically)
+  via a ptr to a base class obj, the correct dtor needs to be called
+  (the inherited class dtor, not the base class one!)
+- always declare dtors virtual if any method is pure abstract
+  (not defined in the base class) or even if it is only virtual
+
+a class containing virtual f. should always have a virtual dtor. that means all
+inherited classes which have f. which override that base-class virtual f. (the
+inherited-class functions are virtual) should have virtual dtors too?
+
+order of ctor and dtor calls:
+- the more fundamental something is, the sooner it is constructed
+  and the later it is destructed
+- an inherited class may need to use the base class during either ctor or dtor,
+  but the converse is never true
+
+example:
+class A {};
+class B: public A
+{
+    C data;
+};
+class C {};
+
+call order:
+- ctors: A, C, B
+- dtors: B, C, A
+
+ctor/dtor rules:
+- the most primitive first for construction and last for destruction
+- a base class is more primitive than a class inherited from it,
+  and data members are more primitive than the class they are members of
+- the bases of a class are more primitive than its data members
+
+provided by compiler (trivial impl.):
+1. copy ctor (calls copy ctor of each data member making a shallow copy)
+2. assign. op. (calls assign. op of each data member
+3. dtor
+- shallow copy OK if POD, but not if ptrs
+- use smart ptrs to avoid having to declare the above 3
+- non-trivial dtor needed if new op. was used
+- dtor should be virtual if obj is likely to be deleted via ptr to base class
+
+“rule of three”:
+if a class has one of:
+- a destructor,
+- a copy constructor,
+- an assignment operator
+it generally needs all three
+
+“rule of almost zero”:
+a class should have none of the three,
+except an empty virtual destructor when it has abstract methods
+(and use smart pointers to take care of memory allocation/deallocation)
+
+virtual f. impl:
+- virtual f. table stores ptrs to all declared virtual f.
+- one copy of table for each class
+- each class obj with virtual f. contains a ptr to the table for that class
+- obj which contain virtual f. are larger because of the table
+
+virtual f. disadv:
+- extra instructions needed because called using ptr indirection
+  (processor jumps to a location contained in a ptr rather than
+  a pre-determined one)
+- virtual f. cannot be inlined (no opt. based on content)
+- objs are larger which can be a problem if many objs
+- mem locality: virtual f. for different classes can be in diff. parts of mem
+
+correct pairing:
+- new & delete (a single obj)
+- new[] & delete[] (an array of objs)
+
+throwing in ctors:
+- yes!
+- but dtor will never be called! (obj. never constructed)
+- however, the dtors of all fully-constructed data members will be called
+- if in {} (main part of ctor), all data members are already full-constructed
+- no return value, therefore throwing is only (almost) option
+- use smart ptrs to ensure allocated mem./resources is/are freed
+
+throwing in dtors:
+- never!
+- because C++ standard says program terminates if 2 unhandled exceptions happen simult.
+- when dtors throw, that is very likely to happen (chain reaction of other dtors throwing)
+
+copying polymorphic objs:
+- use a 'virtual' ctor
+- actually, use a virtual method which calls the ctor
+- inherited class knows its own type (can copy itself)
+- return type is ptr to *inherited* class obj allocated on the heap
+- changing return types is allowed when overriding in inherited class
+
+virtual Base* clone() const = 0;
+
+virtual Inherited* clone() const
+{
+    return new Inherited(*this);
+}
+
+user-defined assign. operator in inherited class if user-defined in base class:
+- no need to redefine
+- uses compiler-generated one (which will call assign. op. for each base class)
+- changing impl. of base class should not affect recoding of inherited class

@@ -1,0 +1,22 @@
+stack segment (data local to functions)
+- - - - - - -
+|
+V
+
+the hole
+
+^
+|
+- - - - - - -
+the heap (used for malloc())
+-------------
+BSS segment (uninitialized data: global/static vars init. to 0 or not init.)
+-
+data segment (initialized data: global/static vars init. to non-zero)
+-------------
+text segment (instructions)
+
+3 main storage areas:
+- heap: dynamically alloc. memory using malloc/new
+- stack: ordinary (automatic) vars
+- data segment: static vars, not init until declaration is reached in code

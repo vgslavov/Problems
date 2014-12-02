@@ -1,0 +1,91 @@
+const uses:
+- var. declaration: must assign at declaration
+- arg of a f. or method: when pass-by-ref to protect change
+- class method: no changes to class's internal state
+- class data member: member must be init in ctor init list, can't after
+  - can't have assign. op. (it would change member value)
+  - avoid because class can't be assigned
+- ptr decl: obj pointed to is const OR location of ptr is const
+- ref decl: only obj pointed to can be const
+  (can't reassign reference by design, reference is already const)
+
+--[ Examples
+
+T *pt = new T;              // ptr to T
+
+const T &rct = *pt;         // rather than const T *const
+const T *const cpct = pt;
+
+T &rt = *pt;                // rather than T *const
+T *const cpt = pt;
+
+void foo(Fruit bar); // Prototype 1
+pass by value (copy object)
+changes ARE NOT reflected in caller
+least efficient way to pass an object
+
+void foo(Fruit* bar); // Prototype 2
+a pointer to a Fruit object
+changes ARE reflected in caller
+more efficient
+could be NULL
+ptr must be explicitly dereferenced before member vars and funcs can be accessed
+
+void foo(Fruit& bar); // Prototype 3
+pass by reference (no copying)
+can't be NULL
+members accessed directly (no dereferencing)
+
+void foo(const Fruit* bar);// Prototype 4
+a constant pointer to a Fruit object
+performance advantage (passing a pointer)
+but prevent modifying bar
+
+void foo(Fruit*& bar); // Prototype 5
+a reference to a ptr to an object
+changes to the obj are seen in caller
+if bar is modified to point to a diff Fruit object, that change will be reflected in caller
+
+--[ cppreference?
+
+1. Simple Use of ‘const’
+
+One has to initialise it immediately in the constructor because, of course, one cannot set the value later as that would be altering it
+
+‘const’ applies to whatever is on its immediate left: int * const Constant3 (other than if there is nothing there in which case it applies to whatever is its immediate right: const int * Constant2).
+
+2. Use of ‘const’ in Functions Return Values
+
+const char *Function1()
+{ return "Some text";}
+
+for returning constant strings and arrays from functions
+
+3. Where it Gets Messy - in Parameter Passing
+
+passing a variable as itself rather than a copy is called a ‘reference’ in C++ (using &)
+(an ‘&’ in front of variables elsewhere in C generates pointers!)
+
+void Subroutine4(big_structure_type const &Parameter1);
+
+which will cause the variable to be passed without copying (more efficient) but stop it from then being altered.
+
+4. Messier Still - in the Object Oriented Programming
+
+class Class2
+{ void Method1() const;
+  int MemberVariable1;}
+
+which will ban Method1 in Class2 from being anything which can attempt to alter any member variables in the object.
+
+const int * const Method3(const int*const&)const;
+
+where the 5 uses ‘const’ respectively mean that the variable pointed to by the returned pointer & the returned pointer itself won’t be alterable and that the method does not alter the variable pointed to by the given pointer, the given pointer itself & the object of which it is a method!.
+
+5. Inconveniences of ‘const’
+
+the ‘mutable’ keyword was added which enables ‘const’ to be overridden for this purpose but it totally relies on trusting the programmer to only use it for that purpose
+
+class methods that don’t change the object are best declared ‘const’ so that they are not prevented from being called when an object of the class has somehow acquired ‘const’ status
+
+an object or variable which has been declared ‘const’ can be converted to changeable by use of ‘const_cast’ which is a similar bodge to ‘mutable’ and using it likewise renders ‘const’ virtually useless.

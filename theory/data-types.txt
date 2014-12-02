@@ -1,0 +1,7 @@
+# sizes:
+char (signed/unsigned): 1 byte
+int (signed/unsigned): 4 bytes
+long int (signed/unsigned): 4 bytes
+float: 4 bytes
+double: 8 bytes
+long doulbe: 8 bytes

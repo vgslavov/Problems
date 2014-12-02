@@ -1,0 +1,12 @@
+local:
+pipes (1 proc to another; named: one-way commm., unnamed: two-way)
+msg queues
+semaphores
+unix sockets (end-to-end, client to server)
+signals (software-generated interrupts)
+shared mem
+
+remote:
+internet sockets
+rpc (for more than 2 procs on diff. sys)
+transport layer interface (TLI)?

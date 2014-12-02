@@ -1,0 +1,12 @@
+extern void asprint(int *ia, int sz);
+void asprint(int *ia, int sz); // okay, compiler ignores the word "external", i.e.it does not make any sense for function definitions
+
+void asprint(int *ia, int sz);
+void asprint(int *ia, int sz); // okay, we ignore the second definition, as it it the same as the first one
+
+
+void asprint(float *ia, int sz);
+void asprint(int *ia, int sz); // still okay, function overloading
+
+int asprint(int *ia, int sz);
+void asprint(int *ia, int sz); // OOPS! function redefinition with different returning type! Error!

@@ -1,0 +1,51 @@
+static:
+- var in a f:
+  - init on 1st encounter
+  - doesn't go out of scope when f. exists
+  - simulate class-like behaviour in C
+  - incompatible with multi-threading
+  - singleton pattern: one instance of a class to exist
+    which is a static var member inside a static member f?
+- class member function:
+  - not associated with an obj of a class
+  - invoked as: MyClass::MyMethod()
+- f. w/o linkage:
+  - can't call a static f in another file
+  - use anon. namespace instead
+  - officially deprecated
+- class data member:
+  - one copy for all instances of the class
+  - issues with thread-safety
+
+Three major contexts:
+
+1. Inside a function
+
+the keyword static prevents re-initialization of the variable
+it happens to be initialized to zero automatically for you
+
+2. Inside a class definition
+
+a static member variable has the same value in any instance of the class and doesn't even require an instance of the class to exist
+
+it is good syntax to refer to static member functions through the use of a class name (class_name::x; rather than instance_of_class.x;)
+
+to access the static member, you use the scope operator, ::, when you refer to it through the name of the class
+
+you cannot initialize the static class member inside of the class
+
+you cannot even initialize the static variable inside of the header file; do it in a .cpp file instead
+
+you are required to initialize the static class member or it will not be in scope. (The syntax is a bit weird: "type class_name::static_variable = value".)
+
+Static member functions are functions that do not require an instance of the class, and are called the same way you access static member variables -- with the class name rather than a variable name. (E.g. a_class::static_function(); rather than an_instance.function();)
+
+Static member functions can only operate on static members
+
+you must include the type of the static variable when you set it!
+(user::next_id++)
+
+3. In front of a global variable inside a file making up a multifile program
+
+source code in other files that are part of the project cannot access the variable
+(It's scope -- or visibility -- is limited to the file.)

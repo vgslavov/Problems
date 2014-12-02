@@ -1,0 +1,11 @@
+--[ Treating Code as an Essay
+
+- brevity
+  - succinctness is power
+  - elimination of redundancy
+  - DRY (don't repeat yourself)
+- conservatism
+- familiarity
+- simplicity
+- flexibility: freedom from enforcement from tools
+- balance

@@ -1,0 +1,42 @@
+--[ Differences
+
+- pointers use: * and -> operators
+- references use: . (i.e. if not a ptr, use "." to access member data)
+
+- no NULL reference, always refer to an object, no need to test validity of a ref
+- references must be initialized, pointers must not
+
+- pointers may be reassigned to refer to diff. objects
+- a ref. always refers to the object it's init.
+
+--[ Examples
+
+*p: dereference the item pointed to by pointer p (* is dereference operator)
+&x: reference the address of a particular variable x (& is reference operator)
+**l: a pointer to a pointer
+
+int x = 3;
+int y = 4;
+int z = 5;
+int *p;
+int **l;
+p = &x;		// reference address of x
+y = *p;		// dereference value of x (pointed to by p)
+*p = z;		// * can be used on left side too
+Push(&(current->next), data);	// reference the address of the next ptr
+
+// C++
+declaration (x is parameter):  int f(int &x);
+caller (x is arg): f(x);
+callee (using x): x;
+
+// C
+// ptr to built-in type
+declaration (x is parameter):  int f(int *x);
+caller (x is arg and ptr): f(x);
+callee (using x): x;
+// ptr to ptr (a.k.a reference ptr)
+declaration (x is parameter):  int f(struct node** x);
+// makes a ptr, a ptr to ptr
+caller (x is arg and ptr): f(&x);
+callee (using x): *x;

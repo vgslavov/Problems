@@ -1,0 +1,21 @@
+// malloc() vs. calloc()
+
+1. # of arguments:
+malloc(size_t size): memory required in bytes
+calloc(size_t count, size_t size): # of contiguous objects of 'size' bytes
+
+2. calloc() inits memory to 0s, malloc() doesn't
+
+// malloc() vs. new
+
+malloc returns void pointer, new returns pointer to actual obj
+
+malloc doesn't call constructor, new does
+
+on error, malloc returns NULL, new throws an exception
+
+malloc can't be overloaded, new can
+
+malloc requires the size of mem to allocate, new doesn't
+
+malloc is function, new is operator

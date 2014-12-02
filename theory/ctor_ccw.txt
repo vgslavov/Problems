@@ -1,0 +1,4 @@
+A* a =new A();//default constructor
+foo(*a); //copy constr
+A b=*a;	 //copy constr
+b=*a; //assignment op

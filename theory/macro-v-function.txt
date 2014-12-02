@@ -1,0 +1,26 @@
+macro:
+- not compiled, but pre-processed
+- expanded by pre-processor
+- direct text-to-text substitution
+- error-prone, should be avoided
+- no context switching, no overhead
+- no overloading
+- no overriding
+- no type checking
+- cannot have a ptr to a macro
+- difficult to debug
+
+function:
+- type checking
+- can be inlined (to improve performance)
+- can have a ptr to a f.
+- can be overloaded
+- can be overriden
+
+inlined functions:
+- avoids run-time overhead of a f. call
+- replace each call with code inside function
+- suggestion only
+- 'longer' code (larger binary) if function called many times
+- must be included in header file, change causes recompiling for clients
+- extra optimizations (code available in context of use, not just f. call)

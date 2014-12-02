@@ -1,0 +1,36 @@
+hash table:
+- unordered keys
+- insert/lookup: amortized O(1)
+- need to handle collisions
+- cheaper to insert/delete (assuming infrequent rehashing)
+- uses an array + linked lists (for collisions)
+
+hash table requirements:
+1. good hash function (operation % large prime):
+   - spread keys (minimize collisions)
+   - equal keys, equal hash codes
+   - efficient hash computation
+   - ex: val = (val * large_prime + str[i]) % modulus;
+2. collision resolving method:
+   - chaining: good for dense tables
+   - open-addressing: good for sparse tables
+3. ability to dynamically increase/decrease size
+
+lookup: O(1) (on avg O(1 + n/m))
+n: # of obj
+m: len of array
+load: n/m (if large, rehash)
+rehashing: O(n+m) (expensive but infrequent)
+
+map (BST):
+- ordered keys
+- insert/lookup: O(log n)
+- no need to handle collisions
+- uses a balanced binary search tree (red-black tree)
+- works well for:
+  - find min/max
+  - print in sorted order
+  - find exact element or next smallest/largest
+
+lookup: O(log n)
+insert/delete: O(log n)

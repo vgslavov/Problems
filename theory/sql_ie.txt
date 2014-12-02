@@ -1,0 +1,99 @@
+Player ( 
+	name CHAR( 20),
+	number INTEGER( 4) PRIMARY_KEY
+);
+
+Stats ( 
+	number INTEGER( 4), 
+	totalPoints INTEGER( 4), 
+	year CHAR( 20),
+	FOREIGN_KEY (number) REFERENCES Player
+);
+
+INSERT INTO Player VALUES('Bill Henry', 50);
+
+SELECT * FROM Player;
+
+SELECT name FROM Player;
+
+SELECT name FROM Player WHERE number < 10 AND number > 40;
+
+-- inner join (excludes rows with key values which don't match)
+SELECT name, totalPoints, year FROM Player, Stats WHERE Player.number = Stats.number;
+-- same as above
+SELECT name, totalPoints, year FROM Player INNER JOIN Stats ON Player.number = Stats.number;
+
+-- outer join: left (retains all rows from the 1st table, but only matching rows from the 2nd (INNER JOIN results))
+SELECT name, totalPoints, year FROM Player LEFT OUTER JOIN Stats ON Player.number = Stats.number;
+
+-- outer join: right (retains all rows from the 2nd table, but only matching rows from the 1st (INNER JOIN results)
+
+-- outer join: full (retains all rows from both tables)
+
+SELECT AVG(totalPoints) FROM Stats;
+
+SELECT name, AVG(totalPoints) FROM Player INNER JOIN Stats ON Player.number = Stats.number GROUP BY name;
+
+-- ACID (Atomicity, Consistency, Isolation, Durability): not a RDBMS requirement
+
+-- referential integrity: when every foreign key value in one table exists as a key in the table it references 
+
+
+-- Simple SQL
+Olympics (
+	city CHAR( 16),
+	year INTEGER( 4)
+);
+
+INSERT INTO Olympics VALUES('Montreal', 1976);
+
+
+-- Company and Employee Database
+Company (
+	companyName CHAR( 30),
+	id INTEGER( 4) PRIMARY KEY
+);
+
+EmployeesHired (
+	id INTEGER( 4),
+	numHired INTEGER( 4),
+	fiscalQuarter INTEGER( 4),
+	FOREIGN KEY (id) REFERENCES Company
+);
+
+SELECT companyName FROM Company, EmployeesHired WHERE Company.id = EmployeesHired.id
+AND fiscalQuarter = 4 AND numHired > 0;
+
+SELECT companyName FROM Company WHERE id NOT IN (SELECT id from EmployeesHired WHERE numHired > 0);
+
+-- ATTN: SUM(numHired)
+SELECT companyName, SUM(numHired) FROM Company, EmployeesHired WHERE Company.id = EmployeesHired.id GROUP BY companyName;
+
+SELECT companyName, COALESCE(SUM(numHired), 0) FROM Company LEFT OUTER JOIN EmployeesHired ON Company.id = EmployeesHired.id GROUP BY companyName;
+
+
+-- Max, No Aggregates
+Test (
+	num INTEGER( 4)
+);
+
+-- AS gives the table a temporary alias for use within the query,
+-- allowing you to use the same table twice in a query 
+SELECT DISTINCT num FROM Test WHERE num NOT IN (SELECT Lesser.num, Greater.num FROM Test AS Greater, Test AS Lesser WHERE Lesser.num < Greater.num);
+
+
+-- Three-Valued Logic
+Address (
+	street CHAR( 30) NOT NULL,
+	apartment CHAR( 10),
+	city CHAR( 40) NOT NULL,
+);
+
+-- 3 possible logical values in SQL: TRUE, FALSE, UNKNOWN
+SELECT * FROM Address WHERE apartment = NULL;
+
+-- proper way to check for NULL
+SELECT * FROM Address WHERE apartment IS NULL;
+
+-- returns only rows that have a non-NULL apartment not equal to 1
+SELECT * FROM Address WHERE apartment <> 1;
