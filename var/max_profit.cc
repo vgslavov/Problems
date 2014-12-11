@@ -1,7 +1,7 @@
-using namespace std;
+//using namespace std;
 
 // brute force: O(n^2)
-int find_max-profit-slow(const vector<int> startprice)
+int find_max_profit_slow(const vector<int> startprice)
 {
     float max_profit = 0;
     int len = startprice.size();
@@ -11,7 +11,7 @@ int find_max-profit-slow(const vector<int> startprice)
             max_profit = max(max_profit, startprice[j] - startprice[i]);
         }
     }
-    return max_diff;
+    return max_profit;
 }
 
 // divide & conquer: O(n logn)

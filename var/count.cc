@@ -3,7 +3,7 @@ int count_words(const char *str)
 {
     bool in_word = false;
     int nwords = 0;
-    char *p = str;
+    const char *p = str;
 
     // check for *p, not p!
     while (*p) {
