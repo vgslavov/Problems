@@ -7,10 +7,10 @@ Interview problems from:
   * Programming Interviews Exposed
 
 * Websites:
-  * [codility.com](codility.com) and
+  * [codility.com](http://codility.com) and
     [solutions](http://codesays.com/solutions-to-training-by-codility/)
-  * [glassdoor.com](glassdoor.com)
-  * [careercup.com](careercup.com)
+  * [glassdoor.com](http://glassdoor.com)
+  * [careercup.com](http://careercup.com)
 
 * Real interviews with:
   * Google
