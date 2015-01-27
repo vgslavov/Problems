@@ -1,4 +1,6 @@
 # examples
+s = 'CamelCase'
+t = 'camel_case'
 
 # my solutions
 import re
