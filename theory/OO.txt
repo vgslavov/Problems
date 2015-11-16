@@ -37,10 +37,11 @@ Base *b = new Derived();
 
 non-virtual members of derived classes cannot be accessed through a reference of the base class
 
-what the virtual keyword does is to allow a member of a derived class with the same name as
-one in the base class to be appropriately called from a pointer
-and more precisely when the type of the pointer is a pointer to
-the base class that is pointing to an object of the derived class
+what the virtual keyword does is to allow a member of a derived class
+with the same name as one in the base class to be appropriately called
+from a pointer and more precisely when the type of the pointer is a
+pointer to the base class that is pointing to an object of the derived
+class
 
 Base *b = new Derived();
 
