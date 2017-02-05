@@ -25,7 +25,7 @@ def find_min_idx_convex(nums):
 
     start = 0
     end = len(nums)-1
-    while start != end:
+    while start <= end:
         mid = (start + end)/2
 
         #print("start: {0}".format(start))
@@ -36,9 +36,11 @@ def find_min_idx_convex(nums):
         if nums[mid] < nums[mid-1] and nums[mid] < nums[mid+1]:
             return mid
         # decreasing, go right
+        # don't add 1 to mid like in bin_search!
         elif nums[mid] < nums[mid-1] and nums[mid] > nums[mid+1]:
             start = mid
         # increasing, go left
+        # don't add 1 to mid like in bin_search!
         elif nums[mid] > nums[mid-1] and nums[mid] < nums[mid+1]:
             end = mid
         # not convex
