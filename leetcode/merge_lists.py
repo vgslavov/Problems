@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import copy
 import sys
 import unittest
 
@@ -9,11 +10,75 @@ import unittest
 # 1 <= m + n <= 200
 # -10^9 <= nums1[i], nums2[j] <= 10^9
 def merge_lists1(nums1, m, nums2, n):
+    # don't extend as len(nums1) > m
     nums1[m:] = nums2
     nums1.sort()
 
 # extra: 0(m + n) run-time
+# but space is 2x O(m + n)
 def merge_lists2(nums1, m, nums2, n):
+    merged = []
+    i = j = 0
+    while i < m and j < n:
+        if nums1[i] < nums2[j]:
+            merged.append(nums1[i])
+            i += 1
+        else:
+            merged.append(nums2[j])
+            j += 1
+
+    while i < m:
+        merged.append(nums1[i])
+        i += 1
+
+    while j < n:
+        merged.append(nums2[j])
+        j += 1
+
+    nums1 = merged[:]
+    # or
+    #nums1 = merged.copy()
+    #nums1 = copy.deepcopy(merged)
+
+class TestMergeLists(unittest.TestCase):
+    def test_empty1(self):
+        nums1 = [0]
+        m = 0
+        nums2 = [1]
+        n = 1
+        expected = [1]
+
+        merge_lists1(nums1, m, nums2, n)
+        self.assertEqual(nums1, expected)
+
+        merge_lists2(nums1, m, nums2, n)
+        self.assertEqual(nums1, expected)
+
+    def test_empty2(self):
+        nums1 = [1]
+        m = 1
+        nums2 = []
+        n = 0
+        expected = [1]
+
+        merge_lists1(nums1, m, nums2, n)
+        self.assertEqual(nums1, expected)
+
+        merge_lists2(nums1, m, nums2, n)
+        self.assertEqual(nums1, expected)
+
+    def test_merged(self):
+        nums1 = [1,2,3,0,0,0]
+        m = 3
+        nums2 = [2,5,6]
+        n = 3
+        expected = [1,2,2,3,5,6]
+
+        merge_lists1(nums1, m, nums2, n)
+        self.assertEqual(nums1, expected)
+
+        merge_lists2(nums1, m, nums2, n)
+        self.assertEqual(nums1, expected)
 
 if __name__ == '__main__':
     sys.exit(unittest.main())
