@@ -23,23 +23,25 @@ def remove_duplicates(nums):
 class TestRemoveDuplicates(unittest.TestCase):
     def test_empty(self):
         nums = []
-        k = 0
+        k = len(nums)
         self.assertEqual(remove_duplicates(nums), (k, nums))
 
     def test_no_dupes(self):
         nums = [1, 2, 3]
-        k = 3
+        k = len(nums)
         self.assertEqual(remove_duplicates(nums), (k, nums))
 
     def test_dupes1(self):
         nums = [1, 1, 2]
-        k = 2
-        self.assertEqual(remove_duplicates(nums)[1][:k], [1, 2])
+        expected = [1, 2]
+        k = len(expected)
+        self.assertEqual(remove_duplicates(nums)[1][:k], expected)
 
     def test_dupes2(self):
         nums = [0,0,1,1,1,2,2,3,3,4]
-        k = 5
-        self.assertEqual(remove_duplicates(nums)[1][:k], [0, 1, 2, 3, 4])
+        expected = [0,1,2,3,4]
+        k = len(expected)
+        self.assertEqual(remove_duplicates(nums)[1][:k], expected)
 
 if __name__ == '__main__':
     sys.exit(unittest.main())
