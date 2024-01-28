@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import math
 import sys
 import unittest
 
@@ -12,8 +13,7 @@ def remove_duplicates(nums):
 
     for i in range(len(nums)-1):
         if nums[i] == nums[i+1]:
-            #print("dupe:{} at i:{}".format(nums[i], i))
-            nums[i] = 999
+            nums[i] = math.inf
             dupes += 1
 
     nums.sort()
