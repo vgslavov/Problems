@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import math
 import sys
 import unittest
 
@@ -12,7 +13,7 @@ def remove_element(nums, val):
 
     for i, v in enumerate(nums):
         if v == val:
-            nums[i] = 999
+            nums[i] = math.inf
             matches += 1
 
     nums.sort()
