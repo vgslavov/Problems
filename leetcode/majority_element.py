@@ -18,7 +18,7 @@ def majority_element1(nums):
 
     return max(zip(counts.values(), counts.keys()))[1]
 
-# extra: O(n) time & O(1) space
+# TODO: extra: O(n) time & O(1) space
 # store in bitmap/int?
 def majority_element2(nums):
     pass
