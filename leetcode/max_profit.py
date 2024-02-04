@@ -10,6 +10,7 @@ import unittest
 # O(n^2)
 def max_profit1(prices):
     max_profit = -math.inf
+
     for i in range(len(prices)):
         for j in range(i+1, len(prices)):
             profit = prices[j] - prices[i]
