@@ -30,21 +30,23 @@ def roman2int(s):
         if i == len(s)-1:
             num += values[s[i]]
         elif s[i] == 'I':
-            if s[i+1] in ('V', 'X'):
+            # more efficient than
+            #if s[i+1] in ('V', 'X'):
+            if s[i+1] == 'V' or s[i+1] == 'X':
                 num -= values[s[i]]
             else:
                 num += values[s[i]]
         elif s[i] == 'V':
             num += values[s[i]]
         elif s[i] == 'X':
-            if s[i+1] in ('L', 'C'):
+            if s[i+1] == 'L' or s[i+1] == 'C':
                 num -= values[s[i]]
             else:
                 num += values[s[i]]
         elif s[i] == 'L':
             num += values[s[i]]
         elif s[i] == 'C':
-            if s[i+1] in ('D', 'M'):
+            if s[i+1] == 'D' or s[i+1] == 'M':
                 num -= values[s[i]]
             else:
                 num += values[s[i]]
