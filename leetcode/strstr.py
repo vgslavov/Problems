@@ -34,6 +34,9 @@ def strstr1(haystack, needle):
 
     return -1
 
+# O(n*m)?
+# n: len(haystack)
+# m: len(needle)
 def strstr2(haystack, needle):
     if not haystack or not needle:
         return -1
@@ -45,6 +48,10 @@ def strstr2(haystack, needle):
             return i
 
     return -1
+
+# TODO: more efficient, using sliding window?
+def strstr3(haystack, needle):
+    pass
 
 class TestStrstr(unittest.TestCase):
     def test_empty(self):
