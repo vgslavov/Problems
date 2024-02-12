@@ -49,7 +49,7 @@ def strstr2(haystack, needle):
 
     return -1
 
-# TODO: more efficient, using sliding window?
+# TODO: O(n) using sliding window?
 def strstr3(haystack, needle):
     pass
 
