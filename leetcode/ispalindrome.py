@@ -6,7 +6,7 @@ import unittest
 # 1 <= s.length <= 2 * 10^5
 # s consists only of printable ASCII characters.
 
-# slow
+# Pythonic, but slow
 def ispalindrome1(s):
     alnum = ''.join([c.lower() for c in s if c.isalnum()])
 
