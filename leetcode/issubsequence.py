@@ -21,7 +21,7 @@ def issubsequence1(s, t):
 
     return True
 
-# O(t + s)? slow
+# O(n): slow?
 def issubsequence2(s, t):
     i = j = match = 0
 
