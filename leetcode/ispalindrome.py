@@ -1,0 +1,59 @@
+#!/usr/bin/env python3
+
+import sys
+import unittest
+
+# 1 <= s.length <= 2 * 10^5
+# s consists only of printable ASCII characters.
+
+# slow
+def ispalindrome1(s):
+    alnum = ''.join([c.lower() for c in s if c.isalnum()])
+
+    return alnum == alnum[::-1]
+
+# O(n)
+def ispalindrome2(s):
+    left = 0
+    right = len(s) - 1
+
+    while left < right:
+        if not s[left].isalnum():
+            left += 1
+        elif not s[right].isalnum():
+            right -= 1
+        elif s[left].lower() != s[right].lower():
+            return False
+        else:
+            left += 1
+            right -= 1
+
+    return True
+
+# TODO: faster?
+def ispalindrome3(s):
+    pass
+
+class TestIspalindrome(unittest.TestCase):
+    def test_empty(self):
+        s = ' '
+        self.assertTrue(ispalindrome1(s))
+        self.assertTrue(ispalindrome2(s))
+
+    def test_true(self):
+        s = 'A man, a plan, a canal: Panama'
+        self.assertTrue(ispalindrome1(s))
+        self.assertTrue(ispalindrome2(s))
+
+    def test_false(self):
+        s = 'race a car'
+        self.assertFalse(ispalindrome1(s))
+        self.assertFalse(ispalindrome2(s))
+
+    def test_num(self):
+        s = '0P'
+        self.assertFalse(ispalindrome1(s))
+        self.assertFalse(ispalindrome2(s))
+
+if __name__ == '__main__':
+    sys.exit(unittest.main())
