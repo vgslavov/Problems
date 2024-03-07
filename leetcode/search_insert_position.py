@@ -24,24 +24,18 @@ def search_insert(nums, target):
         mid = start + (end - start) // 2
         print('start:{}, mid:{}, end:{}'.format(start, mid, end))
 
+        # found
+        if target == nums[mid]:
+            return mid
         # go right
-        if nums[mid] < target:
+        elif nums[mid] < target:
             start = mid + 1
         # go left
-        elif target < nums[mid]:
-            end = mid - 1
-        # found
         else:
-            return mid
+            end = mid - 1
 
-    # TODO: refactor (ugly)
-    # where would it be?
-    if target < nums[mid]:
-        return mid
-    elif nums[mid+1] < target:
-        return mid + 2
-    else:
-        return mid + 1
+    # why?
+    return start
 
 class TestSearchInsert(unittest.TestCase):
     def test_empty(self):
