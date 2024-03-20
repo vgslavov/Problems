@@ -14,17 +14,19 @@ def find_max_avg(nums, k):
         return 0
 
     sum = 0
+    # nums can be -ve!
     ans = -math.inf
 
+    # 1st window
     # k <= n!
     for i in range(k):
         sum += nums[i]
 
+    # 1st avg
     ans = sum / k
 
     for i in range(k, len(nums)):
         sum += nums[i] - nums[i-k]
-
         ans = max(ans, sum / k)
 
     return ans
