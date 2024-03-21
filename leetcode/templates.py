@@ -50,6 +50,24 @@ def fn(arr):
 
     return ans
 
+# Sliding *fixed* window
+def fn(arr):
+    ans = curr = 0
+
+    # 1st window
+    # if k <= n!
+    for i in range(k):
+        # do logic here to add arr[i] to curr
+
+    # update ans
+
+    for i in range(k, len(nums)):
+        # add arr[i] & remove arr[i-k] from curr
+
+        # update ans
+
+    return ans
+
 # Build a prefix sum
 def fn(arr):
     prefix = [arr[0]]
