@@ -22,6 +22,7 @@ def two_sum1(nums, target):
 # complexity?
 # O(n)
 def two_sum2(nums, target):
+    # value to list indices
     d = defaultdict(list)
 
     for i in range(len(nums)):
@@ -38,6 +39,20 @@ def two_sum2(nums, target):
 
     return [-1,-1]
 
+# O(n): smaller const
+def two_sum3(nums, target):
+    # value to index
+    d = {}
+    for i in range(len(nums)):
+        sub = target - nums[i]
+
+        if sub in d:
+            return [d[sub], i]
+
+        d[nums[i]] = i
+
+    return [-1,-1]
+
 class TestTwoSum(unittest.TestCase):
     def test_empty(self):
         nums = []
@@ -45,6 +60,7 @@ class TestTwoSum(unittest.TestCase):
         expected = [-1, -1]
         self.assertEqual(two_sum1(nums, target), expected)
         self.assertEqual(two_sum2(nums, target), expected)
+        self.assertEqual(two_sum3(nums, target), expected)
 
     def test1(self):
         nums = [2,7,11,15]
@@ -52,6 +68,7 @@ class TestTwoSum(unittest.TestCase):
         expected = [0,1]
         self.assertEqual(two_sum1(nums, target), expected)
         self.assertEqual(two_sum2(nums, target), expected)
+        self.assertEqual(two_sum3(nums, target), expected)
 
     def test2(self):
         nums = [3,2,4]
@@ -59,6 +76,7 @@ class TestTwoSum(unittest.TestCase):
         expected = [1,2]
         self.assertEqual(two_sum1(nums, target), expected)
         self.assertEqual(two_sum2(nums, target), expected)
+        self.assertEqual(two_sum3(nums, target), expected)
 
     def test3(self):
         nums = [3,3]
@@ -66,6 +84,7 @@ class TestTwoSum(unittest.TestCase):
         expected = [0,1]
         self.assertEqual(two_sum1(nums, target), expected)
         self.assertEqual(two_sum2(nums, target), expected)
+        self.assertEqual(two_sum3(nums, target), expected)
 
 if __name__ == '__main__':
     sys.exit(unittest.main())
