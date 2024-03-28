@@ -23,23 +23,36 @@ def largest_unique_number(nums):
 
     return ans
 
-# TODO: use max+filter+lambda
+# O(n): max+filter
+def largest_unique_number2(nums):
+    d = defaultdict(int)
+
+    for n in nums:
+        d[n] += 1
+
+    # convert to list to prevent passing empty arg to max()
+    filtered = list(filter(lambda x: x[1] == 1, d.items()))
+
+    return max(filtered)[0] if filtered else -1
 
 class TestLargestUniqueNumber(unittest.TestCase):
     def test_empty(self):
         nums = []
         expected = -1
         self.assertEqual(largest_unique_number(nums), expected)
+        self.assertEqual(largest_unique_number2(nums), expected)
 
     def test_success(self):
         nums = [5,7,3,9,4,9,8,3,1]
         expected = 8
         self.assertEqual(largest_unique_number(nums), expected)
+        self.assertEqual(largest_unique_number2(nums), expected)
 
     def test_failure(self):
         nums = [9,9,8,8]
         expected = -1
         self.assertEqual(largest_unique_number(nums), expected)
+        self.assertEqual(largest_unique_number2(nums), expected)
 
 if __name__ == '__main__':
     sys.exit(unittest.main())
