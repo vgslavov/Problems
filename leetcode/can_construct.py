@@ -17,8 +17,8 @@ def can_construct1(ransom_note, magazine):
     for c in ransom_note:
         if c not in letters or not letters[c]:
             return False
-        else:
-            letters[c] -= 1
+
+        letters[c] -= 1
 
     return True
 
