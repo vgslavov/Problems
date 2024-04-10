@@ -21,6 +21,8 @@ def num_jewelsinstones(jewels, stones):
 
     return count
 
+# TODO: faster using bitmap?
+
 class TestNumJewels(unittest.TestCase):
     def test_empty(self):
         jewels = ''
