@@ -5,7 +5,7 @@ import unittest
 
 # 1 <= s.length <= 10^4
 # s consists of parentheses only '()[]{}'.
-# TODO: refactor ugly code
+# TODO: refactor ugly code, use dict to match open/close
 def valid_parentheses(s):
     stack = []
 
