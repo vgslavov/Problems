@@ -146,9 +146,20 @@ def dfs(root):
 
     ans = 0
 
+    # preorder: order same as function calls
+    print("preorder: ".format(root.val))
+
     # do logic
     dfs(root.left)
+
+    # inorder: all left subtree printed before current and then right subtree
+    print("inorder: ".format(root.val))
+
     dfs(root.right)
+
+    # postorder: root is last to be traversed
+    print("postorder: ".format(root.val))
+
     return ans
 
 # Binary tree: DFS (iterative)
