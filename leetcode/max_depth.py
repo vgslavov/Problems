@@ -23,7 +23,7 @@ def max_depth(root):
 
     return max(left, right) + 1
 
-# iterative
+# iterative: slow!
 def max_depth2(root):
     if not root:
         return 0
