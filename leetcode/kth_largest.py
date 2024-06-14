@@ -29,7 +29,7 @@ class KthLargest:
     def add(self, val):
         heapq.heappush(self.heap, val)
 
-        while len(self.heap) > self.k:
+        if len(self.heap) > self.k:
             heapq.heappop(self.heap)
 
         #print('heap:{}, k:{}'.format(self.heap, self.k))
