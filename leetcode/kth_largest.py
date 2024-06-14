@@ -4,7 +4,7 @@ import heapq
 import sys
 import unittest
 
-# 1 <= k <= 104
+# 1 <= k <= 10^4
 # 0 <= nums.length <= 10^4
 # -10^4 <= nums[i] <= 10^4
 # -10^4 <= val <= 10^4
