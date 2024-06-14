@@ -8,7 +8,7 @@ import unittest
 # 1 <= k <= points.length <= 10^4
 # -10^4 <= x_i, y_i <= 10^4
 
-# runtime O(n * log k): slow!
+# runtime O(n * log n): slow!
 # space O(n)
 def find_k_closest(points, k):
     if not points:
