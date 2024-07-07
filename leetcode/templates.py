@@ -260,6 +260,16 @@ def fn(arr, k):
 
     return [num for num in heap]
 
+# Binary search: using bisect, ascending sorted only!
+import bisect
+
+def fn(arr, target):
+    i = bisect.bisect_left(arr, target)
+    if i < len(arr) and arr[i] == target:
+        return True
+
+    return False
+
 # Binary search
 def fn(arr, target):
     left = 0
