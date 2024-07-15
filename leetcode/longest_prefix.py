@@ -8,7 +8,7 @@ import unittest
 # strs[i] consists of only lowercase English letters.
 
 # O(n^2)
-def longest_common_prefix1(strs):
+def longeset_prefix1(strs):
     if not strs or not len(strs[0]):
         return ''
     elif len(strs) == 1:
@@ -33,40 +33,40 @@ def longest_common_prefix1(strs):
     return prefix if prefix else ''
 
 # TODO: O(n)?
-def longest_common_prefix2(strs):
+def longeset_prefix2(strs):
     pass
 
 class TestLongestCommonPrefix(unittest.TestCase):
 
     def test_empty(self):
         strs = []
-        self.assertFalse(longest_common_prefix1(strs))
+        self.assertFalse(longeset_prefix1(strs))
 
     def test_single_char(self):
         strs = ['a']
-        self.assertEqual(longest_common_prefix1(strs), strs[0])
+        self.assertEqual(longeset_prefix1(strs), strs[0])
 
     def test_two_chars(self):
         strs = ['aa','aa']
-        self.assertEqual(longest_common_prefix1(strs), strs[0])
+        self.assertEqual(longeset_prefix1(strs), strs[0])
 
     def test_three_chars(self):
         strs = ['aba','aba']
-        self.assertEqual(longest_common_prefix1(strs), strs[0])
+        self.assertEqual(longeset_prefix1(strs), strs[0])
 
     def test_one_char_match(self):
         strs = ['cir','car']
         expected = 'c'
-        self.assertEqual(longest_common_prefix1(strs), expected)
+        self.assertEqual(longeset_prefix1(strs), expected)
 
     def test_two_chars_match(self):
         strs = ['flower','flow','flight']
         expected = 'fl'
-        self.assertEqual(longest_common_prefix1(strs), expected)
+        self.assertEqual(longeset_prefix1(strs), expected)
 
     def test_no_match(self):
         strs = ['dog','racecar','car']
-        self.assertFalse(longest_common_prefix1(strs))
+        self.assertFalse(longeset_prefix1(strs))
 
 if __name__ == '__main__':
     sys.exit(unittest.main())

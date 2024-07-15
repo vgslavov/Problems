@@ -8,7 +8,7 @@ import unittest
 # s consists of English letters, digits, symbols and spaces.
 
 # TODO: WIP
-def len_longest_substr(s):
+def longest_substr(s):
     d = defaultdict(int)
 
     left = ans = 0
@@ -28,7 +28,7 @@ def len_longest_substr(s):
 
     return ans
 
-class TestLenLongestSubstr(unittest.TestCase):
+class TestLongestSubstr(unittest.TestCase):
     def test_empty(self):
         s = ''
         expected = 0
