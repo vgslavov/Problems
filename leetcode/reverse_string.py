@@ -9,6 +9,7 @@ import unittest
 # O(n) time
 # O(1) space
 # in-place
+# s is list!
 def reverse_string(s):
     left = 0
     right = len(s) - 1
