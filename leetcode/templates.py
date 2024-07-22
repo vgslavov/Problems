@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 
 # find common:
-# * subseq: order matters
+# * substr: order matters, consecutive chars
+# * subseq: order matters, non-consecutive chars
 # * subset: order doesn't matter
-# * substr: order matters
 
 # Two pointers: one input, opposite ends
 def fn(arr):

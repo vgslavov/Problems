@@ -6,9 +6,31 @@ import unittest
 
 # 0 <= s.length <= 5 * 10^4
 # s consists of English letters, digits, symbols and spaces.
+# w/o repeating chars
+
+# bad
+def longest_substr(s):
+    d = defaultdict(int)
+
+    sub_str = ''
+    ans = ''
+    for c in s:
+        if c in d:
+            if len(sub_str) > len(ans):
+                ans = sub_str
+
+            sub_str = ''
+            d = defaultdict(int)
+
+        sub_str += c
+        d[c] += 1
+
+    print("ans:{}, sub_str:{}".format(ans, sub_str))
+
+    return max(len(ans), len(sub_str))
 
 # TODO: WIP
-def longest_substr(s):
+def longest_substr2(s):
     d = defaultdict(int)
 
     left = ans = 0
@@ -32,32 +54,32 @@ class TestLongestSubstr(unittest.TestCase):
     def test_empty(self):
         s = ''
         expected = 0
-        self.assertEqual(len_longest_substr(s), expected)
+        self.assertEqual(longest_substr(s), expected)
 
     def test_space(self):
         s = ' '
         expected = 1
-        self.assertEqual(len_longest_substr(s), expected)
+        self.assertEqual(longest_substr(s), expected)
 
     def test_1(self):
         s = "abcabcbb"
         expected = 3
-        self.assertEqual(len_longest_substr(s), expected)
+        self.assertEqual(longest_substr(s), expected)
 
     def test_2(self):
         s = "bbbbb"
         expected = 1
-        self.assertEqual(len_longest_substr(s), expected)
+        self.assertEqual(longest_substr(s), expected)
 
     def test_3(self):
         s = "pwwkew"
         expected = 3
-        self.assertEqual(len_longest_substr(s), expected)
+        self.assertEqual(longest_substr(s), expected)
 
     def test_4(self):
         s = "dvdf"
         expected = 3
-        self.assertEqual(len_longest_substr(s), expected)
+        self.assertEqual(longest_substr(s), expected)
 
 if __name__ == '__main__':
     sys.exit(unittest.main())

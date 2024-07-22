@@ -13,6 +13,7 @@ import unittest
 def reverse_words(s):
     ss = s.strip().split(" ")
 
+    # can't use generator expression because of reverse()
     ans = [w.strip() for w in ss if w]
     ans.reverse()
 
