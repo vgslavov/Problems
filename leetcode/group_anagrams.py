@@ -8,8 +8,8 @@ import unittest
 # 0 <= strs[i].length <= 100
 # strs[i] consists of lowercase English letters.
 
-# O(n log n): run-time?
-# O(n): space
+# O(n * k * log(k)): run-time
+# O(n * k): space
 def group_anagrams(strs):
     d = defaultdict(list)
 
