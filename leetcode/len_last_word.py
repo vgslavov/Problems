@@ -3,15 +3,27 @@
 import sys
 import unittest
 
+# number: 58
+# section: array/string
+# difficulty: easy
+# tags: string, top 150
+
+# constraints
 # 1 <= s.length <= 10^4
 # s consists of only English letters and spaces ' '
 # There will be at least one word in s
 
-# fast
+# fast & Pythonic
+# complexity
+# run-time: O(n)
+# space: O(1)
 def len_last_word1(s):
     return len(s.split()[-1]) if s else 0
 
-# slow
+# slow & manual
+# complexity
+# run-time: O(n)
+# space: O(n)
 def len_last_word2(s):
     words = []
     word = ''

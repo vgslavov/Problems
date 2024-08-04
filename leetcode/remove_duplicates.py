@@ -4,10 +4,20 @@ import math
 import sys
 import unittest
 
+# number: 26
+# section: array/string
+# difficulty: easy
+# tags: array, two pointers, top 150
+
+# constraints
 # remove in-place
 # nums is sorted in non-decreasing order
 # 1 <= nums.length <= 3 * 10^4
 # -100 <= nums[i] <= 100
+
+# complexity
+# run-time: O(n * log(n))?
+# space: O(1)?
 def remove_duplicates(nums):
     dupes = 0
 
@@ -19,6 +29,8 @@ def remove_duplicates(nums):
     nums.sort()
 
     return len(nums) - dupes, nums
+
+# TODO: in O(n)
 
 class TestRemoveDuplicates(unittest.TestCase):
     def test_empty(self):

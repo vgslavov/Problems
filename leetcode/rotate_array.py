@@ -4,16 +4,28 @@ from collections import deque
 import sys
 import unittest
 
+# number: 189
+# section: array/string
+# difficulty: medium
+# tags: array, math, two pointers, top 150
+
+# constraints
 # 1 <= nums.length <= 10^5
 # -2^31 <= nums[i] <= 2^31 - 1
 # 0 <= k <= 10^5
 
 # slicing
 # TODO: fix when k > len(nums)
+# complexity
+# run-time: O(n)?
+# space: O(n)?
 def rotate_array1(nums, k):
     return nums[-k:] + nums[:-k]
 
 # using deque rotate
+# complexity
+# run-time: ?
+# space: O(n)?
 def rotate_array2(nums, k):
     q = deque(nums)
     q.rotate(k)
@@ -21,6 +33,9 @@ def rotate_array2(nums, k):
     return list(q)
 
 # using deque manual
+# complexity
+# run-time: ?
+# space: O(n)?
 def rotate_array3(nums, k):
     q = deque(nums)
 
@@ -34,8 +49,6 @@ def rotate_array3(nums, k):
     return list(q)
 
 # TODO: extra: in-place w/ O(1) space
-def rotate_array4(nums, k):
-    pass
 
 class TestRotateArray(unittest.TestCase):
 

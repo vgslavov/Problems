@@ -4,9 +4,10 @@ from collections import defaultdict
 import sys
 import unittest
 
-# tags: array, hash table, string, sorting
-# difficulty: medium
+# number: 49
 # section: hashmap
+# difficulty: medium
+# tags: array, hash table, string, sorting, top 150
 
 # constraints
 # 1 <= strs.length <= 10^4
@@ -14,8 +15,8 @@ import unittest
 # strs[i] consists of lowercase English letters.
 
 # complexity
-# O(n * k * log(k)): run-time
-# O(n * k): space
+# run-time: O(n * k * log(k))
+# space: O(n * k)
 def group_anagrams(strs):
     d = defaultdict(list)
 

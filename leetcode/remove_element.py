@@ -4,10 +4,20 @@ import math
 import sys
 import unittest
 
+# number: 27
+# section: array/string
+# difficulty: easy
+# tags: array, two pointers, top 150
+
+# constraints
 # remove in-place
 # 0 <= nums.length <= 100
 # 0 <= nums[i] <= 50
 # 0 <= val <= 100
+
+# complexity
+# run-time: O(n * log(n))
+# space: O(1)
 def remove_element(nums, val):
     matches = 0
 
@@ -19,6 +29,8 @@ def remove_element(nums, val):
     nums.sort()
 
     return len(nums) - matches, nums
+
+# TODO: O(n) with two pointers
 
 class TestRemoveElement(unittest.TestCase):
 

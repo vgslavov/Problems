@@ -4,10 +4,18 @@ import math
 import sys
 import unittest
 
+# number: 121
+# section: array/string
+# difficulty: easy
+# tags: array, dynamic programming, top 150
+
+# constraints
 # 1 <= prices.length <= 10^5
 # 0 <= prices[i] <= 10^4
 
-# O(n^2)
+# complexity
+# run-time: O(n^2)?
+# space: O(1)?
 def max_profit1(prices):
     max_profit = -math.inf
 
@@ -19,7 +27,9 @@ def max_profit1(prices):
 
     return max_profit if max_profit > 0 else 0
 
-# O(n)
+# complexity
+# run-time: O(n)?
+# space: O(1)?
 def max_profit2(prices):
     max_profit = -math.inf
     min_idx = 0

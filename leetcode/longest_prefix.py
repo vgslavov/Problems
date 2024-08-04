@@ -3,11 +3,19 @@
 import sys
 import unittest
 
+# number: 14
+# section: array/string
+# difficulty: easy
+# tags: string, trie, top 150
+
+# constraints
 # 1 <= strs.length <= 200
 # 0 <= strs[i].length <= 200
 # strs[i] consists of only lowercase English letters.
 
-# O(n^2)
+# complexity
+# run-time: O(n^2)
+# space: O(1)
 def longeset_prefix1(strs):
     if not strs or not len(strs[0]):
         return ''
@@ -32,9 +40,7 @@ def longeset_prefix1(strs):
 
     return prefix if prefix else ''
 
-# TODO: O(n)?
-def longeset_prefix2(strs):
-    pass
+# TODO: O(n) using trie?
 
 class TestLongestCommonPrefix(unittest.TestCase):
 

@@ -3,9 +3,10 @@
 import sys
 import unittest
 
-# tags: stack, design, 150
-# difficulty: medium
+# number: 155
 # section: stack
+# difficulty: medium
+# tags: stack, design, top 150
 
 # constraints
 # -2^31 <= val <= 2^31 - 1
@@ -13,8 +14,8 @@ import unittest
 # At most 3 * 10^4 calls will be made to push, pop, top, and get_min.
 
 # complexity
-# O(1): run-time of all functions
-# O(n): space
+# run-time: O(1)
+# space: O(n)
 class MinStack:
 
     def __init__(self):

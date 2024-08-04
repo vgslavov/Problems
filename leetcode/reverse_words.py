@@ -4,12 +4,19 @@ from collections import deque
 import sys
 import unittest
 
+# number: 151
+# section: array/string
+# difficulty: medium
+# tags: two pointers, string, top 150
+
+# constraints
 # 1 <= s.length <= 10^4
 # s contains English letters (upper-case and lower-case), digits, and spaces ' '.
 # There is at least one word in s.
 
-# O(n) run-time
-# O(n) memory
+# complexity
+# run-time: O(n)
+# space: O(n)
 def reverse_words(s):
     ss = s.strip().split(" ")
 
@@ -19,8 +26,9 @@ def reverse_words(s):
 
     return ' '.join(ans)
 
-# O(n) run-time: faster
-# O(n) memory
+# complexity
+# run-time: O(n), faster
+# space: O(n)
 def reverse_words2(s):
     w = ''
     # TODO: estimate size?
@@ -43,7 +51,7 @@ def reverse_words2(s):
 
     return ' '.join(q)
 
-# TODO: faster, using two pointers
+# TODO: O(n) using two pointers
 def reverse_words3(s):
     left = 0
     right = len(s) - 1

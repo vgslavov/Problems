@@ -3,9 +3,18 @@
 import sys
 import unittest
 
+# number: 28
+# section: array/string
+# difficulty: easy
+# tags: two pointers, string, string matching, top 150
+
+# constraints
 # 1 <= haystack.length, needle.length <= 10^4
 # haystack and needle consist of only lowercase English characters.
 
+# complexity
+# run-time: O(n)
+# space: O(1)
 # TODO: fix bug
 def strstr1(haystack, needle):
     if not haystack or not needle:
@@ -34,9 +43,9 @@ def strstr1(haystack, needle):
 
     return -1
 
-# O(n*m)?
-# n: len(haystack)
-# m: len(needle)
+# complexity
+# run-time: O(n*m)?
+# space: O(1)
 def strstr2(haystack, needle):
     if not haystack or not needle:
         return -1
@@ -50,8 +59,6 @@ def strstr2(haystack, needle):
     return -1
 
 # TODO: O(n) using sliding window?
-def strstr3(haystack, needle):
-    pass
 
 class TestStrstr(unittest.TestCase):
     def test_empty(self):

@@ -4,12 +4,22 @@ import math
 import sys
 import unittest
 
+# number: 80
+# section: array/string
+# difficulty: medium
+# tags: array, two pointers, top 150
+
+# constraints
 # remove in-place w/ O(1) memory!
 # 1 <= nums.length <= 3 * 10^4
 # -10^4 <= nums[i] <= 10^4
 # nums is sorted in non-decreasing order
 # stable
 # unique elements appear at most twice
+
+# complexity
+# run-time: O(n * log(n))?
+# space: O(1)?
 def remove_duplicates2(nums):
     dupes = 0
 
@@ -21,6 +31,8 @@ def remove_duplicates2(nums):
 
     nums.sort()
     return len(nums) - dupes, nums
+
+# TODO: O(n) using two pointers
 
 class TestRemoveDuplicates2(unittest.TestCase):
 

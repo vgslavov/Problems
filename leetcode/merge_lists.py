@@ -4,18 +4,29 @@ import copy
 import sys
 import unittest
 
+# number: 88
+# section: array/string
+# difficulty: easy
+# tags: array, two pointers, sorting, top 150
+
+# constraints
 # nums1.length == m + n
 # nums2.length == n
 # 0 <= m, n <= 200
 # 1 <= m + n <= 200
 # -10^9 <= nums1[i], nums2[j] <= 10^9
+
+# complexity
+# run-time: O((m+n) * log(m+n))
+# space: O(1)
 def merge_lists1(nums1, m, nums2, n):
     # don't extend as len(nums1) > m
     nums1[m:] = nums2
     nums1.sort()
 
-# extra: 0(m + n) run-time
-# but space is 2x O(m + n)
+# complexity
+# run-time: O(m + n)
+# space: O(m + n)
 def merge_lists2(nums1, m, nums2, n):
     merged = []
     i = j = 0
@@ -35,10 +46,10 @@ def merge_lists2(nums1, m, nums2, n):
         merged.append(nums2[j])
         j += 1
 
-    nums1 = merged[:]
-    # or
+    # shallow copy
+    #nums1 = merged[:]
     #nums1 = merged.copy()
-    #nums1 = copy.deepcopy(merged)
+    nums1 = copy.deepcopy(merged)
 
 class TestMergeLists(unittest.TestCase):
     def test_empty1(self):

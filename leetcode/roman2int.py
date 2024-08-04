@@ -3,6 +3,12 @@
 import sys
 import unittest
 
+# number: 13
+# section: array/string
+# difficulty: easy
+# tags: hash table, math, string, top 150
+
+# reference
 # Symbol       Value
 # I             1
 # V             5
@@ -11,16 +17,20 @@ import unittest
 # C             100
 # D             500
 # M             1000
-
+#
 # I can be placed before V (5) and X (10) to make 4 and 9.
 # X can be placed before L (50) and C (100) to make 40 and 90.
 # C can be placed before D (500) and M (1000) to make 400 and 900.
 
+# constraints
 # 1 <= s.length <= 15
 # s contains only the characters ('I', 'V', 'X', 'L', 'C', 'D', 'M').
 # It is guaranteed that s is a valid roman numeral in the range [1, 3999].
-# O(n)
-# TODO: more efficient?
+
+# complexity
+# run-time: O(n)
+# space: O(1)
+# TODO: faster implementation?
 def roman2int(s):
     values = { 'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000 }
     roman = s.upper()
@@ -60,7 +70,7 @@ def roman2int(s):
 
     return num
 
-class TestRomaonToInt(unittest.TestCase):
+class TestRomanToInt(unittest.TestCase):
 
     def test_invalid(self):
         s = "xyz"
