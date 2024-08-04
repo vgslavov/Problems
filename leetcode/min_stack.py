@@ -3,10 +3,16 @@
 import sys
 import unittest
 
+# tags: stack, design, 150
+# difficulty: medium
+# section: stack
+
+# constraints
 # -2^31 <= val <= 2^31 - 1
 # Methods pop, top and get_min operations will always be called on non-empty stacks.
 # At most 3 * 10^4 calls will be made to push, pop, top, and get_min.
 
+# complexity
 # O(1): run-time of all functions
 # O(n): space
 class MinStack:

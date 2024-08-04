@@ -4,10 +4,16 @@ from collections import defaultdict
 import sys
 import unittest
 
+# tags: array, hash table, string, sorting
+# difficulty: medium
+# section: hashmap
+
+# constraints
 # 1 <= strs.length <= 10^4
 # 0 <= strs[i].length <= 100
 # strs[i] consists of lowercase English letters.
 
+# complexity
 # O(n * k * log(k)): run-time
 # O(n * k): space
 def group_anagrams(strs):
