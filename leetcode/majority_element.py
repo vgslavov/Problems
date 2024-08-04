@@ -14,6 +14,7 @@ import unittest
 # 1 <= n <= 5 * 10^4
 # -10^9 <= nums[i] <= 10^9
 
+# solution: dictionary
 # complexity
 # run-time: O(n)
 # space: O(n)
@@ -28,8 +29,7 @@ def majority_element(nums):
 
     return max(zip(counts.values(), counts.keys()))[1]
 
-# TODO: O(n) time & O(1) space
-# store in bitmap/int?
+# TODO: O(n) time & O(1) space using bitmap/int?
 
 class TestMajorityElement(unittest.TestCase):
 

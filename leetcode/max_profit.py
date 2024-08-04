@@ -13,6 +13,7 @@ import unittest
 # 1 <= prices.length <= 10^5
 # 0 <= prices[i] <= 10^4
 
+# solution: brute-force
 # complexity
 # run-time: O(n^2)?
 # space: O(1)?
@@ -27,6 +28,7 @@ def max_profit1(prices):
 
     return max_profit if max_profit > 0 else 0
 
+# solution: dp?
 # complexity
 # run-time: O(n)?
 # space: O(1)?

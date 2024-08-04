@@ -16,6 +16,7 @@ import unittest
 # 1 <= m + n <= 200
 # -10^9 <= nums1[i], nums2[j] <= 10^9
 
+# solution: Pythonic & slow
 # complexity
 # run-time: O((m+n) * log(m+n))
 # space: O(1)
@@ -24,6 +25,7 @@ def merge_lists1(nums1, m, nums2, n):
     nums1[m:] = nums2
     nums1.sort()
 
+# solution: two pointers
 # complexity
 # run-time: O(m + n)
 # space: O(m + n)

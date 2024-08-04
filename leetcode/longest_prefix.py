@@ -13,6 +13,7 @@ import unittest
 # 0 <= strs[i].length <= 200
 # strs[i] consists of only lowercase English letters.
 
+# solution: brute-force
 # complexity
 # run-time: O(n^2)
 # space: O(1)

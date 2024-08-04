@@ -15,6 +15,7 @@ import unittest
 # 0 <= nums[i] <= 50
 # 0 <= val <= 100
 
+# solution: sort
 # complexity
 # run-time: O(n * log(n))
 # space: O(1)

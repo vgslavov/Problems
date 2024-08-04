@@ -17,6 +17,7 @@ import unittest
 # stable
 # unique elements appear at most twice
 
+# solution: sort
 # complexity
 # run-time: O(n * log(n))?
 # space: O(1)?

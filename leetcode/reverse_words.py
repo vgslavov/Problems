@@ -14,6 +14,7 @@ import unittest
 # s contains English letters (upper-case and lower-case), digits, and spaces ' '.
 # There is at least one word in s.
 
+# solution: Pythonic & slow
 # complexity
 # run-time: O(n)
 # space: O(n)
@@ -26,6 +27,7 @@ def reverse_words(s):
 
     return ' '.join(ans)
 
+# solution: deque
 # complexity
 # run-time: O(n), faster
 # space: O(n)

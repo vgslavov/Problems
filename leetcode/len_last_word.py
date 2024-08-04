@@ -13,14 +13,14 @@ import unittest
 # s consists of only English letters and spaces ' '
 # There will be at least one word in s
 
-# fast & Pythonic
+# solution: Pythonic & fast
 # complexity
 # run-time: O(n)
 # space: O(1)
 def len_last_word1(s):
     return len(s.split()[-1]) if s else 0
 
-# slow & manual
+# solution: manual & slow
 # complexity
 # run-time: O(n)
 # space: O(n)

@@ -12,7 +12,7 @@ import unittest
 # 1 <= s.length <= 2 * 10^5
 # s consists only of printable ASCII characters.
 
-# solution: Pythonic, but slow
+# solution: Pythonic & slow
 # complexity
 # run-time: O(n)?
 # space: O(n)?

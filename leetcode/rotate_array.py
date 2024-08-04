@@ -14,7 +14,7 @@ import unittest
 # -2^31 <= nums[i] <= 2^31 - 1
 # 0 <= k <= 10^5
 
-# slicing
+# solution: Pythonic slicing
 # TODO: fix when k > len(nums)
 # complexity
 # run-time: O(n)?
@@ -22,7 +22,7 @@ import unittest
 def rotate_array1(nums, k):
     return nums[-k:] + nums[:-k]
 
-# using deque rotate
+# solution: deque rotate
 # complexity
 # run-time: ?
 # space: O(n)?
@@ -32,7 +32,7 @@ def rotate_array2(nums, k):
 
     return list(q)
 
-# using deque manual
+# solution: deque manual
 # complexity
 # run-time: ?
 # space: O(n)?
