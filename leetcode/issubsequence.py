@@ -4,11 +4,19 @@ from collections import defaultdict
 import sys
 import unittest
 
+# number: 392
+# section: two pointers
+# difficulty: easy
+# tags: two pointers, string, dynamic programming, top 150
+
+# constraints
 # 0 <= s.length <= 100
 # 0 <= t.length <= 10^4
 # s and t consist only of lowercase English letters.
 
-# O(n)
+# complexity
+# run-time: O(n)
+# space: O(1)
 def issubsequence(s, t):
     i = j = 0
 

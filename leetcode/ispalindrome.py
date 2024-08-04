@@ -3,16 +3,28 @@
 import sys
 import unittest
 
+# number: 125
+# section: two pointers
+# difficulty: easy
+# tags: two pointers, string, top 150
+
+# constraints
 # 1 <= s.length <= 2 * 10^5
 # s consists only of printable ASCII characters.
 
-# Pythonic, but slow
+# solution: Pythonic, but slow
+# complexity
+# run-time: O(n)?
+# space: O(n)?
 def ispalindrome1(s):
     alnum = ''.join([c.lower() for c in s if c.isalnum()])
 
     return alnum == alnum[::-1]
 
-# O(n)
+# solution: two pointers
+# complexity
+# run-time: O(n)
+# space: O(1)
 def ispalindrome2(s):
     left = 0
     right = len(s) - 1
@@ -31,8 +43,6 @@ def ispalindrome2(s):
     return True
 
 # TODO: faster?
-def ispalindrome3(s):
-    pass
 
 class TestIspalindrome(unittest.TestCase):
     def test_empty(self):
