@@ -3,11 +3,19 @@
 import sys
 import unittest
 
+# number: 205
+# section: hashmap
+# difficulty: easy
+# tags: hash table, string, top 150
+
+# constraints
 # 1 <= s.length <= 5 * 10^4
 # t.length == s.length
 # s and t consist of any valid ascii character.
 
-# O(n): slow
+# complexity
+# run-time: O(n), slow?
+# space: O(n+m) or O(n)?
 def isisomorphic(s, t):
     if len(s) != len(t):
         return False
@@ -27,9 +35,7 @@ def isisomorphic(s, t):
 
     return True
 
-# TODO: faster
-def isisomorphic2(s, t):
-    pass
+# TODO: faster?
 
 class TestIsIsomorphic(unittest.TestCase):
     def test_empty(self):

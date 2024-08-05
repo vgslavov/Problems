@@ -3,6 +3,19 @@
 import sys
 import unittest
 
+# number: 202
+# section: hashmap
+# difficulty: easy
+# tags: hash table, math, two pointers, top 150
+
+# description
+# A happy number is a number defined by the following process:
+# * Starting with any positive integer, replace the number by the sum of the
+#   squares of its digits.
+# * Repeat the process until the number equals 1 (where it will stay), or it
+#   loops endlessly in a cycle which does not include 1.
+# * Those numbers for which this process ends in 1 are happy.
+
 def pow_digits(n):
     s = str(n)
 
@@ -12,7 +25,12 @@ def pow_digits(n):
 
     return sum
 
+# constraints
 # 1 <= n <= 2^31 - 1
+
+# complexity
+# run-time: O(log n)
+# space: O(1)
 def ishappy(n):
     if not n:
         return False

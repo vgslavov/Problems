@@ -3,6 +3,11 @@
 import sys
 import unittest
 
+# number: 92
+# section: linked list
+# difficulty: medium
+# tags: linked list, top 150
+
 # Definition for singly-linked list.
 # class ListNode:
 #     def __init__(self, val=0, next=None):
@@ -33,11 +38,17 @@ def traverse(head, n):
 
     return prev
 
+# constraints
 # The number of nodes in the list is n.
 # 1 <= n <= 500
 # -500 <= Node.val <= 500
 # 1 <= left <= right <= n
-def reverseBetween(head, left, right):
+
+# complexity
+# run-time: O(n)?
+# space: O(1)
+# TODO: fix bugs, attempted
+def reverse_between(head, left, right):
     pre_start = head
     pre_end = traverse(pre_start, left)
 

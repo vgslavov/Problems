@@ -4,9 +4,19 @@ from collections import defaultdict
 import sys
 import unittest
 
+# number: 128
+# section: hashmap
+# difficulty: medium
+# tags: array, hash table, union find, top 150
+
+# constraints
 # 0 <= nums.length <= 10^5
 # -10^9 <= nums[i] <= 10^9
-# run-time: O(n)
+
+# complexity
+# run-time: O(n+k)
+# space: O(k)
+# TODO: fix bugs, attempted
 def longest_seq(nums):
     if not nums:
         return 0
@@ -20,7 +30,7 @@ def longest_seq(nums):
         if not v:
             continue
         elif k-1 not in counts and k+1 not in counts:
-            counts[k] = 0 
+            counts[k] = 0
 
     print("counts:{}".format(counts))
 

@@ -3,10 +3,20 @@
 import sys
 import unittest
 
+# number: 20
+# section: stack
+# difficulty: easy
+# tags: string, stack, top 150
+
+# constraints
 # 1 <= s.length <= 10^4
 # s consists of parentheses only '()[]{}'.
+
+# complexity
+# run-time: O(n)
+# space: O(n)
 # TODO: refactor ugly code, use dict to match open/close
-def valid_parentheses(s):
+def is_valid(s):
     stack = []
 
     for i in range(len(s)):
@@ -35,39 +45,39 @@ def valid_parentheses(s):
 class TestValidParentheses(unittest.TestCase):
     def test_empty(self):
         s = ""
-        self.assertTrue(valid_parentheses(s))
+        self.assertTrue(is_valid(s))
 
     def test_true1(self):
         s = "()"
-        self.assertTrue(valid_parentheses(s))
+        self.assertTrue(is_valid(s))
 
     def test_true2(self):
         s = "()[]{}"
-        self.assertTrue(valid_parentheses(s))
+        self.assertTrue(is_valid(s))
 
     def test_false1(self):
         s = "(]"
-        self.assertFalse(valid_parentheses(s))
+        self.assertFalse(is_valid(s))
 
     def test_false2(self):
         s = "([)]"
-        self.assertFalse(valid_parentheses(s))
+        self.assertFalse(is_valid(s))
 
     def test_false3(self):
         s = "["
-        self.assertFalse(valid_parentheses(s))
+        self.assertFalse(is_valid(s))
 
     def test_false4(self):
         s = "]"
-        self.assertFalse(valid_parentheses(s))
+        self.assertFalse(is_valid(s))
 
     def test_false5(self):
         s = "){"
-        self.assertFalse(valid_parentheses(s))
+        self.assertFalse(is_valid(s))
 
     def test_false6(self):
         s = "(){}}{"
-        self.assertFalse(valid_parentheses(s))
+        self.assertFalse(is_valid(s))
 
 if __name__ == '__main__':
     sys.exit(unittest.main())

@@ -3,6 +3,11 @@
 import sys
 import unittest
 
+# number: 104
+# section: binary tree general
+# difficulty: easy
+# tags: tree, dfs, bfs, binary tree, top 150
+
 # Definition for a binary tree node.
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
@@ -10,10 +15,14 @@ class TreeNode:
         self.left = left
         self.right = right
 
+# constraints
 # The number of nodes in the tree is in the range [0, 10^4].
 # -100 <= Node.val <= 100
 
-# recursive: fast!
+# solution: recursive dfs
+# complexity
+# run-time: ?, fast
+# space: O(1)
 def max_depth(root):
     if not root:
         return 0
@@ -23,7 +32,10 @@ def max_depth(root):
 
     return max(left, right) + 1
 
-# iterative: slow!
+# solution: iterative dfs
+# complexity
+# run-time: ?, slow
+# space: O(n)
 def max_depth2(root):
     if not root:
         return 0

@@ -3,15 +3,25 @@
 import sys
 import unittest
 
+# number: 21
+# section: linked list
+# difficulty: easy
+# tags: link list, recursion, top 150
+
 # Definition for singly-linked list.
 class ListNode:
     def __init__(self, val=0, next=None):
         self.val = val
         self.next = next
 
+# constraints
 # The number of nodes in both lists is in the range [0, 50].
 # -100 <= Node.val <= 100
 # Both list1 and list2 are sorted in non-decreasing order.
+
+# complexity
+# run-time: O(n+m)?
+# space: O(1)
 def merge_linked_lists(list1, list2):
     if not list1 and not list2:
         return None

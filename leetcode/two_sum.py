@@ -4,12 +4,21 @@ from collections import defaultdict
 import sys
 import unittest
 
+# number: 1
+# section: hashmap
+# difficulty: easy
+# tags: array, hash table, top 150
+
+# constraints
 # 2 <= nums.length <= 10^4
 # -10^9 <= nums[i] <= 10^9
 # -10^9 <= target <= 10^9
 # Only one valid answer exists.
 
-# O(n^2): slow!
+# solution: brute-force
+# complexity
+# run-time: O(n^2), slow
+# space: O(1)
 def two_sum1(nums, target):
     for i in range(len(nums)):
         for j in range(1, len(nums)):
@@ -18,9 +27,10 @@ def two_sum1(nums, target):
 
     return [-1,-1]
 
-# extra: Can you come up with an algorithm that is less than O(n^2) time
-# complexity?
-# O(n)
+# solution: dict
+# complexity
+# run-time: O(n*k)?
+# space: O(n)
 def two_sum2(nums, target):
     # value to list indices
     d = defaultdict(list)
@@ -39,7 +49,10 @@ def two_sum2(nums, target):
 
     return [-1,-1]
 
-# O(n): smaller const
+# solution: dict
+# complexity
+# run-time: O(n)
+# space: O(n)
 def two_sum3(nums, target):
     # value to index
     d = {}

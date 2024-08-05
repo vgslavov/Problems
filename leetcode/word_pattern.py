@@ -3,6 +3,12 @@
 import sys
 import unittest
 
+# number: 290
+# section: hashmap
+# difficulty: easy
+# tags: hash table, string, top 150
+
+# constraints
 # 1 <= pattern.length <= 300
 # pattern contains only lower-case English letters.
 # 1 <= s.length <= 3000
@@ -10,7 +16,10 @@ import unittest
 # s does not contain any leading or trailing spaces.
 # All the words in s are separated by a single space.
 
-# slowest!
+# solution: split + 2 dicts
+# complexity
+# run-time: O(n), slowest
+# space: O(n)
 def word_pattern1(pattern, s):
     if not pattern and not s:
         return True
@@ -38,7 +47,10 @@ def word_pattern1(pattern, s):
 
     return True
 
-# slow & ugly!
+# solution: two pointers + 2 dicts
+# complexity
+# run-time: O(n), slow?
+# space: O(n)?
 def word_pattern2(pattern, s):
     p2w = {}
     w2p = {}

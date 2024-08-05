@@ -3,11 +3,20 @@
 import sys
 import unittest
 
+# number: 35
+# section: binary search
+# difficulty: easy
+# tags: array, binary search, top 150
+
+# constraints
 # 1 <= nums.length <= 10^4
 # -10^4 <= nums[i] <= 10^4
 # nums contains distinct values sorted in ascending order.
 # -10^4 <= target <= 10^4
-# O(log n)
+
+# complexity
+# run-time: O(log n)
+# space: O(1)
 def search_insert(nums, target):
     start = 0
     end = len(nums) - 1

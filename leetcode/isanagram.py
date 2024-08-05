@@ -4,11 +4,18 @@ from collections import defaultdict
 import sys
 import unittest
 
+# number: 242
+# section: hashmap
+# difficulty: easy
+# tags: hash table, string, sorting, top 150
+
+# constraints
 # 1 <= s.length, t.length <= 5 * 10^4
 # s and t consist of lowercase English letters.
 
-# O(n): run-time
-# O(n): space
+# complexity: dict
+# run-time: O(n+m)?
+# space: O(n)
 def isanagram(s, t):
     if len(s) != len(t):
         return False
@@ -26,8 +33,10 @@ def isanagram(s, t):
 
     return True
 
-# O(n log n): run-time
-# O(1): space
+# solution: sort
+# complexity
+# run-time: O(n * log(n))
+# space: O(1)
 def isanagram2(s, t):
     if len(s) != len(t):
         return False

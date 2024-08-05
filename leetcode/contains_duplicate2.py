@@ -4,14 +4,23 @@ from collections import defaultdict
 import sys
 import unittest
 
+# number: 219
+# section: hashmap
+# difficulty: easy
+# tags: array, hash table, sliding window, top 150
+
+# description
 # return true if there are two distinct indices i and j in the array such that
 # nums[i] == nums[j] and abs(i - j) <= k
-#
+
+# constraints
 # 1 <= nums.length <= 10^5
 # -10^9 <= nums[i] <= 10^9
 # 0 <= k <= 10^5
 
-# slow!
+# complexity
+# run-time: O(n^2), slow!
+# space: O(k)
 def contains_nearby_duplicate(nums, k):
     d = defaultdict(list)
 
@@ -26,8 +35,6 @@ def contains_nearby_duplicate(nums, k):
     return False
 
 # TODO: faster, less mem
-def contains_nearby_duplicate2(nums, k):
-    pass
 
 class TestContainsDupes(unittest.TestCase):
     def test_empty(self):

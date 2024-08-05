@@ -4,11 +4,21 @@ from collections import defaultdict
 import sys
 import unittest
 
+# number 3:
+# section: sliding window
+# difficulty: medium
+# tags: hash table, string, sliding window, top 150
+
+# constraints
 # 0 <= s.length <= 5 * 10^4
 # s consists of English letters, digits, symbols and spaces.
 # w/o repeating chars
 
-# bad
+# solution: dict
+# complexity
+# run-time: O(n)
+# space: O(n)
+# TODO: fix?
 def longest_substr(s):
     d = defaultdict(int)
 
@@ -29,7 +39,11 @@ def longest_substr(s):
 
     return max(len(ans), len(sub_str))
 
-# TODO: WIP
+# solution: sliding window
+# complexity
+# run-time: O(n)
+# space: O(n)
+# TODO: finish, attempted
 def longest_substr2(s):
     d = defaultdict(int)
 

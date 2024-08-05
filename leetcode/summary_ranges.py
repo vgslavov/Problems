@@ -3,12 +3,24 @@
 import sys
 import unittest
 
+# number: 228
+# section: intervals
+# difficulty: easy
+# tags: array, top 150
+
+# description
+# Return the smallest sorted list of ranges that cover all the numbers in the
+# array exactly.
+
+# constraints
 # 0 <= nums.length <= 20
 # -2^31 <= nums[i] <= 2^31 - 1
 # All the values of nums are unique.
 # nums is sorted in ascending order.
 
-# O(n): ok
+# complexity
+# run-time: O(n)
+# space: O(n)
 def summary_ranges(nums):
     if not nums:
         return None

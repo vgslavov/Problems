@@ -4,12 +4,22 @@ import heapq
 import sys
 import unittest
 
+# number: 373
+# section: heap
+# difficulty: medium
+# tags: array, heap, priority queue, top 150
+
+# constraints
 # 1 <= nums1.length, nums2.length <= 10^5
 # -10^9 <= nums1[i], nums2[i] <= 10^9
 # nums1 and nums2 both are sorted in non-decreasing order.
 # 1 <= k <= 10^4
 
-# O(n^2): slow & too much memory!
+# solution: brute-force
+# complexity
+# run-time: O(n^2), slow
+# space: O(n), mem limit exceeded
+# TODO: optimize mem, attempted
 def find_k_smallest_pairs(nums1, nums2, k):
     if not nums1 or not nums2:
         return False
@@ -23,6 +33,8 @@ def find_k_smallest_pairs(nums1, nums2, k):
 
     #print(smallest_pairs)
     return [list(heapq.heappop(smallest_pairs)[1]) for i in range(k)]
+
+# TODO: faster, less mem
 
 class TestFindKSmallestPairs(unittest.TestCase):
     def test_empty(self):

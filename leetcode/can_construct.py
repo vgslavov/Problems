@@ -4,10 +4,18 @@ from collections import defaultdict
 import sys
 import unittest
 
+# number: 383
+# section: hashmap
+# difficulty: easy
+# tags: hash table, string, counting, top 150
+
+# constraints
 # 1 <= ransom_note.length, magazine.length <= 10^5
 # ransom_note and magazine consist of lowercase English letters.
 
-# O(n): slow
+# complexity
+# run-time: O(m+n), slow
+# space: O(m)
 def can_construct1(ransom_note, magazine):
     letters = defaultdict(int)
 
@@ -22,9 +30,7 @@ def can_construct1(ransom_note, magazine):
 
     return True
 
-# TODO: faster
-def can_construct2(ransom_note, magazine):
-    pass
+# TODO: faster?
 
 class TestCanConstruct(unittest.TestCase):
 

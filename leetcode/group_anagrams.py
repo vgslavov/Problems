@@ -14,6 +14,7 @@ import unittest
 # 0 <= strs[i].length <= 100
 # strs[i] consists of lowercase English letters.
 
+# solution: dict + sort
 # complexity
 # run-time: O(n * k * log(k))
 # space: O(n * k)
