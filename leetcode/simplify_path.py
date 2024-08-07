@@ -3,9 +3,19 @@
 import sys
 import unittest
 
+# number: 71
+# section: stack
+# difficulty: medium
+# tags: string, stack, top 150
+
+# constraints
 # 1 <= path.length <= 3000
 # path consists of English letters, digits, period '.', slash '/' or '_'.
 # path is a valid absolute Unix path.
+
+# complexity
+# run-time: O(n)
+# space: O(n)
 def simplify_path(path):
     if not path:
         return ''
@@ -57,6 +67,11 @@ class TestSimplifyPath(unittest.TestCase):
         expected = '/'
         self.assertEqual(simplify_path(path), expected)
 
+    def test_2dots2(self):
+        path = "/home/user/Documents/../Pictures"
+        expected = "/home/user/Pictures"
+        self.assertEqual(simplify_path(path), expected)
+
     def test_doubleslash(self):
         path = '/home//foo/'
         expected = '/home/foo'
@@ -75,6 +90,11 @@ class TestSimplifyPath(unittest.TestCase):
     def test_3dots(self):
         path = '/...'
         expected = '/...'
+        self.assertEqual(simplify_path(path), expected)
+
+    def test_3dots2dots2dots(self):
+        path = "/.../a/../b/c/../d/./"
+        expected = "/.../b/d"
         self.assertEqual(simplify_path(path), expected)
 
     def test_abcd(self):
