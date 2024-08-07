@@ -3,10 +3,10 @@
 import sys
 import unittest
 
-# number:
+# number: 9
 # section: math
 # difficulty: easy
-# tags: math
+# tags: math, top 150
 
 # constraints
 # 2^31 <= x <= 2^31 - 1
