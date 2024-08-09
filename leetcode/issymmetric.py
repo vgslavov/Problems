@@ -3,14 +3,14 @@
 import sys
 import unittest
 
-# number: 100
+# number: 101
 # section: binary tree general
 # difficulty: easy
 # tags: tree, dfs, bfs, binary tree, top 150
 
 # constraints
-# The number of nodes in both trees is in the range [0, 100].
-# -10^4 <= Node.val <= 10^4
+# The number of nodes in the tree is in the range [1, 1000].
+# -100 <= Node.val <= 100
 
 # Definition for a binary tree node.
 class TreeNode:
@@ -19,28 +19,32 @@ class TreeNode:
         self.left = left
         self.right = right
 
-# solution: dfs (recursive)
+# solution: recursive dfs
 # complexity
 # run-time: O(n)
 # space: O(n)
-def issametree(p, q):
+def compare(self, p, q):
     if not p and not q:
         return True
     elif not p or not q:
         return False
 
-    print("p.val={}, q.val={}".format(p.val, q.val))
     if p.val != q.val:
         return False
 
-    # fail immediately
-    if not issametree(p.left, q.left):
+    if not compare(p.left, q.right):
         return False
 
-    if not issametree(p.right, q.right):
+    if not compare(p.right, q.left):
         return False
 
     return True
+
+def issymmetric(root):
+    if not root:
+        return False
+
+    return compare(root.left, root.right)
 
 # TODO: add unit tests & solve iteratively
 
