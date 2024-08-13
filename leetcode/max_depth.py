@@ -30,6 +30,7 @@ def max_depth(root):
     left = max_depth(root.left)
     right = max_depth(root.right)
 
+    # post-order traversal
     return max(left, right) + 1
 
 # solution: iterative dfs
@@ -44,6 +45,7 @@ def max_depth2(root):
     ans = 0
 
     while stack:
+        # pre-order traversal
         node, depth = stack.pop()
 
         ans = max(ans, depth)
@@ -51,6 +53,7 @@ def max_depth2(root):
         if node.left:
             stack.append((node.left, depth+1))
 
+        # visiting right first as stack is LIFO!
         if node.right:
             stack.append((node.rigth, depth+1))
 

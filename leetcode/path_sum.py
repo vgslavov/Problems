@@ -27,7 +27,7 @@ class TreeNode:
 def sum_nodes(self, root, target_sum, cur_sum):
     if not root:
         return False
-    elif root and not root.left and not root.right:
+    elif not root.left and not root.right:
         return target_sum == cur_sum + root.val
 
     cur_sum += root.val
@@ -39,7 +39,7 @@ def sum_nodes(self, root, target_sum, cur_sum):
 def path_sum(root, target_sum):
     return self.sum_nodes(root, target_sum, 0)
 
-# TODO: add unit tests & solve iteratively
+# TODO: add unit tests & solve using iterative dfs
 # test 1
 # root = [5,4,8,11,null,13,4,7,2,null,null,null,1]
 # target_sum = 22

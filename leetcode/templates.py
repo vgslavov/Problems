@@ -91,6 +91,7 @@ def fn(arr):
     return "".join(ans)
 
 # Linked list: fast and slow pointer
+# traversing: iteratively more common
 def fn(head):
     slow = head
     fast = head
@@ -145,6 +146,7 @@ def fn(arr):
     return ans
 
 # Binary tree: DFS (recursive)
+# traversing: recursive more common
 def dfs(root):
     if not root:
         return
@@ -158,6 +160,7 @@ def dfs(root):
     dfs(root.left)
 
     # inorder: all left subtree printed before current and then right subtree
+    # on BST: traversal is in sorted order
     print("inorder: ".format(root.val))
 
     dfs(root.right)
@@ -168,6 +171,7 @@ def dfs(root):
     return ans
 
 # Binary tree: DFS (iterative)
+# traversing: less common
 def dfs(root):
     stack = [root]
     ans = 0

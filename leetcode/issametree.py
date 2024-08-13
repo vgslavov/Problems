@@ -42,7 +42,7 @@ def issametree(p, q):
 
     return True
 
-# TODO: add unit tests & solve iteratively
+# TODO: add unit tests & solve using iterative dfs
 
 if __name__ == '__main__':
     sys.exit(unittest.main())
