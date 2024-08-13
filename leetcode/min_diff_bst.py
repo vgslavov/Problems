@@ -13,6 +13,13 @@ import unittest
 # The number of nodes in the tree is in the range [2, 10^4].
 # 0 <= Node.val <= 10^5
 
+# Definition for a binary tree node.
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
 # solution: recursive dfs
 # complexity
 # run-time: O(n)
