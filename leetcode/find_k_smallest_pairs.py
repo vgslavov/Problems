@@ -24,17 +24,39 @@ def find_k_smallest_pairs(nums1, nums2, k):
     if not nums1 or not nums2:
         return False
 
-    smallest_pairs = []
+    heap = []
     i = j = 0
 
     for i in range(len(nums1)):
         for j in range(len(nums2)):
-            heapq.heappush(smallest_pairs, (nums1[i]+nums2[j], (nums1[i],nums2[j])))
+            heapq.heappush(heap, (nums1[i]+nums2[j], (nums1[i],nums2[j])))
+            # TODO: reduce size of heap by using max heap
+            # reorders output pairs
+            #heapq.heappush(heap, (-(nums1[i]+nums2[j]), (nums1[i],nums2[j])))
+            #if len(heap) > k:
+            #    heapq.heappop(heap)
 
-    #print(smallest_pairs)
-    return [list(heapq.heappop(smallest_pairs)[1]) for i in range(k)]
+    #print(heap)
+    return [list(heapq.heappop(heap)[1]) for i in range(k)]
 
 # TODO: faster, less mem
+def find_k_smallest_pairs2(nums1, nums2, k):
+    heap = []
+    i = j = 0
+
+    while i < len(nums1) and j < len(nums2):
+        heapq.heappush(heap, (-(nums1[i]+nums2[j]), (nums1[i],nums2[j])))
+        if len(heap) > k:
+            heapq.heappop(heap)
+
+        # TODO: advance i & j
+        if j < len(nums2)-1 and nums1[i] < nums2[j+1]:
+            j += 1
+        else:
+            i += 1
+
+    print(heap)
+    return [list(heapq.heappop(heap)[1]) for i in range(len(heap))]
 
 class TestFindKSmallestPairs(unittest.TestCase):
     def test_empty(self):
@@ -42,6 +64,7 @@ class TestFindKSmallestPairs(unittest.TestCase):
         nums2 = []
         k = 0
         self.assertFalse(find_k_smallest_pairs(nums1, nums2, k))
+        #self.assertFalse(find_k_smallest_pairs2(nums1, nums2, k))
 
     def test_k3(self):
         nums1 = [1,7,11]
@@ -49,6 +72,7 @@ class TestFindKSmallestPairs(unittest.TestCase):
         k = 3
         expected = [[1,2],[1,4],[1,6]]
         self.assertEqual(find_k_smallest_pairs(nums1, nums2, k), expected)
+        #self.assertEqual(find_k_smallest_pairs2(nums1, nums2, k), expected)
 
     def test_k2(self):
         nums1 = [1,1,2]
