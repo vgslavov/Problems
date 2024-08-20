@@ -17,20 +17,32 @@ import unittest
 # complexity
 # run-time: O(n)
 # space: O(1)
-def toggle_bit(value, index):
-    return value ^ (1 << index)
+# TODO: speed up
+def toggle_bit(value, offset):
+    return value ^ (1 << offset)
 
-def get_normalized_bit(value, index):
-    return (value >> index) & 1
+def get_normalized_bit(value, offset):
+    return (value >> offset) & 1
 
 def single_number(nums):
-    bitmask = 0
+    # negative bitmask
+    bitmask1 = 0
+    # positive bitmask
+    bitmask2 = 0
 
     for n in nums:
-        bitmask = toggle_bit(bitmask, n)
+        if n < 0:
+            n = abs(n)
+            bitmask1 = toggle_bit(bitmask1, n)
+        else:
+            bitmask2 = toggle_bit(bitmask2, n)
 
     for n in nums:
-        if get_normalized_bit(bitmask, n):
+        if n < 0:
+            n = abs(n)
+            if get_normalized_bit(bitmask1, n):
+                return -n
+        elif get_normalized_bit(bitmask2, n):
             return n
 
     return 0
@@ -51,7 +63,6 @@ class TestSingleNumber(unittest.TestCase):
         expected = 1
         self.assertEqual(single_number(nums), expected)
 
-    # TODO: support negative numbers
     def test_negative(self):
         nums = [-1]
         expected = -1
