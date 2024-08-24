@@ -14,53 +14,40 @@ import unittest
 # s consists of English letters, digits, symbols and spaces.
 # w/o repeating chars
 
-# solution: dict
+# solution: sliding window + dict
 # complexity
 # run-time: O(n)
 # space: O(n)
-# TODO: fix?
+# TODO: refactor
 def longest_substr(s):
-    d = defaultdict(int)
+    if len(s) == 1:
+        return 1
 
-    sub_str = ''
-    ans = ''
-    for c in s:
-        if c in d:
-            if len(sub_str) > len(ans):
-                ans = sub_str
-
-            sub_str = ''
-            d = defaultdict(int)
-
-        sub_str += c
-        d[c] += 1
-
-    print("ans:{}, sub_str:{}".format(ans, sub_str))
-
-    return max(len(ans), len(sub_str))
-
-# solution: sliding window
-# complexity
-# run-time: O(n)
-# space: O(n)
-# TODO: finish, attempted
-def longest_substr2(s):
-    d = defaultdict(int)
-
+    # key: char, value: index in s
+    d = {}
     left = ans = 0
-    ans_str = sub_str = ''
+    curr = ''
+    slist = list(s)
 
-    for right in range(len(s)):
-        if s[right] in d:
-            if len(sub_str) > len(ans_str):
-                ans_str = sub_str
+    for right in range(len(slist)):
+        # found duplicate
+        if slist[right] in d:
+            prev_idx = d[slist[right]]
+            sub_start = min(left, prev_idx)
+            sub_end = max(left, prev_idx)
 
-            left += 1
+            for i in range(sub_start, sub_end):
+                if slist[i] in d:
+                    del d[slist[i]]
 
-        d[s[right]] += 1
-        sub_str += s[right]
+            # decrease window
+            left += abs(left - prev_idx) + 1
 
-        ans = max(len(ans_str), len(sub_str))
+        # save index of char at window end
+        d[slist[right]] = right
+
+        # d always contains chars within current window
+        ans = max(ans, len(d))
 
     return ans
 
@@ -93,6 +80,21 @@ class TestLongestSubstr(unittest.TestCase):
     def test_4(self):
         s = "dvdf"
         expected = 3
+        self.assertEqual(longest_substr(s), expected)
+
+    def test_5(self):
+        s = "au"
+        expected = 2
+        self.assertEqual(longest_substr(s), expected)
+
+    def test_6(self):
+        s = "tmmzuxt"
+        expected = 5
+        self.assertEqual(longest_substr(s), expected)
+
+    def test_7(self):
+        s = "bpfbhmipx"
+        expected = 7
         self.assertEqual(longest_substr(s), expected)
 
 if __name__ == '__main__':
