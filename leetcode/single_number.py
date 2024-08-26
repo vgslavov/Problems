@@ -14,10 +14,10 @@ import unittest
 # Each element in the array appears twice except for one element which appears
 # only once.
 
+# solution: xor 2 bitmasks
 # complexity
-# run-time: O(n)
+# run-time: O(n), slow
 # space: O(1)
-# TODO: speed up
 def toggle_bit(value, offset):
     return value ^ (1 << offset)
 
@@ -47,26 +47,45 @@ def single_number(nums):
 
     return 0
 
+# solution: xor 1 bitmask
+# complexity
+# run-time: O(n)
+# space: O(1)
+def single_number2(nums):
+    mask = 0
+
+    # x ^ x = 0
+    # 0 ^ y = y
+    # x ^ x ^ y = y
+    for n in nums:
+        mask ^= n
+
+    return mask
+
 class TestSingleNumber(unittest.TestCase):
     def test_1(self):
         nums = [2,2,1]
         expected = 1
         self.assertEqual(single_number(nums), expected)
+        self.assertEqual(single_number2(nums), expected)
 
     def test_4(self):
         nums = [4,1,2,1,2]
         expected = 4
         self.assertEqual(single_number(nums), expected)
+        self.assertEqual(single_number2(nums), expected)
 
     def test_single(self):
         nums = [1]
         expected = 1
         self.assertEqual(single_number(nums), expected)
+        self.assertEqual(single_number2(nums), expected)
 
     def test_negative(self):
         nums = [-1]
         expected = -1
         self.assertEqual(single_number(nums), expected)
+        self.assertEqual(single_number2(nums), expected)
 
 if __name__ == '__main__':
     sys.exit(unittest.main())
