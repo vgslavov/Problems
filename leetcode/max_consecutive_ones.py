@@ -3,10 +3,20 @@
 import sys
 import unittest
 
+# number: 1004
+# section: sliding window
+# difficulty: medium
+# tags: array, binary search, sliding window, prefix sum, leetcode 75
+
+# constraints
 # 1 <= nums.length <= 10^5
 # nums[i] is either 0 or 1.
 # 0 <= k <= nums.length
 # k: how many 0s to flip
+
+# complexity
+# run-time: O(n)
+# space: O(1)
 def max_consecutive_ones(nums, k):
     left = curr = ans = 0
 

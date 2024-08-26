@@ -4,10 +4,20 @@ from collections import defaultdict
 import sys
 import unittest
 
+# number: 1143
+# section: dp (multi-d)
+# difficulty: medium
+# tags: string, dp
+
+# constraints
 # 1 <= text1.length, text2.length <= 1000
 # text1 and text2 consist of only lowercase English characters.
 
-# WIP: O(n)
+# solution: dict
+# complexity
+# run-time: O(n)
+# space: O(n)
+# TODO: fix bugs
 def longest_subseq(text1, text2):
     count1 = defaultdict(int)
     count2 = defaultdict(int)
@@ -99,6 +109,7 @@ class TestLongestSubseq(unittest.TestCase):
         expected = 2
         self.assertEqual(expected, longest_subseq(text1, text2))
 
+    # TODO: fails
     def test5(self):
         text1 = "oxcpqrsvwf"
         text2 = "shmtulqrypy"

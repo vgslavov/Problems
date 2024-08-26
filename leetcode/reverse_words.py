@@ -7,7 +7,7 @@ import unittest
 # number: 151
 # section: array/string
 # difficulty: medium
-# tags: two pointers, string, top 150
+# tags: two pointers, string, top 150, leetcode 75
 
 # constraints
 # 1 <= s.length <= 10^4
@@ -53,13 +53,7 @@ def reverse_words2(s):
 
     return ' '.join(q)
 
-# TODO: O(n) using two pointers
-def reverse_words3(s):
-    left = 0
-    right = len(s) - 1
-
-    while left < right:
-        pass
+# TODO: solve O(n) using two pointers
 
 # Q: If the string data type is mutable in your language, can you solve
 #    it in-place with O(1) extra space? 

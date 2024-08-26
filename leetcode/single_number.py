@@ -6,7 +6,7 @@ import unittest
 # number: 136
 # section: bit manipulation
 # difficulty: easy
-# tags: array, bit manipulation, top 150
+# tags: array, bit manipulation, top 150, leetcode 75
 
 # constraints
 # 1 <= nums.length <= 3 * 10^4

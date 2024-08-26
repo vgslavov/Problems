@@ -4,11 +4,20 @@ import math
 import sys
 import unittest
 
+# number: 643
+# section: sliding window
+# difficulty: easy
+# tags: array, sliding window, leetcode 75
+
+# constraints
 # n == nums.length
 # 1 <= k <= n <= 10^5
 # -10^4 <= nums[i] <= 10^4
 
-# O(n): sliding window
+# solution: sliding window
+# complexity
+# run-time: O(n)
+# space: O(1)
 def find_max_avg(nums, k):
     if not nums:
         return 0

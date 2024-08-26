@@ -39,7 +39,7 @@ def longest_subseq_limited_sum(nums, queries):
 
     return ans if ans else [0]
 
-# O(log n): use binary search
+# TODO: solve in O(log n), use binary search
 
 class TestLongestSubseqLimitedSum(unittest.TestCase):
     def test_empty(self):

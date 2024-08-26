@@ -7,7 +7,7 @@ import unittest
 # number: 392
 # section: two pointers
 # difficulty: easy
-# tags: two pointers, string, dynamic programming, top 150
+# tags: two pointers, string, dynamic programming, top 150, leetcode 75
 
 # constraints
 # 0 <= s.length <= 100

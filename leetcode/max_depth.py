@@ -6,7 +6,7 @@ import unittest
 # number: 104
 # section: binary tree general
 # difficulty: easy
-# tags: tree, dfs, bfs, binary tree, top 150
+# tags: tree, dfs, bfs, binary tree, top 150, leetcode 75
 
 # constraints
 # The number of nodes in the tree is in the range [0, 10^4].
@@ -35,7 +35,7 @@ def max_depth(root):
 
 # solution: iterative dfs
 # complexity
-# run-time: ?, slow
+# run-time: O(n), slow
 # space: O(n)
 def max_depth2(root):
     if not root:
