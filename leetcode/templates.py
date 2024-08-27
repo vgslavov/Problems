@@ -411,6 +411,31 @@ def fn(words):
 
     return root
 
+class Trie:
+    def __init__(self):
+        self.data = None
+        self.children = {}
+
+    def insert(self, word):
+        curr = self
+
+        for c in word:
+            if c not in curr.children:
+                curr.children[c] = Trie()
+
+            curr = curr.children[c]
+
+    def search(self, word):
+        curr = self
+
+        for c in word:
+            if c not in curr.children:
+                return False
+
+            curr = curr.children[c]
+
+        return True
+
 # Dijkstra's algorithm
 from math import inf
 from heapq import *

@@ -42,7 +42,7 @@ class Trie:
 
         return True if node.isendword else False
 
-    def startsWith(self, prefix: str) -> bool:
+    def starts_with(self, prefix: str) -> bool:
         node = self
 
         for c in prefix:
@@ -58,7 +58,7 @@ class TestTrie(unittest.TestCase):
         trie.insert("apple")
         self.assertTrue(trie.search("apple"))
         self.assertFalse(trie.search("app"))
-        self.assertTrue(trie.startsWith("app"))
+        self.assertTrue(trie.starts_with("app"))
         trie.insert("app")
         self.assertTrue(trie.search("app"))
 
