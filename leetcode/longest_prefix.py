@@ -17,7 +17,7 @@ import unittest
 # complexity
 # run-time: O(n^2)
 # space: O(1)
-def longeset_prefix1(strs):
+def longest_prefix1(strs):
     if not strs or not len(strs[0]):
         return ''
     elif len(strs) == 1:
@@ -41,39 +41,102 @@ def longeset_prefix1(strs):
 
     return prefix if prefix else ''
 
-# TODO: O(n) using trie?
+# solution: trie
+# complexity
+# run-time: O(n)
+# space: O(n)
+class Trie:
+    def __init__(self):
+        self.count = 0
+        self.children = {}
+        # TODO: store shortest word to use to walk trie?
+
+    def insert(self, word):
+        curr = self
+        curr.count += 1
+
+        for c in word:
+            if c not in curr.children:
+                curr.children[c] = Trie()
+
+            curr = curr.children[c]
+            curr.count += 1
+
+    # TODO: refactor
+    def common_prefix(self):
+        curr = self
+        count = self.count
+        prefix = ""
+
+        while 1:
+            if not curr.children:
+                break
+
+            # TODO: pick better?
+            c = next(iter(curr.children))
+            if curr.count != count:
+                return prefix[:-1] if prefix else ""
+
+            prefix += c
+            curr = curr.children[c]
+
+        return prefix if curr.count == count else prefix[:-1]
+
+def longest_prefix2(strs):
+    trie = Trie()
+
+    # build trie
+    for w in strs:
+        trie.insert(w)
+
+    return trie.common_prefix()
 
 class TestLongestCommonPrefix(unittest.TestCase):
 
     def test_empty(self):
         strs = []
-        self.assertFalse(longeset_prefix1(strs))
+        self.assertFalse(longest_prefix1(strs))
+        self.assertFalse(longest_prefix2(strs))
 
     def test_single_char(self):
         strs = ['a']
-        self.assertEqual(longeset_prefix1(strs), strs[0])
+        expected = strs[0]
+        self.assertEqual(longest_prefix1(strs), expected)
+        self.assertEqual(longest_prefix2(strs), expected)
 
     def test_two_chars(self):
         strs = ['aa','aa']
-        self.assertEqual(longeset_prefix1(strs), strs[0])
+        expected = strs[0]
+        self.assertEqual(longest_prefix1(strs), expected)
+        self.assertEqual(longest_prefix2(strs), expected)
 
     def test_three_chars(self):
         strs = ['aba','aba']
-        self.assertEqual(longeset_prefix1(strs), strs[0])
+        expected = strs[0]
+        self.assertEqual(longest_prefix1(strs), expected)
+        self.assertEqual(longest_prefix2(strs), expected)
 
     def test_one_char_match(self):
         strs = ['cir','car']
         expected = 'c'
-        self.assertEqual(longeset_prefix1(strs), expected)
+        self.assertEqual(longest_prefix1(strs), expected)
+        self.assertEqual(longest_prefix2(strs), expected)
 
     def test_two_chars_match(self):
         strs = ['flower','flow','flight']
         expected = 'fl'
-        self.assertEqual(longeset_prefix1(strs), expected)
+        self.assertEqual(longest_prefix1(strs), expected)
+        self.assertEqual(longest_prefix2(strs), expected)
 
     def test_no_match(self):
         strs = ['dog','racecar','car']
-        self.assertFalse(longeset_prefix1(strs))
+        self.assertFalse(longest_prefix1(strs))
+        self.assertFalse(longest_prefix2(strs))
+
+    def test_no_match(self):
+        strs = ['', 'b']
+        self.assertFalse(longest_prefix1(strs))
+        self.assertFalse(longest_prefix2(strs))
 
 if __name__ == '__main__':
     sys.exit(unittest.main())
