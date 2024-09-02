@@ -145,6 +145,20 @@ def fn(arr):
 
     return ans
 
+# intervals
+def fn(intervals):
+    intervals.sort()
+    ans = []
+
+    for start, end in intervals:
+        # merge
+        if ans and start <= ans[-1][1]:
+            ans[-1][1] = max(ans[-1][1], end)
+        else:
+            ans.append([start,end])
+
+    return ans
+
 # Binary tree: DFS (recursive)
 # traversing: recursive more common
 def dfs(root):
