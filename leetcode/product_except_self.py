@@ -45,16 +45,18 @@ def product_except_self(nums):
 
     #print("prefix2:{}".format(prefix2))
 
-    i = j = 0
     # odd number of negative signs
     isneg = neg_count % 2 != 0
+    i = j = 0
 
     while i < len(prefix1) and j < len(prefix2):
         tmp = nums[i]
         nums[i] = prefix1[i] * prefix2[j]
+
         # multiplication by 0 loses - signs
         if tmp == 0 and isneg and nums[i] > 0:
             nums[i] *= -1
+
         i += 1
         j += 1
 
