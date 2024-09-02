@@ -31,11 +31,11 @@ def reverse_bits(n):
 # by: bit twiddling hacks
 # run-time: O(1), slow!
 # space: O(1)
-# TODO: make 32-bit width
 def reverse_bits2(n):
+    width = 32
     r = 0
 
-    while n:
+    for _ in range(width):
         # multiply by 2
         r <<= 1
         r |= n & 1
@@ -54,7 +54,6 @@ class TestReverseBits(unittest.TestCase):
         n = 43261596
         r = 964176192
         self.assertEqual(reverse_bits(n), r)
-        # TODO: fix 32-bit width
         self.assertEqual(reverse_bits2(n), r)
 
     def test2(self):
