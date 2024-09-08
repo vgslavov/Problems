@@ -21,24 +21,27 @@ class TreeNode:
 # run-time: O(n)?
 # space: O(1)
 def insert_bst(root, val):
+    # leaf
     if not root:
         print('empty: leaf')
         return TreeNode(val)
+    # left leaf
     elif root.val and val < root.val and not root.left:
         root.left = TreeNode(val)
         print('inserted as left of {}'.format(root.val))
         return root
+    # right leaf
     elif root.val and val > root.val and not root.right:
         root.right = TreeNode(val)
         print('inserted as right of {}'.format(root.val))
         return root
 
-    # go right
+    # go left
     if val < root.val:
         print('inserting in left')
         insertIntoBST(root.left, val)
         return root
-    # go left
+    # go right
     elif val > root.val:
         print('inserting in right')
         insertIntoBST(root.right, val)

@@ -4,15 +4,25 @@ from collections import deque
 import sys
 import unittest
 
-# Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
+# number: 103
+# section: binary tree bfs
+# difficulty: medium
+# tags: tree, bfs, binary tree, top 150
 
+# Definition for a binary tree node.
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+# constraints
 # The number of nodes in the tree is in the range [0, 2000].
 # -100 <= Node.val <= 100
+
+# complexity
+# run-time: O(n)
+# space: O(n)
 def zigzag_level_order(root):
     if not root:
         return []
