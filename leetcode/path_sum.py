@@ -24,7 +24,7 @@ class TreeNode:
 # complexity
 # run-time: O(n)
 # space: O(n)
-def sum_nodes(self, root, target_sum, cur_sum):
+def sum_nodes(root, target_sum, cur_sum):
     if not root:
         return False
     elif not root.left and not root.right:
