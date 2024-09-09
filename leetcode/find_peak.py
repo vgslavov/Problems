@@ -23,6 +23,7 @@ def find_peak(nums):
     elif len(nums) == 1:
         return 0
     elif len(nums) == 2:
+        # returns index of max num
         return max(range(len(nums)), key=nums.__getitem__)
 
     left = 0
@@ -47,6 +48,13 @@ def find_peak(nums):
             left = mid+1
 
     print(f'left:{left},mid:{mid},right:{right}')
+
+    # cmp to 1st & last
+    if nums[0] > nums[right] and nums[0] > nums[1]:
+        return 0
+    elif nums[-1] > nums[right] and nums[-1] > nums[-2]:
+        return len(nums)-1
+
     return right
 
 class TestFindPeak(unittest.TestCase):
@@ -95,10 +103,14 @@ class TestFindPeak(unittest.TestCase):
         expected = 4
         self.assertEqual(find_peak(nums), expected)
 
-    # TODO: fix code
     def test9(self):
         nums = [4, 3, 2, 1, 4]
-        expected = 4
+        expected = 0
+        self.assertEqual(find_peak(nums), expected)
+
+    def test10(self):
+        nums = [3,4,5,6,1,2]
+        expected = 5
         self.assertEqual(find_peak(nums), expected)
 
 if __name__ == '__main__':
