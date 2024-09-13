@@ -40,7 +40,7 @@ def binary_search(nums, target):
 
 # solution: binary search + two pointers
 # complexity
-# run-time: O(log n)
+# run-time: O(n), if all duplicates
 # space: O(1)
 def search_range(nums, target):
     idx = binary_search(nums, target)
@@ -74,7 +74,7 @@ def search_range(nums, target):
 
 # solution: Pythonic bisect + two pointers
 # complexity
-# run-time: O(log n)
+# run-time: O(n), if all duplicates
 # space: O(1)
 def search_range2(nums, target):
     idx = bisect.bisect_left(nums, target)
