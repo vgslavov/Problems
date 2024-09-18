@@ -38,7 +38,7 @@ def binary_search(nums, target):
 
     return left
 
-# solution: binary search + two pointers
+# solution: manual binary search + two pointers
 # complexity
 # run-time: O(n), if all duplicates
 # space: O(1)

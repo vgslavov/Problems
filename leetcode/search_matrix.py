@@ -77,7 +77,7 @@ def search_matrix(matrix, target):
 
     return False
 
-# solution: manual binary search + bisect
+# solution: manual binary search + Pythonic bisect
 # complexity
 # run-time: O(log(m) + log(n))
 # space: O(1)

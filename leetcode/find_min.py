@@ -35,6 +35,7 @@ def find_min(nums):
 
         if nums[mid-1] > nums[mid] and nums[mid] < nums[mid+1]:
             return nums[mid]
+        # go right: rotation is there
         elif nums[mid] > nums[-1]:
             left = mid+1
         else:
