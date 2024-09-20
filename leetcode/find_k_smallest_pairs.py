@@ -17,7 +17,7 @@ import unittest
 
 # solution: brute-force
 # complexity
-# run-time: O(n^2), slow
+# run-time: O(n^2 log k)? slow
 # space: O(n), mem limit exceeded
 # TODO: optimize mem, attempted
 def find_k_smallest_pairs(nums1, nums2, k):
@@ -27,24 +27,22 @@ def find_k_smallest_pairs(nums1, nums2, k):
     heap = []
     i = j = 0
 
+    # optimization: don't go beyond min
     for i in range(min(k, len(nums1))):
         for j in range(min(k, len(nums2))):
-            heapq.heappush(heap, (nums1[i]+nums2[j], [nums1[i],nums2[j]]))
-
-            # TODO: reduce size of heap by using max heap
-            # reorders output pairs
-            #heapq.heappush(heap, (-(nums1[i]+nums2[j]), (nums1[i],nums2[j])))
-            #if len(heap) > k:
-            #    heapq.heappop(heap)
+            heapq.heappush(heap, (-(nums1[i]+nums2[j]), [nums1[i],nums2[j]]))
+            # optimization: don't grow heap beyond k
+            if len(heap) > k:
+                heapq.heappop(heap)
 
     #print(heap)
-    return [heapq.heappop(heap)[1] for i in range(k)]
+    return sorted([heapq.heappop(heap)[1] for i in range(k)])
 
 # solution: heap + 2 pointers
 # complexity
 # run-time: O(n)
 # space: O(n), mem limit exceeded
-# TODO: faster, less mem
+# TODO: fix bugs
 def find_k_smallest_pairs2(nums1, nums2, k):
     heap = []
     i = j = 0
@@ -54,18 +52,14 @@ def find_k_smallest_pairs2(nums1, nums2, k):
         if len(heap) > k:
             heapq.heappop(heap)
 
-        # TODO: advance i & j
+        # TODO: how to advance i & j
         if j < len(nums2)-1 and nums1[i] < nums2[j+1]:
             j += 1
         else:
             i += 1
 
     #print(heap)
-    ans = [heapq.heappop(heap)[1] for i in range(k)]
-    # TODO: rm sort
-    ans.sort()
-
-    return ans
+    return sorted([heapq.heappop(heap)[1] for i in range(k)])
 
 class TestFindKSmallestPairs(unittest.TestCase):
     def test_empty(self):
@@ -79,7 +73,7 @@ class TestFindKSmallestPairs(unittest.TestCase):
         nums1 = [1,7,11]
         nums2 = [2,4,6]
         k = 3
-        expected = [[1,2],[1,4],[1,6]]
+        expected = sorted([[1,2],[1,4],[1,6]])
         self.assertEqual(find_k_smallest_pairs(nums1, nums2, k), expected)
         self.assertEqual(find_k_smallest_pairs2(nums1, nums2, k), expected)
 
@@ -87,7 +81,7 @@ class TestFindKSmallestPairs(unittest.TestCase):
         nums1 = [1,1,2]
         nums2 = [1,2,3]
         k = 2
-        expected = [[1,1],[1,1]]
+        expected = sorted([[1,1],[1,1]])
         self.assertEqual(find_k_smallest_pairs(nums1, nums2, k), expected)
         # TODO: fix
         #self.assertEqual(find_k_smallest_pairs2(nums1, nums2, k), expected)
@@ -96,7 +90,7 @@ class TestFindKSmallestPairs(unittest.TestCase):
         nums1 = [1,2,4,5,6]
         nums2 = [3,5,7,9]
         k = 3
-        expected = [[1,3],[2,3],[1,5]]
+        expected = sorted([[1,3],[2,3],[1,5]])
         self.assertEqual(find_k_smallest_pairs(nums1, nums2, k), expected)
         # TODO: fix
         #self.assertEqual(find_k_smallest_pairs2(nums1, nums2, k), expected)
@@ -105,7 +99,7 @@ class TestFindKSmallestPairs(unittest.TestCase):
         nums1 = [1,2,4,5,6]
         nums2 = [3,5,7,9]
         k = 20
-        expected = [[1,3],[2,3],[1,5],[2,5],[4,3],[1,7],[5,3],[2,7],[4,5],[6,3],[1,9],[5,5],[2,9],[4,7],[6,5],[5,7],[4,9],[6,7],[5,9],[6,9]]
+        expected = sorted([[1,3],[2,3],[1,5],[2,5],[4,3],[1,7],[5,3],[2,7],[4,5],[6,3],[1,9],[5,5],[2,9],[4,7],[6,5],[5,7],[4,9],[6,7],[5,9],[6,9]])
         self.assertEqual(find_k_smallest_pairs(nums1, nums2, k), expected)
         # TODO: fix
         #self.assertEqual(find_k_smallest_pairs2(nums1, nums2, k), expected)
