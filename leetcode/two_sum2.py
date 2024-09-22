@@ -18,7 +18,6 @@ import unittest
 # complexity
 # run-time: O(log n)
 # space: O(1)
-
 def binary_search(nums, target):
     start = 0
     end = len(nums)-1
@@ -35,6 +34,10 @@ def binary_search(nums, target):
     # duplicates: left-most insertion point
     return start
 
+# solution: binary search
+# complexity
+# run-time: O(n log n)?
+# space: O(1)
 def two_sum2(nums, target):
     for i in range(len(nums)):
         sub = target - nums[i]
