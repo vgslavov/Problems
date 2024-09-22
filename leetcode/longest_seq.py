@@ -10,7 +10,9 @@ import unittest
 # tags: array, hash table, union find, top 150
 
 # constraints
-# 0 <= nums.length <= 10^5
+# k = max(nums)
+# n = len(nums)
+# 0 <= n <= 10^5
 # -10^9 <= nums[i] <= 10^9
 
 # solution: sort
@@ -61,6 +63,52 @@ def longest_seq2(nums):
 
     return nonzero if nonzero else 1
 
+# complexity
+# run-time: O(n)
+# space: O(1)
+def calc_seq(counts, k):
+    length = 0
+
+    while k in counts:
+        # visit
+        counts[k] = 0
+        k += 1
+        length += 1
+
+    return length
+
+# solution: defaultdict
+# complexity
+# run-time: O(n+k*n)
+# space: O(k)
+def longest_seq3(nums):
+    if not nums:
+        return 0
+
+    print(f"len(nums):{len(nums)},nums:{nums}")
+
+    counts = defaultdict(int)
+    for n in nums:
+        counts[n] += 1
+
+    ans = 0
+    for k,v in counts.items():
+        # skip visited
+        if not v:
+            print(f"skipping 0 value at k:{k}")
+            continue
+        # optimization
+        elif k-1 in counts:
+            print(f"skipping k:{k} already in seq")
+            continue
+
+        ans = max(ans, calc_seq(counts, k))
+
+    return ans
+
+# TODO: implement Counting sort
+# complexity: O(k+n) ~ O(n^2) if k > n
+
 class TestLongestSeq(unittest.TestCase):
 
     def test_empty(self):
@@ -68,36 +116,42 @@ class TestLongestSeq(unittest.TestCase):
         expected = 0
         self.assertEqual(longest_seq(nums), expected)
         self.assertEqual(longest_seq2(nums), expected)
+        self.assertEqual(longest_seq3(nums), expected)
 
     def test_1(self):
         nums = [100,4,200,1,3,2]
         expected = 4
         self.assertEqual(longest_seq(nums), expected)
         self.assertEqual(longest_seq2(nums), expected)
+        self.assertEqual(longest_seq3(nums), expected)
 
     def test_2(self):
         nums = [0,3,7,2,5,8,4,6,0,1]
         expected = 9
         self.assertEqual(longest_seq(nums), expected)
         self.assertEqual(longest_seq2(nums), expected)
+        self.assertEqual(longest_seq3(nums), expected)
 
     def test_3(self):
         nums = [0]
         expected = 1
         self.assertEqual(longest_seq(nums), expected)
         self.assertEqual(longest_seq2(nums), expected)
+        self.assertEqual(longest_seq3(nums), expected)
 
     def test_4(self):
         nums = [0,0]
         expected = 1
         self.assertEqual(longest_seq(nums), expected)
         self.assertEqual(longest_seq2(nums), expected)
+        self.assertEqual(longest_seq3(nums), expected)
 
     def test_5(self):
         nums = [0,0]
         expected = 1
         self.assertEqual(longest_seq(nums), expected)
         self.assertEqual(longest_seq2(nums), expected)
+        self.assertEqual(longest_seq3(nums), expected)
 
     def test_6(self):
         nums = [9,1,4,7,3,-1,0,5,8,-1,6]
@@ -105,6 +159,7 @@ class TestLongestSeq(unittest.TestCase):
         self.assertEqual(longest_seq(nums), expected)
         # TODO: counting multiple sequences
         #self.assertEqual(longest_seq2(nums), expected)
+        self.assertEqual(longest_seq3(nums), expected)
 
 if __name__ == '__main__':
     sys.exit(unittest.main())

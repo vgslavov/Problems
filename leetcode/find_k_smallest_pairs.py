@@ -20,7 +20,7 @@ import unittest
 
 # solution: brute-force
 # complexity
-# run-time: O(m*n log m*n), slow
+# run-time: O(m*n log m*n), slow (TLE)
 # space: O(k)
 def find_k_smallest_pairs(nums1, nums2, k):
     if not nums1 or not nums2:
