@@ -201,6 +201,7 @@ def dfs(root):
     return ans
 
 # Binary tree: BFS
+# data struct: queue
 from collections import deque
 
 def fn(root):
@@ -237,6 +238,7 @@ def fn(graph):
     return dfs(START_NODE)
 
 # Graph: DFS (iterative)
+# data struct: stack
 def fn(graph):
     stack = [START_NODE]
     seen = {START_NODE}
@@ -253,6 +255,7 @@ def fn(graph):
     return ans
 
 # Graph: BFS
+# data struct: queue
 from collections import deque
 
 def fn(graph):
@@ -451,6 +454,7 @@ class Trie:
         return True
 
 # Dijkstra's algorithm
+# data struct: heap
 from math import inf
 from heapq import *
 
