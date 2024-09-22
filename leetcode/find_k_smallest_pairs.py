@@ -10,13 +10,13 @@ import unittest
 # tags: array, heap, priority queue, top 150
 
 # constraints
-# 1 <= nums1.length, nums2.length <= 10^5
+# m = len(nums1)
+# n = len(nums2)
+# 1 <= m, n <= 10^5
 # -10^9 <= nums1[i], nums2[i] <= 10^9
 # nums1 and nums2 both are sorted in non-decreasing order.
 # 1 <= k <= 10^4
-# k <= nums1.length * nums2.length
-# m: nums1.length
-# n: nums2.length
+# k <= m * n
 
 # solution: brute-force
 # complexity
@@ -92,7 +92,7 @@ def find_k_smallest_pairs2(nums1, nums2, k):
 
 # solution: LeetCode, Dijkstra-like using heap
 # complexity
-# run-time: O(k log k) or O(m*n log m*n)
+# run-time: O(k log k)
 # space: O(k)
 def find_k_smallest_pairs3(nums1, nums2, k):
     # can't sum w/o an input
@@ -103,17 +103,18 @@ def find_k_smallest_pairs3(nums1, nums2, k):
     heap = [(nums1[0]+nums2[0], [0,0])]
     # (nums1 index, nums2 index)
     visited = set()
-
     # [nums1 value, nums2, value]
     ans = []
+
     while k > 0 and len(heap):
+        # next min sum
         s, [i,j] = heapq.heappop(heap)
         #print(f"s:{s},i:{i},j:{j}")
         ans.append([nums1[i],nums2[j]])
 
         if i+1 < len(nums1) and (i+1,j) not in visited:
             heapq.heappush(heap, (nums1[i+1]+nums2[j],[i+1,j]))
-            # mark as visited, if you put on heap to prevent dupes
+            # mark indices as visited only if you push to heap, to prevent dupes
             visited.add((i+1,j))
 
         if j+1 < len(nums2) and (i,j+1) not in visited:
