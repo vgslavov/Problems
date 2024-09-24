@@ -38,7 +38,7 @@ def pow(x, n):
 # solution: brute-force recursive
 # complexity
 # run-time: O(n), slow!
-# space: O(n)?
+# space: O(n)
 def pow2(x, n):
     # base case
     if not n:
@@ -71,7 +71,7 @@ def pow3(x, n):
 # solution: iterative binary exponentiation
 # complexity
 # run-time: O(log n)
-# space: O(log n)
+# space: O(1)
 def pow4(x, n):
     isneg = False
 
