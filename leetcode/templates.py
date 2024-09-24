@@ -205,6 +205,7 @@ def dfs(root):
 from collections import deque
 
 def fn(root):
+    # list of root!
     queue = deque([root])
     ans = 0
 
