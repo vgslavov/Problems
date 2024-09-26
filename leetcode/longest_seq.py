@@ -93,11 +93,11 @@ def longest_seq3(nums):
 
     ans = 0
     for k,v in counts.items():
-        # skip visited
+        # optimization: skip visited
         if not v:
             print(f"skipping 0 value at k:{k}")
             continue
-        # optimization
+        # optimization: skip if in same seq
         elif k-1 in counts:
             print(f"skipping k:{k} already in seq")
             continue

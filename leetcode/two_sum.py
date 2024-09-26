@@ -35,6 +35,7 @@ def two_sum2(nums, target):
     # value to list indices
     d = defaultdict(list)
 
+    # pre-populate counts
     for i in range(len(nums)):
         d[nums[i]].append(i)
 
@@ -43,6 +44,7 @@ def two_sum2(nums, target):
         if sub not in d:
             continue
 
+        # this can become O(n^2) if many/all duplicates?
         for idx in d[sub]:
             if idx != i:
                 return [i, idx]
