@@ -6,7 +6,7 @@ import unittest
 # number: 2
 # section: linked list
 # difficulty: medium
-# tags: linked list, math, recursion
+# tags: linked list, math, recursion, top 150
 
 # constraints
 # The number of nodes in each linked list is in the range [1, 100].
