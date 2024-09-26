@@ -67,7 +67,7 @@ def int2list(n):
 # complexity
 # run-time: O(n)
 # space: O(1)
-def add_linked_lists(l1, l2):
+def add_numbers(l1, l2):
     return reverse(int2list(list2int(l1) + list2int(l2)))
 
 # TODO: add unit tests
