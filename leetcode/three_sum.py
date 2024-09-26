@@ -84,7 +84,7 @@ def two_sum_dict(nums, target):
     return ans
 
 # solution: two-sum using dict
-# run-time: O(n^2)?
+# run-time: O(n^2)
 # space: O(n)
 def three_sum2(nums):
     #print(f"len(nums):{len(nums)}")
@@ -182,7 +182,7 @@ def two_sum_binsearch(nums, target):
     return ans
 
 # solution: sort + two-sum using binary search
-# run-time: O(n^2 *log n)?
+# run-time: O(n*log n + (n^2)*log n) ~ O((n^2)*log n)
 # space: O(1)
 def three_sum3(nums):
     #print(f"len(nums):{len(nums)}")
@@ -217,6 +217,51 @@ def three_sum3(nums):
 
     return sorted(ans)
 
+# solution: two pointers
+# run-time: O(n^2)
+# space: O(1)
+def three_sum4(nums):
+    # O(n*log n)
+    nums.sort()
+
+    i = 0
+    j = len(nums)-1
+
+    ans = set()
+
+    # O(n)
+    while i < j:
+        third = -nums[i] - nums[j]
+
+        # O(log n)
+        k = bisect.bisect_left(nums, third)
+        print(f"third:{third} @ k:{k}")
+
+        # not found
+        if k >= len(nums) or nums[k] != third:
+            if nums[i] > nums[j]:
+                i += 1
+            else:
+                j -= 1
+            continue
+
+        # same
+        if i == j or i == k or j == k:
+            if nums[i] > nums[j]:
+                i += 1
+            else:
+                j -= 1
+            continue
+
+        ans.add(tuple(sorted([nums[i],nums[j],nums[k]])))
+
+        if nums[i] > nums[j]:
+            i += 1
+        else:
+            j -= 1
+
+    return sorted([list(v) for v in ans])
+
 class TestThreeSum(unittest.TestCase):
     def test_none(self):
         nums = [0,1,1]
@@ -224,6 +269,7 @@ class TestThreeSum(unittest.TestCase):
         self.assertEqual(three_sum(nums), expected)
         self.assertEqual(three_sum2(nums), expected)
         self.assertEqual(three_sum3(nums), expected)
+        #self.assertEqual(three_sum4(nums), expected)
 
     def test_0s(self):
         nums = [0,0,0]
@@ -231,6 +277,7 @@ class TestThreeSum(unittest.TestCase):
         self.assertEqual(three_sum(nums), expected)
         self.assertEqual(three_sum2(nums), expected)
         self.assertEqual(three_sum3(nums), expected)
+        #self.assertEqual(three_sum4(nums), expected)
 
     def test_many_0s(self):
         nums = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
