@@ -113,12 +113,28 @@ def fn(head):
         # check if fast is None?
         fast = fast.next
 
-    while fast and fast.next:
+    while fast:
         # do logic
         slow = slow.next
-        fast = fast.next.next
+        fast = fast.next
 
     return slow
+
+# Linked list: dummy nodes
+def fn(head):
+    dummy = ListNode(0)
+    dummy.next = head
+    fast = slow = dummy
+
+    # move fast pointer k ahead
+
+    while fast.next:
+        slow = slow.next
+        fast = fast.next
+
+    # do something
+
+    return dummy.next
 
 # Reversing a linked list
 def fn(head):
