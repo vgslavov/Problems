@@ -52,7 +52,7 @@ def three_sum(nums):
 
 # solution: dict
 # complexity
-# run-time O(n)
+# run-time O(n^2)
 # space: O(n)
 def two_sum_dict(nums, k, counts, ans):
     if not nums:
@@ -72,7 +72,7 @@ def two_sum_dict(nums, k, counts, ans):
             ans.add(tuple(sorted([nums[i],nums[j],nums[k]])))
 
 # solution: two-sum using dict
-# run-time: O(n^2), too slow, TLE
+# run-time: O(n^3), too slow, TLE
 # space: O(n)
 def three_sum2(nums):
     #print(f"len(nums):{len(nums)}")
@@ -81,20 +81,27 @@ def three_sum2(nums):
         return []
 
     # O(n*log n)
+    # needed for optimization below
     nums.sort()
     ans = set()
 
+    # key: number
+    # values: list of indices in nums
     counts = defaultdict(list)
     for i in range(len(nums)):
         counts[nums[i]].append(i)
 
     # O(n)
     for k in range(len(nums)):
-        # optimization
+        # optimization: don't search for smaller numbers later (it's sorted)
         if nums[k] > 0:
             break
 
-        # O(n)
+        # optimization: skip dupes
+        if k != 0 and nums[k-1] == nums[k]:
+            continue
+
+        # O(n^2)
         two_sum_dict(nums, k, counts, ans)
 
     return sorted([list(v) for v in ans])
@@ -126,6 +133,7 @@ def binary_search(nums, k):
 # run-time O(n*log n)
 # space: O(1)
 def two_sum_binsearch(nums, k, ans):
+    #print(f"k:{k}")
     if not nums:
         return
 
@@ -151,6 +159,7 @@ def two_sum_binsearch(nums, k, ans):
 
         # same index/value
         if i == diff_idx or i == k or k == diff_idx:
+            #print(f"skipping i:{i}")
             continue
 
         ans.add(tuple(sorted([nums[i],nums[diff_idx],nums[k]])))
@@ -232,7 +241,6 @@ class TestThreeSum(unittest.TestCase):
         self.assertEqual(three_sum(nums), expected)
         self.assertEqual(three_sum2(nums), expected)
         self.assertEqual(three_sum3(nums), expected)
-        #self.assertEqual(three_sum4(nums), expected)
 
     def test_0s(self):
         nums = [0,0,0]
@@ -240,7 +248,6 @@ class TestThreeSum(unittest.TestCase):
         self.assertEqual(three_sum(nums), expected)
         self.assertEqual(three_sum2(nums), expected)
         self.assertEqual(three_sum3(nums), expected)
-        #self.assertEqual(three_sum4(nums), expected)
 
     def test_many_0s(self):
         nums = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -265,8 +272,7 @@ class TestThreeSum(unittest.TestCase):
                 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
         expected = [[0,0,0]]
         self.assertEqual(three_sum(nums), expected)
-        # too slow
-        #self.assertEqual(three_sum2(nums), expected)
+        self.assertEqual(three_sum2(nums), expected)
         self.assertEqual(three_sum3(nums), expected)
 
     def test1(self):
