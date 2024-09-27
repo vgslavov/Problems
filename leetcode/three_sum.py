@@ -15,7 +15,7 @@ import unittest
 # -10^5 <= nums[i] <= 10^5
 
 # solution: dict + brute-force
-# run-time: O(n^2), too slow, TLE
+# run-time: O(n^3)?, too slow, TLE
 # space: O(n)
 def three_sum(nums):
     #print(f"len(nums):{len(nums)}")
@@ -54,17 +54,11 @@ def three_sum(nums):
 # complexity
 # run-time O(n)
 # space: O(n)
-def two_sum_dict(nums, target):
+def two_sum_dict(nums, k, counts, ans):
     if not nums:
-        return []
+        return
 
-    counts = defaultdict(list)
-
-    for i in range(len(nums)):
-        counts[nums[i]].append(i)
-
-    ans = []
-    values = set()
+    target = -nums[k]
 
     for i in range(len(nums)):
         diff = target - nums[i]
@@ -73,18 +67,12 @@ def two_sum_dict(nums, target):
             continue
 
         for j in counts[diff]:
-            pair = tuple(sorted([nums[i],nums[j]]))
-            if i == j or pair in values:
+            if i == j or i == k or j == k:
                 continue
-
-            # need indices, not values!
-            ans.append(sorted([i,j]))
-            values.add(pair)
-
-    return ans
+            ans.add(tuple(sorted([nums[i],nums[j],nums[k]])))
 
 # solution: two-sum using dict
-# run-time: O(n^2)
+# run-time: O(n^2), too slow, TLE
 # space: O(n)
 def three_sum2(nums):
     #print(f"len(nums):{len(nums)}")
@@ -92,31 +80,24 @@ def three_sum2(nums):
     if not nums:
         return []
 
-    ans = []
-    values = set()
+    # O(n*log n)
+    nums.sort()
+    ans = set()
+
+    counts = defaultdict(list)
+    for i in range(len(nums)):
+        counts[nums[i]].append(i)
 
     # O(n)
     for k in range(len(nums)):
+        # optimization
+        if nums[k] > 0:
+            break
+
         # O(n)
-        pair_idx = two_sum_dict(nums, -nums[k])
+        two_sum_dict(nums, k, counts, ans)
 
-        #print(f"n:{nums[k]},k:{k},pair_idx:{pair_idx}")
-        #print(f"len(pair_idx):{len(pair_idx)}")
-
-        # O(?)
-        for i,j in pair_idx:
-            if i == j or k == i or k == j:
-                continue
-
-            triple = tuple(sorted([nums[i],nums[j],nums[k]]))
-            if triple in values:
-                continue
-
-            # optimization: don't have to convert set to list later
-            ans.append(sorted([nums[i],nums[j],nums[k]]))
-            values.add(triple)
-
-    return sorted(ans)
+    return sorted([list(v) for v in ans])
 
 # complexity
 # run-time: O(log n)
@@ -144,12 +125,11 @@ def binary_search(nums, k):
 # complexity
 # run-time O(n*log n)
 # space: O(1)
-def two_sum_binsearch(nums, target):
+def two_sum_binsearch(nums, k, ans):
     if not nums:
-        return []
+        return
 
-    ans = []
-    values = set()
+    target = -nums[k]
 
     for i in range(len(nums)):
         diff = target - nums[i]
@@ -170,19 +150,13 @@ def two_sum_binsearch(nums, target):
             continue
 
         # same index/value
-        if i == diff_idx:
+        if i == diff_idx or i == k or k == diff_idx:
             continue
 
-        # optimization: don't store indices pointing to same values
-        pair = tuple(sorted([nums[i],nums[diff_idx]]))
-        if pair not in values:
-            ans.append(tuple(sorted([i,diff_idx])))
-            values.add(pair)
-
-    return ans
+        ans.add(tuple(sorted([nums[i],nums[diff_idx],nums[k]])))
 
 # solution: sort + two-sum using binary search
-# run-time: O(n*log n + (n^2)*log n) ~ O((n^2)*log n)
+# run-time: O(n*log n + (n^2)*log n) ~ O((n^2)*log n), too slow, TLE
 # space: O(1)
 def three_sum3(nums):
     #print(f"len(nums):{len(nums)}")
@@ -192,34 +166,23 @@ def three_sum3(nums):
 
     # O(n*log n)
     nums.sort()
-    ans = []
-    values = set()
+    ans = set()
 
     # O(n)
     for k in range(len(nums)):
+        # optimization: sorted input, can't add up to 0 if all positive
+        if nums[k] > 0:
+            break
+
         # O(n*log n)
-        pair_idx = two_sum_binsearch(nums, -nums[k])
+        two_sum_binsearch(nums, k, ans)
 
-        #print(f"n:{nums[k]},k:{k},pair_idx:{pair_idx}")
-        #print(f"len(pair_idx):{len(pair_idx)}")
-
-        for i,j in pair_idx:
-            if i == j or k == i or k == j:
-                continue
-
-            triple = tuple(sorted([nums[i],nums[j],nums[k]]))
-            if triple in values:
-                continue
-
-            # optimization: don't have to convert set to list later
-            ans.append(sorted([nums[i],nums[j],nums[k]]))
-            values.add(triple)
-
-    return sorted(ans)
+    return sorted([list(v) for v in ans])
 
 # solution: two pointers
-# run-time: O(n^2)
+# run-time: O(n^2)?
 # space: O(1)
+# TODO: finish/fix
 def three_sum4(nums):
     # O(n*log n)
     nums.sort()
