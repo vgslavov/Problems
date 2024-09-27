@@ -24,7 +24,7 @@ class ListNode:
 # run-time: O(n)
 # space: O(1)
 # TODO: refactor, ugly
-def remove_duplicates(head):
+def remove_duplicates2(head):
     if not head:
         return None
 
@@ -67,7 +67,7 @@ def remove_duplicates(head):
 
     return head
 
-# TODO: use fast & slow pointers
+# TODO: use fast & slow pointers?
 
 # TODO: add unit tests
 # Input: head = [1,2,3,3,4,4,5]

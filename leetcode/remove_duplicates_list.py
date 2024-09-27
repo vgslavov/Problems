@@ -14,7 +14,7 @@ class ListNode:
 # The number of nodes in the list is in the range [0, 300].
 # -100 <= Node.val <= 100
 # The list is guaranteed to be sorted in ascending order.
-def remove_duplicates3(head):
+def remove_duplicates(head):
     slow = fast = head
 
     while fast and fast.next:
