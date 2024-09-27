@@ -104,6 +104,22 @@ def fn(head):
 
     return ans
 
+# Linked list: fast & slow k apart
+def fn(head):
+    slow = head
+    fast = head
+
+    for _ in range(k):
+        # check if fast is None?
+        fast = fast.next
+
+    while fast and fast.next:
+        # do logic
+        slow = slow.next
+        fast = fast.next.next
+
+    return slow
+
 # Reversing a linked list
 def fn(head):
     curr = head
