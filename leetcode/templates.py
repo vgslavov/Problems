@@ -109,9 +109,9 @@ def fn(head):
     slow = head
     fast = head
 
-    for _ in range(k):
-        # check if fast is None?
+    while fast and k:
         fast = fast.next
+        k -= 1
 
     while fast:
         # do logic

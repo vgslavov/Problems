@@ -19,7 +19,6 @@ import unittest
 # space: O(1)
 # TODO: fix bugs
 def roteate_right(head, k):
-
     if not k or not head:
         return head
 
@@ -73,7 +72,7 @@ def roteate_right2(head, k):
         fast = fast.next
         k -= 1
 
-    print(f"after 1st while: slow.val:{slow.val},fast.val:{fast.val},k:{k}")
+    #print(f"after 1st while: slow.val:{slow.val},fast.val:{fast.val},k:{k}")
 
     # list ended: create loop
     if not fast.next:
@@ -89,19 +88,55 @@ def roteate_right2(head, k):
         elif k:
             k -= 1
 
-    print(f"after 2nd while: slow.val:{slow.val},fast.val:{fast.val}")
+    #print(f"after 2nd while: slow.val:{slow.val},fast.val:{fast.val}")
 
     # list ended: create loop
     if not fast.next:
         fast.next = head
         end_reached = True
 
-    print(f"k:{k},end_reached:{end_reached}")
+    #print(f"k:{k},end_reached:{end_reached}")
 
     new_head = slow.next
     slow.next = None
 
     return new_head
+
+# solution: Leetcode
+# complexity
+# run-time: O(n)
+# space: O(1)
+def roteate_right3(head, k):
+    curr = old_head = head
+
+    if not head or not k:
+        return head
+
+    # create loop
+    n = 1
+    while curr.next:
+        curr = curr.next
+        n += 1
+
+    curr.next = head
+
+    # find new tail
+    curr = old_head
+
+    # new head:
+    # * if k < n: n - k
+    # * if k >= n: n - k % n
+    # new tail:
+    # * if k < n: n - k - 1
+    # * if k >= n: n - k % n - 1
+    for _ in range(n-k%n-1):
+        curr = curr.next
+
+    # break loop
+    head = curr.next
+    curr.next = None
+
+    return head
 
 # TODO: add unit tests
 # Input: head = [1,2,3,4,5], k = 2
@@ -113,7 +148,7 @@ def roteate_right2(head, k):
 # Input: head = [1,2], k = 1
 # Output: [2,1]
 
-# TODO: bug fix
+# TODO: fix bug in rotate_list2
 # Input: head = [1,2], k = 2
 # Output: [1,2]
 
