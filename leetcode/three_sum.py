@@ -32,7 +32,8 @@ def three_sum(nums):
     ans = set()
 
     for i in range(len(nums)):
-        for j in range(len(nums)):
+        # optimization: don't start at 0
+        for j in range(i+1, len(nums)):
             if i == j:
                 continue
 
@@ -41,7 +42,6 @@ def three_sum(nums):
             if third not in counts:
                 continue
 
-            #print(f"third:{third},counts[third]:{counts[third]}")
             for k in counts[third]:
                 if i != k and j != k:
                     ans.add(tuple(sorted([nums[i], nums[j], third])))
@@ -50,29 +50,35 @@ def three_sum(nums):
 
     return sorted([list(v) for v in ans])
 
-# solution: dict
+# solution: set
 # complexity
-# run-time O(n^2)
+# run-time O(n)
 # space: O(n)
-def two_sum_dict(nums, k, counts, ans):
+def two_sum_set(nums, k, ans):
     if not nums:
         return
 
-    target = -nums[k]
+    seen = set()
 
-    for i in range(len(nums)):
-        diff = target - nums[i]
+    # optimization: don't start at 0
+    for i in range(k+1, len(nums)):
+        diff = -nums[i] - nums[k]
 
-        if diff not in counts:
-            continue
+        if diff in seen:
+            ans.add(tuple(sorted([nums[i],nums[k],diff])))
 
-        for j in counts[diff]:
-            if i == j or i == k or j == k:
+            # eliminate same indices
+            if i == k or i == diff or k == diff:
                 continue
-            ans.add(tuple(sorted([nums[i],nums[j],nums[k]])))
 
-# solution: two-sum using dict
-# run-time: O(n^3), too slow, TLE
+            # optimization: skip dupes
+            if i != 0 and nums[i-1] == nums[k]:
+                continue
+
+        seen.add(nums[i])
+
+# solution: LeetCode, two-sum using set
+# run-time: O(n^2)
 # space: O(n)
 def three_sum2(nums):
     #print(f"len(nums):{len(nums)}")
@@ -81,15 +87,9 @@ def three_sum2(nums):
         return []
 
     # O(n*log n)
-    # needed for optimization below
+    # needed for dupes optimization below
     nums.sort()
     ans = set()
-
-    # key: number
-    # values: list of indices in nums
-    counts = defaultdict(list)
-    for i in range(len(nums)):
-        counts[nums[i]].append(i)
 
     # O(n)
     for k in range(len(nums)):
@@ -101,9 +101,11 @@ def three_sum2(nums):
         if k != 0 and nums[k-1] == nums[k]:
             continue
 
-        # O(n^2)
-        two_sum_dict(nums, k, counts, ans)
+        # O(n)
+        # pass k & build answer inside two-sum
+        two_sum_set(nums, k, ans)
 
+    # sorting needed for unit tests
     return sorted([list(v) for v in ans])
 
 # complexity
@@ -133,14 +135,12 @@ def binary_search(nums, k):
 # run-time O(n*log n)
 # space: O(1)
 def two_sum_binsearch(nums, k, ans):
-    #print(f"k:{k}")
     if not nums:
         return
 
-    target = -nums[k]
-
-    for i in range(len(nums)):
-        diff = target - nums[i]
+    # optimization: don't start at 0
+    for i in range(k+1, len(nums)):
+        diff = -nums[k] - nums[i]
 
         # optimization: don't search for smaller numbers later (it's sorted)
         if diff < nums[i]:
@@ -151,7 +151,6 @@ def two_sum_binsearch(nums, k, ans):
         #diff_idx = binary_search(nums, diff)
         # Pythonic
         diff_idx = bisect.bisect_left(nums, diff)
-        #print(f"diff_dix:{diff_idx}")
 
         # not found
         if diff_idx >= len(nums) or nums[diff_idx] != diff:
@@ -159,7 +158,6 @@ def two_sum_binsearch(nums, k, ans):
 
         # same index/value
         if i == diff_idx or i == k or k == diff_idx:
-            #print(f"skipping i:{i}")
             continue
 
         ans.add(tuple(sorted([nums[i],nums[diff_idx],nums[k]])))
