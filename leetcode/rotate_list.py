@@ -123,6 +123,7 @@ def roteate_right3(head, k):
     # find new tail
     curr = old_head
 
+    # nodes from start
     # new head:
     # * if k < n: n - k
     # * if k >= n: n - k % n
