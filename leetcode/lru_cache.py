@@ -15,6 +15,10 @@ import unittest
 # 0 <= value <= 10^5
 # At most 2 * 10^5 calls will be made to get and put.
 
+# solution: OrderedDict
+# complexity
+# run-time: O(1) for both put/get
+# space: O(capacity)
 class LRUCache:
 
     def __init__(self, capacity: int):
@@ -53,6 +57,8 @@ class LRUCache:
 
         # new key
         self.__cache[key] = value
+
+# TODO: solve using dict
 
 class TestLRUCache(unittest.TestCase):
 
