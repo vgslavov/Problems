@@ -58,16 +58,74 @@ class LRUCache:
         # new key
         self.__cache[key] = value
 
-# TODO: solve using dict
+# solution: dict (>= 3.7)
+# complexity
+# run-time: O(1) for both put/get
+# space: O(capacity)
+class LRUCache2:
+
+    def __init__(self, capacity: int):
+        self.__cache = {}
+
+        if not capacity:
+            raise ValueError("Invalid capacity")
+
+        self.__capacity = capacity
+
+    def get(self, key: int) -> int:
+        #print(f"get cache:{self.__cache} for key:{key}")
+
+        if key not in self.__cache:
+            return -1
+
+        # mark as recent by readding
+        val = self.__cache[key]
+        del self.__cache[key]
+        self.__cache[key] = val
+
+        return self.__cache[key]
+
+    def put(self, key: int, value: int) -> None:
+        #print(f"put cache:{self.__cache} for key:{key}")
+
+        # existing key
+        if key in self.__cache:
+            # mark as recent by readding
+            del self.__cache[key]
+            self.__cache[key] = value
+            return
+
+        # at capacity, free up
+        if len(self.__cache) == self.__capacity:
+            # read first key
+            old_key = next(iter(self.__cache))
+            del self.__cache[old_key]
+
+        # new key
+        self.__cache[key] = value
 
 class TestLRUCache(unittest.TestCase):
 
     def test_empty(self):
         self.assertRaises(ValueError, LRUCache, 0)
+        self.assertRaises(ValueError, LRUCache2, 0)
 
     def test_lrucache(self):
         capacity = 2
         obj = LRUCache(capacity)
+        obj.put(1, 1); # cache is {1=1}
+        obj.put(2, 2); # cache is {1=1, 2=2}
+        self.assertEqual(obj.get(1), 1)
+        obj.put(3, 3); # LRU key was 2, evicts key 2, cache is {1=1, 3=3}
+        self.assertEqual(obj.get(2), -1)
+        obj.put(4, 4); # LRU key was 1, evicts key 1, cache is {4=4, 3=3}
+        self.assertEqual(obj.get(1), -1)
+        self.assertEqual(obj.get(3), 3)
+        self.assertEqual(obj.get(4), 4)
+
+    def test_lrucache2(self):
+        capacity = 2
+        obj = LRUCache2(capacity)
         obj.put(1, 1); # cache is {1=1}
         obj.put(2, 2); # cache is {1=1, 2=2}
         self.assertEqual(obj.get(1), 1)
