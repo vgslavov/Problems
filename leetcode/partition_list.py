@@ -38,16 +38,20 @@ def partition_list(head, x):
             before.next = head
             # go fwd in before
             before = before.next
-            # go fwd in org
-            head = head.next
-            # disconnect node from org
-            before.next = None
+            # not necessary to terminate before, just use as ptrs!
+            #before.next = None
         # add to after (>= x)
         else:
             after.next = head
             after = after.next
-            head = head.next
-            after.next = None
+            # not necessary to terminate after, just use as ptrs!
+            #after.next = None
+
+        # iterate
+        head = head.next
+
+    # terminate after list
+    after.next = None
 
     # join end of before & beginning of after
     before.next = after_head.next
