@@ -15,16 +15,15 @@ import unittest
 
 # solution: brute-force
 # complexity
-# run-time: O(n^2)?
-# space: O(1)?
+# run-time: O(n^2)
+# space: O(1)
 def max_profit1(prices):
     max_profit = -math.inf
 
     for i in range(len(prices)):
         for j in range(i+1, len(prices)):
             profit = prices[j] - prices[i]
-            if profit > max_profit:
-                max_profit = profit
+            max_profit = max(max_profit, profit)
 
     return max_profit if max_profit > 0 else 0
 
@@ -38,8 +37,7 @@ def max_profit2(prices):
 
     for i in range(1, len(prices)):
         profit = prices[i] - prices[min_idx]
-        if profit > max_profit:
-            max_profit = profit
+        max_profit = max(max_profit, profit)
 
         if prices[i] < prices[min_idx]:
             min_idx = i
