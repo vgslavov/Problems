@@ -41,7 +41,7 @@
 
 ### Arrays (dynamic array/list)
 
-Given `n = arr.length`
+Given `n = len(arr)`
 
 * Add or remove element at the end: `O(1)` amortized
 * Add or remove element from arbitrary index: `O(n)`
@@ -54,7 +54,7 @@ Given `n = arr.length`
 
 ### Strings (immutable)
 
-Given `n = s.length`
+Given `n = len(s)`
 
 * Add or remove character: `O(n)`
 * Access element at arbitrary index: `O(1)`
@@ -80,7 +80,7 @@ Given `n` as the number of nodes in the linked list,
 
 ### Hash table/dictionary
 
-Given `n = dic.length`
+Given `n = len(dict)`
 
 * Add or remove key-value pair: `O(1)`
 * Check if key exists: `O(1)`
@@ -95,7 +95,7 @@ Given `n = dic.length`
 
 ### Set
 
-Given `n = set.length`
+Given `n = len(set)`
 
 * Add or remove element: `O(1)`
 * Check if element exists: `O(1)`
@@ -107,7 +107,7 @@ Given `n = set.length`
 Stack operations are dependent on their implementation. A stack is only required
 to support pop and push. If implemented with a dynamic array:
 
-Given `n = stack.length`
+Given `n = len(stack)`
 
 * Push element: `O(1)`
 * Pop element: `O(1)`
@@ -120,7 +120,7 @@ Given `n = stack.length`
 Queue operations are dependent on their implementation. A queue is only required
 to support dequeue and enqueue. If implemented with a doubly linked list:
 
-Given `n = queue.length`
+Given `n = len(queue)`
 
 * Enqueue element: `O(1)`
 * Dequeue element: `O(1)`
@@ -153,7 +153,7 @@ full. The worst case is when the tree is just a straight line.
 
 ### Heap/Priority Queue
 
-Given `n = heap.length` and talking about min heaps,
+Given `n = (heap)` and talking about min heaps,
 
 * Add an element: `O(log n)`
 * Delete the minimum element: `O(log n)`
