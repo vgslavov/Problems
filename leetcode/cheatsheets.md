@@ -153,7 +153,7 @@ full. The worst case is when the tree is just a straight line.
 
 ### Heap/Priority Queue
 
-Given `n = (heap)` and talking about min heaps,
+Given `n = len(heap)` and talking about min heaps,
 
 * Add an element: `O(log n)`
 * Delete the minimum element: `O(log n)`
