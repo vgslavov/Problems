@@ -7,6 +7,10 @@
 # 1 <= name.length, typed.length <= 1000
 # name and typed consist of only lowercase English letters.
 
+# solution: two pointers
+# complexity
+# run-time: O(n)
+# space: O(1)
 def islongpressedname(name: str, typed: str) -> bool:
 
     if not name or not typed or len(name) > len(typed):
@@ -35,3 +39,9 @@ def islongpressedname(name: str, typed: str) -> bool:
             return False
 
     return True
+
+# TODO: solve using dict
+# solution: dict
+# complexity
+# run-time: O(n)
+# space: O(1)

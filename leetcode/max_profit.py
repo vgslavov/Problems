@@ -44,6 +44,8 @@ def max_profit2(prices):
 
     return max_profit if max_profit > 0 else 0
 
+# TODO: solve using sliding window?
+
 class TestMaxProfit(unittest.TestCase):
 
     def test_empty(self):
