@@ -5,13 +5,14 @@ import sys
 import unittest
 
 # number: 70
+# section: 1D DP
 # difficulty: easy
 # tags: math, dp, memoization, top 150
 
 # constraints
 # 1 <= n <= 45
 
-# solution: recursive + dict
+# solution: recursive top-down 1D DP using dict
 # complexity
 # run-time: O(n)
 # space: O(n)
@@ -36,7 +37,7 @@ def climb_stairs(n: int) -> int:
     memo = {}
     return dp(n)
 
-# solution: recursive + functools
+# solution: recursive top-down 1D DP using functools
 # complexity
 # run-time: O(n)
 # space: O(n)
