@@ -423,7 +423,7 @@ def backtrack(curr, OTHER_ARGUMENTS...):
 
     return ans
 
-# Dynamic programming: top-down memoization
+# Dynamic programming: recursive top-down memoization
 def fn(arr):
     def dp(STATE):
         if BASE_CASE:
@@ -438,6 +438,20 @@ def fn(arr):
 
     memo = {}
     return dp(STATE_FOR_WHOLE_INPUT)
+
+# Dynamic programming: iterative bottom-up
+def fn(arr):
+    n = len(arr)
+    dp = [0] * n
+
+    # set base case(s)
+    dp[0] = arr[0]
+
+    for i in range(2, n):
+        # define recurrence relation
+        dp[i] = RECURRENCE_RELATION(STATE)
+
+    return dp[n-1]
 
 # Build a trie
 # note: using a class is only necessary if you want to store data at each node.
