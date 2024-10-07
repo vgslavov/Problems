@@ -2,8 +2,9 @@
 
 import math
 
-# tags: meta
+# section: assessments
 # difficulty: medium
+# tags: meta
 
 # constraints
 # rows == mat.length

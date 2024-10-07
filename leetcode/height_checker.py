@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 
-# tags: google
+# section: assessments
 # difficulty: easy
+# tags: google
 
 # constraints
 # 1 <= heights.length <= 100

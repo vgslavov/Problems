@@ -4,6 +4,10 @@ from collections import deque
 import sys
 import unittest
 
+# section: assessments
+# difficulty: easy
+# tags: amazon
+
 # 1 <= size <= 1000
 # -10^5 <= val <= 10^5
 # At most 10^4 calls will be made to next.
