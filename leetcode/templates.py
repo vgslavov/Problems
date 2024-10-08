@@ -424,7 +424,10 @@ def backtrack(curr, OTHER_ARGUMENTS...):
     return ans
 
 # Dynamic programming: recursive top-down memoization
+from functools import cache
+
 def fn(arr):
+    #@cache
     def dp(STATE):
         if BASE_CASE:
             return 0
@@ -432,9 +435,11 @@ def fn(arr):
         if STATE in memo:
             return memo[STATE]
 
-        ans = RECURRENCE_RELATION(STATE)
-        memo[STATE] = ans
-        return ans
+        memo[STATE] = RECURRENCE_RELATION(STATE)
+        return memo[STATE]
+
+        # or if using functools
+        #return RECURRENCE_RELATION(STATE)
 
     memo = {}
     return dp(STATE_FOR_WHOLE_INPUT)
