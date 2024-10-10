@@ -30,33 +30,34 @@ def domino_pairs(dominoes) -> int:
     return sum([math.comb(v,2) for v in counts.values()])
 
 # complexity
-# run-time:
-# space:
+# run-time: O(n)
+# space: O(n)
 def combinations(n, k):
     #print(f"n:{n},k:{k}")
 
-    @cache
+    #@cache
     def dp(i):
         # base case
         if i <= 1:
             return 1
 
         # check cache
-        #if i in memo:
-        #    return memo[i]
+        if i in memo:
+            return memo[i]
 
         # recurrence relation
-        #memo[i] = dp(i-1)*i
-        #return memo[i]
+        memo[i] = dp(i-1)*i
+        return memo[i]
 
-        return dp(i-1)*i
+        # if cache
+        #return dp(i-1)*i
 
-    #memo = {}
+    memo = {}
     n_f = dp(n)
     nk_f = dp(n-k)
     k_f = dp(k)
 
-    # integer division: for n < k!
+    # integer division: when k > n, combinations are 0!
     return n_f // (nk_f*k_f)
 
 # solution: dict + dp comb
