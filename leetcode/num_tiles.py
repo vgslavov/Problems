@@ -26,7 +26,7 @@ def num_tiles(tiles: str) -> int:
 
     return n
 
-# TODO: improve performance
+# TODO: calc permutations manually
 
 class TestNumTiles(unittest.TestCase):
     def test_empty(self):
