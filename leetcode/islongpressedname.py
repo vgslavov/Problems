@@ -1,8 +1,12 @@
 #!/usr/bin/env python3
 
+import sys
+import unittest
+
+# number: 925
 # section: assessments
 # difficulty: easy
-# tags: google
+# tags: two pointers, string, google
 
 # constraints
 # 1 <= name.length, typed.length <= 1000
@@ -46,3 +50,13 @@ def islongpressedname(name: str, typed: str) -> bool:
 # complexity
 # run-time: O(n)
 # space: O(1)
+
+# TODO: add unit tests
+# Input: name = "alex", typed = "aaleex"
+# Output: true
+
+# Input: name = "saeed", typed = "ssaaedd"
+# Output: false
+
+if __name__ == '__main__':
+    sys.exit(unittest.main())

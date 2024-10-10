@@ -4,14 +4,21 @@ from collections import deque
 import sys
 import unittest
 
+# number: 346
 # section: assessments
 # difficulty: easy
-# tags: amazon
+# tags: array, design, queue, data stream, amazon
 
+# constraints
 # 1 <= size <= 1000
 # -10^5 <= val <= 10^5
 # At most 10^4 calls will be made to next.
-class MovingAverage:
+
+# solution: deque
+# complexity
+# run-time: O(k)
+# space: O(k)
+class MovingAvg:
 
     def __init__(self, size: int):
         self.queue = deque(maxlen=size)
@@ -33,10 +40,10 @@ class MovingAverage:
 
 # TODO: faster?
 
-class TestMovingAverage(unittest.TestCase):
+class TestMovingAvg(unittest.TestCase):
     def test(self):
         size = 3
-        obj = MovingAverage(size)
+        obj = MovingAvg(size)
         self.assertEqual(obj.next(1), 1.0)
         self.assertEqual(obj.next(10), 5.5)
         self.assertEqual(obj.next(3), 4.66667)

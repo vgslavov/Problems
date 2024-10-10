@@ -2,9 +2,10 @@
 
 import math
 
+# number: 1428
 # section: assessments
 # difficulty: medium
-# tags: meta
+# tags: array, binary search, matrix, interactive, meta
 
 # constraints
 # rows == mat.length
