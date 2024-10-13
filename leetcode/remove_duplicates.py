@@ -7,7 +7,7 @@ import unittest
 # number: 26
 # section: array/string
 # difficulty: easy
-# tags: array, two pointers, top 150
+# tags: array, two pointers, top 150, meta
 
 # constraints
 # remove in-place
@@ -17,8 +17,8 @@ import unittest
 
 # solution: sort
 # complexity
-# run-time: O(n * log(n))?
-# space: O(1)?
+# run-time: O(n * log(n))
+# space: O(1)
 def remove_duplicates(nums):
     dupes = 0
 

@@ -6,7 +6,7 @@ import unittest
 # number: 56
 # section: intervals
 # difficulty: medium
-# tags: array, sorting, top 150
+# tags: array, sorting, top 150, meta
 
 # constraints
 # 1 <= intervals.length <= 10^4
@@ -15,7 +15,7 @@ import unittest
 
 # solution: sort + min/max
 # complexity
-# run-time: O(n log(n))
+# run-time: O(n*log n)
 # space: O(1)!
 def merge_intervals(intervals):
     intervals.sort()
@@ -23,6 +23,7 @@ def merge_intervals(intervals):
     i = 1
     while i < len(intervals):
         #print("i:{}, intervals:{}".format(i, intervals))
+        # beginning of current starts before end of previous
         if intervals[i][0] <= intervals[i-1][1]:
             intervals[i][0] = min(intervals[i][0], intervals[i-1][0])
             intervals[i][1] = max(intervals[i][1], intervals[i-1][1])

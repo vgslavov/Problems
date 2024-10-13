@@ -7,7 +7,7 @@ import unittest
 # number: 49
 # section: hashmap
 # difficulty: medium
-# tags: array, hash table, string, sorting, top 150
+# tags: array, hash table, string, sorting, top 150, meta
 
 # constraints
 # 1 <= strs.length <= 10^4
@@ -30,6 +30,8 @@ def group_anagrams(strs):
         ans.append([strs[i] for i in v])
 
     return ans
+
+# TODO: faster?
 
 class TestGroupAnagrams(unittest.TestCase):
     def test_empty(self):

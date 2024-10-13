@@ -37,7 +37,7 @@ def sum_nodes(root, target_sum, cur_sum):
     return left or right
 
 def path_sum(root, target_sum):
-    return self.sum_nodes(root, target_sum, 0)
+    return sum_nodes(root, target_sum, 0)
 
 # TODO: add unit tests & solve using iterative dfs
 # test 1

@@ -7,7 +7,7 @@ import unittest
 # number: 98
 # section: binary search tree
 # difficulty: medium
-# tags: tree, dfs, bfs, binary tree, top 150
+# tags: tree, dfs, bfs, binary tree, top 150, meta
 
 # constraints
 # The number of nodes in the tree is in the range [1, 10^4].
@@ -41,7 +41,7 @@ def dfs(node, small, large):
 def isvalidbst(root):
     return dfs(root, -math.inf, math.inf)
 
-# TODO: add unit tests & solve iteratively using dfs
+# TODO: add unit tests
 
 if __name__ == '__main__':
     sys.exit(unittest.main())

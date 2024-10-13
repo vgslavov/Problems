@@ -5,6 +5,9 @@
 # * subseq: order matters, non-consecutive chars
 # * subset: order doesn't matter
 
+# * combinations
+# * permutations
+
 # Two pointers: one input, opposite ends
 def fn(arr):
     left = ans = 0

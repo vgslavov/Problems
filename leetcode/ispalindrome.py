@@ -6,7 +6,7 @@ import unittest
 # number: 125
 # section: two pointers
 # difficulty: easy
-# tags: two pointers, string, top 150
+# tags: two pointers, string, top 150, meta
 
 # constraints
 # 1 <= s.length <= 2 * 10^5
@@ -14,8 +14,8 @@ import unittest
 
 # solution: Pythonic & slow
 # complexity
-# run-time: O(n)?
-# space: O(n)?
+# run-time: O(n)
+# space: O(n)
 def ispalindrome1(s):
     alnum = ''.join([c.lower() for c in s if c.isalnum()])
 

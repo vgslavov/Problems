@@ -7,7 +7,7 @@ import unittest
 # number: 238
 # section: array/string
 # difficulty: medium
-# tags: array, prefix sum, top 150
+# tags: array, prefix sum, top 150, meta
 
 # constraints
 # 2 <= nums.length <= 10^5
@@ -15,7 +15,7 @@ import unittest
 # The product of any prefix or suffix of nums is guaranteed to fit in a 32-bit
 # integer.
 
-# solution: prefix sum + 2 pointers
+# solution: prefix sum + deque + two pointers
 # complexity
 # run-time: O(n), slow!
 # space: O(n)

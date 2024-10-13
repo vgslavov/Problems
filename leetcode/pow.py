@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
 
+from functools import cache
 import sys
 import unittest
 
 # number: 50
 # section: math
-# tags: math, recursion, top 150
+# difficulty: medium
+# tags: math, recursion, top 150, meta
 
 # constraints
 # -100.0 < x < 100.0

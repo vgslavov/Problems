@@ -7,7 +7,7 @@ import unittest
 # number: 146
 # section: linked list
 # difficulty: medium
-# tags: hash table, linked list, design, doubly-linked list, top 150
+# tags: hash table, linked list, design, doubly-linked list, top 150, meta
 
 # constraints
 # 1 <= capacity <= 3000

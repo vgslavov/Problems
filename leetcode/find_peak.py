@@ -6,7 +6,7 @@ import unittest
 # number: 162
 # section: binary search
 # difficulty: medium
-# tags: array, binary search, top 150
+# tags: array, binary search, top 150, meta
 
 # constraints
 # 1 <= nums.length <= 1000
@@ -50,6 +50,7 @@ def find_peak(nums):
     print(f'left:{left},mid:{mid},right:{right}')
 
     # cmp to 1st & last
+    # TODO: refactor?
     if nums[0] > nums[right] and nums[0] > nums[1]:
         return 0
     elif nums[-1] > nums[right] and nums[-1] > nums[-2]:

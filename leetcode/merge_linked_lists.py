@@ -6,7 +6,7 @@ import unittest
 # number: 21
 # section: linked list
 # difficulty: easy
-# tags: link list, recursion, top 150
+# tags: link list, recursion, top 150, meta
 
 # Definition for singly-linked list.
 class ListNode:
@@ -19,6 +19,7 @@ class ListNode:
 # -100 <= Node.val <= 100
 # Both list1 and list2 are sorted in non-decreasing order.
 
+# solution: two pointers
 # complexity
 # run-time: O(n+m)?
 # space: O(1)
