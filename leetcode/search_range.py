@@ -7,7 +7,7 @@ import unittest
 # number: 34
 # section: binary search
 # difficulty: medium
-# tags: array, binary search, top 150
+# tags: array, binary search, top 150, meta
 
 # constraints
 # 0 <= nums.length <= 10^5

@@ -8,7 +8,7 @@ import unittest
 # number: 33
 # section: binary search
 # difficulty: medium
-# tags: array, binary search, top 150
+# tags: array, binary search, top 150, meta
 
 # constraints
 # 1 <= nums.length <= 5000
@@ -42,6 +42,7 @@ def find_max(nums):
         if nums[mid] > nums[mid+1] and nums[mid] > nums[mid-1]:
             return mid
         # go right: rotation is there
+        # compare to last!
         elif nums[mid] > nums[-1]:
             left = mid+1
         # go left
@@ -123,7 +124,6 @@ def search_rotate2(nums, target):
         return right
 
     return -1
-
 
 class TestSearchRotate(unittest.TestCase):
 

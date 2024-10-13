@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+from functools import cache
 import sys
 import unittest
 
@@ -14,6 +15,8 @@ import unittest
 # complexity
 # run-time: O(n)
 # space: O(n)
+# uses a lot of mem
+@cache
 def factorial(n):
     if not n:
         return 1
