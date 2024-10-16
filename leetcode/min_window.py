@@ -15,7 +15,7 @@ import unittest
 # 1 <= m, n <= 10^5
 # s and t consist of uppercase and lowercase English letters.
 
-# solution: sliding window
+# solution: sliding window + dict
 # complexity
 # run-time: O(n+m)
 # space: O(n)
@@ -35,18 +35,22 @@ def min_window(s: str, t: str) -> str:
             # how many chars in window match in t
             matched += 1
 
+        # cmp to len(t), not len(counts): t can have dupes!
+        if matched < len(t):
+            continue
+
         # slide left side of window
         while left < len(s) and s[left] not in counts:
             left += 1
 
         # we have a winner!
-        # cmp to len(t), not len(counts): t can have dupes!
-        if matched == len(t):
-            print(f"ans:{ans},matched:{s[left:right+1]}")
-            if not ans or len(ans) >= len(s[left:right+1]):
-                ans = s[left:right+1]
-            left += 1
-            matched -= 1
+        print(f"ans:{ans},matched:{s[left:right+1]}")
+        if not ans or len(ans) >= len(s[left:right+1]):
+            ans = s[left:right+1]
+
+        # continue sliding the window
+        left += 1
+        matched -= 1
 
     return ans
 
