@@ -4,9 +4,9 @@ import sys
 import unittest
 
 # number: 13
-# section: array/string
+# section: array/string, meta
 # difficulty: easy
-# tags: hash table, math, string, top 150
+# tags: hash table, math, string, top 150, meta
 
 # reference
 # Symbol       Value
