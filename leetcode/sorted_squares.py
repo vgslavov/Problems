@@ -53,8 +53,8 @@ def find_min_idx(self, nums):
 
 # solution: min() + merge
 # complexity
-# complexity: O(n)
-# space: O(1)
+# run-time: O(n)
+# space: O(n)
 def sorted_squares2(nums):
     if not nums:
         return nums
@@ -107,9 +107,27 @@ def sorted_squares2(nums):
 
     return ans
 
-# TODO: solve in O(n) using two pointers?
+# solution: two pointers
+# complexity
+# run-time: O(n)
+# space: O(n)
 def sorted_squares3(nums):
-    pass
+    left = 0
+    right = len(nums)-1
+    ans = []
+
+    while left <= right:
+        # sort descending
+        if abs(nums[left]) < abs(nums[right]):
+            square = nums[right]
+            right -= 1
+        else:
+            square = nums[left]
+            left += 1
+
+        ans.append(pow(square, 2))
+
+    return list(reversed(ans))
 
 class TestSortedSquares(unittest.TestCase):
     def test_empty(self):
@@ -127,6 +145,11 @@ class TestSortedSquares(unittest.TestCase):
         expected = [0,1,9,16,100]
         self.assertEqual(sorted_squares2(nums), expected)
 
+    def test_1_3(self):
+        nums = [-4,-1,0,3,10]
+        expected = [0,1,9,16,100]
+        self.assertEqual(sorted_squares3(nums), expected)
+
     def test_2_1(self):
         nums = [-7,-3,2,3,11]
         expected = [4,9,9,49,121]
@@ -136,6 +159,11 @@ class TestSortedSquares(unittest.TestCase):
         nums = [-7,-3,2,3,11]
         expected = [4,9,9,49,121]
         self.assertEqual(sorted_squares2(nums), expected)
+
+    def test_2_3(self):
+        nums = [-7,-3,2,3,11]
+        expected = [4,9,9,49,121]
+        self.assertEqual(sorted_squares3(nums), expected)
 
 if __name__ == '__main__':
     sys.exit(unittest.main())
