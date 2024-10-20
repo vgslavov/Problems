@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 
 from collections import defaultdict
+import functools
 import sys
 import unittest
 
 # number: 791
 # section: assessment
 # difficulty: medium
-# tags: hash table, string, sorting
+# tags: hash table, string, sorting, meta
 
 # constraints
 # len(order): m
@@ -81,11 +82,11 @@ def custom_sort2(order: str, s: str) -> str:
     counts = defaultdict(int)
     ans = ""
 
-    # O(n): calc freq in s
+    # O(n): count chars in s
     for c in s:
         counts[c] += 1
 
-    # O(m): build answer for c in order
+    # O(m): build answer from order
     for c in order:
         if c in counts:
             ans += c * counts[c]
