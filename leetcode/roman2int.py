@@ -37,12 +37,15 @@ def roman2int(s):
     roman = s.upper()
     num = 0
 
+    # from 0 to n-1
     for i in range(len(s)):
+        # special case for last char
         if i == len(s)-1:
             num += values[s[i]]
         elif s[i] == 'I':
             # more efficient than
             #if s[i+1] in ('V', 'X'):
+            # add or subtract depending on next char
             if s[i+1] == 'V' or s[i+1] == 'X':
                 num -= values[s[i]]
             else:

@@ -47,6 +47,7 @@ def list2int(l):
 
     return ans
 
+# solution: requires reverse
 # complexity
 # run-time: O(n)
 # space: O(1)
@@ -63,12 +64,31 @@ def int2list(n):
 
     return l
 
+# solution: doesn't require reverse
+# complexity
+# run-time: O(n)
+# space: O(1)
+def int2list2(n):
+    l = head = ListNode()
+
+    if n == 0:
+        return ListNode(0)
+
+    while n:
+        l.next = ListNode(n % 10)
+        n //= 10
+        l = l.next
+
+    return head.next
+
 # solution: list 2 int 2 list + reverse
 # complexity
 # run-time: O(n)
 # space: O(1)
 def add_numbers(l1, l2):
-    return reverse(int2list(list2int(l1) + list2int(l2)))
+    #return reverse(int2list(list2int(l1) + list2int(l2)))
+    # no need to reverse!
+    return int2list2(list2int(l1) + list2int(l2))
 
 # TODO: add unit tests
 
