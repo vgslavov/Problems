@@ -19,7 +19,7 @@ class ListNode:
         self.val = val
         self.next = next
 
-# solution: LeetCode using 2 pointers
+# solution: leetcode using 2 pointers
 # complexity
 # run-time: O(n)
 # space: O(1)

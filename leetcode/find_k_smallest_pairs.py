@@ -90,7 +90,7 @@ def find_k_smallest_pairs2(nums1, nums2, k):
 
     return sorted([heapq.heappop(heap)[1] for _ in range(k)])
 
-# solution: LeetCode, Dijkstra-like using heap
+# solution: leetcode, Dijkstra-like using heap
 # complexity
 # run-time: O(k log k)
 # space: O(k)

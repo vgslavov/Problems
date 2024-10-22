@@ -102,7 +102,7 @@ def roteate_right2(head, k):
 
     return new_head
 
-# solution: Leetcode
+# solution: leetcode
 # complexity
 # run-time: O(n)
 # space: O(1)

@@ -52,7 +52,7 @@ def next_perm(nums):
     if not nextp:
         return
 
-    # LeetCode: deep copy & list comp doesn't work
+    # leetcode: deep copy & list comp doesn't work
     #for i in range(len(nextp)):
         #nums[i] = nextp[i]
 
