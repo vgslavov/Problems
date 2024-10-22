@@ -4,10 +4,10 @@ from collections import defaultdict
 import sys
 import unittest
 
-# number:
+# number: 161
 # section: meta
-# difficulty:
-# tags: meta
+# difficulty: medium
+# tags: two pointers, string, meta
 
 # constraints
 # 0 <= s.length, t.length <= 10^4
@@ -17,7 +17,7 @@ import unittest
 # complexity
 # run-time: O(n+m)
 # space: O(n)
-def edit_distance(s: str, t: str) -> bool:
+def edit_distance_one_bad1(s: str, t: str) -> bool:
     # O(n*log n + m*log m)
     if sorted(s) == sorted(t):
         return False
@@ -50,7 +50,7 @@ def edit_distance(s: str, t: str) -> bool:
 # complexity
 # run-time: O(n+m)
 # space: O(1)
-def edit_distance2(s: str, t: str) -> bool:
+def edit_distance_one_bad2(s: str, t: str) -> bool:
     # len(s)-1 <= len(t) <= len(s)+1
     if len(t) > len(s) + 1 or len(t) < len(s) - 1 or s == t:
         return False
@@ -83,74 +83,101 @@ def edit_distance2(s: str, t: str) -> bool:
     # single edit
     return ndiff == 1
 
-# solution:
 # complexity:
-# run-time:
-# space:
-def edit_distance3(s: str, t: str) -> bool:
-    # len(s)-1 <= len(t) <= len(s)+1
-    if len(t) > len(s) + 1 or len(t) < len(s) - 1 or s == t:
+# run-time: O(n)
+# space: O(1)
+def same_length(s, t):
+    if len(s) != len(t):
         return False
 
-    ndiff = 0
+    for i in range(len(s)):
+        # everything after diff char should be same
+        if s[i] != t[i]:
+            return s[i+1:] == t[i+1:]
 
-    # 1) strings are same length
+    return False
+
+# solution: leetcode using two pointers
+# complexity
+# run-time: O(min(n,m))
+# space: O(1)
+def edit_distance_one(s: str, t: str) -> bool:
+    # identical or too big of a diff in len
+    if abs(len(s)-len(t)) > 1 or s == t:
+        return False
+
     if len(s) == len(t):
-        for i in range(len(s)):
-            if s[i] != t[i]:
-                ndiff += 1
+        return same_length(s, t)
 
-            if ndiff > 1:
-                return False
+    i = j = ndiff = 0
 
-    # TODO: 2) string have diff lengths
+    while i < len(s) and j < len(t):
+        #print(f"i:{i},j:{j}")
+        if s[i] == t[j]:
+            i += 1
+            j += 1
+            continue
 
-    return ndiff == 1
+        ndiff += 1
+
+        if ndiff > 1:
+            return False
+
+        # skip extra char!
+        if len(s) > len(t):
+            i += 1
+        else:
+            j += 1
+
+    #print(f"ndiff:{ndiff}")
+
+    return True
 
 class TestEditDistance(unittest.TestCase):
     def test_empty(self):
         s = ""
         t = ""
-        self.assertFalse(edit_distance(s, t))
-        self.assertFalse(edit_distance2(s, t))
-        self.assertFalse(edit_distance3(s, t))
+        self.assertFalse(edit_distance_one(s, t))
 
     def test_same(self):
         s = "a"
         t = "a"
-        self.assertFalse(edit_distance(s, t))
-        self.assertFalse(edit_distance2(s, t))
-        self.assertFalse(edit_distance3(s, t))
+        self.assertFalse(edit_distance_one(s, t))
 
     def test_sort(self):
         s = "ab"
         t = "ba"
-        self.assertFalse(edit_distance(s, t))
-        self.assertFalse(edit_distance2(s, t))
-        self.assertFalse(edit_distance3(s, t))
+        self.assertFalse(edit_distance_one(s, t))
 
     def test1(self):
         s = "ab"
         t = "acb"
-        self.assertTrue(edit_distance(s, t))
-        self.assertTrue(edit_distance2(s, t))
-        self.assertTrue(edit_distance3(s, t))
+        self.assertTrue(edit_distance_one(s, t))
 
     def test2(self):
         s = "teacher"
         t = "detacher"
-        # not solvable
-        #self.assertFalse(edit_distance(s, t))
-        self.assertFalse(edit_distance2(s, t))
-        self.assertFalse(edit_distance3(s, t))
+        self.assertFalse(edit_distance_one(s, t))
 
     def test3(self):
         s = "a"
         t = ""
-        #self.assertFalse(edit_distance(s, t))
-        #self.assertTrue(edit_distance2(s, t))
-        self.assertTrue(edit_distance3(s, t))
+        self.assertTrue(edit_distance_one(s, t))
 
+    def test4(self):
+        s = "cab"
+        t = "ad"
+        self.assertFalse(edit_distance_one(s, t))
+
+    def test5(self):
+        s = "cab"
+        t = "ab"
+        self.assertTrue(edit_distance_one(s, t))
+
+    def test6(self):
+        s = "cab"
+        t = "acd"
+        self.assertFalse(edit_distance_one(s, t))
 
 if __name__ == '__main__':
     sys.exit(unittest.main())
