@@ -14,6 +14,8 @@ import unittest
 # -30 <= nums[i] <= 30
 # The product of any prefix or suffix of nums is guaranteed to fit in a 32-bit
 # integer.
+# You must write an algorithm that runs in O(n) time and without using the
+# division operation.
 
 # solution: prefix sum + deque + two pointers
 # complexity
@@ -72,32 +74,66 @@ def product_except_self(nums):
 
     return nums
 
+# solution: prefix sum + deque + two pointers
+# complexity
+# run-time: O(n), slow!
+# space: O(n)
+def product_except_self2(nums):
+    if not nums:
+        return []
+
+    ans = []
+    # forward
+    prefix_sum1 = [1]
+
+    for i in range(1, len(nums)):
+        prefix_sum1.append(prefix_sum1[-1]*nums[i-1])
+
+    #print(f"prefix_sum1:{prefix_sum1}")
+
+    # backward
+    prefix_sum2 = deque([1])
+    for i in reversed(range(len(nums)-1)):
+        prefix_sum2.appendleft(prefix_sum2[0]*nums[i+1])
+
+    #print(f"prefix_sum2:{prefix_sum2}")
+
+    for i in range(len(prefix_sum1)):
+        ans.append(prefix_sum1[i]*prefix_sum2[i])
+
+    return ans
+
 # TODO: refactor & solve w/ O(1) space
 
 class TestProductExceptSelf(unittest.TestCase):
     def test_empty(self):
         nums = []
         expected = []
+        self.assertEqual(product_except_self2(nums), expected)
         self.assertEqual(product_except_self(nums), expected)
 
     def test_1(self):
         nums = [1,2,3,4]
         expected = [24,12,8,6]
+        self.assertEqual(product_except_self2(nums), expected)
         self.assertEqual(product_except_self(nums), expected)
 
     def test_2(self):
         nums = [-1,1,0,-3,3]
         expected = [0,0,9,0,0]
+        self.assertEqual(product_except_self2(nums), expected)
         self.assertEqual(product_except_self(nums), expected)
 
     def test_3(self):
         nums = [1,-1]
         expected = [-1,1]
+        self.assertEqual(product_except_self2(nums), expected)
         self.assertEqual(product_except_self(nums), expected)
 
     def test_4(self):
         nums = [9,0,-2]
         expected = [0,-18,0]
+        self.assertEqual(product_except_self2(nums), expected)
         self.assertEqual(product_except_self(nums), expected)
 
 if __name__ == '__main__':

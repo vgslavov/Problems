@@ -49,6 +49,8 @@ def longest_substr(s):
         # d always contains chars within current window
         ans = max(ans, len(d))
 
+        print(f"left:{left},right:{right},ans:{ans},d:{d}")
+
     return ans
 
 class TestLongestSubstr(unittest.TestCase):

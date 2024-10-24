@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # find common:
-# * substr: order matters, consecutive chars
+# * substr: order matters, consecutive chars, w/o repetition
 # * subseq: order matters, non-consecutive chars
 # * subset: order doesn't matter
 

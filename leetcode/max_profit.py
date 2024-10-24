@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import heapq
 import math
 import sys
 import unittest
@@ -44,6 +45,25 @@ def max_profit2(prices):
 
     return max_profit if max_profit > 0 else 0
 
+# solution: heap
+# complexity
+# run-time: O(n*log n)
+# space: O(n)
+def max_profit3(prices):
+    if not prices:
+        return 0
+
+    heap = [prices[0]]
+    max_diff = -math.inf
+
+    for i in range(1, len(prices)):
+        # heap[0] is min element
+        max_diff = max(max_diff, prices[i]-heap[0])
+        heapq.heappush(heap, prices[i])
+        #print(f"max_diff:{max_diff}")
+
+    return max_diff if max_diff > 0 else 0
+
 # TODO: solve using sliding window?
 
 class TestMaxProfit(unittest.TestCase):
@@ -54,6 +74,7 @@ class TestMaxProfit(unittest.TestCase):
 
         self.assertEqual(max_profit1(prices), expected)
         self.assertEqual(max_profit2(prices), expected)
+        self.assertEqual(max_profit3(prices), expected)
 
     def test_profit1(self):
         prices = [7,1,5,3,6,4]
@@ -61,6 +82,7 @@ class TestMaxProfit(unittest.TestCase):
 
         self.assertEqual(max_profit1(prices), expected)
         self.assertEqual(max_profit2(prices), expected)
+        self.assertEqual(max_profit3(prices), expected)
 
     def test_profit2(self):
         prices = [7,6,4,3,1]
@@ -68,6 +90,7 @@ class TestMaxProfit(unittest.TestCase):
 
         self.assertEqual(max_profit1(prices), expected)
         self.assertEqual(max_profit2(prices), expected)
+        self.assertEqual(max_profit3(prices), expected)
 
     def test_profit3(self):
         prices = [2,4,1]
@@ -75,6 +98,7 @@ class TestMaxProfit(unittest.TestCase):
 
         self.assertEqual(max_profit1(prices), expected)
         self.assertEqual(max_profit2(prices), expected)
+        self.assertEqual(max_profit3(prices), expected)
 
     def test_profit4(self):
         prices = [2,1,2,1,0,1,2]
@@ -82,6 +106,7 @@ class TestMaxProfit(unittest.TestCase):
 
         self.assertEqual(max_profit1(prices), expected)
         self.assertEqual(max_profit2(prices), expected)
+        self.assertEqual(max_profit3(prices), expected)
 
     def test_profit5(self):
         prices = [2,1,2,0,1]
@@ -89,6 +114,7 @@ class TestMaxProfit(unittest.TestCase):
 
         self.assertEqual(max_profit1(prices), expected)
         self.assertEqual(max_profit2(prices), expected)
+        self.assertEqual(max_profit3(prices), expected)
 
 if __name__ == '__main__':
     sys.exit(unittest.main())
