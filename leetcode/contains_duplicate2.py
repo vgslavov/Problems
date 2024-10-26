@@ -18,6 +18,7 @@ import unittest
 # -10^9 <= nums[i] <= 10^9
 # 0 <= k <= 10^5
 
+# solution: brute-force
 # complexity
 # run-time: O(n^2), slow!
 # space: O(k)
@@ -34,7 +35,7 @@ def contains_nearby_duplicate(nums, k):
 
     return False
 
-# TODO: faster, less mem
+# TODO: solve using sliding window
 
 class TestContainsDupes(unittest.TestCase):
     def test_empty(self):
