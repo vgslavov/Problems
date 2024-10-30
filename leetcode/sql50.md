@@ -105,6 +105,12 @@ AND a.activity_type = "start"
 AND b.activity_type = "end"
 GROUP BY a.machine_id
 ```
+* 577: Employee Bonus #easy
+```
+SELECT name, bonus
+FROM employee AS e LEFT JOIN bonus AS b ON e.empId = b.empId
+WHERE bonus < 1000 or bonus IS NULL
+```
 
 ## Basic Aggregate Functions
 
