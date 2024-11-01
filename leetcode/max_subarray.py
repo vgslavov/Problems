@@ -4,7 +4,7 @@ from collections import defaultdict
 import sys
 import unittest
 
-# number: 2938
+# number: 2958
 # section: citadel
 # difficulty: medium
 # tags: array, hash table, sliding window, citadel
