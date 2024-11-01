@@ -41,7 +41,7 @@ def rob(nums) -> int:
 # complexity
 # run-time: O(n)
 # space: O(n)
-def rob(nums) -> int:
+def rob2(nums) -> int:
     @cache
     def dp(i):
         # base case
@@ -55,6 +55,26 @@ def rob(nums) -> int:
 
     return dp(len(nums)-1)
 
+# solution: iterative bottom-up 1D DP
+# complexity
+# run-time: O(n)
+# space: O(n)
+def rob3(nums) -> int:
+    # init
+    dp = [0] * len(nums)
+
+    if len(nums) == 1:
+        return nums[0]
+
+    # base cases
+    dp[0] = nums[0]
+    dp[1] = max(nums[0], nums[1])
+
+    # recurrence relation
+    for i in range(2, len(nums)):
+        dp[i] = max(dp[i-1], dp[i-2]+nums[i])
+
+    return dp[len(nums)-1]
 
 if __name__ == '__main__':
     sys.exit(unittest.main())
