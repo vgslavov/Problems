@@ -35,7 +35,7 @@ def min_cost_clim_stairs(cost) -> int:
 # complexity
 # run-time: O(n)
 # space: O(n)
-def min_cost_clim_stairs(cost) -> int:
+def min_cost_clim_stairs2(cost) -> int:
     @cache
     def dp(i):
         # base case
@@ -47,6 +47,19 @@ def min_cost_clim_stairs(cost) -> int:
 
     return dp(len(cost))
 
+# solution: iterative bottom-up 1D DP
+# complexity
+# run-time: O(n)
+# space: O(n)
+def min_cost_clim_stairs3(cost) -> int:
+    # init + base cases
+    dp = [0] * (len(cost)+1)
+
+    # recurrence relation
+    for i in range(2, len(cost)+1):
+        dp[i] = min(dp[i-1]+cost[i-1], dp[i-2]+cost[i-2])
+
+    return dp[len(cost)]
 
 if __name__ == '__main__':
     sys.exit(unittest.main())
