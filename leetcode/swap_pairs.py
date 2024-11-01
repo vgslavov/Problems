@@ -12,6 +12,12 @@ import unittest
 # The number of nodes in the list is in the range [0, 100].
 # 0 <= Node.val <= 100
 
+# Definition for singly-linked list.
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
 def swap_helper(head):
     if not head or not head.next:
         return
