@@ -54,7 +54,7 @@ def traverse(head, n):
 # run-time: O(n)
 # space: O(1)
 # TODO: refactor
-def reverse_between(head, left, right):
+def reverse_list2(head, left, right):
     if left == right and left == 1:
         return head
 
