@@ -17,13 +17,11 @@ import math
 # Submissions making more than 1000 calls to BinaryMatrix.get will be judged
 # Wrong Answer.
 
-# """
 # This is BinaryMatrix's API interface.
 # You should not implement it, or speculate about its implementation
-# """
-#class BinaryMatrix(object):
-#    def get(self, row: int, col: int) -> int:
-#    def dimensions(self) -> list[]:
+class BinaryMatrix(object):
+    def get(self, row: int, col: int) -> int:
+    def dimensions(self) -> list[]:
 
 # solution: brute-force
 # complexity
