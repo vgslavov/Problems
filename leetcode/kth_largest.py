@@ -4,7 +4,11 @@ import heapq
 import sys
 import unittest
 
-# related: #215 (find_k_largest)
+# number: 703
+# related: 215
+# section:
+# difficulty: easy
+# tags: tree, design, bst, heap, binary tree, data stream
 
 # constraints
 # 1 <= k <= 10^4
@@ -15,10 +19,10 @@ import unittest
 # It is guaranteed that there will be at least k elements in the array when you
 # search for the kth element.
 
-# solution: heap + Pythonic nlargest
+# solution: min heap
 # complexity
-# run-time: ?
-# space: O(k)?
+# run-time: O(log k) for add(), O(log n) for construct
+# space: O(k)
 class KthLargest:
 
     def __init__(self, k, nums):
@@ -26,24 +30,20 @@ class KthLargest:
         self.k = k
 
         for n in nums:
-            heapq.heappush(self.heap, n)
-
-            # limit size of heap to k
-            if len(self.heap) > self.k:
-                heapq.heappop(self.heap)
-
-        #print('heap:{}, k:{}'.format(self.heap, self.k))
+            self.add(n)
 
     def add(self, val):
         heapq.heappush(self.heap, val)
 
+        # pop *after* adding!
         if len(self.heap) > self.k:
             heapq.heappop(self.heap)
 
         #print('heap:{}, k:{}'.format(self.heap, self.k))
 
-        # TODO: speed up
-        return heapq.nlargest(self.k, self.heap)[-1] if self.heap else None
+        #return heapq.nlargest(self.k, self.heap)[-1] if self.heap else None
+        # no need for nlargest, kth largest is top of min heap
+        return self.heap[0] if self.heap else None
 
 class TestKthLargest(unittest.TestCase):
 
@@ -63,6 +63,15 @@ class TestKthLargest(unittest.TestCase):
         self.assertEqual(obj.add(10), 5)
         self.assertEqual(obj.add(9), 8)
         self.assertEqual(obj.add(4), 8)
+
+    def test_add2(self):
+        nums = [7,7,7,7,8,3]
+        k = 4
+        obj = KthLargest(k, nums)
+        self.assertEqual(obj.add(2), 7)
+        self.assertEqual(obj.add(10), 7)
+        self.assertEqual(obj.add(9), 7)
+        self.assertEqual(obj.add(9), 8)
 
 if __name__ == '__main__':
     sys.exit(unittest.main())
