@@ -55,6 +55,8 @@ private:
     std::vector<std::tuple<int, int>> d_stack;
 };
 
+// TODO: add unit tests, don't store duplicates
+
 // Your MinStack object will be instantiated and called as such:
 MinStack* obj = new MinStack();
 obj->push(val);
