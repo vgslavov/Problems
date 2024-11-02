@@ -14,7 +14,7 @@ import unittest
 # At most 3 * 10^4 calls will be made to push, pop, top, and get_min.
 
 # complexity
-# run-time: O(1)
+# run-time: O(1) per op
 # space: O(n)
 class MinStack:
 
@@ -23,7 +23,7 @@ class MinStack:
         self.stack = []
 
     def push(self, val: int) -> None:
-        cmin = val if not len(self.stack) else  min(val, self.stack[-1][1])
+        cmin = val if not len(self.stack) else min(val, self.get_min())
         self.stack.append((val, cmin))
 
     def pop(self) -> None:
