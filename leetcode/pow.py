@@ -37,10 +37,11 @@ def pow(x, n):
 
     return 1/ans if isneg else ans
 
-# solution: brute-force recursive
+# solution: brute-force recursive w/ functools
 # complexity
 # run-time: O(n), slow!
 # space: O(n)
+@cache
 def pow2(x, n):
     # base case
     if not n:
