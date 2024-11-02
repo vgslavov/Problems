@@ -20,7 +20,7 @@
 
 // solution: min heap
 // complexity
-// run-time: O(log k) for add(), O(log n) for construct
+// run-time: O(log k) to add(), O(log n) to construct
 // space: O(k)
 class KthLargest {
 public:
