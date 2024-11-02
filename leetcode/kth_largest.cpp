@@ -24,7 +24,7 @@
 // space: O(k)
 class KthLargest {
 public:
-    KthLargest(int k, vector<int>& nums)
+    KthLargest(int k, const vector<int>& nums)
     : d_k(k)
     {
         // don't init, have to go through all nums!
