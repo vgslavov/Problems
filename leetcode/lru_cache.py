@@ -24,7 +24,7 @@ class LRUCache:
     def __init__(self, capacity: int):
         self.__cache = OrderedDict()
 
-        if not capacity:
+        if capacity <= 0:
             raise ValueError("Invalid capacity")
 
         self.__capacity = capacity
@@ -67,7 +67,7 @@ class LRUCache2:
     def __init__(self, capacity: int):
         self.__cache = {}
 
-        if not capacity:
+        if capacity <= 0:
             raise ValueError("Invalid capacity")
 
         self.__capacity = capacity
@@ -106,9 +106,15 @@ class LRUCache2:
 
 class TestLRUCache(unittest.TestCase):
 
-    def test_empty(self):
-        self.assertRaises(ValueError, LRUCache, 0)
-        self.assertRaises(ValueError, LRUCache2, 0)
+    def test_0_capacity(self):
+        capacity = 0
+        self.assertRaises(ValueError, LRUCache, capacity)
+        self.assertRaises(ValueError, LRUCache2, capacity)
+
+    def test_neg_capacity(self):
+        capacity = -5
+        self.assertRaises(ValueError, LRUCache, capacity)
+        self.assertRaises(ValueError, LRUCache2, capacity)
 
     def test_lrucache(self):
         capacity = 2
