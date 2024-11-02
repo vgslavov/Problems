@@ -3,7 +3,7 @@
 import sys
 import unittest
 
-# number:
+# number: 622
 # section: citadel
 # difficulty: medium
 # tags: array, linked list, design, queue, citadel
@@ -16,8 +16,8 @@ import unittest
 
 # solution: 2 lists
 # complexity
-# run-time: O(n)?
-# space: O(n)
+# run-time: O(1) per op
+# space: O(k)
 class MyCircularQueue:
 
     def __init__(self, k: int):
@@ -44,6 +44,7 @@ class MyCircularQueue:
             return False
 
     def front(self) -> int:
+        # first check front!
         if self.__front:
             return self.__front[0]
         elif self.__rear:
@@ -52,6 +53,7 @@ class MyCircularQueue:
             return -1
 
     def rear(self) -> int:
+        # first check rear!
         if self.__rear:
             return self.__rear[-1]
         elif self.__front:
