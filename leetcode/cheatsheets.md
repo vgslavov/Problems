@@ -26,13 +26,13 @@
   - [Binary search](#binary-search)
   - [Miscellaneous](#miscellaneous)
 - [Input Sizes vs Time Complexity](#input-sizes-vs-time-complexity)
-  - [n <= 10](#n--10)
-  - [10 < n <= 20](#10--n--20)
-  - [20 < n <= 100](#20--n--100)
-  - [100 < n <= 1,000](#100--n--1000)
-  - [1,000 < n < 100,000](#1000--n--100000)
-  - [100,000 < n < 1,000,000](#100000--n--1000000)
-  - [1,000,000 < n](#1000000--n)
+  - [`n <= 10`](#n--10)
+  - [`10 < n <= 20`](#10--n--20)
+  - [`20 < n <= 100`](#20--n--100)
+  - [`100 < n <= 1,000`](#100--n--1000)
+  - [`1,000 < n < 100,000`](#1000--n--100000)
+  - [`100,000 < n < 1,000,000`](#100000--n--1000000)
+  - [`1,000,000 < n`](#1000000--n)
 - [Sorting Algorithms](#sorting-algorithms)
 - [Interview Stages](#interview-stages)
   - [Stage 1: Introductions](#stage-1-introductions)
@@ -72,6 +72,9 @@
 ### DP
 
 * optimized recursion
+```
+Dynamic Programming = Recursion + Memoization
+```
 * characteristics
     * optimal substructure
     * overlapping subproblems
@@ -81,10 +84,40 @@
         * iterative
         * faster
         * less memory
+        * nested loops: 1 per state variable
+        * *start after* base case
     * top-down
         * memoization
         * recursive
         * easier to write
+        * start from `n`, end at base case
+* when to use
+    * min cost
+    * max profit
+    * number of ways
+    * longest possible
+    * possible to reach
+* state: a set of variables to sufficiently describe a scenario
+* memoization
+    * hash map
+        * use for top-down
+        * if no `functools.cache` or equivalent
+    * vector
+        * use for bottom-up
+        * faster than hash map
+        * but more memory: may not need every state
+    * built-in: `functools.cache`
+        * use for top-down
+* multidimensional DP
+    * 1: index along input (same as 1DP), `d(i)` or `d[i]`
+    * 2: 2nd index state variable to track subseq of same input, `d(i, j)` or `d[i][j]`
+    * 3: numerical constraint, e.g. `k` transactions
+    * 4: `true`/`false` status in given state
+    * 5: tuple/bitmask to indicate visited/seen
+* time complexity: `O(n*F)`
+    * `n`: possible states
+    * `F`: computing each state
+* space complexity: usually equal to time complexity
 
 ### Backtracking
 
