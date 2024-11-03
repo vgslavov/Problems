@@ -47,11 +47,18 @@
 
 ## Theory
 
-### Sub/str/seq/set
+### Substr/seq/set
 
-* substr: order matters, consecutive chars, w/o repetition
-* subseq: order matters, non-consecutive chars
-* subset: order doesn't matter
+* substring
+    * order matters
+    * consecutive chars
+    * no repetition
+* subsequence
+    * order matters
+    * non-consecutive chars
+    * a common subsequence is a sequence of letters that appears in both strings
+* subset
+    * order doesn't matter
 
 ### Divide & Conquer
 
