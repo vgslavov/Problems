@@ -111,6 +111,12 @@ SELECT name, bonus
 FROM employee AS e LEFT JOIN bonus AS b ON e.empId = b.empId
 WHERE bonus < 1000 or bonus IS NULL
 ```
+* 1280: Students and Examinations #easy #mistakes
+```
+SELECT e.student_id, subject_name, COUNT(e.student_id) AS attended_exams
+FROM examinations AS e
+GROUP BY e.student_id, subject_name
+```
 
 ## Basic Aggregate Functions
 
