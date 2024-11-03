@@ -26,14 +26,13 @@ def climb_stairs(n: int) -> int:
         if i in memo:
             return memo[i]
 
-        # calc recurrence relation
+        # calc recurrence relation & cache
         memo[i] = dp(i-1) + dp(i-2)
         #print(f"memo[{i}]:{memo[i]}")
 
         # return recurrence relation
         return memo[i]
 
-    # cache or use @functools.cache
     memo = {}
     return dp(n)
 
