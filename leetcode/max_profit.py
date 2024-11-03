@@ -19,33 +19,33 @@ import unittest
 # run-time: O(n^2)
 # space: O(1)
 def max_profit1(prices):
-    max_profit = -math.inf
+    ans = -math.inf
 
     for i in range(len(prices)):
         for j in range(i+1, len(prices)):
             profit = prices[j] - prices[i]
-            max_profit = max(max_profit, profit)
+            ans = max(ans, profit)
 
-    return max_profit if max_profit > 0 else 0
+    return ans if ans > 0 else 0
 
 # solution: dp?
 # complexity
 # run-time: O(n)?
 # space: O(1)?
 def max_profit2(prices):
-    max_profit = -math.inf
+    ans = -math.inf
     min_idx = 0
 
     for i in range(1, len(prices)):
         profit = prices[i] - prices[min_idx]
-        max_profit = max(max_profit, profit)
+        ans = max(ans, profit)
 
         if prices[i] < prices[min_idx]:
             min_idx = i
 
-    return max_profit if max_profit > 0 else 0
+    return ans if ans > 0 else 0
 
-# solution: heap
+# solution: min heap
 # complexity
 # run-time: O(n*log n)
 # space: O(n)
@@ -54,15 +54,15 @@ def max_profit3(prices):
         return 0
 
     heap = [prices[0]]
-    max_diff = -math.inf
+    ans = -math.inf
 
     for i in range(1, len(prices)):
         # heap[0] is min element
-        max_diff = max(max_diff, prices[i]-heap[0])
+        ans = max(ans, prices[i]-heap[0])
         heapq.heappush(heap, prices[i])
         #print(f"max_diff:{max_diff}")
 
-    return max_diff if max_diff > 0 else 0
+    return ans if ans > 0 else 0
 
 # TODO: solve using sliding window?
 
