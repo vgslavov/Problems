@@ -13,6 +13,8 @@ import unittest
 # constraints
 # 1 <= prices.length <= 10^5
 # 0 <= prices[i] <= 10^4
+# limit to 1 buy & 1 sell
+# have to buy *before* you sell (can't short)
 
 # solution: brute-force
 # complexity
@@ -28,10 +30,10 @@ def max_profit1(prices):
 
     return ans if ans > 0 else 0
 
-# solution: dp?
+# solution: one pass to find biggest diff by finding cheapest price
 # complexity
-# run-time: O(n)?
-# space: O(1)?
+# run-time: O(n)
+# space: O(1)
 def max_profit2(prices):
     ans = -math.inf
     min_idx = 0
@@ -64,7 +66,7 @@ def max_profit3(prices):
 
     return ans if ans > 0 else 0
 
-# TODO: solve using sliding window?
+# TODO: solve using sliding window & DP
 
 class TestMaxProfit(unittest.TestCase):
 
