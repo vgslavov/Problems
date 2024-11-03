@@ -76,5 +76,7 @@ def rob3(nums) -> int:
 
     return dp[len(nums)-1]
 
+# TODO: add unit tests
+
 if __name__ == '__main__':
     sys.exit(unittest.main())
