@@ -43,20 +43,35 @@ def count_substr(s: str) -> int:
 # TODO: finish
 def count_substr2(s: str) -> int:
     @cache
-    def dp(i):
+    def dp(i, j):
+        print(f"i:{i},j:{j}")
+
         # base case
-        if i == 1:
+        # single letter palindrome
+        if i == j:
+            return 1
+        # be safe
+        elif i > j or j > len(s)-1 or i > len(s)-1:
+            return 0
+        # 2-letter palindrome
+        elif (j == i + 1) and (s[i] == s[j]):
             return 1
 
-        ans = 0
         # recurrence relation
-        for j in range(i):
-            if ispalindrome(s, i, j):
-                ans += dp(j) + 1
+        ans = 0
+        for z in range(i, len(s)-1):
+            if s[z] == s[z+1]:
+                ans += 1
 
-        return ans
+        print(f"s:{s},ans:{ans}")
 
-    return sum(dp(i) for i in range(len(s)))
+        for z in range(i, len(s)-1):
+            if s[i] == s[j]:
+                return ans + dp(i+1, j-1) + 1
+            else:
+                return ans + dp(i+1, j-1)
+
+    return dp(0, len(s)-1)
 
 class TestCountSubstr(unittest.TestCase):
     def test_empty(self):
