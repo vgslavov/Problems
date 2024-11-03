@@ -13,7 +13,7 @@ import unittest
 # complexity
 # run-time: O(n)
 # space: O(n)
-def min_cost_clim_stairs(cost) -> int:
+def min_cost_climb_stairs(cost) -> int:
     def dp(i):
         # base case
         if i in (0,1):
@@ -35,7 +35,7 @@ def min_cost_clim_stairs(cost) -> int:
 # complexity
 # run-time: O(n)
 # space: O(n)
-def min_cost_clim_stairs2(cost) -> int:
+def min_cost_climb_stairs2(cost) -> int:
     @cache
     def dp(i):
         # base case
@@ -51,12 +51,14 @@ def min_cost_clim_stairs2(cost) -> int:
 # complexity
 # run-time: O(n)
 # space: O(n)
-def min_cost_clim_stairs3(cost) -> int:
+def min_cost_climb_stairs3(cost) -> int:
     # init + base cases
     dp = [0] * (len(cost)+1)
 
     # recurrence relation
     for i in range(2, len(cost)+1):
+        # why not?
+        #memo[i] = cost[i] + min(dp[i + 1], dp[i + 2])
         dp[i] = min(dp[i-1]+cost[i-1], dp[i-2]+cost[i-2])
 
     return dp[len(cost)]
