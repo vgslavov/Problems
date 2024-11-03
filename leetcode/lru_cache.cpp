@@ -52,9 +52,9 @@ public:
     }
 
     void put(int key, int value) {
-        // update existing key
         KeyListMap::iterator cacheIter = d_cache.find(key);
 
+        // update existing key
         if (cacheIter != d_cache.end()) {
             ListTuples::iterator listIter = cacheIter->second;
             d_list.erase(listIter);
