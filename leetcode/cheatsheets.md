@@ -4,7 +4,15 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-- [Time complexity (Big O) cheat sheet](#time-complexity-big-o-cheat-sheet)
+- [Theory](#theory)
+  - [Sub/str/seq/set](#substrseqset)
+  - [Divide & Conquer](#divide--conquer)
+  - [Greedy](#greedy)
+  - [Recursion](#recursion)
+  - [DP](#dp)
+  - [Backtracking](#backtracking)
+  - [Combinations & Permutations](#combinations--permutations)
+- [Time Complexity](#time-complexity)
   - [Arrays (dynamic array/list)](#arrays-dynamic-arraylist)
   - [Strings (immutable)](#strings-immutable)
   - [Linked Lists](#linked-lists)
@@ -17,7 +25,7 @@
   - [Heap/Priority Queue](#heappriority-queue)
   - [Binary search](#binary-search)
   - [Miscellaneous](#miscellaneous)
-- [Input sizes vs time complexity](#input-sizes-vs-time-complexity)
+- [Input Sizes vs Time Complexity](#input-sizes-vs-time-complexity)
   - [n <= 10](#n--10)
   - [10 < n <= 20](#10--n--20)
   - [20 < n <= 100](#20--n--100)
@@ -25,8 +33,8 @@
   - [1,000 < n < 100,000](#1000--n--100000)
   - [100,000 < n < 1,000,000](#100000--n--1000000)
   - [1,000,000 < n](#1000000--n)
-- [Sorting algorithms](#sorting-algorithms)
-- [Interview stages cheat sheet](#interview-stages-cheat-sheet)
+- [Sorting Algorithms](#sorting-algorithms)
+- [Interview Stages](#interview-stages)
   - [Stage 1: Introductions](#stage-1-introductions)
   - [Stage 2: Problem statement](#stage-2-problem-statement)
   - [Stage 3: Brainstorming DS&A](#stage-3-brainstorming-dsa)
@@ -37,7 +45,56 @@
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-## Time complexity (Big O) cheat sheet
+## Theory
+
+### Sub/str/seq/set
+
+* substr: order matters, consecutive chars, w/o repetition
+* subseq: order matters, non-consecutive chars
+* subset: order doesn't matter
+
+### Divide & Conquer
+
+* characteristics
+    * non-overlapping subproblems
+
+### Greedy
+
+* characteristics
+    * optimal substructure
+    * non-overlapping subproblems
+
+### Recursion
+
+* base cases
+* recurrence relation
+
+### DP
+
+* optimized recursion
+* characteristics
+    * optimal substructure
+    * overlapping subproblems
+* methods
+    * bottom-up
+        * tabulation
+        * iterative
+        * faster
+        * less memory
+    * top-down
+        * memoization
+        * recursive
+        * easier to write
+
+### Backtracking
+
+* brute-force
+* exhaustive search
+* usually `O(2^n)`
+
+### Combinations & Permutations
+
+## Time Complexity
 
 ### Arrays (dynamic array/list)
 
@@ -177,7 +234,7 @@ your initial search space.
   states and `k` is the work done at each state
 * Dynamic programming space complexity: `O(n)`, where `n` is the number of states
 
-## Input sizes vs time complexity
+## Input Sizes vs Time Complexity
 
 The constraints of a problem can be considered as hints because they indicate an
 upper bound on what your solution's time complexity should be. Being able to
@@ -273,7 +330,7 @@ constant time (like with math or a clever use of hash maps).
 Other time complexities are possible like `O(sqrt(n))`, but this is very rare
 and will usually only be seen in very advanced problems.
 
-## Sorting algorithms
+## Sorting Algorithms
 
 All major programming languages have a built-in method for sorting. It is
 usually correct to assume and say sorting costs `O(n*log n)`, where n is the
@@ -288,7 +345,7 @@ algorithm is stable if whenever there are two records R and S with the same key
 and with R appearing before S in the original list, R will appear before S in
 the sorted list."
 
-## Interview stages cheat sheet
+## Interview Stages
 
 The following will be a summary of the "Stages of an interview" article. If you
 have a remote interview, you can print this condensed version and keep it in
