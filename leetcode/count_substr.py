@@ -40,7 +40,7 @@ def count_substr(s: str) -> int:
 # complexity
 # run-time: O(n^2)
 # space: O(n^2)
-# TODO: finish
+# TODO: translate bottom-up
 def count_substr2(s: str) -> int:
     @cache
     def dp(i, j):
