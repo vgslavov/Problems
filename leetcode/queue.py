@@ -30,7 +30,7 @@ class MyQueue:
         # always push to back stack
         self.__back.append(x)
 
-    # run-time: O(n)
+    # run-time: O(1) amortized, O(n) worst-case
     def pop(self) -> int:
         if self.empty():
             raise ValueError("empty queue") 
@@ -41,7 +41,7 @@ class MyQueue:
 
         return self.__front.pop()
 
-    # run-time: O(n)
+    # run-time: O(1) amortized, O(n) worst-case
     def peek(self) -> int:
         if self.empty():
             raise ValueError("empty queue")
@@ -56,7 +56,7 @@ class MyQueue:
         if self.empty():
             return False
 
-        while len(self.__back):
+        while self.__back:
             self.__front.append(self.__back[-1])
             self.__back.pop()
 
