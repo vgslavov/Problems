@@ -3,76 +3,75 @@
 import sys
 import unittest
 
-# number: 232
-# section: 
-# difficulty: easy
-# tags: stack, design, queue
-
 # constraints
-# 1 <= x <= 9
-# At most 100 calls will be made to push, pop, peek, and empty.
-# All the calls to pop and peek are valid.
+# don't use Python list/deque's append(), etc.
 
-# complexity
-# run-time: see below
-# space: O(n)
 class MyQueue:
+    def __init__(self, capacity=100):
+        self.__capacity = capacity
+        self.__queue = [None] * capacity
+        self.__front = -1
+        self.__back = -1
 
-    def __init__(self):
-        # front of queue
-        self.__front = []
+    def __increase_capacity(self, factor=2):
+        print(f"before increase_capacity, q:{self.__queue}")
+        self.__capacity *= factor
+        self.__queue[:] = self.__queue[:self.__capacity] + \
+                [None for _ in range(self.__capacity - len(self.__queue))]
 
-        # back of queue
-        self.__back = []
+        print(f"after increase_capacity, q:{self.__queue}")
 
-    # run-time: O(1)
-    def push(self, x: int) -> None:
-        # always push to back stack
-        self.__back.append(x)
+    def push(self, value):
+        print(f"before push, q:{self.__queue}")
+        if (self.__back - self.__front + 1) == self.__capacity:
+            self.__increase_capacity()
 
-    # run-time: O(1) amortized, O(n) worst-case
-    def pop(self) -> int:
+        self.__back += 1
+        self.__queue[self.__back] = value
+        if self.__front < 0:
+            self.__front = 0
+        print(f"after push, q:{self.__queue}")
+
+    def pop(self):
+        print(f"before pop, q:{self.__queue}")
         if self.empty():
-            raise ValueError("empty queue") 
+            return None
 
-        # if front is non-empty, pop from front
-        if not self.__front and not self.__back2front():
-            raise ValueError("failed moving from back to front")
+        value = self.__queue[self.__front]
+        self.__queue[self.__front] = None
+        self.__front += 1
+        print(f"after pop, q:{self.__queue}")
 
-        return self.__front.pop()
+        return value
 
-    # run-time: O(1) amortized, O(n) worst-case
-    def peek(self) -> int:
+    def peek(self):
         if self.empty():
-            raise ValueError("empty queue")
+            return None
 
-        if not self.__front and not self.__back2front():
-            raise ValueError("failed moving from back to front")
+        return self.__queue[self.__front]
 
-        return self.__front[-1]
-
-    # run-time: O(n)
-    def __back2front(self) -> bool:
-        if self.empty():
+    def empty(self):
+        print(f"empty, front:{self.__front},back:{self.__back}")
+        if self.__front != self.__back:
             return False
 
-        while self.__back:
-            self.__front.append(self.__back[-1])
-            self.__back.pop()
+        # brand new
+        if self.__front == -1:
+            return True
+        # point to None
+        elif not self.__queue[self.__front]:
+            return True
 
-        return True
-
-    # run-time: O(1)
-    def empty(self) -> bool:
-        return not len(self.__front) and not len(self.__back)
-
-# TODO: worst-case O(1)?
+        return False
 
 class TestMyQueue(unittest.TestCase):
     def test(self):
-        q = MyQueue()
+        q = MyQueue(1)                  # [None]
+        self.assertTrue(q.empty())
+        self.assertFalse(q.pop())
         q.push(1)                       # [1]
         q.push(2)                       # [1,2]
+        q.push(3)                       # [1,2,3]
         self.assertEqual(q.peek(), 1)
         self.assertEqual(q.pop(), 1)    # [2]
         self.assertFalse(q.empty())
