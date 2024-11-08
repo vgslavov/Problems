@@ -129,7 +129,7 @@ Dynamic Programming = Recursion + Memoization
 ### Backtracking
 
 * brute-force
-* exhaustive search
+* optimization on exhaustive search
 * usually `O(2^n)`
 
 ### Combinations & Permutations
