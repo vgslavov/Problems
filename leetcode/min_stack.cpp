@@ -24,7 +24,7 @@ public:
         if (!d_stack.empty()) {
             cmin = std::min(val, getMin());
         }
-        d_stack.push_back(std::make_pair(val, cmin));
+        d_stack.push_back(std::make_tuple(val, cmin));
     }
 
     void pop() {
