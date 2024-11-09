@@ -14,25 +14,31 @@ import unittest
 # At most 3 * 10^4 calls in total will be made to insert, search, and startsWith.
 
 # complexity
-# run-time: O(n)?
-# space: O(n)?
+# run-time: O(n)
+# space: O(n*m)
 class Trie:
 
     def __init__(self):
-        self.isendword = False
         self.children = {}
+        self.isendword = False
 
     def insert(self, word: str) -> None:
-        curr = self
+        node = self
 
         for c in word:
-            if c not in curr.children:
-                curr.children[c] = Trie()
-            curr = curr.children[c]
+            if c not in node.children:
+                node.children[c] = Trie()
+            node = node.children[c]
 
-        curr.isendword = True
+        node.isendword = True
 
     def search(self, word: str) -> bool:
+        return self.__search_helper(word, True)
+
+    def starts_with(self, prefix: str) -> bool:
+        return self.__search_helper(prefix)
+
+    def __search_helper(self, word: str, check_end_word=False) -> bool:
         node = self
 
         for c in word:
@@ -40,17 +46,7 @@ class Trie:
                 return False
             node = node.children[c]
 
-        return True if node.isendword else False
-
-    def starts_with(self, prefix: str) -> bool:
-        node = self
-
-        for c in prefix:
-            if c not in node.children:
-                return False
-            node = node.children[c]
-
-        return True
+        return True if not check_end_word or node.isendword else False
 
 class TestTrie(unittest.TestCase):
     def test(self):
