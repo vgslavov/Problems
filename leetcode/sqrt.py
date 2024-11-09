@@ -16,12 +16,7 @@ import unittest
 # run-time: O(n)
 # space: O(1)
 def check(x, k):
-    squared = k * k
-
-    if squared > x:
-        return False
-
-    return True
+    return False if k*k > x else True
 
 def sqrt(x):
     if not x:
@@ -34,7 +29,7 @@ def sqrt(x):
     while start <= end:
         mid = start + (end-start) // 2
 
-        print("start:{}, mid:{}, end:{}".format(start, mid, end))
+        #print("start:{}, mid:{}, end:{}".format(start, mid, end))
 
         if check(x, mid):
             start = mid+1

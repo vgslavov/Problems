@@ -10,6 +10,8 @@ import unittest
 # tags: array, binary search, dp, sliding window, rolling hash, hash function
 
 # constraints
+# 1 <= nums1.length, nums2.length <= 1000
+# 0 <= nums1[i], nums2[i] <= 100
 
 # solution: top-down recursive 2DP using functools, like LCS
 # complexity

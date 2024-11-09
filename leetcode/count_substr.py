@@ -115,6 +115,7 @@ def count_substr3(s: str) -> int:
 
     return ans
 
+# run-time: O(n)
 def count_palindromes(s, i, j):
     ans = 0
 

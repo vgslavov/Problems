@@ -10,8 +10,10 @@ import unittest
 # tags: array, hash table, string, sorting, top 150, meta, citadel
 
 # constraints
-# 1 <= strs.length <= 10^4
-# 0 <= strs[i].length <= 100
+# k: len(strs[i])
+# n: len(strs)
+# 1 <= n <= 10^4
+# 0 <= k <= 100
 # strs[i] consists of lowercase English letters.
 
 # solution: dict + sort
@@ -23,6 +25,7 @@ def group_anagrams(strs):
 
     for i in range(len(strs)):
         ss = ''.join(sorted(strs[i]))
+        # key: sorted str, value: list of original str
         d[ss].append(i)
 
     ans = []
