@@ -19,10 +19,7 @@ import unittest
 class MyQueue:
 
     def __init__(self):
-        # front of queue
         self.__front = []
-
-        # back of queue
         self.__back = []
 
     # run-time: O(1)
@@ -35,7 +32,7 @@ class MyQueue:
         if self.empty():
             raise ValueError("empty queue") 
 
-        # if front is non-empty, pop from front
+        # if front is empty, transfer to front
         if not self.__front and not self.__back2front():
             raise ValueError("failed moving from back to front")
 
@@ -57,8 +54,7 @@ class MyQueue:
             return False
 
         while self.__back:
-            self.__front.append(self.__back[-1])
-            self.__back.pop()
+            self.__front.append(self.__back.pop())
 
         return True
 

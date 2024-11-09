@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <cstddef>
 #include <iostream>
 #include <stdexcept>
@@ -10,7 +11,10 @@
 // constraints
 // don't use C++ list/deque's push_back(), etc.
 
-// solution: epi using vector
+// solution: EPI using vector
+// complexity
+// run-time: see below
+// space: O(n)
 const size_t MAX_SIZE = 100;
 
 template
@@ -35,6 +39,7 @@ public:
         d_queue.reserve(d_capacity);
     }
 
+    // run-time: O(1) amortized, O(n) worst-case
     void push(const T& value)
     {
         if (d_size == d_capacity) {
@@ -52,6 +57,7 @@ public:
         ++d_size;
     }
 
+    // run-time: O(1)
     T pop()
     {
         if (empty()) {
@@ -65,6 +71,7 @@ public:
         return value;
     }
 
+    // run-time: O(1)
     T front() const
     {
         if (empty()) {
@@ -74,8 +81,10 @@ public:
         return d_queue[d_front];
     }
 
+    // run-time: O(1)
     bool empty() const { return d_size == 0; }
 
+    // run-time: O(1)
     size_t size() const { return d_size; }
 
 private:
