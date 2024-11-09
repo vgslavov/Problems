@@ -8,7 +8,7 @@ import unittest
 # number: 121
 # section: array/string
 # difficulty: easy
-# tags: array, dynamic programming, top 150
+# tags: array, dynamic programming, top 150, citadel
 
 # constraints
 # 1 <= prices.length <= 10^5

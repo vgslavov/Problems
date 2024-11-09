@@ -49,7 +49,7 @@
 
 ### Substr/seq/set
 
-* substring
+* substring/subarray
     * order matters
     * consecutive chars
     * no repetition

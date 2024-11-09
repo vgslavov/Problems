@@ -6,7 +6,7 @@ import unittest
 # number: 208
 # section: trie (prefix tree)
 # difficulty: medium
-# tags: hash table, string, design, trie, top 150
+# tags: hash table, string, design, trie, top 150, citadel
 
 # constraints
 # 1 <= word.length, prefix.length <= 2000

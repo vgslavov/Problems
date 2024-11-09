@@ -7,7 +7,7 @@ import unittest
 # number: 49
 # section: hashmap
 # difficulty: medium
-# tags: array, hash table, string, sorting, top 150, meta
+# tags: array, hash table, string, sorting, top 150, meta, citadel
 
 # constraints
 # 1 <= strs.length <= 10^4
