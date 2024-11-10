@@ -12,7 +12,7 @@
 // At most 3000 calls will be made to enqueue, dequeue, front, rear, isempty, and
 // isfull.
 
-// solution: 2 lists
+// solution: 2 vectors, using push_back
 // complexity
 // run-time: O(1) per op
 // space: O(k)
@@ -24,6 +24,8 @@ public:
         if (k <= 0) {
             throw std::invalid_argument("invalid capacity");
         }
+
+        // don't use reserve(), don't know how to split it b/w front & rear
     }
 
     // don't allow creation of queue with 0 capacity
@@ -104,6 +106,95 @@ private:
     std::vector<int> d_front;
     std::vector<int> d_rear;
     int d_capacity;
+};
+
+// solution: 1 vector w/o push_back
+// + calc tail: (head + size-1) % capacity
+// complexity
+// run-time: O(1) per op
+// space: O(k)
+const size_t MAX_SIZE = 100;
+
+template
+<typename T>
+class MyCircularQueue2 {
+public:
+    MyCircularQueue2()
+    : d_capacity(MAX_SIZE)
+    , d_size(0)
+    , d_head(0)
+    {
+        d_queue.reserve(d_capacity);
+    }
+
+    MyCircularQueue2(int k)
+    : d_capacity(k)
+    , d_size(0)
+    , d_head(0)
+    {
+        if (k <= 0) {
+            throw std::invalid_argument("invalid capacity");
+        }
+
+        // allocate memory
+        d_queue.reserve(d_capacity);
+    }
+
+    // don't support copying
+    MyCircularQueue2(const MyCircularQueue2&) = delete;
+    MyCircularQueue2& operator=(const MyCircularQueue2&) = delete;
+
+    bool enQueue(const T& value) {
+        // TODO: increase capacity by doubling?
+        if (isFull()) {
+            return false;
+        }
+
+        // don't subtract 1: adding a new item!
+        d_queue[(d_head + d_size) % d_capacity] = value;
+        ++d_size;
+
+        return true;
+    }
+
+    bool deQueue() {
+        if (isEmpty()) {
+            return false;
+        }
+
+        // make circular: if past end!
+        d_head = (d_head + 1) % d_capacity;
+        --d_size;
+
+        return true;
+    }
+
+    T Front() {
+        if (isEmpty()) {
+            throw std::length_error("empty queue");
+        }
+
+        return d_queue[d_head];
+    }
+
+    T Rear() {
+        if (isEmpty()) {
+            throw std::length_error("empty queue");
+        }
+
+        // calc tail
+        return d_queue[(d_head + d_size-1) % d_capacity];
+    }
+
+    bool isEmpty() { return d_size == 0; }
+
+    bool isFull() { return d_size == d_capacity; }
+
+private:
+    std::vector<T> d_queue;
+    size_t         d_capacity;
+    size_t         d_size;
+    size_t         d_head;
 };
 
 // TODO: solve using linked list & unit test
