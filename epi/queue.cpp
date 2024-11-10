@@ -9,7 +9,8 @@
 // tags: optiver
 
 // constraints
-// don't use C++ list/deque's push_back(), etc.
+// don't use C++ vector/list/deque's push_back(), etc.
+// allocate a chunk of memory
 
 // solution: EPI using vector
 // complexity
@@ -43,13 +44,15 @@ public:
     void push(const T& value)
     {
         if (d_size == d_capacity) {
-            // shift left
+            // shift everything to left: O(n)
             std::rotate(d_queue.begin(), d_queue.begin() + d_front, d_queue.end());
             d_front = 0;
             d_back = d_size;
 
             // double size
             d_capacity *= 2;
+
+            // double capacity: O(n) for copying
             d_queue.resize(d_capacity);
         }
 
