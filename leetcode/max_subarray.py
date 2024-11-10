@@ -25,7 +25,8 @@ def max_subarray(nums: [], k: int) -> int:
     for right in range(len(nums)):
         #print(f"left:{left},right:{right}")
 
-        # always expand window: don't compare w/ k!
+        # keep expanding window up until you reach k freq
+        # don't compare w/ k here, leave for while loop!
         freqs[nums[right]] += 1
 
         # shrink it
