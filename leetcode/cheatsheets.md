@@ -47,6 +47,14 @@
 
 ## Theory
 
+### Binary
+
+* if you don't know how to start, start by computing XOR (`^`) of input data
+* OR is an operation that only adds bits, never removes them
+* bitmasking
+    * setting bits: use OR & shift left
+    * reading bits: use AND & shift left
+
 ### Substr/seq/set
 
 * substring/subarray
