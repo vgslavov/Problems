@@ -103,6 +103,5 @@ class TestSuggestedProducts(unittest.TestCase):
                     ["baggage","bags"],["bags"]]
         self.assertEqual(suggested_products(products, word), expected)
 
-
 if __name__ == '__main__':
     sys.exit(unittest.main())
