@@ -15,11 +15,11 @@ import unittest
 # All the integers in nums appear only once except for precisely one integer
 # which appears two or more times.
 
-def set_bit(value, bit_index):
-    return value | (1 << bit_index)
+def set_bit(value, index):
+    return value | (1 << index)
 
-def get_bit(value, bit_index):
-    return value & (1 << bit_index)
+def get_bit(value, index):
+    return value & (1 << index)
 
 # solution: bitmap
 # complexity
