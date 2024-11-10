@@ -16,10 +16,6 @@
 // space: O(n)
 class MyQueue {
 public:
-    MyQueue() {
-
-    }
-
     // run-time: O(1)
     void push(int x) {
         d_back.push_back(x);
