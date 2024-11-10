@@ -15,7 +15,7 @@
 // 0 <= k <= 100
 // strs[i] consists of lowercase English letters.
 
-// solution: dict + sort
+// solution: map + sort
 // complexity
 // run-time: O(n * k * log(k))
 // space: O(n * k)

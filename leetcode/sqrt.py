@@ -9,7 +9,7 @@ import unittest
 # tags: math, binary search, top 150, citadel
 
 # constraints
-#0 <= x <= 2^31 - 1
+# 0 <= x <= 2^31 - 1
 
 # solution: binary search
 # complexity
