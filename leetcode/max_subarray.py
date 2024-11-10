@@ -81,5 +81,11 @@ class TestMaxSubarray(unittest.TestCase):
         expected = 2
         self.assertEqual(max_subarray(nums, k), expected)
 
+    def test7(self):
+        nums = [1,4,4,3]
+        k = 1
+        expected = 2
+        self.assertEqual(max_subarray(nums, k), expected)
+
 if __name__ == '__main__':
     sys.exit(unittest.main())
