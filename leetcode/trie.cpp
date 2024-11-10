@@ -1,4 +1,5 @@
 #include <map>
+#include <utility>
 
 // number: 208
 // section: trie (prefix tree)
@@ -32,8 +33,10 @@ public:
             ChildrenMap& children = curr->children();
             auto itr = children.find(c);
             if (itr == children.end()) {
-                // on stack is fine, we are copying into container
                 children[c] = Trie();
+                // if we had to move it
+                //Trie newTrie = Trie();
+                //children.insert(std::make_pair(c, std::move(newTrie)));
             }
 
             curr = &curr->children()[c];

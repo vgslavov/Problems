@@ -40,6 +40,7 @@ def max_subarray_repeated(nums1, nums2) -> int:
 # run-time: O(n*m)
 # space: O(n*m)
 def max_subarray_repeated2(nums1, nums2) -> int:
+    # init
     # add 1!
     dp = [[0]*(len(nums2) + 1) for _ in range(len(nums1)+1)]
 
@@ -47,6 +48,7 @@ def max_subarray_repeated2(nums1, nums2) -> int:
     for i in range(len(nums1)-1,-1,-1):
         for j in range(len(nums2)-1,-1,-1):
             if nums1[i] == nums2[j]:
+                # recurrence relation
                 dp[i][j] = dp[i+1][j+1] + 1
 
     return max(max(r) for r in dp)

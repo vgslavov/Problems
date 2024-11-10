@@ -72,6 +72,8 @@ def suggested_products(products, word):
 
     return ans
 
+# TODO: solve using trie
+
 class TestSuggestedProducts(unittest.TestCase):
     def test_empty(self):
         products = []
