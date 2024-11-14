@@ -13,9 +13,10 @@
 // solution: Leetcode, C++ stoi/bitset & bitwise operators
 // run-time: O(n+m)
 // space: O(max(n,m))
+// TODO: fix std::out_of_range exception
 std::string addBinary(const std::string& a, const std::string& b) {
-    int x = std::stoi(a, nullptr, 2);
-    int y = std::stoi(b, nullptr, 2);
+    long long x = std::stoll(a, nullptr, 2);
+    long long y = std::stoll(b, nullptr, 2);
 
     while (y != 0) {
         int answer = x ^ y;
@@ -25,6 +26,9 @@ std::string addBinary(const std::string& a, const std::string& b) {
     }
 
     std::string ans = std::bitset<8>(x).to_string();
+
+    if (x == 0) {
+        return "0";
 
     return ans.erase(0, ans.find_first_not_of("0"));
 }

@@ -16,7 +16,7 @@ import unittest
 # complexity
 # run-time: O(m+n), slow
 # space: O(m)
-def can_construct1(ransom_note, magazine):
+def can_construct(ransom_note, magazine):
     letters = defaultdict(int)
 
     for c in magazine:
@@ -37,22 +37,22 @@ class TestCanConstruct(unittest.TestCase):
     def test_empty(self):
         note = ''
         mag = ''
-        self.assertTrue(can_construct1(note, mag))
+        self.assertTrue(can_construct(note, mag))
 
     def test_false1(self):
         note = "a"
         mag = "b"
-        self.assertFalse(can_construct1(note, mag))
+        self.assertFalse(can_construct(note, mag))
 
     def test_false2(self):
         note = "aa"
         mag = "ab"
-        self.assertFalse(can_construct1(note, mag))
+        self.assertFalse(can_construct(note, mag))
 
     def test_true(self):
         note = "aa"
         mag = "aab"
-        self.assertTrue(can_construct1(note, mag))
+        self.assertTrue(can_construct(note, mag))
 
 if __name__ == '__main__':
     sys.exit(unittest.main())
