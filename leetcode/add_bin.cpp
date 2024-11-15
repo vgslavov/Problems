@@ -29,6 +29,7 @@ std::string addBinary(const std::string& a, const std::string& b) {
 
     if (x == 0) {
         return "0";
+    }
 
     return ans.erase(0, ans.find_first_not_of("0"));
 }
