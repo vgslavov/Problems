@@ -38,7 +38,7 @@ public:
     , d_back(0)
     , d_size(0)
     {
-        d_queue.reserve(d_capacity);
+        d_queue.resize(d_capacity);
     }
 
     // run-time: O(1) amortized, O(n) worst-case
