@@ -22,12 +22,12 @@ import unittest
 def two_sum1(nums, target):
     for i in range(len(nums)):
         for j in range(1, len(nums)):
-            if nums[i] + nums[j] == target:
+            if i != j and nums[i] + nums[j] == target:
                 return [i,j]
 
     return [-1,-1]
 
-# solution: dict
+# solution: dict of lists
 # complexity
 # run-time: O(n*k)?
 # space: O(n)
@@ -97,6 +97,14 @@ class TestTwoSum(unittest.TestCase):
         nums = [3,3]
         target = 6
         expected = [0,1]
+        self.assertEqual(two_sum1(nums, target), expected)
+        self.assertEqual(two_sum2(nums, target), expected)
+        self.assertEqual(two_sum3(nums, target), expected)
+
+    def test4(self):
+        nums = [2,5,5,11]
+        target = 10
+        expected = [1,2]
         self.assertEqual(two_sum1(nums, target), expected)
         self.assertEqual(two_sum2(nums, target), expected)
         self.assertEqual(two_sum3(nums, target), expected)
