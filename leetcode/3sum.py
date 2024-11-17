@@ -34,8 +34,9 @@ def three_sum(nums):
     for i in range(len(nums)):
         # optimization: don't start at 0
         for j in range(i+1, len(nums)):
-            if i == j:
-                continue
+            # not possible
+            #if i == j:
+            #    continue
 
             third = -nums[i] - nums[j]
 
@@ -186,7 +187,7 @@ def three_sum3(nums):
 
     return sorted([list(v) for v in ans])
 
-# solution: two pointers
+# non-solution: two pointers
 # run-time: O(n^2)?
 # space: O(1)
 # TODO: finish/fix
