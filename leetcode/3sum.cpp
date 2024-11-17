@@ -60,7 +60,7 @@ std::vector<std::vector<int>> threeSum(const std::vector<int>& nums)
     }
 
     std::vector<std::vector<int>> ans;
-    std::copy(seen.begin(), seen.end(), back_inserter(ans));
+    std::copy(seen.begin(), seen.end(), std::back_inserter(ans));
     std::sort(ans.begin(), ans.end());
 
     return ans;

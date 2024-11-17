@@ -186,8 +186,7 @@ def fn(intervals):
 
     return ans
 
-# Binary tree: DFS (recursive)
-# traversing: recursive more common
+# Binary tree: recursive DFS (more common)
 def dfs(root):
     if not root:
         return
@@ -211,8 +210,7 @@ def dfs(root):
 
     return ans
 
-# Binary tree: DFS (iterative)
-# traversing: less common
+# Binary tree: iterative DFS (less common)
 def dfs(root):
     stack = [root]
     ans = 0
@@ -227,8 +225,7 @@ def dfs(root):
 
     return ans
 
-# Binary tree: BFS
-# data struct: queue
+# Binary tree: iterative BFS (more common)
 from collections import deque
 
 def fn(root):
@@ -439,7 +436,7 @@ def fn(arr):
     memo = {}
     return dp(STATE_FOR_WHOLE_INPUT)
 
-# Dynamic programming: iterative bottom-up
+# Dynamic programming: iterative bottom-up 1D
 def fn(arr):
     n = len(arr)
     dp = [0] * n
@@ -452,6 +449,8 @@ def fn(arr):
         dp[i] = RECURRENCE_RELATION(STATE)
 
     return dp[n-1]
+
+# TODO: Dynamic programming: iterative bottom-up 2D
 
 # Build a trie
 # note: using a class is only necessary if you want to store data at each node.
@@ -475,6 +474,7 @@ def fn(words):
 
     return root
 
+# Build a trie: insert & search
 class Trie:
     def __init__(self):
         self.data = None
