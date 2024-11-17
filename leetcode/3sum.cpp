@@ -37,9 +37,9 @@ std::vector<std::vector<int>> threeSum(const std::vector<int>& nums)
     for (int i = 0; i != nums.size(); ++i) {
         for (int j = i+1; j != nums.size(); ++j) {
             // not possible
-            if (i == j) {
-                continue;
-            }
+            //if (i == j) {
+            //    continue;
+            //}
 
             int third = -nums[i]-nums[j];
 
@@ -48,8 +48,9 @@ std::vector<std::vector<int>> threeSum(const std::vector<int>& nums)
                 continue;
             }
 
-            for (int k = 0; k != counts[third].size(); ++k) {
-                if (i != j && i != k && j != k) {
+            // need values from counts[third], not indices!
+            for (const auto& k: counts[third]) {
+                if (i != k && j != k) {
                     std::vector<int> v{nums[i],nums[j],third};
                     std::sort(v.begin(), v.end());
                     seen.insert(v);
