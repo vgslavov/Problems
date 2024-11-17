@@ -51,7 +51,7 @@ def fn(arr):
     return ans
 
 # Sliding *fixed* window
-def fn(arr):
+def fn(arr, k):
     ans = curr = 0
 
     # 1st window
@@ -61,7 +61,7 @@ def fn(arr):
 
     # update ans
 
-    for i in range(k, len(nums)):
+    for i in range(min(k, len(nums))):
         # add arr[i] & remove arr[i-k] from curr
 
         # update ans
