@@ -13,9 +13,13 @@ import unittest
 # constraints
 # 3 <= nums.length <= 3000
 # -10^5 <= nums[i] <= 10^5
+#
+# return all the triplets [nums[i], nums[j], nums[k]]
+# such that i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0.
+# the solution set must not contain duplicate triplets
 
-# solution: dict + brute-force
-# run-time: O(n^3)?, too slow, TLE
+# solution: brute-force, dict + set
+# run-time: O(n^3), too slow, TLE
 # space: O(n)
 def three_sum(nums):
     #print(f"len(nums):{len(nums)}")
@@ -51,7 +55,6 @@ def three_sum(nums):
 
     return sorted([list(v) for v in ans])
 
-# solution: set
 # complexity
 # run-time O(n)
 # space: O(n)
@@ -78,8 +81,8 @@ def two_sum_set(nums, k, ans):
 
         seen.add(nums[i])
 
-# solution: LeetCode, two-sum using set
-# run-time: O(n^2)
+# solution: LeetCode, sort + two-sum using set
+# run-time: O(n*log n + n^2) ~ O(n^2)
 # space: O(n)
 def three_sum2(nums):
     #print(f"len(nums):{len(nums)}")
@@ -94,7 +97,8 @@ def three_sum2(nums):
 
     # O(n)
     for k in range(len(nums)):
-        # optimization: don't search for smaller numbers later (it's sorted)
+        # optimization: 3rd num must be negative
+        # otherwise, can't add up to 0
         if nums[k] > 0:
             break
 
@@ -165,7 +169,7 @@ def two_sum_binsearch(nums, k, ans):
 
 # solution: sort + two-sum using binary search
 # run-time: O(n*log n + (n^2)*log n) ~ O((n^2)*log n), too slow, TLE
-# space: O(1)
+# space: O(n)
 def three_sum3(nums):
     #print(f"len(nums):{len(nums)}")
 
