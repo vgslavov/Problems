@@ -27,7 +27,7 @@ std::vector<std::vector<int>> threeSum(const std::vector<int>& nums)
     for (int i = 0; i != nums.size(); ++i) {
         auto it = counts.find(nums[i]);
 
-        // TODO: user insert_or_assign?
+        // TODO: use insert_or_assign?
         if (it != counts.end()) {
             counts[nums[i]].push_back(i);
         } else {

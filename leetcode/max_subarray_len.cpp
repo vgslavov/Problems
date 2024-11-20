@@ -11,6 +11,9 @@
 // 1 <= nums.length <= 10^5
 // 1 <= nums[i] <= 10^9
 // 1 <= k <= nums.length
+// An array is called good if the frequency of each element in this array is
+// less than or equal to k.
+// Return the length of the longest good subarray of nums.
 
 // solution: sliding window + map
 // complexity

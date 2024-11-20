@@ -13,12 +13,15 @@ import unittest
 # 1 <= nums.length <= 10^5
 # 1 <= nums[i] <= 10^9
 # 1 <= k <= nums.length
+# An array is called good if the frequency of each element in this array is less
+# than or equal to k.
+# Return the length of the longest good subarray of nums.
 
 # solution: sliding window + dict
 # complexity
 # run-time: O(n)
 # space: O(n)
-def max_subarray(nums: [], k: int) -> int:
+def max_subarray_len(nums: [], k: int) -> int:
     freqs = defaultdict(int)
     left = ans = 0
 
@@ -43,49 +46,49 @@ class TestMaxSubarray(unittest.TestCase):
         nums = []
         k = 0
         expected = 0
-        self.assertEqual(max_subarray(nums, k), expected)
+        self.assertEqual(max_subarray_len(nums, k), expected)
 
     def test1(self):
         nums = [1,2,3,1,2,3,1,2]
         k = 2
         expected = 6
-        self.assertEqual(max_subarray(nums, k), expected)
+        self.assertEqual(max_subarray_len(nums, k), expected)
 
     def test2(self):
         nums = [1,2,1,2,1,2,1,2]
         k = 1
         expected = 2
-        self.assertEqual(max_subarray(nums, k), expected)
+        self.assertEqual(max_subarray_len(nums, k), expected)
 
     def test3(self):
         nums = [5,5,5,5,5,5,5]
         k = 4
         expected = 4
-        self.assertEqual(max_subarray(nums, k), expected)
+        self.assertEqual(max_subarray_len(nums, k), expected)
 
     def test4(self):
         nums = [1]
         k = 1
         expected = 1
-        self.assertEqual(max_subarray(nums, k), expected)
+        self.assertEqual(max_subarray_len(nums, k), expected)
 
     def test5(self):
         nums = [1,11]
         k = 2
         expected = 2
-        self.assertEqual(max_subarray(nums, k), expected)
+        self.assertEqual(max_subarray_len(nums, k), expected)
 
     def test6(self):
         nums = [3,1,1]
         k = 1
         expected = 2
-        self.assertEqual(max_subarray(nums, k), expected)
+        self.assertEqual(max_subarray_len(nums, k), expected)
 
     def test7(self):
         nums = [1,4,4,3]
         k = 1
         expected = 2
-        self.assertEqual(max_subarray(nums, k), expected)
+        self.assertEqual(max_subarray_len(nums, k), expected)
 
 if __name__ == '__main__':
     sys.exit(unittest.main())
