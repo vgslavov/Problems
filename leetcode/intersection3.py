@@ -4,9 +4,9 @@ import sys
 import unittest
 
 # number: 1213
-# section: meta
+# section: assessment
 # difficulty: easy
-# tags: array, hash table, binary search, counting
+# tags: array, hash table, binary search, counting, meta
 
 # constraints
 # n = len(arr1)
