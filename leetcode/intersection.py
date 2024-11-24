@@ -14,7 +14,7 @@ import unittest
 
 # solution: Pythonic set &
 # complexity
-# run-time: O(n+m)
+# run-time: O(max(n, m))
 # space: O(n+m)
 def intersection(nums1, nums2):
     return sorted(list(set(nums1) & set(nums2)))
