@@ -19,11 +19,8 @@ import unittest
 # run-time: O(n*m)
 # space: O(n)
 def next_greater_element1(nums1, nums2):
-    num2index = {}
     ans = []
-
-    for i in range(len(nums2)):
-        num2index[nums2[i]] = i
+    num2index = {num: i for i, num in enumerate(nums2)}
 
     for i in range(len(nums1)):
         j = num2index[nums1[i]]
