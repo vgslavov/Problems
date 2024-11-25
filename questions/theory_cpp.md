@@ -25,29 +25,29 @@
 
 * compare STL's `map` and `unordered_map`
 
-|`map`|`unordered_map`|
-|-----|---------------|
-|ordered key|unordered keys|
-|BST (red-black tree)|array + linked lists|
-|insert/lookup: amortized O(log n)|insert/lookup: O(1), can degrade to O(n)|
-|no hashing of keys|hash keys|
-|no need to handle collisions|need to handle collisions|
-||cheaper to insert/delete|
-|anything works as a key if can compare|use primitive data types & string work as keys|
-|use case: find min/max/next smallest, iterate sorted, large n|use case: order not important, hashing not expensive, small n|
+|what|`map`|`unordered_map`|
+|----|-----|---------------|
+|keys|ordered|unordered|
+|implementation|BST (red-black tree)|array + linked lists|
+|insert/lookup|amortized O(log n)|O(1), can degrade to O(n)|
+|hashing|no|yes|
+|collisions|no|yes|
+|insert/delete||cheaper|
+|preferred keys|anything works as a key if can compare|use primitive data types & string work as keys|
+|use case|find min/max/next smallest, iterate sorted, large n|order not important, hashing not expensive, small n|
 
-### Memory
+### Memory & Pointers
 
 * compare `new` and `malloc`
 
-|malloc|new|
-|------|---|
-|returns `void` ptr|returns ptr to obj|
-|doesn't call ctor|does call ctor|
-|returns `NULL` on error|`throw` exception|
-|can't be overloaded|can be overloaded|
-|requires size|doesn't require size|
-|function|operator|
+|what|malloc|new|
+|----|------|---|
+|returns|`void` ptr|ptr to obj|
+|ctor called|no|yes|
+|errors|returns `NULL`|`throw` exception|
+|overloading|no|yes|
+|requires size|yes|no|
+|type|function|operator|
 
 * are you familiar with RAII?
 * 3 main storage areas
@@ -74,6 +74,19 @@ data segment (initialized data: global/static vars init. to non-zero)
 -------------
 text segment (instructions)
 ```
+* compare `unique_ptr` and `shared_ptr`
+
+|what|`unique_ptr`|`shared_ptr`|`weak_ptr`|
+|----|------------|------------|----------|
+|ownership|exclusive|shared|augmentation of `shared_ptr`|
+|copying allowed|no, move-only type|yes|
+|size|same as raw ptrs|2x size of raw ptrs|same as `shared_ptr`|
+|custom deleters|part of ptr type|not part of type: can store in container even if diff deleters|n/a|
+|use case|factory functions, pimpl||detect dangling cache ptrs, observer design pattern, prevention of `shared_ptr` cycles|
+|support arrays|yes|no|no|
+|convert to opposite type|shared from unique|no|shared from weak|
+|ref count|no|yes, dynamically allocated & atomic|weak count|
+|control block|no|yes|yes|
 
 ### Threads
 
@@ -104,12 +117,12 @@ text segment (instructions)
 * compare an inline function and a macro
 * compare a ptr and a ref
 
-|ptr|ref|
-|---|---|
-|use `*` & `->`|use `.`|
-|`NULL` ptr|no `NULL` ref|
-|no need to init|need to init|
-|may be reassigned|always refers to init obj|
+|what|ptr|ref|
+|----|---|---|
+|syntax|`*` & `->`|`.`|
+|`NULL`|yes|no|
+|init|no|yes|
+|reassignment|yes|no|
 
 * give and compare all the uses of `static`
     * member function
