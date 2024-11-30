@@ -35,6 +35,7 @@ def find_max_avg(nums, k):
     ans = sum / k
 
     for i in range(k, len(nums)):
+        # add current & remove first!
         sum += nums[i] - nums[i-k]
         ans = max(ans, sum / k)
 
