@@ -53,19 +53,15 @@ def combinations(n, k):
         #return dp(i-1)*i
 
     memo = {}
-    n_f = dp(n)
-    nk_f = dp(n-k)
-    k_f = dp(k)
 
     # integer division: when k > n, combinations are 0!
-    return n_f // (nk_f*k_f)
+    return dp(n) // (dp(n-k)*dp(k))
 
 # solution: dict + dp comb
 # complexity
 # run-time: O(n)
 # space: O(n)
 def domino_pairs2(dominoes) -> int:
-    ans = 0
     counts = defaultdict(int)
 
     for i in range(len(dominoes)):
