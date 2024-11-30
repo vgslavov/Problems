@@ -18,10 +18,8 @@ import unittest
 # space: O(n)
 @cache
 def fib(n: int) -> int:
-    if n == 1:
-        return 1
-    elif n == 0:
-        return 0
+    if n in (0,1):
+        return n
 
     return fib(n-1) + fib(n-2)
 
