@@ -283,7 +283,31 @@ int fn(const std::vector<int>& v, int target)
 
 // TODO: Backtracing
 
-// TODO: Dynamic programming: recursive top-down w/ memoization
+// Dynamic programming: recursive top-down w/ memoization
+int dp(int STATE, const std::vector<int>& v, std::map<int, STATE>& memo)
+{
+    // base cases
+    if (BASE_CASE) {
+        return 0;
+    }
+
+    // check cache
+    auto it = memo.find(STATE);
+    if (it != memo.end()) {
+        return memo[STATE];
+    }
+
+    // recurrence relation
+    memo[STATE] = RECURRENCE_RELATION(STATE);
+
+    return memo[STATE];
+}
+
+int fn(const std::vector<int>& v)
+{
+    std::map<int, STATE> memo;
+    return dp(STATE_FOR_WHOLE_INPUT, memo);
+}
 
 // Dynamic programming: iterative bottom-up 1D
 int fn(const std::vector<int>& v)
@@ -292,11 +316,11 @@ int fn(const std::vector<int>& v)
     std::vector<int> dp(v.size());
 
     // set base case(s)
-    dp[0] = v[0];
+    dp[0] = BASE_CASE;
 
     for (int i = 2; i != v.size(); ++i) {
         // define recurrence relation
-        dp[i] = RECURRENCE_RELATION(STATE)
+        dp[STATE] = RECURRENCE_RELATION(STATE)
     }
 
     return dp[v.size()-1];
