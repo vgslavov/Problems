@@ -180,7 +180,7 @@ int dfs(Tree* root)
 // Binary tree: iterative BFS (more common)
 int bfs(Tree* root)
 {
-    std::deque<Tree> queue{*root};
+    std::deque<Tree*> queue{root};
     int ans = 0;
 
     while (!queue.empty()) {
@@ -188,16 +188,16 @@ int bfs(Tree* root)
         // do logic for current level
 
         while (!size) {
-            Tree node = queue.front();
+            Tree* node_p = queue.front();
             queue.pop_front();
 
             // do logic
-            if (node.left) {
-                queue.push_back(node.left);
+            if (node_p->left) {
+                queue.push_back(node_p->left);
             }
 
-            if (node.right) {
-                queue.push_back(node.right);
+            if (node_p->right) {
+                queue.push_back(node_p->right);
             }
 
             --size;
