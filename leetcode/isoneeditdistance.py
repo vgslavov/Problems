@@ -17,7 +17,7 @@ import unittest
 # complexity
 # run-time: O(n+m)
 # space: O(n)
-def edit_distance_one_bad1(s: str, t: str) -> bool:
+def isoneeditdistance_bad1(s: str, t: str) -> bool:
     # O(n*log n + m*log m)
     if sorted(s) == sorted(t):
         return False
@@ -50,7 +50,7 @@ def edit_distance_one_bad1(s: str, t: str) -> bool:
 # complexity
 # run-time: O(n+m)
 # space: O(1)
-def edit_distance_one_bad2(s: str, t: str) -> bool:
+def isoneeditdistance_bad2(s: str, t: str) -> bool:
     # len(s)-1 <= len(t) <= len(s)+1
     if len(t) > len(s) + 1 or len(t) < len(s) - 1 or s == t:
         return False
@@ -101,7 +101,7 @@ def same_length(s, t):
 # complexity
 # run-time: O(min(n,m))
 # space: O(1)
-def edit_distance_one(s: str, t: str) -> bool:
+def isoneeditdistance(s: str, t: str) -> bool:
     # identical or too big of a diff in len
     if abs(len(s)-len(t)) > 1 or s == t:
         return False
@@ -137,47 +137,47 @@ class TestEditDistance(unittest.TestCase):
     def test_empty(self):
         s = ""
         t = ""
-        self.assertFalse(edit_distance_one(s, t))
+        self.assertFalse(isoneeditdistance(s, t))
 
     def test_same(self):
         s = "a"
         t = "a"
-        self.assertFalse(edit_distance_one(s, t))
+        self.assertFalse(isoneeditdistance(s, t))
 
     def test_sort(self):
         s = "ab"
         t = "ba"
-        self.assertFalse(edit_distance_one(s, t))
+        self.assertFalse(isoneeditdistance(s, t))
 
     def test1(self):
         s = "ab"
         t = "acb"
-        self.assertTrue(edit_distance_one(s, t))
+        self.assertTrue(isoneeditdistance(s, t))
 
     def test2(self):
         s = "teacher"
         t = "detacher"
-        self.assertFalse(edit_distance_one(s, t))
+        self.assertFalse(isoneeditdistance(s, t))
 
     def test3(self):
         s = "a"
         t = ""
-        self.assertTrue(edit_distance_one(s, t))
+        self.assertTrue(isoneeditdistance(s, t))
 
     def test4(self):
         s = "cab"
         t = "ad"
-        self.assertFalse(edit_distance_one(s, t))
+        self.assertFalse(isoneeditdistance(s, t))
 
     def test5(self):
         s = "cab"
         t = "ab"
-        self.assertTrue(edit_distance_one(s, t))
+        self.assertTrue(isoneeditdistance(s, t))
 
     def test6(self):
         s = "cab"
         t = "acd"
-        self.assertFalse(edit_distance_one(s, t))
+        self.assertFalse(isoneeditdistance(s, t))
 
 if __name__ == '__main__':
     sys.exit(unittest.main())
