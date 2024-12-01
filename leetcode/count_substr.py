@@ -36,7 +36,7 @@ def count_substr(s: str) -> int:
 
     return count
 
-# non-solution: recursive top-down 2D DP using functools
+# WIP solution: recursive top-down 2D DP using functools
 # complexity
 # run-time: O(n^2)
 # space: O(n^2)
@@ -73,7 +73,7 @@ def count_substr2(s: str) -> int:
 
     return dp(0, len(s)-1)
 
-# solution: Leetcode iterative bottom-up 2D DP
+# WIP solution: Leetcode iterative bottom-up 2D DP
 # complexity
 # run-time: O(n^2)
 # space: O(n^2)

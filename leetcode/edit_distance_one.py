@@ -13,7 +13,7 @@ import unittest
 # 0 <= s.length, t.length <= 10^4
 # s and t consist of lowercase letters, uppercase letters, and digits.
 
-# solution: bad, dict + sort
+# non-solution: dict + sort
 # complexity
 # run-time: O(n+m)
 # space: O(n)
@@ -46,7 +46,7 @@ def edit_distance_one_bad1(s: str, t: str) -> bool:
 
     return False if non_zero > 1 or ndiff > 1 else True
 
-# solution: bad, two pointers
+# non-solution: two pointers
 # complexity
 # run-time: O(n+m)
 # space: O(1)
