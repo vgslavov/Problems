@@ -18,7 +18,7 @@ import unittest
 # order and s consist of lowercase English letters.
 # All the characters of order are unique.
 
-# solution: hash table + two pointers
+# WIP solution: hash table + two pointers
 # complexity
 # run-time: O(n*log n + m*log m)
 # space: O(n)
@@ -102,7 +102,7 @@ def custom_sort2(order: str, s: str) -> str:
 
     return ans
 
-# solution: sort + custom cmp func
+# WIP solution: sort + custom cmp func
 # complexity
 # run-time: O(n*log n)
 # space: O(n)
