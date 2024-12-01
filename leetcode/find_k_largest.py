@@ -14,9 +14,9 @@ import unittest
 # 1 <= k <= nums.length <= 10^5
 # -10^4 <= nums[i] <= 10^4
 
-# solution: min heap + Pythonic nlargest
+# solution: Pythonic nlargest
 # complexity
-# run-time: O(n * log(k)), slow
+# run-time: O(n*log k)
 # space: O(k)
 def find_k_largest1(nums, k):
     if not nums:
@@ -28,27 +28,32 @@ def find_k_largest1(nums, k):
 
 # solution: min heap
 # complexity
-# run-time: O(n * log(k)), slow
-# space: O(n), more mem
+# run-time: O(n*log k)
+# space: O(k)
 def find_k_largest2(nums, k):
-    if k == 1:
+    if not nums:
+        return False
+    elif k == 1:
         return max(nums)
 
-    nums2 = [-n for n in nums]
-    heapq.heapify(nums2)
+    heap = []
 
-    ans = None
-    for i in range(k):
-        ans = -heapq.heappop(nums2)
+    for n in nums:
+        heapq.heappush(heap, n)
 
-    return ans
+        if len(heap) > k:
+            heapq.heappop(heap)
+
+    return heap[0]
 
 # solution: max heap
 # complexity
-# run-time: O(n * log(k)), slow
-# space: O(n), more mem
+# run-time: O(n*log k)
+# space: O(n)
 def find_k_largest3(nums, k):
     if k == 1:
+        return max(nums)
+    elif k == 1:
         return max(nums)
 
     # deep copy
@@ -63,7 +68,7 @@ def find_k_largest3(nums, k):
 
 # solution: slower sort & Pythonic slicing
 # complexity
-# run-time: O(n * log(n)), why faster?
+# run-time: O(n*log n)
 # space: O(1)
 def find_k_largest4(nums, k):
     if not nums:
@@ -75,9 +80,9 @@ def find_k_largest4(nums, k):
     #return sorted(nums)[-k:][0]
     return sorted(nums, reverse=True)[:k][-1]
 
-# solution: faster sort in-place & Pythonic slicing
+# solution: sort in-place & Pythonic slicing
 # complexity
-# run-time: O(n * log(n)), why fastest?
+# run-time: O(n*log n)
 # space: O(1)
 def find_k_largest5(nums, k):
     if not nums:
@@ -128,6 +133,17 @@ class TestFindKthLargest(unittest.TestCase):
         self.assertEqual(find_k_largest3(nums, k), expected)
         self.assertEqual(find_k_largest4(nums, k), expected)
         self.assertEqual(find_k_largest5(nums, k), expected)
+
+    def test_k5(self):
+        nums = [2,1]
+        k = 2
+        expected = 1
+        self.assertEqual(find_k_largest1(nums, k), expected)
+        self.assertEqual(find_k_largest2(nums, k), expected)
+        self.assertEqual(find_k_largest3(nums, k), expected)
+        self.assertEqual(find_k_largest4(nums, k), expected)
+        self.assertEqual(find_k_largest5(nums, k), expected)
+
 
 if __name__ == '__main__':
     sys.exit(unittest.main())
