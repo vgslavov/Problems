@@ -18,8 +18,9 @@ import unittest
 
 # solution: intervals
 # complexity
-# run-time: O(n), slow!
+# run-time: O(n)
 # space: O(n)
+# TODO: refactor
 def insert_intervals(intervals, new_interval):
     ans = []
     inserted = False
