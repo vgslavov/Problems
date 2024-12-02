@@ -59,7 +59,7 @@ def binary_search(binaryMatrix, row, length, k):
 
 # solution: binary search
 # complexity
-# run-time: O(n*log n)
+# run-time: O(rows*log cols)
 # space: O(1)
 def leftmost_col2(binaryMatrix: 'BinaryMatrix') -> int:
     rows,cols = binaryMatrix.dimensions()
