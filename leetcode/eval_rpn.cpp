@@ -68,11 +68,7 @@ int evalRPN(std::vector<std::string>& tokens)
         }
     }
 
-    if (stack.empty()) {
-        return 0;
-    }
-
-    return stack.top();
+    return !stack.empty() ? stack.top() : 0;
 }
 
 // TODO: solve recursively & add unit tests
