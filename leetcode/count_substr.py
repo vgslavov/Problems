@@ -8,6 +8,7 @@ import unittest
 # section: citadel
 # difficulty: medium
 # tags: two pointers, string, dp, citadel
+# similar: 5
 
 # constraints
 # 1 <= s.length <= 1000

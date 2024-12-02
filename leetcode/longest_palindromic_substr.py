@@ -8,6 +8,7 @@ import unittest
 # section: meta
 # difficulty: medium
 # tags: meta, two pointers, string, dp
+# similar: 647
 
 # constraints
 # 1 <= s.length <= 1000
