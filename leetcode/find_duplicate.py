@@ -6,7 +6,7 @@ import unittest
 # number: 287
 # section:
 # difficulty: medium
-# tags: 
+# tags: array, two pointers, binary search, bit manipulation
 
 # constraints
 # 1 <= n <= 10^5

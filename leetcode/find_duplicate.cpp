@@ -1,5 +1,17 @@
 #include <vector>
 
+// number: 287
+// section:
+// difficulty: medium
+// tags: array, two pointers, binary search, bit manipulation
+
+// constraints
+// 1 <= n <= 10^5
+// nums.length == n + 1
+// 1 <= nums[i] <= n
+// All the integers in nums appear only once except for precisely one integer
+// which appears two or more times.
+
 long int getBit(long int value, int index)
 {
     return value & (1 << index);
@@ -10,6 +22,10 @@ long int setBit(long int value, int index)
     return value | (1 << index);
 }
 
+// solution: bitmap
+// complexity
+// run-time: O(n)
+// space: O(1)
 int findDuplicate(std::vector<int>& nums) {
     long int bitmap = 0;
 

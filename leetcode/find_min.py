@@ -33,7 +33,7 @@ def find_min(nums):
     while left < right:
         mid = left + (right-left) // 2
 
-        if nums[mid-1] > nums[mid] and nums[mid] < nums[mid+1]:
+        if mid > 0 and mid < len(nums) and nums[mid-1] > nums[mid] and nums[mid] < nums[mid+1]:
             return nums[mid]
         # go right: rotation is there
         elif nums[mid] > nums[-1]:
@@ -70,6 +70,11 @@ class TestFindMin(unittest.TestCase):
 
     def test5(self):
         nums = [2,3,1]
+        expected = 1
+        self.assertEqual(find_min(nums), expected)
+
+    def test6(self):
+        nums = [1,2,3,4,5]
         expected = 1
         self.assertEqual(find_min(nums), expected)
 
