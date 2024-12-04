@@ -14,6 +14,9 @@
 const int VALID_IPV4_LEN = 4;
 const int VALID_IPV6_LEN = 8;
 
+// complexity
+// run-time: O(n)
+// space: O(1)
 bool tokenize(
     std::string str,
     const std::string& delimeter,
@@ -23,10 +26,22 @@ bool tokenize(
         return false;
     }
 
-    while (!str.empty()) {
-        tokens.push_back(str.substr(0, str.find(delimeter)));
-        str.erase(0, str.find(delimeter) + delimeter.length());
+    int pos = str.find(delimeter);
+
+    while (pos != std::string::npos) {
+        //std::cout << "str:" << str << std::endl;
+
+        tokens.push_back(str.substr(0, pos));
+        str.erase(0, pos + delimeter.length());
+        pos = str.find(delimeter);
     }
+
+    if (tokens.empty()) {
+        return false;
+    }
+
+    // always push: will catch ending delimeter
+    tokens.push_back(str);
 
     return true;
 }
@@ -34,21 +49,38 @@ bool tokenize(
 // complexity
 // run-time: O(n)
 // space: O(1)
-std::string validIPv4(const std::vector<std::string>& tokens) {
+std::string validIPv4(const std::vector<std::string>& tokens)
+{
     if (tokens.empty() || tokens.size() != VALID_IPV4_LEN) {
+        std::cerr << "not enough tokens: " << tokens.size() << std::endl;
         return "Neither";
     }
 
     int num = 0;
     for (const auto& t : tokens) {
+        //std::cout << "token:" << t << std::endl;
+
+        // or strncmp/strlcmp, but not t[0]
+        if (t.size() > 1 && t.substr(0, 1) == "0") {
+            return "Neither";
+        }
+
+        size_t pos;
+
         try {
-            num = std::stoi(t, nullptr, 10);
+            num = std::stoi(t, &pos, 10);
+            if (pos < t.size()) {
+                std::cerr << "invalid chars in t:" << t
+                            << " at pos:" << pos
+                            << std::endl;
+                return "Neither";
+            }
         } catch (std::invalid_argument const& ex) {
-            std::cout << "invalid_argument: " << ex.what()
+            std::cerr << "invalid_argument: " << ex.what()
                         << std::endl;
             return "Neither";
         } catch (std::out_of_range const& ex) {
-            std::cout << "out_of_range: " << ex.what()
+            std::cerr << "out_of_range: " << ex.what()
                         << std::endl;
             return "Neither";
         }
@@ -56,8 +88,6 @@ std::string validIPv4(const std::vector<std::string>& tokens) {
         if (num < 0 || num > 255) {
             return "Neither";
         }
-
-        // TODO: check if it starts with 0
     }
 
     return "IPv4";
@@ -69,50 +99,59 @@ std::string validIPv4(const std::vector<std::string>& tokens) {
 std::string validIPv6(const std::vector<std::string>& tokens)
 {
     if (tokens.empty() || tokens.size() != VALID_IPV6_LEN) {
+        std::cerr << "not enough tokens: " << tokens.size() << std::endl;
         return "Neither";
     }
 
-    int num = 0;
-
     for (const auto& t : tokens) {
-        try {
-            num = std::stoi(t, nullptr, 16);
-        } catch (std::invalid_argument const& ex) {
-            std::cout << "invalid_argument: " << ex.what()
-                      << std::endl;
+        //std::cout << "token:" << t << std::endl;
+
+        // 4-digit hex
+        if (t.size() > 4) {
             return "Neither";
-        } catch (std::out_of_range const& ex) {
-            std::cout << "out_of_range: " << ex.what()
-                      << std::endl;
+        }
+
+        size_t pos;
+
+        try {
+            int num = std::stoi(t, &pos, 16);
+            if (pos < t.size()) {
+                std::cerr << "invalid chars in t:" << t
+                            << " at pos:" << pos
+                            << std::endl;
+                return "Neither";
+            }
+        } catch (std::invalid_argument const& ex) {
+            std::cerr << "invalid_argument: " << ex.what() 
+                        << std::endl;
+            return "Neither";
+        } catch (std::out_of_range const &ex) {
+            std::cerr << "out_of_range: " << ex.what()
+                        << std::endl;
             return "Neither";
         }
     }
-
     return "IPv6";
 }
 
-// solution: Pythonic split + divide & conquer + try/except
+// solution: substr/find/erase + divide & conquer + try/except
 // complexity
 // run-time: O(n)
 // space: O(1)
-std::string validIPAddress(std::string queryIP)
+std::string validIPAddress(const std::string& queryIP)
 {
     if (queryIP.empty()) {
         return "Neither";
     }
 
     std::vector<std::string> tokens;
-    if (tokenize(queryIP, ".", tokens)) {
-        return "Neither";
-    }
+    tokenize(queryIP, ".", tokens);
 
     if (tokens.size() > 1) {
         return validIPv4(tokens);
     }
 
-    if (tokenize(queryIP, ":", tokens)) {
-        return "Neither";
-    }
+    tokenize(queryIP, ":", tokens);
 
     if (tokens.size() > 1) {
         return validIPv6(tokens);

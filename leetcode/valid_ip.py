@@ -138,9 +138,27 @@ class TestValidIP(unittest.TestCase):
         self.assertEqual(valid_ip(query), expected)
         self.assertEqual(valid_ip3(query), expected)
 
+    def test_ipv4_invalid4(self):
+        query = "1e1.4.5.6"
+        expected = "Neither"
+        self.assertEqual(valid_ip(query), expected)
+        self.assertEqual(valid_ip3(query), expected)
+
     def test_ipv6_valid(self):
         query = "2001:0db8:85a3:0:0:8A2E:0370:7334"
         expected = "IPv6"
+        self.assertEqual(valid_ip(query), expected)
+        self.assertEqual(valid_ip3(query), expected)
+
+    def test_ipv6_invalid(self):
+        query = "2001:0db8:85a3:0:0:8A2E:0370:7334:"
+        expected = "Neither"
+        self.assertEqual(valid_ip(query), expected)
+        self.assertEqual(valid_ip3(query), expected)
+
+    def test_ipv6_invalid2(self):
+        query = "20EE:FGb8:85a3:0:0:8A2E:0370:7334"
+        expected = "Neither"
         self.assertEqual(valid_ip(query), expected)
         self.assertEqual(valid_ip3(query), expected)
 
