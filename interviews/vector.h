@@ -3,9 +3,20 @@
 #include <iostream>
 #include <memory>
 
-// discussion
-// push_back's exception guarantee
-// * make_unique
+// section: interview
+// difficulty: medium
+// tags: sig
+
+// constraints
+// don't use C++ vector
+// implement push_back
+
+// solution: unique_ptr & move semantics
+// complexity
+// run-time: see below
+// space: O(n)
+// questions:
+// * exception safety guarantees of push_back/reserve
 // * move
 template <typename T>
 class vector {
@@ -37,9 +48,11 @@ public:
     ~vector() = default;
 
     // copy
+    // run-time: O(1) amortized, O(n) worst-case
     void push_back(const T& item);
 
     // move
+    // run-time: O(1) amortized, O(n) worst-case
     void push_back(T&& item);
 
     // use ref qualifiers for overloading
