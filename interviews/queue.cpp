@@ -28,8 +28,8 @@ public:
     , d_back(0)
     , d_size(0)
     {
-        // reserve to prevent having to allocate additional memory
-        d_queue.reserve(d_capacity);
+        // resize to prevent having to allocate additional memory
+        d_queue.resize(d_capacity);
     }
 
     MyQueue(size_t capacity)
