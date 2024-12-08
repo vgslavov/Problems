@@ -40,6 +40,7 @@ public:
     Example& operator=(Example&& rhs);
 
 private:
+    // default member init
     int d_counter = 0;
     T* d_ptr{nullptr};
 

@@ -5,7 +5,7 @@
 
 // section: interview
 // difficulty: medium
-// tags: sig
+// tags: exceptions, mem, sig
 
 // constraints
 // don't use C++ vector
@@ -15,9 +15,10 @@
 // complexity
 // run-time: see below
 // space: O(n)
-// questions:
+
+// discussion
 // * exception safety guarantees of push_back/reserve
-// * move
+// * move semantics
 
 namespace notstd {
 

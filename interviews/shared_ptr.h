@@ -2,9 +2,9 @@
 #include <cstddef>
 #include <utility>
 
-// section: smart pointers
+// section: interview
 // difficulty: medium
-// tags: pointers, shared, ctc
+// tags: raw ptrs, smart ptrs, threads, exceptions, ctc
 
 // constraints
 // can't use std::shared_ptr
@@ -14,6 +14,8 @@
 // exception safety
 // self-assignment
 // move semantics
+
+// solution: raw ptr + std::atomic
 
 namespace notstd {
 
