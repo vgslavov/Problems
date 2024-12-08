@@ -16,13 +16,18 @@
 // complexity
 // run-time: see below
 // space: O(n)
+
+namespace {
 const size_t MAX_SIZE = 100;
+} // anon. namespace
+
+namespace notstd {
 
 template
 <typename T>
-class MyQueue {
+class queue {
 public:
-    MyQueue()
+    queue()
     : d_capacity(MAX_SIZE)
     , d_front(0)
     , d_back(0)
@@ -32,7 +37,7 @@ public:
         d_queue.resize(d_capacity);
     }
 
-    MyQueue(size_t capacity)
+    queue(size_t capacity)
     : d_capacity(capacity)
     , d_front(0)
     , d_back(0)
@@ -98,3 +103,5 @@ private:
     size_t d_back;
     size_t d_size;
 };
+
+} // notstd namespace

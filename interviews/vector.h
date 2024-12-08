@@ -18,6 +18,9 @@
 // questions:
 // * exception safety guarantees of push_back/reserve
 // * move
+
+namespace notstd {
+
 template <typename T>
 class vector {
 public:
@@ -75,9 +78,9 @@ public:
 
     T at(size_t i) && { return std::move(at(i)); }
 
-    // copy assignment operator
+    // copy assignment op
     vector<T>& operator=(const vector<T>& rhs);
-    // move assignment operator
+    // move assignment op
     vector<T>& operator=(vector<T>&& rhs);
 
     void reserve(size_t capacity);
@@ -179,6 +182,8 @@ void vector<T>::push_back(T&& item)
     d_buf[d_size++] = std::move(item);
 }
 
+} // notstd namespace
+
 int main()
 {
     vector<int> v1;
@@ -209,3 +214,4 @@ int main()
     v3.clear();
     assert(v3.empty());
 }
+
