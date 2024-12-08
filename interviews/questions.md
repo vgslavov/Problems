@@ -5,10 +5,13 @@
 * what does `inline` do?
     * function calls
 * what does `static` do?
+    * class member: data/function
+    * global
+    * local
     * `static inline`?
 * dynamic resizing of a vector
-* `malloc`, virtual memory, paging
 * dynamic resizing of a hash map
+* `malloc`, virtual memory, paging
 * find top k
     * sort: O(n*log n)
     * heap: O(n*log k)
@@ -16,11 +19,11 @@
 
 ## Coding
 
-* implement a queue in Python w/o using `append` #optiver
+* implement a queue in Python w/o using `append`
     * amortized analysis
-* external sorting of a large file #citadel
-* implement a `vector`'s `push_back` in C++ #sig
+* external sorting of a large file
+* implement a `vector`'s `push_back` in C++
     * amortized analysis
     * `move` semantics
     * exception safety
-* implement a `shared_ptr` in C++ #ctc
+* implement a `shared_ptr` in C++
