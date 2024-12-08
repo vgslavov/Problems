@@ -2,19 +2,34 @@
 #include <cstddef>
 #include <utility>
 
+// section: smart pointers
+// difficulty: medium
+// tags: pointers, shared, ctc
+
+// constraints
+// can't use std::shared_ptr
+
+// discussion
+// thread safety
+// exception safety
+// self-assignment
+// move semantics
+
 namespace notstd {
 
 template <typename T>
 class shared_ptr {
 public:
     // default ctor
-    shared_ptr() = default;
+    shared_ptr() {
+        *d_refCount = 0;
+    }
 
     // copy ctor
     shared_ptr(const shared_ptr<T>& rhs) {
         d_buf = rhs.d_buf;
         d_refCount = rhs.d_refCount;
-        (*d_refCount)++;
+        ++(*d_refCount);
     }
 
     // move ctor
@@ -29,13 +44,15 @@ public:
     // dtor
     ~shared_ptr() { reset(); }
 
-    void reset() {
-        if (!d_buf) {
-            return;
-        }
+    // TODO
+    void reset(T* rhs);
 
-        delete d_buf;
-        delete d_refCount;
+    void reset() {
+        // only delete if last ptr!
+        if (--(*d_refCount) == 0) {
+            delete d_buf;
+            delete d_refCount;
+        }
 
         d_buf = nullptr;
         d_refCount = nullptr;
@@ -53,18 +70,17 @@ public:
 
         d_buf = rhs.d_buf;
         d_refCount = rhs.d_refCount;
-        (*d_refCount)++;
+        ++(*d_refCount);
 
         return *this;
     }
 
     // move assignment op
     shared_ptr<T>& operator=(shared_ptr<T>&& rhs) {
-        if (&rhs ==  this) {
+        if (&rhs == this) {
             return *this;
         }
 
-        // don't leak mem!
         reset();
 
         d_buf = rhs.d_buf;
@@ -86,7 +102,7 @@ private:
     T* d_buf{nullptr};
 
     // make ref count thread-safe
-    std::atomic<size_t *> d_refCount{nullptr};
+    std::atomic<size_t>* d_refCount{nullptr};
 };
 
 } // notstd namespace
