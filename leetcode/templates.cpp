@@ -11,6 +11,40 @@
 #include <utility>
 #include <vector>
 
+namespace notstd {
+
+template <typename T>
+class Example {
+public:
+
+    // default ctor
+    Example() = default;
+
+    // ctor
+    Example(int counter)
+    : d_counter(counter) {}
+
+    // copy ctor
+    Example(const Example& rhs);
+
+    // move ctor
+    Example(Example&& rhs) = default;
+
+    // dtor
+    ~Example() = default;
+
+    // copy assignment op
+    Example& operator=(const Example& rhs);
+
+    // move assignment op
+    Example& operator=(Example&& rhs);
+
+private:
+    int d_counter = 0;
+    T* d_ptr{nullptr};
+
+};
+
 // Two pointers: one input, opposite ends
 int fn(const std::vector<int>& v)
 {
@@ -368,3 +402,5 @@ public:
 private:
     ChildrenMap d_children;
 };
+
+} // notstd namespace
