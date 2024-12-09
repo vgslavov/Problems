@@ -3,51 +3,42 @@
 import sys
 import unittest
 
-# number:
+# number: 680
 # section: meta
-# difficulty:
-# tags: meta
+# difficulty: easy
+# tags: two pointers, string, greedy,  meta
 
 # constraints
 # 1 <= s.length <= 10^5
 # s consists of lowercase English letters.
 
-# solution: two pointers
+# complexity
+# run-time: O(n)
+# space: O(1)
+def check_palindrome(s: str, i: int, j: int) -> bool:
+    while i < j:
+        if s[i] != s[j]:
+            return False
+
+        i += 1
+        j -= 1
+
+    return True
+
+# non-solution: Leetcode two pointers
 # complexity:
 # run-time: O(n)
 # space: O(1)
 def ispalindrome2(s: str) -> bool:
-    left = nomatch = 0
-    right = len(s)-1
+    i = nomatch = 0
+    j = len(s)-1
 
-    while left < right:
-        print(f"left:{left},right:{right}")
-        if s[left] == s[right]:
-            left += 1
-            right -= 1
-            continue
+    while i < j:
+        if s[i] != s[j]:
+            return check_palindrome(s, i, j-1) or check_palindrome(s, i+1, j)
 
-        nomatch += 1
-        print(f"nomatch:{nomatch} at left:{left},right:{right}")
-
-        old_right = right
-        old_left = left
-
-        if right > 0 and s[left] == s[right-1]:
-            old_right -= 1
-
-        if left < len(s) and s[left+1] == s[right]:
-            old_left += 1
-
-        right = old_right
-        left = old_left
-
-        if nomatch > 1:
-            print(f"nomatch:{nomatch}")
-            return False
-
-    if nomatch > 1:
-        return False
+        i += 1
+        j -= 1
 
     return True
 
@@ -76,9 +67,9 @@ class TestIsPalindrome2(unittest.TestCase):
         s = "eddboebddcaacddkbebdde"
         self.assertFalse(ispalindrome2(s))
 
-    # TODO: fix algo
     def test7(self):
         s = "ebcbbececabbacecbbcbe"
+        # TODO: fix algo
         self.assertTrue(ispalindrome2(s))
 
 if __name__ == '__main__':

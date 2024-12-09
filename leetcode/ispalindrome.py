@@ -16,7 +16,7 @@ import unittest
 # complexity
 # run-time: O(n)
 # space: O(n)
-def ispalindrome1(s):
+def ispalindrome(s):
     alnum = ''.join([c.lower() for c in s if c.isalnum()])
 
     return alnum == alnum[::-1]
@@ -47,22 +47,22 @@ def ispalindrome2(s):
 class TestIspalindrome(unittest.TestCase):
     def test_empty(self):
         s = ' '
-        self.assertTrue(ispalindrome1(s))
+        self.assertTrue(ispalindrome(s))
         self.assertTrue(ispalindrome2(s))
 
     def test_true(self):
         s = 'A man, a plan, a canal: Panama'
-        self.assertTrue(ispalindrome1(s))
+        self.assertTrue(ispalindrome(s))
         self.assertTrue(ispalindrome2(s))
 
     def test_false(self):
         s = 'race a car'
-        self.assertFalse(ispalindrome1(s))
+        self.assertFalse(ispalindrome(s))
         self.assertFalse(ispalindrome2(s))
 
     def test_num(self):
         s = '0P'
-        self.assertFalse(ispalindrome1(s))
+        self.assertFalse(ispalindrome(s))
         self.assertFalse(ispalindrome2(s))
 
 if __name__ == '__main__':
