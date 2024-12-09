@@ -151,7 +151,9 @@ void vector<T>::reserve(size_t newCapacity)
     auto newBuf = std::make_unique<T[]>(newCapacity);
 
     for (size_t i = 0; i != d_size; ++i) {
-        newBuf[i] = std::move(d_buf[i]);
+        // guarantee strong exception safety (depending on T)
+        newBuf[i] = std::move_if_noexcept(d_buf[i]);
+        //newBuf[i] = std::move(d_buf[i]);
     }
 
     d_buf = std::move(newBuf);
