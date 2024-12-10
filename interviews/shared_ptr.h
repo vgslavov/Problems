@@ -24,23 +24,23 @@ class shared_ptr {
 public:
     // default ctor
     shared_ptr() {
-        *d_refCount = 0;
+        *d_count = 0;
     }
 
     // copy ctor
     shared_ptr(const shared_ptr<T>& rhs) {
-        d_buf = rhs.d_buf;
-        d_refCount = rhs.d_refCount;
-        ++(*d_refCount);
+        d_ptr = rhs.d_ptr;
+        d_count = rhs.d_count;
+        ++(*d_count);
     }
 
     // move ctor
     shared_ptr(shared_ptr<T>&& rhs) {
-        d_buf = rhs.d_buf;
-        rhs.d_buf = nullptr;
+        d_ptr = rhs.d_ptr;
+        rhs.d_ptr = nullptr;
 
-        d_refCount = rhs.d_refCount;
-        rhs.d_refCount = nullptr;
+        d_count = rhs.d_count;
+        rhs.d_count = nullptr;
     }
 
     // dtor
@@ -51,13 +51,13 @@ public:
 
     void reset() {
         // only delete if last ptr!
-        if (--(*d_refCount) == 0) {
-            delete d_buf;
-            delete d_refCount;
+        if (--(*d_count) == 0) {
+            delete d_ptr;
+            delete d_count;
         }
 
-        d_buf = nullptr;
-        d_refCount = nullptr;
+        d_ptr = nullptr;
+        d_count = nullptr;
     }
 
     // copy assignment op
@@ -70,9 +70,9 @@ public:
         // don't leak mem!
         reset();
 
-        d_buf = rhs.d_buf;
-        d_refCount = rhs.d_refCount;
-        ++(*d_refCount);
+        d_ptr = rhs.d_ptr;
+        d_count = rhs.d_count;
+        ++(*d_count);
 
         return *this;
     }
@@ -85,26 +85,26 @@ public:
 
         reset();
 
-        d_buf = rhs.d_buf;
-        rhs.d_buf = nullptr;
+        d_ptr = rhs.d_ptr;
+        rhs.d_ptr = nullptr;
 
-        d_refCount = rhs.d_refCount;
-        rhs.d_refCount = nullptr;
+        d_count = rhs.d_count;
+        rhs.d_count = nullptr;
 
         return *this;
     }
 
-    T* get() { return d_buf; }
+    T* get() { return d_ptr; }
 
     T* operator->() { return get(); }
 
     T& operator*() { return *get(); }
 
 private:
-    T* d_buf{nullptr};
+    T* d_ptr{nullptr};
 
     // make ref count thread-safe
-    std::atomic<size_t>* d_refCount{nullptr};
+    std::atomic<size_t>* d_count{nullptr};
 };
 
 } // notstd namespace

@@ -29,9 +29,9 @@ class queue {
 public:
     queue()
     : d_capacity(MAX_SIZE)
+    , d_size(0)
     , d_front(0)
     , d_back(0)
-    , d_size(0)
     {
         // resize to prevent having to allocate additional memory
         d_queue.resize(d_capacity);
@@ -39,9 +39,9 @@ public:
 
     queue(size_t capacity)
     : d_capacity(capacity)
+    , d_size(0)
     , d_front(0)
     , d_back(0)
-    , d_size(0)
     {
         d_queue.resize(d_capacity);
     }
@@ -99,9 +99,9 @@ public:
 private:
     std::vector<T> d_queue;
     size_t d_capacity;
+    size_t d_size;
     size_t d_front;
     size_t d_back;
-    size_t d_size;
 };
 
 } // notstd namespace
