@@ -23,11 +23,7 @@ template
 class queue {
 public:
     // default ctor
-    queue()
-    : d_capacity(0)
-    , d_size(0)
-    , d_head(0)
-    {}
+    queue() = default;
 
     // ctor
     queue(size_t capacity)
@@ -112,9 +108,9 @@ public:
 
 private:
     std::vector<T> d_queue;
-    size_t d_capacity;
-    size_t d_size;
-    size_t d_head;
+    size_t d_capacity = 0;
+    size_t d_size = 0;
+    size_t d_head = 0;
 };
 
 } // notstd namespace
