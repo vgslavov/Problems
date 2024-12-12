@@ -22,9 +22,11 @@ namespace notstd {
 template <typename T>
 class shared_ptr {
 public:
-    // default ctor
-    shared_ptr() {
-        *d_count = 0;
+    // ctor
+    explicit shared_ptr(T* ptr = nullptr)
+    : d_ptr(ptr)
+    {
+        d_count = new std::atomic<size_t>(1);
     }
 
     // copy ctor
@@ -46,18 +48,20 @@ public:
     // dtor
     ~shared_ptr() { reset(); }
 
-    // TODO
-    //void reset(T* rhs);
-
-    void reset() {
+    void reset(T* rhs = nullptr) {
         // only delete if last ptr!
         if (--(*d_count) == 0) {
             delete d_ptr;
             delete d_count;
         }
 
-        d_ptr = nullptr;
-        d_count = nullptr;
+        if (rhs) {
+            d_ptr = rhs;
+            d_count = new std::atomic<size_t>(1);
+        } else {
+            d_ptr = nullptr;
+            d_count = nullptr;
+        }
     }
 
     // copy assignment op
@@ -104,8 +108,7 @@ private:
     T* d_ptr = nullptr;
 
     // make ref count thread-safe
-    //std::atomic<size_t>* d_count = nullptr;
-    size_t* d_count = nullptr;
+    std::atomic<size_t>* d_count = nullptr;
 };
 
 } // notstd namespace
