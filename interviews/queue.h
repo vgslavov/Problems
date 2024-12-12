@@ -1,6 +1,5 @@
 #include <algorithm>
 #include <cstddef>
-#include <iostream>
 #include <stdexcept>
 #include <vector>
 
@@ -17,81 +16,96 @@
 // run-time: see below
 // space: O(n)
 
-namespace {
-const size_t MAX_SIZE = 100;
-} // anon. namespace
-
 namespace notstd {
 
 template
 <typename T>
 class queue {
 public:
+    // default ctor
     queue()
-    : d_capacity(MAX_SIZE)
+    : d_capacity(0)
     , d_size(0)
-    , d_front(0)
-    , d_back(0)
-    {
-        // resize to prevent having to allocate additional memory
-        d_queue.resize(d_capacity);
-    }
+    , d_head(0)
+    {}
 
+    // ctor
     queue(size_t capacity)
     : d_capacity(capacity)
     , d_size(0)
-    , d_front(0)
-    , d_back(0)
+    , d_head(0)
     {
         d_queue.resize(d_capacity);
     }
 
+    // dtor
+    ~queue() = default;
+
+    // TODO: add copy/move semantics
+
     // run-time: O(1) amortized, O(n) worst-case
-    void push(const T& value)
-    {
+    void push(const T& value) {
+        // check if full
         if (d_size == d_capacity) {
             // shift everything to left: O(n)
-            std::rotate(d_queue.begin(), d_queue.begin() + d_front, d_queue.end());
-            d_front = 0;
-            d_back = d_size;
+            std::rotate(d_queue.begin(),
+                        d_queue.begin() + d_head,
+                        d_queue.end());
 
-            // double size
-            d_capacity *= 2;
+            d_head = 0;
 
-            // double capacity: O(n) for copying
+            // double capacity
+            d_capacity = (d_capacity == 0) ? 1 : d_capacity * 2;
+
+            // double size: O(n) for copying
             d_queue.resize(d_capacity);
         }
 
-        d_queue[d_back++] = value;
+        d_queue[(d_head + d_size) % d_capacity] = value;
+
+        // update size
         ++d_size;
     }
 
     // run-time: O(1)
-    T pop()
-    {
+    void pop() {
         if (empty()) {
             throw std::length_error("empty queue");
         }
 
-        int value = d_queue[d_front];
-        d_queue[d_front++] = 0;
-        --d_size;
+        // init
+        d_queue[d_head] = 0;
 
-        return value;
+        // update head
+        d_head = (d_head + 1) % d_capacity;
+
+        // update size
+        --d_size;
     }
 
     // run-time: O(1)
-    T front() const
-    {
+    T front() const {
         if (empty()) {
             throw std::length_error("empty queue");
         }
 
-        return d_queue[d_front];
+        return d_queue[d_head];
+    }
+
+    // run-time: O(1)
+    T back() const {
+        if (empty()) {
+            throw std::length_error("empty queue");
+        }
+
+        return d_queue[(d_head + d_size-1) % d_capacity];
     }
 
     // run-time: O(1)
     bool empty() const { return d_size == 0; }
+
+    // run-time: O(1)
+    size_t capacity() const { return d_capacity; }
 
     // run-time: O(1)
     size_t size() const { return d_size; }
@@ -100,8 +114,7 @@ private:
     std::vector<T> d_queue;
     size_t d_capacity;
     size_t d_size;
-    size_t d_front;
-    size_t d_back;
+    size_t d_head;
 };
 
 } // notstd namespace

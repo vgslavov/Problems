@@ -47,7 +47,7 @@ public:
     ~shared_ptr() { reset(); }
 
     // TODO
-    void reset(T* rhs);
+    //void reset(T* rhs);
 
     void reset() {
         // only delete if last ptr!
@@ -101,10 +101,11 @@ public:
     T& operator*() { return *get(); }
 
 private:
-    T* d_ptr{nullptr};
+    T* d_ptr = nullptr;
 
     // make ref count thread-safe
-    std::atomic<size_t>* d_count{nullptr};
+    //std::atomic<size_t>* d_count = nullptr;
+    size_t* d_count = nullptr;
 };
 
 } // notstd namespace
