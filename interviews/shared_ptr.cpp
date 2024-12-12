@@ -23,5 +23,11 @@ int main()
     sp3 = sp2;
     assert(*sp3.get() == 10);
 
+    // copy ctor
+    notstd::shared_ptr<int> sp4(sp3);
+    assert(*sp4.get() == 10);
+
+    // TODO: test move ctor & assign op
+
     return 0;
 }
