@@ -44,7 +44,7 @@ public:
     //vector(vector&& rhs)
     //: d_capacity(rhs.size())
     //, d_size(rhs.size())
-    //, d_buf(std::move(rhs.d_buf)) {}
+    //, d_buf(std::move(rhs.d_buf)) noexcept {}
 
     // dtor
     ~vector() = default;
@@ -80,7 +80,7 @@ public:
     // copy assignment op
     vector<T>& operator=(const vector<T>& rhs);
     // move assignment op
-    vector<T>& operator=(vector<T>&& rhs);
+    vector<T>& operator=(vector<T>&& rhs) noexcept;
 
     void reserve(size_t capacity);
 
@@ -94,7 +94,7 @@ private:
     // default member init
     size_t d_capacity = 0;
     size_t d_size = 0;
-    std::unique_ptr<T[]> d_buf{nullptr};
+    std::unique_ptr<T[]> d_buf = nullptr;
 };
 
 template <typename T>
@@ -123,7 +123,7 @@ vector<T>& vector<T>::operator=(const vector<T>& rhs)
 }
 
 template <typename T>
-vector<T>& vector<T>::operator=(vector<T>&& rhs)
+vector<T>& vector<T>::operator=(vector<T>&& rhs) noexcept
 {
     assert(&rhs != this);
 

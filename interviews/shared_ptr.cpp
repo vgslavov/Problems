@@ -9,7 +9,7 @@ int main()
     notstd::shared_ptr<int> sp1(new int(10));
     assert(*sp1.get() == 10);
 
-    // copy assign op
+    // copy ctor!
     notstd::shared_ptr<int> sp2 = sp1;
     assert(*sp2.get() == 10);
 
@@ -27,7 +27,19 @@ int main()
     notstd::shared_ptr<int> sp4(sp3);
     assert(*sp4.get() == 10);
 
-    // TODO: test move ctor & assign op
+    // move ctor
+    notstd::shared_ptr<int> sp5(notstd::shared_ptr<int>(new int(10)));
+    assert(*sp5.get() == 10);
+
+    // TODO: fix seg fault
+    // move ctor
+    //notstd::shared_ptr<int> sp6(std::move(sp5));
+    //assert(*sp6.get() == 10);
+
+    //sp5.reset();
+    //assert(sp5.get() == nullptr);
+
+    // TODO: test move assign op
 
     return 0;
 }
