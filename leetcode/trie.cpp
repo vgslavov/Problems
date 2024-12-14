@@ -30,7 +30,8 @@ public:
         Trie* curr = this;
 
         for (const auto& c: word) {
-            ChildrenMap& children = curr->children();
+            //ChildrenMap& children = curr->children();
+            ChildrenMap& children = curr->d_children;
             auto itr = children.find(c);
             if (itr == children.end()) {
                 children[c] = Trie();
@@ -39,7 +40,8 @@ public:
                 //children.insert(std::make_pair(c, std::move(newTrie)));
             }
 
-            curr = &curr->children()[c];
+            //curr = &curr->children()[c];
+            curr = &curr->d_children[c];
         }
 
         curr->isendword(true);
@@ -55,7 +57,7 @@ public:
 
     void isendword(bool val) { d_isendword = val; }
 
-    ChildrenMap& children() { return d_children; }
+    //ChildrenMap& children() { return d_children; }
 
     bool isendword() const { return d_isendword; }
 
@@ -64,13 +66,16 @@ private:
         Trie* curr = this;
 
         for (const auto& c: word) {
-            ChildrenMap& children = curr->children();
+            //ChildrenMap& children = curr->children();
+            // can access private members of other instances of same class!
+            ChildrenMap& children = curr->d_children;
             const auto itr = children.find(c);
             if (itr == children.end()) {
                 return false;
             }
 
-            curr = &curr->children()[c];
+            //curr = &curr->children()[c];
+            curr = &curr->d_children[c];
         }
 
         if (!checkEndWord || curr->isendword()) {
