@@ -36,15 +36,15 @@ public:
 
     // support moving
     // move ctor
-    Example(Example&& rhs) = default;
+    Example(Example&& rhs) noexcept = default;
 
     // move assignment op
-    Example& operator=(Example&& rhs) = default;
+    Example& operator=(Example&& rhs) noexcept = default;
 
 private:
     // default member init
     int d_counter = 0;
-    T* d_ptr{nullptr};
+    T* d_ptr = nullptr;
 };
 
 // Two pointers: one input, opposite ends
