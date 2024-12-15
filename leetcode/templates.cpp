@@ -16,36 +16,73 @@ namespace notstd {
 template <typename T>
 class Example {
 public:
-
     // default ctor
     Example() = default;
 
     // ctor
-    Example(int counter)
-    : d_counter(counter) {}
+    Example(int size)
+    : d_size(size) {}
 
     // dtor
-    ~Example() = default;
+    ~Example()
+    {
+        if (d_buf) {
+            delete d_buf;
+        }
+    }
 
     // support copying
     // copy ctor
     Example(const Example& rhs) = default;
 
     // copy assignment op
-    Example& operator=(const Example& rhs) = default;
+    // exception safety: strong guarantee
+    Example& operator=(const Example& rhs)
+    {
+        // don't check self-assignment, copy is cheaper
+        //if (this == &rhs) return *this;
+        auto tmp = rhs;
+        std::swap(tmp);
+        return *this;
+    }
 
     // support moving
     // move ctor
-    Example(Example&& rhs) noexcept = default;
+    // exception safety: ?
+    Example(Example&& rhs) noexcept
+    : d_size(rhs.d_size)
+    , d_buf(rhs.d_buf)
+    {
+        // leave moved *from* in valid state
+        rhs.d_size = 0;
+        rhs.d_buf = nullptr;
+    }
 
     // move assignment op
-    Example& operator=(Example&& rhs) noexcept = default;
+    // exception safety: ?
+    Example& operator=(Example&& rhs) noexcept
+    {
+        // have to check self-assign!
+        if (this == &rhs) return *this;
+        d_size = rhs.d_size;
+        rhs.d_size = 0;
+        d_buf = std::move(rhs.d_buf);
+        rhs.d_buf = nullptr;
+        return *this;
+    }
 
 private:
     // default member init
-    int d_counter = 0;
-    T* d_ptr = nullptr;
+    int d_size = 0;
+    T* d_buf = nullptr;
 };
+
+// non-member
+template <typename T>
+bool operator==(const Example& a, const Example& b)
+{
+    return a.d_size == b.d_size && a.d_buf == b.d_buf;
+}
 
 // Two pointers: one input, opposite ends
 int fn(const std::vector<int>& v)
