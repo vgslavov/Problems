@@ -37,14 +37,14 @@ public:
         }
     }
 
-    // move ctor
-    vector(vector&& rhs) = default;
+    // move ctor: default
+    //vector(vector&& rhs) = default;
 
     // move ctor: manual
-    //vector(vector&& rhs)
-    //: d_capacity(rhs.size())
-    //, d_size(rhs.size())
-    //, d_buf(std::move(rhs.d_buf)) noexcept {}
+    vector(vector&& rhs) noexcept
+    : d_capacity(rhs.size())
+    , d_size(rhs.size())
+    , d_buf(std::move(rhs.d_buf)) {}
 
     // dtor
     ~vector() = default;
@@ -112,7 +112,7 @@ vector<T>& vector<T>::operator=(const vector<T>& rhs)
     // clear existing
     clear();
 
-    // reserve capacity
+    // reserve capacity == size
     reserve(rhs.size());
 
     // copy

@@ -69,8 +69,8 @@ public:
             throw std::length_error("empty queue");
         }
 
-        // init
-        d_queue[d_head] = 0;
+        // init: what if T is non number?
+        //d_queue[d_head] = 0;
 
         // update head
         d_head = (d_head + 1) % d_capacity;

@@ -28,20 +28,78 @@ public:
     , d_buf(std::make_unique<T[]>(rhs.d_size))
     {
         for (size_t i = 0; i != d_size; ++i) {
-            d_buf[i] = rhs[i];
+            d_buf[i] = rhs.d_buf[i];
         }
     }
 
     // copy assign op
-    queue& operator=(const queue& rhs) = default;
+    queue& operator=(const queue& rhs)
+    {
+        // not necessary
+        if (this == &rhs) return *this;
 
-    // move ctor
-    queue(queue&& rhs) noexcept = default;
+        clear();
+        reserve(rhs.size());
+
+        for (size_t i = 0; i != rhs.size(); ++i) {
+            d_buf[i] = rhs.d_buf[i];
+        }
+
+        d_size = rhs.size();
+
+        return *this;
+    }
+
+    //move ctor: default
+    //queue(queue&& rhs) noexcept = default;
+
+    // move ctor: manual
+    queue(queue&& rhs) noexcept
+    : d_capacity(rhs.d_capacity)
+    , d_size(rhs.d_size)
+    , d_head(rhs.d_head)
+    , d_buf(std::move(rhs.d_buf))
+    {
+        rhs.d_capacity = 0;
+        rhs.d_size = 0;
+        rhs.d_head = 0;
+        rhs.d_buf.reset();
+    }
 
     // move assign op
-    queue& operator=(queue&& rhs) noexcept = default;
+    queue& operator=(queue&& rhs) noexcept
+    {
+        if (this == &rhs) return *this;
 
-    void reserve(size_t capacity) {}
+        d_capacity = rhs.d_capacity;
+        rhs.d_capacity = 0;
+
+        d_size = rhs.d_size;
+        rhs.d_size = 0;
+
+        d_head = rhs.d_head;
+        rhs.d_head = 0;
+
+        d_buf = std::move(rhs.d_buf);
+
+        return *this;
+    }
+
+    void reserve(size_t capacity)
+    {
+        if (capacity <= d_capacity) {
+            return;
+        }
+
+        auto newBuf = std::make_unique<T[]>(capacity);
+
+        for (size_t i = 0; i != d_size; ++i) {
+            newBuf[i] = std::move_if_noexcept(d_buf[i]);
+        }
+
+        d_buf = std::move(newBuf);
+        d_capacity = capacity;
+    }
 
     void push(const T& item)
     {
@@ -49,10 +107,29 @@ public:
             reserve(d_capacity == 0 ? 1 : d_capacity * 2);
         }
 
-        // TODO
+        d_buf[(d_head + d_size) % d_capacity] = item;
+        ++d_size;
     }
 
-    void pop() {}
+    void push(T&& item)
+    {
+        if (d_capacity == d_size) {
+            reserve(d_capacity == 0 ? 1 : d_capacity * 2);
+        }
+
+        d_buf[(d_head + d_size) % d_capacity] = std::move(item);
+        ++d_size;
+    }
+
+    void pop()
+    {
+        if (empty()) {
+            throw std::length_error("empty queue");
+        }
+
+        d_head = (d_head + 1) % d_capacity;
+        --d_size;
+    }
 
     T front() const
     {
@@ -71,6 +148,13 @@ public:
 
         // subtract 1!
         return d_buf[(d_head + d_size-1) % d_capacity];
+    }
+
+    void clear()
+    {
+        d_size = 0;
+        d_head = 0;
+        d_buf.reset();
     }
 
     bool empty() const { return d_size == 0; }
