@@ -22,41 +22,45 @@ namespace notstd {
 template <typename T>
 class shared_ptr {
 public:
-    // ctor
+    // default ctor
     explicit shared_ptr(T* ptr = nullptr)
     : d_ptr(ptr)
     {
-        d_count = new std::atomic<size_t>(1);
+        if (d_ptr) {
+            d_count = new std::atomic<size_t>(1);
+        }
     }
 
     // copy ctor
-    shared_ptr(const shared_ptr<T>& rhs) {
-        d_ptr = rhs.d_ptr;
-        d_count = rhs.d_count;
+    shared_ptr(const shared_ptr<T>& rhs)
+    : d_ptr(rhs.d_ptr)
+    , d_count(rhs.d_count)
+    {
         ++(*d_count);
     }
 
     // move ctor
-    shared_ptr(shared_ptr<T>&& rhs) {
-        d_ptr = rhs.d_ptr;
+    shared_ptr(shared_ptr<T>&& rhs)
+    : d_ptr(rhs.d_ptr)
+    , d_count(rhs.d_count)
+    {
         rhs.d_ptr = nullptr;
-
-        d_count = rhs.d_count;
         rhs.d_count = nullptr;
     }
 
     // dtor
     ~shared_ptr() { reset(); }
 
-    void reset(T* rhs = nullptr) {
+    void reset(T* ptr = nullptr)
+    {
         // only delete if last ptr!
         if (--(*d_count) == 0) {
             delete d_ptr;
             delete d_count;
         }
 
-        if (rhs) {
-            d_ptr = rhs;
+        if (ptr) {
+            d_ptr = ptr;
             d_count = new std::atomic<size_t>(1);
         } else {
             d_ptr = nullptr;
@@ -65,7 +69,8 @@ public:
     }
 
     // copy assignment op
-    shared_ptr<T>& operator=(const shared_ptr<T>& rhs) {
+    shared_ptr<T>& operator=(const shared_ptr<T>& rhs)
+    {
         // prevent self-assignment
         if (&rhs == this) {
             return *this;
@@ -82,7 +87,8 @@ public:
     }
 
     // move assignment op
-    shared_ptr<T>& operator=(shared_ptr<T>&& rhs) {
+    shared_ptr<T>& operator=(shared_ptr<T>&& rhs)
+    {
         if (&rhs == this) {
             return *this;
         }

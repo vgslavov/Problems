@@ -33,10 +33,18 @@ public:
     }
 
     // swap
+    //friend void swap(copy_swap& a, copy_swap& b)
+    //{
+    //    using std::swap;
+    //    swap(a.ptr, b.ptr);
+    //}
+
+    // manual swap
     friend void swap(copy_swap& a, copy_swap& b)
     {
-        using std::swap;
-        swap(a.ptr, b.ptr);
+        copy_swap tmp(std::move(a));
+        a = std::move(b);
+        b = std::move(tmp);
     }
 
 private:

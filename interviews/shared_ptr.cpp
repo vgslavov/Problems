@@ -33,8 +33,8 @@ int main()
 
     // TODO: fix seg fault
     // move ctor
-    //notstd::shared_ptr<int> sp6(std::move(sp5));
-    //assert(*sp6.get() == 10);
+    notstd::shared_ptr<int> sp6(std::move(sp5));
+    assert(*sp6.get() == 10);
 
     //sp5.reset();
     //assert(sp5.get() == nullptr);
