@@ -26,8 +26,9 @@ public:
     explicit shared_ptr(T* ptr = nullptr)
     : d_ptr(ptr)
     {
-        if (d_ptr) {
-            d_count = new std::atomic<size_t>(1);
+        d_count = new std::atomic<size_t>(1);
+        if (!d_ptr) {
+            d_ptr = new T();
         }
     }
 
@@ -40,7 +41,7 @@ public:
     }
 
     // move ctor
-    shared_ptr(shared_ptr<T>&& rhs)
+    shared_ptr(shared_ptr<T>&& rhs) noexcept
     : d_ptr(rhs.d_ptr)
     , d_count(rhs.d_count)
     {
@@ -71,10 +72,8 @@ public:
     // copy assignment op
     shared_ptr<T>& operator=(const shared_ptr<T>& rhs)
     {
-        // prevent self-assignment
-        if (&rhs == this) {
-            return *this;
-        }
+        // not necessary
+        //if (&rhs == this) return *this;
 
         // don't leak mem!
         reset();
@@ -87,11 +86,10 @@ public:
     }
 
     // move assignment op
-    shared_ptr<T>& operator=(shared_ptr<T>&& rhs)
+    shared_ptr<T>& operator=(shared_ptr<T>&& rhs) noexcept
     {
-        if (&rhs == this) {
-            return *this;
-        }
+        // prevent self-assignment
+        if (&rhs == this) return *this;
 
         reset();
 

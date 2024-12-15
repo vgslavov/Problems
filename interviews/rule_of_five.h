@@ -39,13 +39,11 @@ public:
     }
 
     // IV. move ctor
-    //rule_of_five(rule_of_five&& other) noexcept
-    //rule_of_five(rule_of_five&& other)
-    //: ptr(std::exchange(other.ptr, nullptr)) {}
+    rule_of_five(rule_of_five&& other) noexcept
+    : ptr(std::exchange(other.ptr, nullptr)) {}
 
     // V. move assign op
-    //rule_of_five& operator=(rule_of_five&& other) noexcept
-    rule_of_five& operator=(rule_of_five&& other)
+    rule_of_five& operator=(rule_of_five&& other) noexcept
     {
         rule_of_five temp(std::move(other));
         std::swap(ptr, temp.ptr);

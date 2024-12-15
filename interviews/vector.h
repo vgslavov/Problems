@@ -84,7 +84,11 @@ public:
 
     void reserve(size_t capacity);
 
-    void clear() { d_size = 0; }
+    void clear()
+    {
+        d_size = 0;
+        d_buf.reset();
+    }
 
     size_t capacity() const { return d_capacity; }
     size_t size() const { return d_size; }

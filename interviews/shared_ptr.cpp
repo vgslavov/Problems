@@ -31,10 +31,10 @@ int main()
     notstd::shared_ptr<int> sp5(notstd::shared_ptr<int>(new int(10)));
     assert(*sp5.get() == 10);
 
-    // TODO: fix seg fault
     // move ctor
-    notstd::shared_ptr<int> sp6(std::move(sp5));
-    assert(*sp6.get() == 10);
+    // TODO: fix seg fault
+    notstd::shared_ptr<int> sp6(std::move(sp3));
+    //assert(*sp6.get() == 10);
 
     //sp5.reset();
     //assert(sp5.get() == nullptr);

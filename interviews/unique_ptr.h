@@ -7,31 +7,34 @@ template <typename T>
 class unique_ptr {
 public:
     // default ctor
-    explicit unique_ptr(T* ptr = nullptr)
+    // don't throw!
+    explicit unique_ptr(T* ptr = nullptr) noexcept
     : d_ptr(ptr) {}
 
     // dtor
     ~unique_ptr() { reset(); }
 
     // copy ctor
+    // don't copy!
     unique_ptr(const unique_ptr& rhs) = delete;
 
     // copy assign op
+    // don't copy!
     unique_ptr& operator=(const unique_ptr& rhs) = delete;
 
     // move ctor
-    unique_ptr(unique_ptr&& rhs)
+    // don't throw!
+    unique_ptr(unique_ptr&& rhs) noexcept
     : d_ptr(rhs.d_ptr)
     {
         rhs.d_ptr = nullptr;
     }
 
     // move assign op
-    unique_ptr& operator=(unique_ptr&& rhs)
+    // don't throw!
+    unique_ptr& operator=(unique_ptr&& rhs) noexcept
     {
-        if (this == &rhs) {
-            return *this;
-        }
+        if (this == &rhs) return *this;
 
         reset();
 
