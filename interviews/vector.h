@@ -44,7 +44,7 @@ public:
     //vector(vector&& rhs) noexcept
     //: d_capacity(rhs.size())
     //, d_size(rhs.size())
-    //, d_buf((rhs.d_buf) {}
+    //, d_buf(std::move(rhs.d_buf)) {}
 
     // dtor
     ~vector() noexcept = default;
