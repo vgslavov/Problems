@@ -38,16 +38,16 @@ public:
     }
 
     // move ctor: default
-    //vector(vector&& rhs) = default;
+    vector(vector&& rhs) = default;
 
     // move ctor: manual
-    vector(vector&& rhs) noexcept
-    : d_capacity(rhs.size())
-    , d_size(rhs.size())
-    , d_buf(std::move(rhs.d_buf)) {}
+    //vector(vector&& rhs) noexcept
+    //: d_capacity(rhs.size())
+    //, d_size(rhs.size())
+    //, d_buf((rhs.d_buf) {}
 
     // dtor
-    ~vector() = default;
+    ~vector() noexcept = default;
 
     // copy
     // run-time: O(1) amortized, O(n) worst-case

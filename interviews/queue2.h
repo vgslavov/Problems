@@ -51,20 +51,20 @@ public:
     }
 
     //move ctor: default
-    //queue(queue&& rhs) noexcept = default;
+    queue(queue&& rhs) noexcept = default;
 
     // move ctor: manual
-    queue(queue&& rhs) noexcept
-    : d_capacity(rhs.d_capacity)
-    , d_size(rhs.d_size)
-    , d_head(rhs.d_head)
-    , d_buf(std::move(rhs.d_buf))
-    {
-        rhs.d_capacity = 0;
-        rhs.d_size = 0;
-        rhs.d_head = 0;
-        rhs.d_buf.reset();
-    }
+    //queue(queue&& rhs) noexcept
+    //: d_capacity(rhs.d_capacity)
+    //, d_size(rhs.d_size)
+    //, d_head(rhs.d_head)
+    //, d_buf(std::move(rhs.d_buf))
+    //{
+    //    rhs.d_capacity = 0;
+    //    rhs.d_size = 0;
+    //    rhs.d_head = 0;
+    //    rhs.d_buf.reset();
+    //}
 
     // move assign op
     queue& operator=(queue&& rhs) noexcept

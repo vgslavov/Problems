@@ -12,7 +12,7 @@ public:
     : d_ptr(ptr) {}
 
     // dtor
-    ~unique_ptr() { reset(); }
+    ~unique_ptr() noexcept { reset(); }
 
     // copy ctor
     // don't copy!

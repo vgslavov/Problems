@@ -50,7 +50,7 @@ public:
     }
 
     // dtor
-    ~shared_ptr() { reset(); }
+    ~shared_ptr() noexcept { reset(); }
 
     void reset(T* ptr = nullptr)
     {

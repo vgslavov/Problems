@@ -24,7 +24,7 @@ public:
     : d_size(size) {}
 
     // dtor
-    ~Example()
+    ~Example() noexcept
     {
         if (d_buf) {
             delete d_buf;
@@ -39,10 +39,12 @@ public:
     // exception safety: strong guarantee
     Example& operator=(const Example& rhs)
     {
-        // don't check self-assignment, copy is cheaper
+        // don't check, occasional self-assign is cheaper
         //if (this == &rhs) return *this;
         auto tmp = rhs;
         std::swap(tmp);
+        // or?
+        //this->swap(rhs);
         return *this;
     }
 
@@ -66,9 +68,16 @@ public:
         if (this == &rhs) return *this;
         d_size = rhs.d_size;
         rhs.d_size = 0;
-        d_buf = std::move(rhs.d_buf);
+        d_buf = rhs.d_buf;
         rhs.d_buf = nullptr;
         return *this;
+    }
+
+    // member swap: don't throw!
+    void swap(Example& rhs) noexcept
+    {
+        std::swap(d_buf, rhs.d_buf);
+        std::swap(d_size, rhs.d_size);
     }
 
 private:
@@ -77,11 +86,19 @@ private:
     T* d_buf = nullptr;
 };
 
-// non-member
+// non-member assign op
 template <typename T>
-bool operator==(const Example& a, const Example& b)
+bool operator==(const Example<T>& rhs, const Example<T>& lhs) noexcept
 {
-    return a.d_size == b.d_size && a.d_buf == b.d_buf;
+    return rhs.d_size == lhs.d_size &&
+           rhs.d_buf == lhs.d_buf;
+}
+
+// non-member swap
+template <typename T>
+void swap(Example<T>& rhs, Example<T>& lhs)
+{
+    rhs.swap(lhs);
 }
 
 // Two pointers: one input, opposite ends
