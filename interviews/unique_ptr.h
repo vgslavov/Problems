@@ -7,9 +7,12 @@ template <typename T>
 class unique_ptr {
 public:
     // default ctor
+    unique_ptr() = default;
+
+    // ctor
     // don't throw!
-    explicit unique_ptr(T* ptr = nullptr) noexcept
-    : d_ptr(ptr) {}
+    explicit unique_ptr(T* ptr) noexcept
+    : d_ptr(new T(*ptr)) {}
 
     // dtor
     ~unique_ptr() noexcept { reset(); }

@@ -7,8 +7,11 @@ template <typename T>
 class rule_of_three {
 public:
     // default ctor
-    explicit rule_of_three(T* p = nullptr)
-    : ptr(p) {}
+    rule_of_three()
+    : ptr(new T) {}
+
+    explicit rule_of_three(T* p)
+    : ptr(new T(*p)) {}
 
     // I. dtor
     ~rule_of_three()
@@ -20,18 +23,17 @@ public:
     }
 
     // II. copy ctor
-    rule_of_three(const rule_of_three& other)
-    : rule_of_three(other.ptr) {}
+    rule_of_three(const rule_of_three& rhs)
+    : rule_of_three(rhs.ptr) {}
 
     // III. copy assign op
-    rule_of_three& operator=(const rule_of_three& other)
+    rule_of_three& operator=(const rule_of_three& rhs)
     {
-        if (this == &other) {
-            return *this;
-        }
+        // optional
+        if (this == &rhs) return *this;
 
         // copy ctor
-        rule_of_three temp(other);
+        rule_of_three temp(rhs);
         std::swap(ptr, temp.ptr);
 
         return *this;

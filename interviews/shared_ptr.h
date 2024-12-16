@@ -23,12 +23,17 @@ template <typename T>
 class shared_ptr {
 public:
     // default ctor
-    explicit shared_ptr(T* ptr = nullptr)
-    : d_ptr(ptr)
+    shared_ptr()
+    : d_count(new std::atomic<size_t>(0)) {}
+
+    // ctor
+    explicit shared_ptr(T* ptr)
     {
-        d_count = new std::atomic<size_t>(1);
         if (!d_ptr) {
-            d_ptr = new T();
+            d_ptr = new T(*ptr);
+            d_count = new std::atomic<size_t>(1);
+        } else {
+            d_count = new std::atomic<size_t>(0);
         }
     }
 
@@ -61,7 +66,7 @@ public:
         }
 
         if (ptr) {
-            d_ptr = ptr;
+            d_ptr = new T(*ptr);
             d_count = new std::atomic<size_t>(1);
         } else {
             d_ptr = nullptr;
