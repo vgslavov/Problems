@@ -32,14 +32,9 @@ def kth_smallest_bst(root, k):
     nums_sorted = []
     dfs(root, nums_sorted)
 
-    for n in nums_sorted:
-        k -= 1
-        if not k:
-            return n
+    return nums_sorted[k-1]
 
-    return None
-
-# TODO: add unit tests
+# TODO: solve in O(log n) & add unit tests
 
 if __name__ == '__main__':
     sys.exit(unittest.main())
