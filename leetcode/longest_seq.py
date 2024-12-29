@@ -79,7 +79,7 @@ def calc_seq(counts, k):
 
 # solution: defaultdict
 # complexity
-# run-time: O(n+k*n)
+# run-time: O(n+k*n) ~ O(n*k)
 # space: O(k)
 def longest_seq3(nums):
     if not nums:
