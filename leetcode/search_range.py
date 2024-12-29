@@ -72,39 +72,21 @@ def search_range(nums, target):
 
     return [left,right]
 
-# solution: Pythonic bisect + two pointers
+# solution: Pythonic bisect
 # complexity
-# run-time: O(n), if all duplicates
+# run-time: O(log n) average, O(n), if all duplicates
 # space: O(1)
 def search_range2(nums, target):
-    idx = bisect.bisect_left(nums, target)
-    if idx < 0 or idx >= len(nums) or nums[idx] != target:
+    left = bisect.bisect_left(nums, target)
+    if left < 0 or left >= len(nums) or nums[left] != target:
         return [-1,-1]
 
-    #print(f"idx:{idx},val:{nums[idx]}")
-    left = right = idx
-    while 0 < left and right < len(nums)-1:
-        if nums[left-1] == target:
-            left -= 1
+    right = left
 
-        if nums[right+1] == target:
-            right += 1
-        else:
-            break
-
-    while 0 < left:
-        if nums[left-1] != target:
-            break
-
-        left -= 1
-
-    while right < len(nums)-1:
-        if nums[right+1] != target:
-            break
-
+    while right < len(nums) and nums[right] == target:
         right += 1
 
-    return [left,right]
+    return [left,right-1]
 
 class TestSearchRange(unittest.TestCase):
     def test_empty(self):
