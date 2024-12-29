@@ -43,12 +43,11 @@ def binary_search(nums, target):
 # run-time: O(n), if all duplicates
 # space: O(1)
 def search_range(nums, target):
-    idx = binary_search(nums, target)
-    if idx < 0 or idx >= len(nums) or nums[idx] != target:
+    left = binary_search(nums, target)
+    if left < 0 or left >= len(nums) or nums[left] != target:
         return [-1,-1]
 
-    #print(f"idx:{idx},val:{nums[idx]}")
-    left = right = idx
+    right = left
     while 0 < left and right < len(nums)-1:
         if nums[left-1] == target:
             left -= 1
