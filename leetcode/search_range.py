@@ -40,7 +40,7 @@ def binary_search(nums, target):
 
 # solution: manual binary search + two pointers
 # complexity
-# run-time: O(n), if all duplicates
+# run-time: O(log n) average, O(n), if all duplicates
 # space: O(1)
 def search_range(nums, target):
     left = binary_search(nums, target)
