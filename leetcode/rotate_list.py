@@ -18,7 +18,7 @@ import unittest
 # run-time: O(n)
 # space: O(1)
 # TODO: fix bugs
-def roteate_right(head, k):
+def rotate_right(head, k):
     if not k or not head:
         return head
 
@@ -58,7 +58,7 @@ def roteate_right(head, k):
 # run-time: O(n)
 # space: O(1)
 # TODO: fix bugs
-def roteate_right2(head, k):
+def rotate_right2(head, k):
     dummy = ListNode(-1)
     dummy.next = head
     fast = slow = dummy
@@ -106,7 +106,7 @@ def roteate_right2(head, k):
 # complexity
 # run-time: O(n)
 # space: O(1)
-def roteate_right3(head, k):
+def rotate_right3(head, k):
     curr = old_head = head
 
     if not head or not k:

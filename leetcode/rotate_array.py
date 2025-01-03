@@ -15,18 +15,26 @@ import unittest
 # 0 <= k <= 10^5
 
 # solution: Pythonic slicing
-# TODO: fix when k > len(nums)
 # complexity
 # run-time: O(n)?
 # space: O(n)?
-def rotate_array1(nums, k):
+def rotate_array(nums, k):
+    if not nums:
+        return []
+
+    if k > len(nums):
+        k //= len(nums)
+
     return nums[-k:] + nums[:-k]
 
 # solution: deque rotate
 # complexity
-# run-time: ?
-# space: O(n)?
+# run-time: O(n)
+# space: O(n)
 def rotate_array2(nums, k):
+    if not nums:
+        return []
+
     q = deque(nums)
     q.rotate(k)
 
@@ -34,13 +42,13 @@ def rotate_array2(nums, k):
 
 # solution: deque manual
 # complexity
-# run-time: ?
-# space: O(n)?
+# run-time: O(n)
+# space: O(n)
 def rotate_array3(nums, k):
-    q = deque(nums)
-
     if not nums:
         return []
+
+    q = deque(nums)
 
     while k:
         q.appendleft(q.pop())
@@ -56,7 +64,7 @@ class TestRotateArray(unittest.TestCase):
         nums = []
         k = 5
         expected = nums
-        self.assertEqual(rotate_array1(nums, k), expected)
+        self.assertEqual(rotate_array(nums, k), expected)
         self.assertEqual(rotate_array2(nums, k), expected)
         self.assertEqual(rotate_array3(nums, k), expected)
 
@@ -64,7 +72,7 @@ class TestRotateArray(unittest.TestCase):
         nums = [1, 2, 3, 4]
         k = 0
         expected = nums
-        self.assertEqual(rotate_array1(nums, k), expected)
+        self.assertEqual(rotate_array(nums, k), expected)
         self.assertEqual(rotate_array2(nums, k), expected)
         self.assertEqual(rotate_array3(nums, k), expected)
 
@@ -72,7 +80,7 @@ class TestRotateArray(unittest.TestCase):
         nums = [1,2,3,4,5,6,7]
         k = 3
         expected = [5,6,7,1,2,3,4]
-        self.assertEqual(rotate_array1(nums, k), expected)
+        self.assertEqual(rotate_array(nums, k), expected)
         self.assertEqual(rotate_array2(nums, k), expected)
         self.assertEqual(rotate_array3(nums, k), expected)
 
@@ -80,7 +88,7 @@ class TestRotateArray(unittest.TestCase):
         nums = [-1,-100,3,99]
         k = 2
         expected = [3,99,-1,-100]
-        self.assertEqual(rotate_array1(nums, k), expected)
+        self.assertEqual(rotate_array(nums, k), expected)
         self.assertEqual(rotate_array2(nums, k), expected)
         self.assertEqual(rotate_array3(nums, k), expected)
 
@@ -88,8 +96,7 @@ class TestRotateArray(unittest.TestCase):
         nums = [1,2]
         k = 3
         expected = [2,1]
-        # TODO: fix when k > len(nums)
-        #self.assertEqual(rotate_array1(nums, k), expected)
+        self.assertEqual(rotate_array(nums, k), expected)
         self.assertEqual(rotate_array2(nums, k), expected)
         self.assertEqual(rotate_array3(nums, k), expected)
 
