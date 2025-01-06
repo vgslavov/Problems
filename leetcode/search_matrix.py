@@ -16,7 +16,7 @@ import unittest
 # -10^4 <= matrix[i][j], target <= 10^4
 
 # complexity
-# run-time: O(log(m) + log(n))
+# run-time: O(log m)
 # space: O(1)
 def binary_search(nums, target):
     left = 0
@@ -35,7 +35,7 @@ def binary_search(nums, target):
     return left
 
 # complexity
-# run-time: O(log(m) + log(n))
+# run-time: O(log m)
 # space: O(1)
 def find_row(matrix, target):
     left = 0
@@ -62,7 +62,7 @@ def find_row(matrix, target):
 
 # solution: manual binary search x2
 # complexity
-# run-time: O(log(m) + log(n))
+# run-time: O(log m + log n)
 # space: O(1)
 # TODO: combine 2 steps?
 def search_matrix(matrix, target):
@@ -79,7 +79,7 @@ def search_matrix(matrix, target):
 
 # solution: manual binary search + Pythonic bisect
 # complexity
-# run-time: O(log(m) + log(n))
+# run-time: O(log m + log n)
 # space: O(1)
 def search_matrix2(matrix, target):
     row = find_row(matrix, target)
