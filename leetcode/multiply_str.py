@@ -52,15 +52,10 @@ def str2int(s):
 # run-time: O(n+m)
 # space: O(1)
 def multiply_str(num1: str, num2: str) -> str:
-    if not num1 and not num2:
+    if not num1 or not num2:
         return ""
 
-    int1 = str2int(num1)
-    int2 = str2int(num2)
-    #print(f"nums1:{num1},int1:{int1}")
-    #print(f"nums2:{num2},int2:{int2}")
-
-    return int2str(int1*int2)
+    return int2str(str2int(num1)*str2int(num2))
 
 class TestMutiplyStr(unittest.TestCase):
     def test_empty(self):
