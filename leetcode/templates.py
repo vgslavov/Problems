@@ -100,7 +100,7 @@ def fn(head):
     return ans
 
 # Linked list: fast & slow k apart
-def fn(head):
+def fn(head, k):
     slow = head
     fast = head
 

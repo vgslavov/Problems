@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <cstddef>
 #include <deque>
 #include <iostream>
 #include <iterator>
@@ -212,7 +213,84 @@ std::string fn(const std::vector<std::string>& v)
     return s;
 }
 
-// TODO: linked lists
+struct ListNode {
+    int val;
+    ListNode *next;
+    ListNode() : val(0), next(nullptr) {}
+    ListNode(int x) : val(x), next(nullptr) {}
+    ListNode(int x, ListNode* next) : val(x), next(next) {}
+};
+
+// Linked list: fast and slow pointer
+int fn(ListNode* head)
+{
+    ListNode* slow = head;
+    ListNode* fast = head;
+    int ans = 0;
+
+    while (fast != nullptr && fast->next != nullptr) {
+        // do logic
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    return ans;
+}
+
+// Linked list: fast & slow k apart
+ListNode* fn(ListNode* head, int k)
+{
+    ListNode* slow = head;
+    ListNode* fast = head;
+
+    while (fast != nullptr && k != 0) {
+        fast = fast->next;
+        --k;
+    }
+
+    while (fast != nullptr) {
+        // do logic
+        slow = slow->next;
+        fast = fast->next;
+    }
+
+    return slow;
+}
+
+// Linked list: dummy nodes
+ListNode* fn(ListNode* head)
+{
+    ListNode* dummy = ListNode(0, head);
+    ListNode* fast = head;
+    ListNode* slow = head;
+
+    // move fast pointer k ahead
+
+    while (fast->next != nullptr) {
+        slow = slow->next;
+        fast = fast->next;
+    }
+
+    // do something
+
+    return dummy->next;
+}
+
+// Reversing a linked list
+ListNode* fn(ListNode* head)
+{
+    ListNode* curr = head;
+    ListNode* prev = nullptr;
+
+    while (curr != nullptr) {
+        ListNode* next = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
+    }
+
+    return prev;
+}
 
 struct Tree {
     int val;
@@ -247,20 +325,20 @@ int dfs(Tree* root)
 // Binary tree: iterative DFS (less common)
 int dfs(Tree* root)
 {
-    std::stack<Tree> s;
+    std::stack<Tree*> s;
     int ans = 0;
 
     while (!s.empty()) {
-        Tree node = s.top();
+        Tree* node_p = s.top();
         s.pop();
 
         // do logic
-        if (node.left) {
-            s.push(node.left);
+        if (node_p->left) {
+            s.push(node_p->left);
         }
 
-        if (node.right) {
-            s.push(node.right);
+        if (node_p->right) {
+            s.push(node_p->right);
         }
     }
 
