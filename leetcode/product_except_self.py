@@ -74,7 +74,7 @@ def product_except_self(nums):
 
     return nums
 
-# solution: prefix sum + deque + two pointers
+# solution: prefix sum + deque
 # complexity
 # run-time: O(n), slow!
 # space: O(n)
