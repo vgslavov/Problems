@@ -292,14 +292,14 @@ ListNode* fn(ListNode* head)
     return prev;
 }
 
-struct Tree {
+struct TreeNode {
     int val;
-    Tree* left;
-    Tree* right;
+    TreeNode* left;
+    TreeNode* right;
 };
 
 // Binary tree: recursive DFS (more common)
-int dfs(Tree* root)
+int dfs(TreeNode* root)
 {
     if (!root) {
         return 0;
@@ -323,13 +323,13 @@ int dfs(Tree* root)
 }
 
 // Binary tree: iterative DFS (less common)
-int dfs(Tree* root)
+int dfs(TreeNode* root)
 {
-    std::stack<Tree*> s;
+    std::stack<TreeNode*> s;
     int ans = 0;
 
     while (!s.empty()) {
-        Tree* node_p = s.top();
+        TreeNode* node_p = s.top();
         s.pop();
 
         // do logic
@@ -346,9 +346,9 @@ int dfs(Tree* root)
 }
 
 // Binary tree: iterative BFS (more common)
-int bfs(Tree* root)
+int bfs(TreeNode* root)
 {
-    std::deque<Tree*> queue{root};
+    std::deque<TreeNode*> queue{root};
     int ans = 0;
 
     while (!queue.empty()) {
@@ -356,7 +356,7 @@ int bfs(Tree* root)
         // do logic for current level
 
         while (!size) {
-            Tree* node_p = queue.front();
+            TreeNode* node_p = queue.front();
             queue.pop_front();
 
             // do logic
