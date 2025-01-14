@@ -14,6 +14,7 @@ import unittest
 # nums contains distinct values sorted in ascending order.
 # -10^4 <= target <= 10^4
 
+# solution: binary search
 # complexity
 # run-time: O(log n)
 # space: O(1)
