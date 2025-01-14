@@ -12,7 +12,7 @@ import unittest
 # 1 <= haystack.length, needle.length <= 10^4
 # haystack and needle consist of only lowercase English characters.
 
-# solution: two pointers
+# non-solution: two pointers
 # complexity
 # run-time: O(n)
 # space: O(1)
@@ -46,7 +46,7 @@ def strstr1(haystack, needle):
 
 # solution: slicing
 # complexity
-# run-time: O(n*m)?
+# run-time: O((n-m+1)*m)
 # space: O(1)
 def strstr2(haystack, needle):
     if not haystack or not needle:
