@@ -21,6 +21,7 @@ class TreeNode:
         self.left = left
         self.right = right
 
+# solution: dfs
 # complexity
 # run-time: O(log n)
 # space: O(n)
