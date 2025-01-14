@@ -15,7 +15,7 @@
 // complexity
 // run-time: O(log n)
 // space: O(1)
-int searchInsert(std::vector<int>& nums, int target)
+int searchInsert(const std::vector<int>& nums, int target)
 {
     int left = 0;
     int right = nums.size()-1;

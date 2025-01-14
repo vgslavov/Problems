@@ -13,7 +13,7 @@
 // complexity
 // run-time: O((n-m+1)*m)
 // space: O(1)
-int strStr(std::string haystack, std::string needle)
+int strStr(const std::string& haystack, const std::string& needle)
 {
     if (haystack.empty() || needle.empty()) {
         return -1;
