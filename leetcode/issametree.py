@@ -19,7 +19,7 @@ class TreeNode:
         self.left = left
         self.right = right
 
-# solution: dfs (recursive)
+# solution: recursive dfs
 # complexity
 # run-time: O(n)
 # space: O(n)
