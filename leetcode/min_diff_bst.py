@@ -20,10 +20,6 @@ class TreeNode:
         self.left = left
         self.right = right
 
-# solution: recursive dfs
-# complexity
-# run-time: O(n)
-# space: O(n)
 def dfs(node, values):
     if not node:
         return
@@ -33,6 +29,10 @@ def dfs(node, values):
     values.append(node.val)
     dfs(node.right, values)
 
+# solution: recursive dfs
+# complexity
+# run-time: O(n)
+# space: O(n)
 def min_diff(root):
     values = []
     dfs(root, values)
