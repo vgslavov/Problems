@@ -1,5 +1,5 @@
 #include <algorithm>
-#include <deque>
+#include <queue>
 #include <limits>
 #include <vector>
 
@@ -29,24 +29,24 @@ std::vector<int> largestValues(TreeNode* root)
     if (!root) {
         return ans;
     }
-    std::deque<TreeNode> queue{*root};
+    std::queue<TreeNode*> queue{root};
 
     while (!queue.empty()) {
         int rowMax = std::numeric_limits<int>::min();
         int rowLen = queue.size();
 
         for (int i = 0; i != rowLen; ++i) {
-            TreeNode node = queue.front();
-            queue.pop_front();
+            TreeNode* node_p = queue.front();
+            queue.pop();
 
-            rowMax = std::max(rowMax, node.val);
+            rowMax = std::max(rowMax, node_p->val);
 
-            if (node.left) {
-                queue.push_back(*node.left);
+            if (node_p->left) {
+                queue.push(node_p->left);
             }
 
-            if (node.right) {
-                queue.push_back(*node.right);
+            if (node_p->right) {
+                queue.push(node_p->right);
             }
         }
         ans.push_back(rowMax);

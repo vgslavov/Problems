@@ -47,6 +47,14 @@
 
 ## Theory
 
+### Trees
+
+* DFS: recursive
+* BFS: iterative, using queue/deque
+* perfect binary tree
+    * DFS: O(log n) space
+    * BFS: O(n) space
+
 ### Binary
 
 * if you don't know how to start, start by computing XOR (`^`) of input data
