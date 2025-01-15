@@ -1,4 +1,4 @@
-#include <deque>
+#include <queue>
 #include <vector>
 
 // number: 199
@@ -27,12 +27,13 @@ struct TreeNode {
 // space: O(n)
 std::vector<int> rightSideView(TreeNode* root)
 {
+    std::vector<int> ans;
+
     if (!root) {
-        return std::vector<int>{};
+        return ans;
     }
 
-    std::deque<TreeNode*> queue{root};
-    std::vector<int> ans;
+    std::queue<TreeNode*> queue{root};
 
     while (!queue.empty()) {
         int size = queue.size();
@@ -42,14 +43,14 @@ std::vector<int> rightSideView(TreeNode* root)
 
         while (size) {
             TreeNode* node_p = queue.front();
-            queue.pop_front();
+            queue.pop();
 
             if (node_p->left) {
-                queue.push_back(node_p->left);
+                queue.push(node_p->left);
             }
 
             if (node_p->right) {
-                queue.push_back(node_p->right);
+                queue.push(node_p->right);
             }
 
             --size;
