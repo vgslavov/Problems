@@ -4,6 +4,11 @@ import math
 import sys
 import unittest
 
+# number: 270
+# section: assessment
+# difficulty: easy
+# tags: binary search, tree, dfs, bst, bineary tree, meta
+
 # constraints
 # The number of nodes in the tree is in the range [1, 10^4].
 # 0 <= Node.val <= 10^9
@@ -17,30 +22,30 @@ class TreeNode:
         self.right = right
 
 # solution: recursive dfs
-# run-time: O(n)
-# space: O(1)
+# complexity
+# run-time: O(log n)
+# space: O(n)
 def min_diff(root, target):
     # to be safe
     if not root:
-        return None, math.inf
+        return math.inf, None
     # leaf
     elif not root.left and not root.right:
-        return root.val, abs(root.val - target)
+        return abs(root.val - target), root.val
 
-    left_val, left_diff = min_diff(root.left, target)
-    #print('left_val:{},left_diff:{}'.format(left_val, left_diff))
-
-    right_val, right_diff = min_diff(root.right, target)
-    #print('right_val:{},right_diff:{}'.format(right_val, right_diff))
+    # use BST properties!
+    if target == root.val:
+        return 0, root.val
+    elif target < root.val:
+        diff, val = min_diff(root.left, target)
+    else:
+        diff, val = min_diff(root.right, target)
 
     # works if duplicate diffs: picks smallest val
-    cur_diff,cur_val = min([(abs(root.val - target),root.val),
-                            (left_diff,left_val),
-                            (right_diff,right_val)])
-    return cur_val,cur_diff
+    return min((abs(root.val - target),root.val), (diff,val))
 
 def closest_val_bst(root, target):
-    return int(min_diff(root, target)[0])
+    return int(min_diff(root, target)[1])
 
 # TODO: add unit tests
 
