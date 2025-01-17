@@ -21,17 +21,14 @@ class TreeNode:
 
 # solution: recursive dfs
 # complexity
-# run-time: ?, fast
-# space: O(1)
+# run-time: O(n), fast
+# space: O(n)
 def max_depth(root):
     if not root:
         return 0
 
-    left = max_depth(root.left)
-    right = max_depth(root.right)
-
     # post-order traversal
-    return max(left, right) + 1
+    return max(max_depth(root.left), max_depth(root.right)) + 1
 
 # solution: iterative dfs
 # complexity
