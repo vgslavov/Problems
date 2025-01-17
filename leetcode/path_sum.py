@@ -20,24 +20,23 @@ class TreeNode:
         self.left = left
         self.right = right
 
-# solution: recursive dfs
-# complexity
-# run-time: O(n)
-# space: O(n)
-def sum_nodes(root, target_sum, cur_sum):
+def dfs(root, target_sum, cur_sum):
     if not root:
         return False
     elif not root.left and not root.right:
         return target_sum == cur_sum + root.val
 
     cur_sum += root.val
-    left = sum_nodes(root.left, target_sum, cur_sum)
-    right = sum_nodes(root.right, target_sum, cur_sum)
 
-    return left or right
+    return dfs(root.left, target_sum, cur_sum) or \
+           dfs(root.right, target_sum, cur_sum)
 
+# solution: recursive dfs
+# complexity
+# run-time: O(n)
+# space: O(n)
 def path_sum(root, target_sum):
-    return sum_nodes(root, target_sum, 0)
+    return dfs(root, target_sum, 0)
 
 # TODO: add unit tests & solve using iterative dfs
 # test 1
