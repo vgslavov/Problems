@@ -1,14 +1,13 @@
 #include <queue>
-#include <vector>
 
-// number: 199
-// section: binary tree bfs
+// number: 1302
+// section:
 // difficulty: medium
-// tags: dfs, bfs, binary tree, top 150, meta
-//
+// tags: tree, dfs, bfs, binary tree
+
 // constraints
-// The number of nodes in the tree is in the range [0, 100].
-// -100 <= Node.val <= 100
+// The number of nodes in the tree is in the range [1, 10^4].
+// 1 <= Node.val <= 100
 
 // Definition for a binary tree node.
 struct TreeNode {
@@ -21,44 +20,34 @@ struct TreeNode {
     : val(x), left(left), right(right) {}
 };
 
-// solution: iterative bfs
 // complexity
 // run-time: O(n)
 // space: O(n)
-std::vector<int> rightSideView(TreeNode* root)
+int deepestLeavesSum(TreeNode* root)
 {
-    std::vector<int> ans;
-
-    if (!root) {
-        return ans;
-    }
-
     std::queue<TreeNode*> queue;
     queue.push(root);
+    int ans = 0;
 
     while (!queue.empty()) {
-        int size = queue.size();
-        TreeNode* last_p = queue.back();
+        int len = queue.size();
+        ans = 0;
 
-        ans.push_back(last_p->val);
-
-        while (size) {
+        for (size_t i = 0; i != len; ++i) {
             TreeNode* node_p = queue.front();
             queue.pop();
 
-            if (node_p->left) {
-                queue.push(node_p->left);
-            }
+            ans += node_p->val;
 
             if (node_p->right) {
                 queue.push(node_p->right);
             }
 
-            --size;
+            if (node_p->left) {
+                queue.push(node_p->left);
+            }
         }
     }
 
     return ans;
 }
-
-// TODO: add unit tests

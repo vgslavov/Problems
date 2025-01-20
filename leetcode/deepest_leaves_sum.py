@@ -4,6 +4,15 @@ from collections import deque
 import sys
 import unittest
 
+# number: 1302
+# section:
+# difficulty: medium
+# tags: tree, dfs, bfs, binary tree
+
+# constraints
+# The number of nodes in the tree is in the range [1, 10^4].
+# 1 <= Node.val <= 100
+
 # Definition for a binary tree node.
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
@@ -11,8 +20,9 @@ class TreeNode:
         self.left = left
         self.right = right
 
-# The number of nodes in the tree is in the range [1, 10^4].
-# 1 <= Node.val <= 100
+# complexity
+# run-time: O(n)
+# space: O(n)
 def deepest_leaves_sum(root):
     queue = deque([root])
 

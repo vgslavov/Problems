@@ -29,7 +29,8 @@ std::vector<int> largestValues(TreeNode* root)
     if (!root) {
         return ans;
     }
-    std::queue<TreeNode*> queue{root};
+    std::queue<TreeNode*> queue;
+    queue.push(root);
 
     while (!queue.empty()) {
         int rowMax = std::numeric_limits<int>::min();

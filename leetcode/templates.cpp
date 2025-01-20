@@ -349,7 +349,8 @@ int dfs(TreeNode* root)
 // Binary tree: iterative BFS (more common)
 int bfs(TreeNode* root)
 {
-    std::queue<TreeNode *> level{root};
+    std::queue<TreeNode *> level;
+    level.push(root);
     int ans = 0;
 
     while (!level.empty()) {
