@@ -28,11 +28,8 @@ def count_nodes(root):
     if not root:
         return 0
 
-    left = count_nodes(root.left)
-    right = count_nodes(root.right)
-
     # post-order
-    return left+right+1
+    return count_nodes(root.left) + count_nodes(root.right) + 1
 
 # TODO: add unit tests & solve iteratively
 
