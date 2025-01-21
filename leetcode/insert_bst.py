@@ -3,6 +3,11 @@
 import sys
 import unittest
 
+# number: 701
+# section:
+# difficulty: medium
+# tags: tree, bst, binary tree
+
 # constraints
 # The number of nodes in the tree will be in the range [0, 10^4].
 # -10^8 <= Node.val <= 10^8
@@ -18,33 +23,27 @@ class TreeNode:
         self.right = right
 
 # solution: recursive dfs
-# run-time: O(n)?
+# run-time: O(log n)
 # space: O(1)
 def insert_bst(root, val):
     # leaf
     if not root:
-        print('empty: leaf')
         return TreeNode(val)
-    # left leaf
-    elif root.val and val < root.val and not root.left:
+    # insert as left leaf
+    elif not root.left and val < root.val:
         root.left = TreeNode(val)
-        print('inserted as left of {}'.format(root.val))
         return root
-    # right leaf
-    elif root.val and val > root.val and not root.right:
+    # insert as right leaf
+    elif not root.right and val > root.val:
         root.right = TreeNode(val)
-        print('inserted as right of {}'.format(root.val))
         return root
-
     # go left
-    if val < root.val:
-        print('inserting in left')
-        insertIntoBST(root.left, val)
+    elif val < root.val:
+        insert_bst(root.left, val)
         return root
     # go right
     elif val > root.val:
-        print('inserting in right')
-        insertIntoBST(root.right, val)
+        insert_bst(root.right, val)
         return root
     else:
         print('error: duplicate of {} found'.format(val))
