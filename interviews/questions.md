@@ -27,3 +27,7 @@
     * `move` semantics
     * exception safety
 * implement a `shared_ptr` in C++
+* find an element in a BST
+* validate BST
+* fix C++ class with dynamic memory allocation bugs & move semantics
+* design an OrderBook class

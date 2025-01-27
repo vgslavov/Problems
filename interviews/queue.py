@@ -5,7 +5,7 @@ import unittest
 
 # section: interview
 # difficulty: easy
-# tags: optiver
+# tags: amortized analysis, optiver
 
 # constraints
 # don't use Python list/deque's append(), etc.

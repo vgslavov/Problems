@@ -54,6 +54,11 @@
 * perfect binary tree
     * DFS: O(log n) space
     * BFS: O(n) space
+* BST: no dupes allowed
+
+### Graphs
+
+* binary trees are directed acyclic graphs
 
 ### Binary
 

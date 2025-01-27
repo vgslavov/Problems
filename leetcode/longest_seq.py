@@ -37,7 +37,7 @@ def longest_seq(nums):
 
     return ans
 
-# solution: defaultdict
+# non-solution: defaultdict
 # complexity
 # run-time: O(n+k)
 # space: O(k)
