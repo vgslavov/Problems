@@ -357,7 +357,7 @@ int bfs(TreeNode* root)
         int size = level.size();
         // do logic for current level
 
-        while (!size) {
+        while (size) {
             TreeNode* node_p = level.front();
             level.pop();
 
@@ -451,7 +451,7 @@ int fn(const std::vector<int>& v, int target)
     return left;
 }
 
-// TODO: Backtracing
+// TODO: Backtracking
 
 // Dynamic programming: recursive top-down w/ memoization
 int dp(int STATE, const std::vector<int>& v, std::map<int, STATE>& memo)

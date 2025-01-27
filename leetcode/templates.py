@@ -238,8 +238,12 @@ def fn(root):
         # do logic for current level
 
         for _ in range(current_length):
+            # read from front
             node = queue.popleft()
+
             # do logic
+
+            # add to back
             if node.left:
                 queue.append(node.left)
             if node.right:
