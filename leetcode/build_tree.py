@@ -34,14 +34,18 @@ def build_tree(preorder, inorder):
 
         # keep track of preorder_i: it's the root of a subtree
         nonlocal preorder_i
+
+        # create the node
         root_val = preorder[preorder_i]
         root = TreeNode(root_val)
+
         preorder_i += 1
 
         # find index of root in inorder
         root_i = val2i[root_val]
 
         # split left & right subtrees from inorder but exclude root
+        # left first!
         root.left = array2tree(left, root_i-1)
         root.right = array2tree(root_i+1, right)
 
