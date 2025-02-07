@@ -25,10 +25,6 @@ public:
     }
 };
 
-// solution: dict of visited nodes
-// complexity
-// run-time: O(n)
-// space: O(n)
 Node* createNode(Node* oldNode, std::map<Node *, Node*>& visited)
 {
     if (!oldNode) {
@@ -46,6 +42,10 @@ Node* createNode(Node* oldNode, std::map<Node *, Node*>& visited)
     return newNode;
 }
 
+// solution: dict of visited nodes
+// complexity
+// run-time: O(n)
+// space: O(n)
 Node* copyRandomList(Node* head)
 {
     if (!head) {
@@ -74,4 +74,35 @@ Node* copyRandomList(Node* head)
     }
 
     return newHead->next;
+}
+
+Node* dfs(Node* oldNode, std::map<Node*, Node*>& visited)
+{
+    if (!oldNode) {
+        return nullptr;
+    }
+
+    auto it = visited.find(oldNode);
+    if (it != visited.end()) {
+        return it->second;
+    }
+
+    Node* newNode = new Node(oldNode->val);
+    visited[oldNode] = newNode;
+
+    newNode->next = dfs(oldNode->next, visited);
+    newNode->random = dfs(oldNode->random, visited);
+
+    return newNode;
+}
+
+// solution: recursive dfs
+// complexity
+// run-time: O(n)
+// space: O(n)
+Node* copyRandomList2(Node* head)
+{
+    std::map<Node*,Node*> visited;
+
+    return dfs(head, visited);
 }

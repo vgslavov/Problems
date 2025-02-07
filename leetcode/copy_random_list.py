@@ -70,7 +70,28 @@ def copy_random_list(head):
 
     return new_head.next
 
-# TODO: solve recursively
+# solution: recursive dfs
+# complexity
+# run-time: O(n)
+# space: O(n)
+def copy_random_list2(head):
+    def dfs(head):
+        if not head:
+            return None
+
+        if head in visited:
+            return visited[head]
+
+        new_node = Node(head.val)
+        visited[head] = new_node
+
+        new_node.next = dfs(head.next)
+        new_node.random = dfs(head.random)
+
+        return new_node
+
+    visited = {}
+    return dfs(head)
 
 # TODO: add unit tests
 
