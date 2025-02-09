@@ -70,7 +70,7 @@ def copy_random_list(head):
 
     return new_head.next
 
-# solution: recursive dfs
+# solution: leetcode recursive dfs
 # complexity
 # run-time: O(n)
 # space: O(n)
