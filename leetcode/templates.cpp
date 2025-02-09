@@ -156,7 +156,7 @@ int fn(const std::vector<int>& v)
     int left = 0;
     int curr = 0;
 
-    for (int right = 0; right != v.size(); ++right) {
+    for (size_t right = 0; right != v.size(); ++right) {
         // do logic here to add v[right] to curr
 
         while (WINDOW_CONDITION_BROKEN) {
@@ -177,13 +177,13 @@ int fn(const std::vector<int>& v, int k)
     int ans = 0;
     int curr = 0;
 
-    for (int i = 0; i < v.size() && i < k; ++i) {
+    for (size_t i = 0; i < v.size() && i < k; ++i) {
         // do logic here to add v[i] to curr
     }
 
     // update ans
 
-    for (int i = 0; i < std::min(k, v.size()) ; ++i) {
+    for (size_t i = 0; i < std::min(k, v.size()) ; ++i) {
         // add v[i] & remove v[i-k] from curr
 
         // update ans
@@ -198,7 +198,7 @@ std::vector<int> fn(const std::vector<int>& v)
 {
     std::vector<int> prefix{v[0]};
 
-    for (int i = 1; i != v.size(); ++i) {
+    for (size_t i = 1; i != v.size(); ++i) {
         prefix.push_back(prefix[i-1] + v[i]);
     }
 
@@ -290,6 +290,24 @@ ListNode* fn(ListNode* head)
     }
 
     return prev;
+}
+
+// intervals
+std::vector<std::vector<int>> fn(std::vector<std::vector<int>> intervals)
+{
+    std::sort(intervals.begin(), intervals.end());
+    std::vector<std::vector<int>> ans;
+
+    for (const auto& start_end : intervals) {
+        // merge
+        if (!ans.empty() && start_end[0] <= ans.back()[1]) {
+            ans.back()[1] = std::max(ans.back()[1], start_end[1]);
+        } else {
+            ans.push_back(start_end);
+        }
+    }
+
+    return ans;
 }
 
 struct TreeNode {
@@ -488,7 +506,7 @@ int fn(const std::vector<int>& v)
     // set base case(s)
     dp[0] = BASE_CASE;
 
-    for (int i = 2; i != v.size(); ++i) {
+    for (size_t i = 2; i != v.size(); ++i) {
         // define recurrence relation
         dp[STATE] = RECURRENCE_RELATION(STATE)
     }
