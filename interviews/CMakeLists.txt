@@ -4,6 +4,9 @@ project(InterviewProject)
 add_executable(vector vector.cpp)
 set_property(TARGET vector PROPERTY CXX_STANDARD 17)
 
+add_executable(vector2 vector2.cpp)
+set_property(TARGET vector2 PROPERTY CXX_STANDARD 17)
+
 add_executable(queue queue.cpp)
 set_property(TARGET queue PROPERTY CXX_STANDARD 17)
 

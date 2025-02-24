@@ -27,7 +27,7 @@ public:
     vector() = default;
 
     // copy ctor
-    vector(const vector& rhs)
+    vector(const vector<T>& rhs)
     : d_capacity(rhs.size())
     , d_size(rhs.size())
     , d_buf(std::make_unique<T[]>(rhs.size()))
@@ -38,7 +38,7 @@ public:
     }
 
     // move ctor: default
-    vector(vector&& rhs) = default;
+    vector(vector<T>&& rhs) = default;
 
     // move ctor: manual
     //vector(vector&& rhs) noexcept
