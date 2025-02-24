@@ -33,11 +33,16 @@ public:
     }
 
     // move ctor: default
-    //vector2(vector2<T>&& rhs) = default;
     vector2(vector2<T>&& rhs) noexcept
     : d_capacity(rhs.size())
     , d_size(rhs.size())
-    , d_buf(std::move(rhs.d_buf)) {}
+    {
+        for (size_t i = 0; i != d_size; ++i) {
+            d_buf[i] = std::move(rhs[i]);
+        }
+
+        // TODO: reset rhs?
+    }
 
     // dtor
     ~vector2() noexcept { clear(); }
@@ -102,6 +107,8 @@ vector2<T>& vector2<T>::operator=(vector2<T>&& rhs) noexcept
     d_size = rhs.size();
     d_capacity = rhs.capacity();
     d_buf = std::move(rhs.d_buf);
+
+    // TODO: reset rhs?
 
     return *this;
 }
