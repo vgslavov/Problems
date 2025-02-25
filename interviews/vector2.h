@@ -62,7 +62,11 @@ public:
     {
         d_capacity = 0;
         d_size = 0;
-        delete[] d_buf;
+
+        // TODO: fix double delete
+        //if (d_buf) {
+        //    delete[] d_buf;
+        //}
     }
 
     void push_back(const T& item);
@@ -109,8 +113,7 @@ vector2<T>& vector2<T>::operator=(vector2<T>&& rhs) noexcept
 
     d_size = rhs.size();
     d_capacity = rhs.capacity();
-    d_buf = rhs.d_buf;
-    //d_buf = std::move(rhs.d_buf);
+    d_buf = std::move(rhs.d_buf);
 
     rhs.d_size = 0;
     rhs.d_capacity = 0;
@@ -130,10 +133,8 @@ void vector2<T>::reserve(size_t newCapacity)
 
     for (size_t i = 0; i != d_size; ++i) {
         newBuf[i] = std::move_if_noexcept(d_buf[i]);
-        //newBuf[i] = std::move(d_buf[i]);
     }
 
-    //clear();
     d_buf = std::move(newBuf);
     d_capacity = newCapacity;
 }
