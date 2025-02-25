@@ -137,6 +137,10 @@ vector<T>& vector<T>::operator=(vector<T>&& rhs) noexcept
     d_capacity = rhs.capacity();
     d_buf = std::move(rhs.d_buf);
 
+    rhs.d_size = 0;
+    rhs.d_capacity = 0;
+    rhs.d_buf = nullptr;
+
     return *this;
 }
 

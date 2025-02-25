@@ -39,6 +39,11 @@ int main()
 
     // move ctor
     notstd::vector2<int> v4(std::move(v2));
+    std::cout << "v1.size():" << v1.size() << std::endl;
+    std::cout << "v2.size():" << v2.size() << std::endl;
+    std::cout << "v3.size():" << v3.size() << std::endl;
+    std::cout << "v4.size():" << v4.size() << std::endl;
+    std::cout << "size:" << size << std::endl;
     assert(v4.size() == size);
     v4.clear();
     assert(v4.empty());

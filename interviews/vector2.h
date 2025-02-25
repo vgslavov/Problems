@@ -36,12 +36,15 @@ public:
     vector2(vector2<T>&& rhs) noexcept
     : d_capacity(rhs.size())
     , d_size(rhs.size())
+    , d_buf(rhs.d_buf)
     {
         for (size_t i = 0; i != d_size; ++i) {
             d_buf[i] = std::move(rhs[i]);
         }
 
-        // TODO: reset rhs?
+        rhs.d_buf = nullptr;
+        rhs.d_size = 0;
+        rhs.d_capacity = 0;
     }
 
     // dtor
@@ -106,9 +109,12 @@ vector2<T>& vector2<T>::operator=(vector2<T>&& rhs) noexcept
 
     d_size = rhs.size();
     d_capacity = rhs.capacity();
-    d_buf = std::move(rhs.d_buf);
+    d_buf = rhs.d_buf;
+    //d_buf = std::move(rhs.d_buf);
 
-    // TODO: reset rhs?
+    rhs.d_size = 0;
+    rhs.d_capacity = 0;
+    rhs.d_buf = nullptr;
 
     return *this;
 }
@@ -127,7 +133,7 @@ void vector2<T>::reserve(size_t newCapacity)
         //newBuf[i] = std::move(d_buf[i]);
     }
 
-    clear();
+    //clear();
     d_buf = std::move(newBuf);
     d_capacity = newCapacity;
 }
