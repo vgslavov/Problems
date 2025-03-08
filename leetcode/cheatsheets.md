@@ -59,6 +59,7 @@
 ### Graphs
 
 * binary trees are directed acyclic graphs
+* a graph with `n` nodes and `n-1` edges is a tree
 
 ### Binary
 
