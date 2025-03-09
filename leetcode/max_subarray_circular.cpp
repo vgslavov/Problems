@@ -11,6 +11,7 @@
 // n == nums.length
 // 1 <= n <= 3 * 10^4
 // -3 * 10^4 <= nums[i] <= 3 * 10^4
+// return the maximum possible sum of a *non-empty* subarray of nums
 
 // solution: Kadane's algo + calc total/min sum
 // complexity
@@ -38,6 +39,7 @@ int maxSubarraySumCircular(const std::vector<int>& nums)
         totalSum += n;
     }
 
+    // total_sum == min_sum when all n < 0
     return totalSum == minSum ? maxSum : std::max(maxSum, totalSum-minSum);
 }
 

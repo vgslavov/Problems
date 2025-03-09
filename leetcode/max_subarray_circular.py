@@ -13,6 +13,7 @@ import unittest
 # n == nums.length
 # 1 <= n <= 3 * 10^4
 # -3 * 10^4 <= nums[i] <= 3 * 10^4
+# return the maximum possible sum of a *non-empty* subarray of nums
 
 # solution: Kadane's algo + calc total/min sum
 # complexity
@@ -38,6 +39,7 @@ def max_subarray_circular(nums):
         # calculate total sum
         total_sum += n
 
+    # total_sum == min_sum when all n < 0
     return max_sum if total_sum == min_sum else max(max_sum, total_sum-min_sum)
 
 # non-solution: Kadane's algo + circular indices
