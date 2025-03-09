@@ -1,3 +1,4 @@
+#include <cstddef>
 #include <string>
 #include <unordered_map>
 
@@ -32,12 +33,9 @@ class WordDictionary {
 public:
     WordDictionary() = default;
 
-    // TODO: recursively free allocated mem
-    //~WordDictionary() {
-    //    while (d_root != nullptr) {
-    //        delete d_root;
-    //    }
-    //}
+    ~WordDictionary() {
+        cleanup(d_root);
+    }
 
     void addWord(const std::string& word) {
         TrieNode* node = d_root;
@@ -46,9 +44,9 @@ public:
             TrieNode::ChildrenMap& children = node->children;
             auto it = children.find(ch);
             if (it == children.end()) {
-                node->children[ch] = new TrieNode();
+                children[ch] = new TrieNode();
             }
-            node = node->children[ch];
+            node = children[ch];
         }
 
         node->isWord = true;
@@ -58,25 +56,39 @@ public:
         return dfs(0, d_root, word);
     }
 private:
+    void cleanup(TrieNode* node) {
+        if (node == nullptr) {
+            return;
+        }
+
+        for (auto& child: node->children) {
+            cleanup(child.second);
+        }
+
+        delete node;
+    }
+
     bool dfs(int i, TrieNode* node, const std::string& word) {
         if (i == word.size()) {
             return node->isWord;
         }
 
         char ch = word[i];
+        TrieNode::ChildrenMap& children = node->children;
+
 
         // compare to char constant (single quotes)!
         // not string literal (double quotes)
         if (ch == '.') {
-            for (const auto& child : node->children) {
-                if (dfs(i+1, node->children[child.first], word)) {
+            for (const auto& child: children) {
+                if (dfs(i+1, children[child.first], word)) {
                     return true;
                 }
             }
         } else {
-            auto it = node->children.find(ch);
-            if (it != node->children.end()) {
-                if (dfs(i+1, node->children[ch], word)) {
+            auto it = children.find(ch);
+            if (it != children.end()) {
+                if (dfs(i+1, children[ch], word)) {
                     return true;
                 }
             }
