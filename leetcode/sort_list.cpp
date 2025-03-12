@@ -64,7 +64,7 @@ ListNode* findMid(ListNode* head)
     return mid;
 }
 
-// solution: fast/slow ptrs + merge sort
+// solution: LeetCode fast/slow ptrs + merge sort
 // complexity:
 // run-time: O(n*log n)
 // space: O(log n)
