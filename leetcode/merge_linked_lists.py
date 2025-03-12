@@ -21,46 +21,25 @@ class ListNode:
 
 # solution: two pointers
 # complexity
-# run-time: O(n+m)?
+# run-time: O(n+m)
 # space: O(1)
 def merge_linked_lists(list1, list2):
-    if not list1 and not list2:
-        return None
-    elif not list1:
-        return list2
-    elif not list2:
-        return list1
-
-    head = None
-    if list1.val < list2.val:
-        head = list1
-        list1 = list1.next
-    else:
-        head = list2
-        list2 = list2.next
-
-    merged = head
+    head = ListNode()
+    tail = head
 
     while list1 and list2:
         if list1.val < list2.val:
-            merged.next = list1
+            tail.next = list1
             list1 = list1.next
         else:
-            merged.next = list2
+            tail.next = list2
             list2 = list2.next
-        merged = merged.next
+        tail = tail.next
 
-    while list1:
-        merged.next = list1
-        list1 = list1.next
-        merged = merged.next
+    # append remaining list
+    tail.next = list1 if list1 else list2
 
-    while list2:
-        merged.next = list2
-        list2 = list2.next
-        merged = merged.next
-
-    return head
+    return head.next
 
 # TODO: unit test
 
