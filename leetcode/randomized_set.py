@@ -5,7 +5,7 @@ import sys
 import unittest
 
 # number: 380
-# section: citadel
+# section: array / string
 # difficulty: medium 
 # tags: array, hash table, math, design, randomized, top 150
 
