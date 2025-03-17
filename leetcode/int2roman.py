@@ -20,10 +20,11 @@ def int2roman(num: int) -> str:
     if not isinstance(num, int):
         return ""
 
-    # largest to smallest
+    # largest to smallest roman symbols (including subtractive notation)
+    # order in a Python dictionary is guaranteed to be insertion order
     romans = {"M":1000, "CM":900, "D":500, "CD": 400, "C": 100, "XC": 90,
               "L": 50, "XL": 40, "X": 10, "IX": 9, "V": 5, "IV": 4, "I": 1}
-    ans = ""
+    ans = []
 
     for roman,arabic in romans.items():
         # find first roman numeral that is less than or equal to num
@@ -32,10 +33,10 @@ def int2roman(num: int) -> str:
 
         # how many times does it fit?
         count = num // arabic
-        ans += roman * count
+        ans.append(roman * count)
         num -= arabic * count
 
-    return ans
+    return "".join(ans)
 
 class TestInt2Roman(unittest.TestCase):
     def test_empty(self):
