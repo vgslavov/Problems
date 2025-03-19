@@ -18,8 +18,8 @@ import unittest
 # run-time: O(n*log n)
 # space: O(1)
 def h_index(citations) -> int:
-    citations.sort()
-    citations.reverse()
+    # descending order
+    citations.sort(reverse=True)
 
     i = 0
     # keep going until we find a citation that is less than the index
