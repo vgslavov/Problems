@@ -26,7 +26,7 @@ bool canJumpI(const std::vector<int>& nums, int i)
     return false;
 }
 
-// solution: LeetCode backtracking
+// non-solution: LeetCode backtracking
 // complexity:
 // run-time: O(2^n)
 // space: O(n)
@@ -57,7 +57,7 @@ bool canJumpI2(const std::vector<int>& nums, int i, std::vector<int>& memo)
     return false;
 }
 
-// solution: LeetCode 1D DP w/ memoization
+// solution: LeetCode top-down 1D recursive DP w/ memoization
 // complexity:
 // run-time: O(n^2)
 // space: O(n)
@@ -68,6 +68,34 @@ bool canJump2(const std::vector<int>& nums)
     // last index is always reachable
     memo.back() = 1;
     return canJumpI2(nums, 0, memo);
+}
+
+// solution: LeetCode bottom-up 1D iterative DP w/ memoization
+// complexity:
+// run-time: O(n^2)
+// space: O(n)
+bool canJump3(const std::vector<int>& nums) {
+    std::vector<int> memo(nums.size(), -1);
+    // last index is always reachable
+    memo.back() = 1;
+
+    // go right to left
+    for (int i = nums.size(); i != 0;) {
+        --i;
+        int farthest = std::min(i+nums[i], static_cast<int>(nums.size())-1);
+
+        for (int j = i+1; j != farthest+1; ++j) {
+            // can reach j from i
+            if (memo[j] == 1) {
+                memo[i] = 1;
+                // optimization: no need to check farther
+                break;
+            }
+        }
+    }
+
+    // check if we can reach from the first index
+    return memo[0] == 1;
 }
 
 // TODO: add unit tests
