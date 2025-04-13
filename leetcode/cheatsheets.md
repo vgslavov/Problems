@@ -116,6 +116,7 @@ Dynamic Programming = Recursion + Memoization
         * nested loops: 1 per state variable
         * *start after* base case
     * top-down
+        * optimized backtracking
         * memoization
         * recursive
         * easier to write
@@ -147,6 +148,11 @@ Dynamic Programming = Recursion + Memoization
     * `n`: possible states
     * `F`: computing each state
 * space complexity: usually equal to time complexity
+* strategy
+  1. Start with the recursive backtracking solution
+  2. Optimize by using a memoization table (top-down dynamic programming)
+  3. Remove the need for recursion (bottom-up dynamic programming)
+  4. Apply final tricks to reduce the time / memory complexity
 
 ### Backtracking
 
