@@ -27,9 +27,8 @@ public:
     // dtor
     ~Example() noexcept
     {
-        if (d_buf) {
-            delete d_buf;
-        }
+        // can delete nullptr
+        delete d_buf;
     }
 
     // support copying
@@ -183,7 +182,7 @@ int fn(const std::vector<int>& v, int k)
 
     // update ans
 
-    for (size_t i = 0; i < std::min(k, v.size()) ; ++i) {
+    for (size_t i = 0; i < std::min(k, static_cast<int>(v.size())) ; ++i) {
         // add v[i] & remove v[i-k] from curr
 
         // update ans
@@ -260,7 +259,7 @@ ListNode* fn(ListNode* head, int k)
 // Linked list: dummy nodes
 ListNode* fn(ListNode* head)
 {
-    ListNode* dummy = ListNode(0, head);
+    ListNode* dummy = new ListNode(0, head);
     ListNode* fast = head;
     ListNode* slow = head;
 

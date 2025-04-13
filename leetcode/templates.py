@@ -58,10 +58,12 @@ def fn(arr, k):
     # if k <= n!
     for i in range(k):
         # do logic here to add arr[i] to curr
+        pass
 
     # update ans
 
     for i in range(min(k, len(nums))):
+        pass
         # add arr[i] & remove arr[i-k] from curr
 
         # update ans
@@ -114,6 +116,12 @@ def fn(head, k):
         fast = fast.next
 
     return slow
+
+# Definition for singly-linked list.
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
 
 # Linked list: dummy nodes
 def fn(head):
@@ -412,7 +420,7 @@ def backtrack(curr, OTHER_ARGUMENTS...):
         return
 
     ans = 0
-    for (ITERATE_OVER_INPUT):
+    for ITERATE_OVER_INPUT:
         # modify the current state
         ans += backtrack(curr, OTHER_ARGUMENTS...)
         # undo the modification of the current state
