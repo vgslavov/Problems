@@ -36,7 +36,7 @@ def can_jump_i(nums, i):
 def can_jump(nums):
     return can_jump_i(nums, 0)
 
-# solution: LeetCode top-down DP w/ functools for memoization
+# solution: LeetCode top-down 1D DP w/ functools for memoization
 # complexity:
 # run-time: O(n^2)
 # space: O(n)
@@ -60,7 +60,7 @@ def can_jump2(nums) -> bool:
 
     return dp(0)
 
-# solution: LeetCode top-down DP w/ list for memoization
+# solution: LeetCode top-down 1D DP w/ list for memoization
 # complexity:
 # run-time: O(n^2)
 # space: O(n)
