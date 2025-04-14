@@ -79,8 +79,8 @@ bool canJump3(const std::vector<int>& nums) {
     // last index is always reachable
     memo.back() = 1;
 
-    // go right to left
-    for (int i = nums.size(); i != 0;) {
+    // go right to left: skip last
+    for (int i = nums.size()-2; i >= 0; --i) {
         --i;
         int farthest = std::min(i+nums[i], static_cast<int>(nums.size())-1);
 
@@ -98,4 +98,4 @@ bool canJump3(const std::vector<int>& nums) {
     return memo[0] == 1;
 }
 
-// TODO: add unit tests
+// TODO: solvge using greedy & unit tests

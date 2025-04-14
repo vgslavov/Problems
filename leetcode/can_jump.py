@@ -117,7 +117,7 @@ def can_jump4(nums) -> bool:
     # is first index Good (i.e. can reach next from it?)
     return memo[0] == 1
 
-# TODO: solve using  greedy
+# TODO: solve using greedy
 class TestCanJump(unittest.TestCase):
     def test_can_jump(self):
         self.assertEqual(can_jump([2,3,1,1,4]), True)
