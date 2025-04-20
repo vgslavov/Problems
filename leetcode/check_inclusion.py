@@ -14,9 +14,9 @@ import unittest
 # 1 <= s1.length, s2.length <= 10^4
 # s1 and s2 consist of lowercase English letters.
 
-# solution: sliding window + defaultdict
+# solution: LeetCode solution of #438, sliding window + defaultdict
 # complexity
-# run-time: O(n)
+# run-time: O(n^2)
 # space: O(1) (only 26 letters per dict)
 def checkInclusion(s1: str, s2: str) -> bool:
     # s1 cannot be longer than s2 and be a permutation of s2
