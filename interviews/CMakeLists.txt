@@ -30,3 +30,6 @@ set_property(TARGET rule_of_zero PROPERTY CXX_STANDARD 17)
 
 add_executable(copy_swap copy_swap.cpp)
 set_property(TARGET copy_swap PROPERTY CXX_STANDARD 17)
+
+add_executable(order_book order_book.cpp)
+set_property(TARGET order_book PROPERTY CXX_STANDARD 17)
