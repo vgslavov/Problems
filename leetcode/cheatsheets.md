@@ -158,7 +158,10 @@ Dynamic Programming = Recursion + Memoization
 
 * brute-force
 * optimization on exhaustive search
+    * exhaustive search: generate all possibilities, then check for solutions
+    * backtracking: prune paths that cannot lead to solution, generating fewer possibilities
 * usually `O(2^n)`
+* implemented using recursion (almost always)
 
 ### Combinations & Permutations
 
