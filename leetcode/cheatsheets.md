@@ -5,7 +5,10 @@
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
 - [Theory](#theory)
-  - [Sub/str/seq/set](#substrseqset)
+  - [Trees](#trees)
+  - [Graphs](#graphs)
+  - [Binary](#binary)
+  - [Substr/seq/set](#substrseqset)
   - [Divide & Conquer](#divide--conquer)
   - [Greedy](#greedy)
   - [Recursion](#recursion)
@@ -26,13 +29,13 @@
   - [Binary search](#binary-search)
   - [Miscellaneous](#miscellaneous)
 - [Input Sizes vs Time Complexity](#input-sizes-vs-time-complexity)
-  - [`n <= 10`](#n--10)
-  - [`10 < n <= 20`](#10--n--20)
-  - [`20 < n <= 100`](#20--n--100)
-  - [`100 < n <= 1,000`](#100--n--1000)
-  - [`1,000 < n < 100,000`](#1000--n--100000)
-  - [`100,000 < n < 1,000,000`](#100000--n--1000000)
-  - [`1,000,000 < n`](#1000000--n)
+  - [n <= 10](#n--10)
+  - [10 < n <= 20](#10--n--20)
+  - [20 < n <= 100](#20--n--100)
+  - [100 < n <= 1,000](#100--n--1000)
+  - [1,000 < n < 100,000](#1000--n--100000)
+  - [100,000 < n < 1,000,000](#100000--n--1000000)
+  - [1,000,000 < n](#1000000--n)
 - [Sorting Algorithms](#sorting-algorithms)
 - [Interview Stages](#interview-stages)
   - [Stage 1: Introductions](#stage-1-introductions)
@@ -60,6 +63,23 @@
 
 * binary trees are directed acyclic graphs
 * a graph with `n` nodes and `n-1` edges is a tree
+* representations/inputs
+    * array of edges
+        * `[[0,1],[1,2],[2,0],[2,3]]`
+        * least efficient: iterate over entire array to find neighbors
+    * adjacency lists
+        * `[[1],[2],[0, 3],[]]`
+        * list of outgoing edges from `i`th node
+        * most convenient: convert other inputs to it
+    * adjacency matrix
+        * `[[0,1,0,0],[0,0,1,0],[1,0,0,1],[0,0,0,0]]`
+        * 2D matrix n rows x n columns
+        * if `graph[i][j] == 1`, edge from `i` to `j`
+        * traversal: O(n^2)
+    * matrix
+        * `(row, col)` is node
+        * neighbors: `(row - 1, col), (row, col - 1), (row + 1, col), (row, col + 1)`
+* DFS: O(n + e)
 
 ### Binary
 
