@@ -48,7 +48,10 @@ bool dfs(int node, int destination)
     return false;
 }
 
-bool validPath(int n, const std::vector<std::vector<int>>& edges, int source, int destination)
+bool validPath(int n,
+               const std::vector<std::vector<int>>& edges,
+               int source,
+               int destination)
 {
     // init
     seen = std::vector<bool>(n, false);

@@ -9,6 +9,7 @@
 #include <stack>
 #include <string>
 #include <tuple>
+#include <unordered_map>
 #include <utility>
 #include <vector>
 
@@ -392,6 +393,27 @@ int bfs(TreeNode* root)
     }
 
     return ans;
+}
+
+// Graph: recursive DFS
+int dfs(int node,
+        const std::unordered_map<int, std::vector<int>>& graph,
+        std::vector<bool>& seen)
+{
+    // base case
+    if (seen[node]) {
+        return 0;
+    }
+
+    seen[node] = true;
+
+    // do logic
+
+    for (const auto& neighbor : graph[node]) {
+        dfs(neighbor, graph, seen);
+    }
+
+    return 0;
 }
 
 // Find top k elements with heap
