@@ -209,8 +209,7 @@ std::vector<int> fn(const std::vector<int>& v)
 // v is a list of chars
 std::string fn(const std::vector<std::string>& v)
 {
-    std::string s(v.begin(), v.end());
-    return s;
+    return std::string(v.begin(), v.end());
 }
 
 struct ListNode {
