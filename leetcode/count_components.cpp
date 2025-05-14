@@ -33,7 +33,7 @@ void dfs(int node) {
     }
 }
 
-int countComponents(int n, std::vector<std::vector<int>>& edges)
+int countComponents(int n, const std::vector<std::vector<int>>& edges)
 {
     seen = std::vector<bool>(n, false);
 
