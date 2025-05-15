@@ -79,7 +79,13 @@
     * matrix
         * `(row, col)` is node
         * neighbors: `(row - 1, col), (row, col - 1), (row + 1, col), (row, col + 1)`
-* DFS: O(n + e)
+* DFS
+    * recursive more common
+    * O(n + e)
+    * easier to implement
+* BFS
+    * iterative more common
+    * use to find shortest path from a node
 
 ### Binary
 
