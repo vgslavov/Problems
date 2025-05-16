@@ -18,10 +18,9 @@ public:
     // I. dtor
     ~rule_of_five()
     {
-        if (ptr) {
-            delete ptr;
-            ptr = nullptr;
-        }
+        // safe to delete nullptr
+        delete ptr;
+        ptr = nullptr;
     }
 
     // II. copy ctor

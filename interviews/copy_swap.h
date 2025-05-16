@@ -12,10 +12,9 @@ public:
     // dtor
     ~copy_swap()
     {
-        if (ptr) {
-            delete ptr;
-            ptr = nullptr;
-        }
+        // safe to delete nullptr
+        delete ptr;
+        ptr = nullptr;
     }
 
     // copy ctor

@@ -13,8 +13,6 @@ public:
 
     queue(size_t capacity)
     : d_capacity(capacity)
-    , d_size(0)
-    , d_head(0)
     , d_buf(std::make_unique<T[]>(capacity)) {}
 
     // dtor

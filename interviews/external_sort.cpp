@@ -68,7 +68,8 @@ void sort2()
                 if (data.timestamp < queue.top().timestamp) {
                     break;
                 }
-                writer.put(queue.pop());
+                writer.put(queue.top());
+                queue.pop();
             }
         }
 
