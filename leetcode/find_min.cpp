@@ -16,7 +16,7 @@
 // complexity
 // run-time: O(log n)
 // space: O(1)
-int findMin(std::vector<int>& nums)
+int findMin(const std::vector<int>& nums)
 {
     if (nums.empty()) {
         return -1;

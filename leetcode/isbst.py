@@ -29,7 +29,7 @@ def dfs(node, start, end):
 
     # all nodes in left subtree < current node
     # all nodes in right subtree > current node
-    return dfs(node.left, start, node.val) and right = dfs(node.right, node.val, end)
+    return dfs(node.left, start, node.val) and dfs(node.right, node.val, end)
 
 # solution: recursive dfs
 # complexity

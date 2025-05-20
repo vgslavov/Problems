@@ -18,7 +18,7 @@ import unittest
 # complexity
 # run-time: O(n^2)
 # space: O(1) (only 26 letters per dict)
-def findAnagrams(s: str, p: str) -> list[int]:
+def find_anagrams(s: str, p: str) -> list[int]:
     if len(p) > len(s):
         return []
     
@@ -59,19 +59,19 @@ class TestFindAnagram(unittest.TestCase):
         s = ""
         p = ""
         expected = []
-        self.assertEqual(findAnagrams(s, p), expected)
+        self.assertEqual(find_anagrams(s, p), expected)
 
     def test_1(self):
         s = "cbaebabacd"
         p = "abc"
         expected = [0, 6]
-        self.assertEqual(findAnagrams(s, p), expected)
+        self.assertEqual(find_anagrams(s, p), expected)
 
     def test_2(self):
         s = "abab"
         p = "ab"
         expected = [0, 1, 2]
-        self.assertEqual(findAnagrams(s, p), expected)
+        self.assertEqual(find_anagrams(s, p), expected)
 
 if __name__ == "__main__":
     sys.exit(unittest.main())
