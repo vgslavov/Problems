@@ -1,4 +1,6 @@
 // number: 50
+// title: Pow(x, n)
+// url: https://leetcode.com/problems/powx-n/
 // section: math
 // difficulty: medium
 // tags: math, recursion, top 150, meta

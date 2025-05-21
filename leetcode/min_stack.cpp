@@ -3,6 +3,8 @@
 #include <vector>
 
 // number: 155
+// title: Min Stack
+// url: https://leetcode.com/problems/min-stack/
 // section: stack
 // difficulty: medium
 // tags: stack, design, top 150

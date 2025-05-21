@@ -4,6 +4,8 @@ import sys
 import unittest
 
 # number: 112
+# title: Path Sum
+# url: https://leetcode.com/problems/path-sum/
 # section: binary tree general
 # difficulty: easy
 # tags: tree, dfs, bfs, binary tree, top 150
@@ -75,4 +77,4 @@ def path_sum(root, target_sum):
 # expected = False
 
 if __name__ == '__main__':
-    return sys.exit(unittest.main())
+    sys.exit(unittest.main())

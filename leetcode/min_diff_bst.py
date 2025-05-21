@@ -5,6 +5,8 @@ import sys
 import unittest
 
 # number: 530
+# title: Minimum Absolute Difference in BST 
+# url: https://leetcode.com/problems/minimum-absolute-difference-in-bst/
 # section: binary search tree
 # difficulty: easy
 # tags: tree, dfs, bfs, binary search tree, binary tree, top 150

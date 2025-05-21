@@ -3,13 +3,23 @@
 import sys
 import unittest
 
+# number: 268
+# title: Missing Number
+# url: https://leetcode.com/problems/missing-number/
+# section: array
+# difficulty: easy
+# tags: array, bit manipulation, math, top 150
+
+# constraints
 # n == nums.length
 # 1 <= n <= 10^4
 # 0 <= nums[i] <= n
 # All the numbers of nums are unique.
 
-# O(n log n) runtime
-# O(1) space
+# solution: sort + linear scan
+# complexity
+# run-time: O(n*log n)
+# space: O(1)
 def missing_number1(nums):
     nums.sort()
 
@@ -22,8 +32,9 @@ def missing_number1(nums):
 
     return nums[-1] + 1 if nums else False
 
-# O(n) runtime
-# O(n) space
+# solution: dict
+# run-time: O(n)
+# space: O(n)
 def missing_number2(nums):
     if not nums:
         return False
@@ -40,8 +51,9 @@ def missing_number2(nums):
 
     return max_num + 1
 
-# O(n) runtime
-# O(1) space
+# solution: math
+# run-time: O(n)
+# space: O(1)
 def missing_number3(nums):
     if not nums:
         return False
@@ -52,6 +64,7 @@ def missing_number3(nums):
     if min_num != 0:
         return 0
 
+    # formula: n * (n+1) / 2
     real_sum = max_num * (max_num+1) // 2
     actual_sum = sum(nums)
 

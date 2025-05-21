@@ -4,9 +4,21 @@ from collections import defaultdict
 import sys
 import unittest
 
+# number: 771
+# title: Jewels and Stones
+# url: https://leetcode.com/problems/jewels-and-stones/
+# difficulty: easy
+# tags: string, hash table
+
+# constraints
 # 1 <= jewels.length, stones.length <= 50
 # jewels and stones consist of only English letters.
 # All the characters of jewels are unique.
+
+# solution: dict
+# complexity
+# run-time: O(n+m)
+# space: O(n)
 def num_jewelsinstones(jewels, stones):
     d_j = defaultdict(int)
 

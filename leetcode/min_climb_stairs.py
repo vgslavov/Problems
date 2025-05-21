@@ -4,10 +4,14 @@ import sys
 import unittest
 
 # number: 746
+# title: Min Cost Climbing Stairs
+# url: https://leetcode.com/problems/min-cost-climbing-stairs/
 # difficulty: easy
-# tags: array, dynamic programming
+# tags: array, dp
 
 # constraints
+# 2 <= cost.length <= 1000
+# 0 <= cost[i] <= 999
 
 # solution: recursive top-down 1D DP using dict
 # complexity

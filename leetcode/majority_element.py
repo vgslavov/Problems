@@ -5,6 +5,8 @@ import sys
 import unittest
 
 # number: 169
+# title: Majority Element
+# url: https://leetcode.com/problems/majority-element/
 # section: array/string
 # difficulty: easy
 # tags: array, hash table, divide & conquer, sorting, counting, top 150

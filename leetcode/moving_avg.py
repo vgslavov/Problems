@@ -5,6 +5,8 @@ import sys
 import unittest
 
 # number: 346
+# title: Moving Average from Data Stream
+# url: https://leetcode.com/problems/moving-average-from-data-stream/
 # section: assessments
 # difficulty: easy
 # tags: array, design, queue, data stream, amazon
@@ -32,6 +34,7 @@ class MovingAvg:
             self.queue.append(val)
             return float(val)
 
+        # at capacity, remove the oldest value
         if len(self.queue) == self.size:
             self.sum -= self.queue[0]
 

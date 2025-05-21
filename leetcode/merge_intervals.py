@@ -4,6 +4,8 @@ import sys
 import unittest
 
 # number: 56
+# title: Merge Intervals
+# url: https://leetcode.com/problems/merge-intervals/
 # section: intervals
 # difficulty: medium
 # tags: array, sorting, top 150, meta

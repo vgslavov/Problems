@@ -3,6 +3,23 @@
 import sys
 import unittest
 
+# number: 1544
+# title: Make The String Great
+# url: https://leetcode.com/problems/make-the-string-great/
+# section: string
+# difficulty: easy
+# tags: string, stack
+
+# A good string is a string which doesn't have two adjacent characters s[i] and
+# s[i + 1] where:
+# * 0 <= i <= s.length - 2
+# * s[i] is a lower-case letter and s[i + 1] is the same letter but in
+#   upper-case or vice-versa.
+
+# contraints:
+# 1 <= s.length <= 100
+# s contains only lower and upper case English letters.
+
 def isbad(a, b):
     if a.isupper() and b.islower() and a == b.upper():
         return True
@@ -11,13 +28,10 @@ def isbad(a, b):
 
     return False
 
-# A good string is a string which doesn't have two adjacent characters s[i] and
-# s[i + 1] where:
-# * 0 <= i <= s.length - 2
-# * s[i] is a lower-case letter and s[i + 1] is the same letter but in
-#   upper-case or vice-versa.
-# 1 <= s.length <= 100
-# s contains only lower and upper case English letters.
+# solution: stack
+# complexity
+# run-time: O(n)
+# space: O(n)
 def make_good(s):
     ans = []
 

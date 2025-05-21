@@ -3,6 +3,8 @@
 #include <unordered_map>
 
 // number: 325
+// title: Maximum Size Subarray Sum Equals k
+// url: https://leetcode.com/problems/maximum-size-subarray-sum-equals-k/
 // section: meta
 // difficulty: medium
 // tags: array, hash table, prefix sum, meta

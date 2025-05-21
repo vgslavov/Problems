@@ -5,6 +5,8 @@ import sys
 import unittest
 
 # number: 31
+# title: Next Permutation
+# url: https://leetcode.com/problems/next-permutation/
 # section: meta
 # difficulty: medium
 # tags: array, two pointers, meta
@@ -21,7 +23,7 @@ def get_next(perms, i):
     else:
         return list(perms[i+1])
 
-# solution: Pythonic itertools
+# non-solution: Pythonic itertools
 # complexity
 # run-time: O(n)?
 # space: O(n)
@@ -52,7 +54,7 @@ def next_perm(nums):
     if not nextp:
         return
 
-    # leetcode: deep copy & list comp doesn't work
+    # leetcode: deep copy & list comp don't work
     #for i in range(len(nextp)):
         #nums[i] = nextp[i]
 

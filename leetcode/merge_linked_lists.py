@@ -4,6 +4,8 @@ import sys
 import unittest
 
 # number: 21
+# title: Merge Two Sorted Lists
+# url: https://leetcode.com/problems/merge-two-sorted-lists/
 # section: linked list
 # difficulty: easy
 # tags: link list, recursion, top 150, meta

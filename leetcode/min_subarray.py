@@ -5,6 +5,8 @@ import sys
 import unittest
 
 # number: 209
+# title: Minimum Size Subarray Sum
+# url: https://leetcode.com/problems/minimum-size-subarray-sum/
 # section: sliding window
 # difficulty: medium
 # tags: array, binary search, sliding window, prefix sum, top 150

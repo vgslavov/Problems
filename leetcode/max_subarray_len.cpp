@@ -3,6 +3,8 @@
 #include <vector>
 
 // number: 2958
+// title: Length of Longest Subarray With at Most K Frequency
+// url: https://leetcode.com/problems/length-of-longest-subarray-with-at-most-k-frequency/
 // section: citadel
 // difficulty: medium
 // tags: array, hash table, sliding window, citadel

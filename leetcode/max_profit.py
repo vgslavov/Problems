@@ -6,6 +6,8 @@ import sys
 import unittest
 
 # number: 121
+# title: Best Time to Buy and Sell Stock
+# url: https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
 # section: array/string
 # difficulty: easy
 # tags: array, dynamic programming, top 150, citadel

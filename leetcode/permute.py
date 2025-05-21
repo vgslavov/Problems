@@ -5,6 +5,8 @@ import sys
 import unittest
 
 # number: 46
+# title: Permutations
+# url: https://leetcode.com/problems/permutations/
 # section: backtracking
 # difficulty: medium
 # tags: array, backtracking, top 150

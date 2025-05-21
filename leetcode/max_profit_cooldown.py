@@ -5,6 +5,8 @@ import sys
 import unittest
 
 # number: 309
+# title: Best Time to Buy and Sell Stock with Cooldown
+# url: https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/
 # section: optiver
 # difficulty: medium
 # tags: array, dp, optiver

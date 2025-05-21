@@ -3,6 +3,8 @@
 #include <vector>
 
 // number: 53
+// title: Maximum Subarray
+// url: https://leetcode.com/problems/maximum-subarray/
 // section: Kadane's algo
 // difficulty: medium
 // tags: array, divide & conquer, dp
@@ -14,7 +16,7 @@
 // complexity
 // run-time: O(n)
 // space: O(1)
-int maxSubArray(std::vector<int>& nums) {
+int maxSubArray(const std::vector<int>& nums) {
     int maxSum = std::numeric_limits<int>::min();
     int currSum = 0;
 

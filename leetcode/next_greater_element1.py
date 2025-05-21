@@ -4,6 +4,8 @@ import sys
 import unittest
 
 # number: 496
+# title: Next Greater Element I
+# url: https://leetcode.com/problems/next-greater-element-i/
 # section: assessment
 # difficulty: easy
 # tags: array, hash table, stack, monotonic stack, meta

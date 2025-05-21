@@ -1,6 +1,8 @@
 #include <algorithm>
 
 // number: 104
+// title: Maximum Depth of Binary Tree
+// url: https://leetcode.com/problems/maximum-depth-of-binary-tree/
 // section: binary tree general
 // difficulty: easy
 // tags: tree, dfs, bfs, binary tree, top 150, leetcode 75

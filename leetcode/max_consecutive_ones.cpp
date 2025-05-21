@@ -2,6 +2,8 @@
 #include <vector>
 
 // number: 1004
+// title: Max Consecutive Ones III
+// url: https://leetcode.com/problems/max-consecutive-ones-iii/
 // section: sliding window
 // difficulty: medium
 // tags: array, binary search, sliding window, prefix sum, leetcode 75

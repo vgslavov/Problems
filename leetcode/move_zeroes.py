@@ -4,6 +4,8 @@ import sys
 import unittest
 
 # number: 283
+# title: Move Zeroes
+# url: https://leetcode.com/problems/move-zeroes/
 # section: meta
 # difficulty: easy
 # tags: array, two pointers, meta
@@ -21,7 +23,7 @@ def move_zeroes(nums):
     left = right = 0
 
     for right in range(len(nums)):
-        print(f"left:{left},right:{right}")
+        #print(f"left:{left},right:{right}")
 
         # find next non-zero on right
         if nums[right] == 0:

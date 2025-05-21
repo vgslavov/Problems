@@ -5,6 +5,8 @@ import sys
 import unittest
 
 # number: 718
+# title: Maximum Length of Repeated Subarray
+# url: https://leetcode.com/problems/maximum-length-of-repeated-subarray/
 # section: citadel
 # difficulty: medium
 # tags: array, binary search, dp, sliding window, rolling hash, hash function

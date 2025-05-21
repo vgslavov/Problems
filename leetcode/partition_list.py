@@ -4,6 +4,8 @@ import sys
 import unittest
 
 # number: 86
+# title: Partition List
+# url: https://leetcode.com/problems/partition-list/
 # section: linked list
 # difficulty: medium
 # tags: linked list, two pointers, top 150
@@ -19,7 +21,7 @@ class ListNode:
         self.val = val
         self.next = next
 
-# solution: leetcode using 2 pointers
+# solution: Leetcode using 2 pointers
 # complexity
 # run-time: O(n)
 # space: O(1)

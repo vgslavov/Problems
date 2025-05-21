@@ -5,6 +5,8 @@ import sys
 import unittest
 
 # number: 918
+# title: Maximum Sum Circular Subarray
+# url: https://leetcode.com/problems/maximum-sum-circular-subarray/
 # section: Kadane's algo
 # difficulty: medium
 # tags: array, divide & conquer, dp, queue, monotonic queue

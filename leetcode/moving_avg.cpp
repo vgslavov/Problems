@@ -1,6 +1,8 @@
 #include <deque>
 
 // number: 346
+// title: Moving Average from Data Stream
+// url: https://leetcode.com/problems/moving-average-from-data-stream/
 // section: assessments
 // difficulty: easy
 // tags: array, design, queue, data stream, amazon
@@ -28,6 +30,7 @@ public:
             return val;
         }
 
+        // at capacity, remove the oldest element
         if (d_queue.size() == d_size) {
             d_sum -= d_queue.front();
             d_queue.pop_front();

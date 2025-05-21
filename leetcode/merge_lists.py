@@ -5,6 +5,8 @@ import sys
 import unittest
 
 # number: 88
+# title: Merge Sorted Array 
+# url: https://leetcode.com/problems/merge-sorted-array/
 # section: array/string
 # difficulty: easy
 # tags: array, two pointers, sorting, top 150, meta

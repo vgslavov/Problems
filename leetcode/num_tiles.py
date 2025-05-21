@@ -5,6 +5,8 @@ import sys
 import unittest
 
 # number: 1079
+# title: Letter Tile Possibilities
+# url: https://leetcode.com/problems/letter-tile-possibilities/
 # section: assessments
 # difficulty: medium
 # tags: hash table, string, backtracking, counting, google

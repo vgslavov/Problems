@@ -5,6 +5,8 @@ import sys
 import unittest
 
 # number: 53
+# title: Maximum Subarray
+# url: https://leetcode.com/problems/maximum-subarray/
 # section: Kadane's algo
 # difficulty: medium
 # tags: array, divide & conquer, dp

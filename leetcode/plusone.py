@@ -4,6 +4,8 @@ import sys
 import unittest
 
 # number: 66
+# title: Plus One
+# url: https://leetcode.com/problems/plus-one/
 # section: math
 # difficulty: easy
 # tags: array, math, top 150

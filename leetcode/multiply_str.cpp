@@ -1,6 +1,8 @@
 #include <string>
 
 // number: 43
+// title: Multiply Strings
+// url: https://leetcode.com/problems/multiply-strings/
 // section: meta
 // difficulty: medium
 // tags: math, string, simulation, meta

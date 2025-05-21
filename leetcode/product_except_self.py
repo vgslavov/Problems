@@ -5,6 +5,8 @@ import sys
 import unittest
 
 # number: 238
+# title: Product of Array Except Self
+# url: https://leetcode.com/problems/product-of-array-except-self/
 # section: array/string
 # difficulty: medium
 # tags: array, prefix sum, top 150, meta

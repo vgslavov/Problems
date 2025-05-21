@@ -2,6 +2,8 @@
 #include <vector>
 
 // number: 121
+// title: Best Time to Buy and Sell Stock
+// url: https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
 // section: array/string
 // difficulty: easy
 // tags: array, dynamic programming, top 150, citadel
@@ -11,7 +13,6 @@
 // 0 <= prices[i] <= 10^4
 // limit to 1 buy & 1 sell
 // have to buy *before* you sell (can't short)
-
 
 // solution: one pass to find biggest diff by finding cheapest price
 // complexity
@@ -37,4 +38,4 @@ int maxProfit(std::vector<int>& prices) {
     return ans;
 }
 
-// TODO: add unit tests
+// TODO: add unit tests & solve using min heap
