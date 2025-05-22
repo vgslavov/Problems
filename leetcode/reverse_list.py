@@ -4,6 +4,8 @@ import sys
 import unittest
 
 # number: 206
+# title: Reverse Linked List
+# url: https://leetcode.com/problems/reverse-linked-list/
 # section: recursion
 # difficulty: easy
 # tags: linked list, recursion

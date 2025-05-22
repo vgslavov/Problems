@@ -2,6 +2,8 @@
 #include <stdexcept>
 
 // number: 622
+// title: Design Circular Queue
+// url: https://leetcode.com/problems/design-circular-queue/
 // section: citadel
 // difficulty: medium
 // tags: array, linked list, design, queue, citadel
@@ -16,6 +18,7 @@
 // complexity
 // run-time: O(1) per op
 // space: O(k)
+template <typename T>
 class MyCircularQueue {
 public:
     MyCircularQueue(int k)
@@ -35,7 +38,11 @@ public:
     MyCircularQueue(const MyCircularQueue&) = delete;
     MyCircularQueue& operator=(const MyCircularQueue&) = delete;
 
-    bool enQueue(int value) {
+    // don't support moving
+    MyCircularQueue(MyCircularQueue&&) = delete;
+    MyCircularQueue& operator=(MyCircularQueue&&) = delete;
+
+    bool enQueue(const T& value) {
         if (isFull()) {
             return false;
         }
@@ -60,30 +67,26 @@ public:
         return false;
     }
 
-    int Front() {
+    T Front() {
         // first check front!
         if (!d_front.empty()) {
             return d_front.front();
         } else if (!d_rear.empty()) {
             return d_rear.front();
-        } else {
-            return -1;
         }
 
-        return -1;
+        throw std::length_error("empty queue");
     }
 
-    int Rear() {
+    T Rear() {
         // first check rear!
         if (!d_rear.empty()) {
             return d_rear.back();
         } else if(!d_front.empty()) {
             return d_front.back();
-        } else {
-            return -1;
         }
 
-        return -1;
+        throw std::length_error("empty queue");
     }
 
     bool isEmpty() {
@@ -103,8 +106,8 @@ public:
     }
 
 private:
-    std::vector<int> d_front;
-    std::vector<int> d_rear;
+    std::vector<T> d_front;
+    std::vector<T> d_rear;
     int d_capacity;
 };
 
@@ -115,8 +118,7 @@ private:
 // space: O(k)
 const size_t MAX_SIZE = 100;
 
-template
-<typename T>
+template <typename T>
 class MyCircularQueue2 {
 public:
     MyCircularQueue2()
@@ -143,6 +145,10 @@ public:
     // don't support copying
     MyCircularQueue2(const MyCircularQueue2&) = delete;
     MyCircularQueue2& operator=(const MyCircularQueue2&) = delete;
+
+    // don't support moving
+    MyCircularQueue2(MyCircularQueue2&&) = delete;
+    MyCircularQueue2& operator=(MyCircularQueue2&&) = delete;
 
     bool enQueue(const T& value) {
         // TODO: increase capacity by doubling?

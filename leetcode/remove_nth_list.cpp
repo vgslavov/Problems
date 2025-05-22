@@ -1,6 +1,8 @@
 #include <cstddef>
 
 // number: 19
+// title: Remove Nth Node From End of List
+// url: https://leetcode.com/problems/remove-nth-node-from-end-of-list/
 // section: linked list
 // difficulty: medium
 // tags: linked list, two pointers, top 150
@@ -10,6 +12,15 @@
 // 1 <= sz <= 30
 // 0 <= Node.val <= 100
 // 1 <= n <= sz
+
+// Definition for singly-linked list.
+struct ListNode {
+    int val;
+    ListNode *next;
+    ListNode() : val(0), next(nullptr) {}
+    ListNode(int x) : val(x), next(nullptr) {}
+    ListNode(int x, ListNode *next) : val(x), next(next) {}
+};
 
 // Definition for singly-linked list.
 struct ListNode {

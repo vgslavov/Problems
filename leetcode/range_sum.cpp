@@ -1,6 +1,8 @@
 #include <vector>
 
 // number: 303
+// title: Range Sum Query - Immutable
+// url: https://leetcode.com/problems/range-sum-query-immutable/
 // section: assessments
 // difficulty: easy
 // tags: array, design, prefix sum, meta
@@ -17,7 +19,7 @@
 // space: O(n)
 class NumArray {
 public:
-    NumArray(const vector<int>& nums)
+    NumArray(const std::vector<int>& nums)
     : d_nums(nums)
     {
         calcPrefixSum();

@@ -4,6 +4,8 @@ import sys
 import unittest
 
 # number: 345
+# title: Reverse Vowels of a String
+# url: https://leetcode.com/problems/reverse-vowels-of-a-string/
 # section: assessments
 # difficulty: easy
 # tags: two pointers, string, meta

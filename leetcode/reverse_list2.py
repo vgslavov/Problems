@@ -4,6 +4,8 @@ import sys
 import unittest
 
 # number: 92
+# title: Reverse Linked List II
+# url: https://leetcode.com/problems/reverse-linked-list-ii/
 # section: linked list
 # difficulty: medium
 # tags: linked list, top 150

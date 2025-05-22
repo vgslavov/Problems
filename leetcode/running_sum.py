@@ -3,8 +3,21 @@
 import sys
 import unittest
 
-#1 <= nums.length <= 1000
-#-10^6 <= nums[i] <= 10^6
+# number: 1480
+# title: Running Sum of 1d Array
+# url: https://leetcode.com/problems/running-sum-of-1d-array/
+# section: array/string
+# difficulty: easy
+# tags: array, prefix sum
+
+# constraints
+# 1 <= nums.length <= 1000
+# -10^6 <= nums[i] <= 10^6
+
+# solution: prefix sum
+# complexity
+# run-time: O(n)
+# space: O(n)
 def running_sum(nums):
     if not nums:
         return []

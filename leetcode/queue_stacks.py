@@ -4,6 +4,8 @@ import sys
 import unittest
 
 # number: 232
+# title: Implement Queue using Stacks
+# url: https://leetcode.com/problems/implement-queue-using-stacks/
 # section: 
 # difficulty: easy
 # tags: stack, design, queue
@@ -13,6 +15,7 @@ import unittest
 # At most 100 calls will be made to push, pop, peek, and empty.
 # All the calls to pop and peek are valid.
 
+# solution: 2 stacks/lists
 # complexity
 # run-time: see below
 # space: O(n)
@@ -36,6 +39,7 @@ class MyQueue:
         if not self.__front and not self.__back2front():
             raise ValueError("failed moving from back to front")
 
+        # pop from front stack
         return self.__front.pop()
 
     # run-time: O(1) amortized, O(n) worst-case

@@ -4,6 +4,8 @@ import sys
 import unittest
 
 # number: 19
+# title: Remove Nth Node From End of List
+# url: https://leetcode.com/problems/remove-nth-node-from-end-of-list/
 # section: linked list
 # difficulty: medium
 # tags: linked list, two pointers, top 150
@@ -13,6 +15,12 @@ import unittest
 # 1 <= sz <= 30
 # 0 <= Node.val <= 100
 # 1 <= n <= sz
+
+# Definition for singly-linked list.
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
 
 # solution: dummy node + fast & slow pointers
 # complexity

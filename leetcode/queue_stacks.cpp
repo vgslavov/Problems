@@ -2,6 +2,8 @@
 #include <vector>
 
 // number: 232
+// title: Implement Queue using Stacks
+// url: https://leetcode.com/problems/implement-queue-using-stacks/
 // section: 
 // difficulty: easy
 // tags: stack, design, queue
@@ -14,15 +16,16 @@
 // complexity
 // run-time: see below
 // space: O(n)
+template <typename T>
 class MyQueue {
 public:
     // run-time: O(1)
-    void push(int x) {
+    void push(const T& x) {
         d_back.push_back(x);
     }
 
     // run-time: O(1) amortized, O(n) worst-case
-    int pop() {
+    T pop() {
         if (empty()) {
             throw std::length_error("empty queue");
         }
@@ -31,13 +34,13 @@ public:
             throw std::runtime_error("failed to move back to front");
         }
 
-        int value = d_front.back();
+        T value = d_front.back();
         d_front.pop_back();
         return value;
     }
 
     // run-time: O(1) amortized, O(n) worst-case
-    int peek() {
+    T peek() {
         if (empty()) {
             throw std::length_error("empty queue");
         }
@@ -68,8 +71,8 @@ private:
 
         return !d_front.empty();
     }
-    std::vector<int> d_front;
-    std::vector<int> d_back;
+    std::vector<T> d_front;
+    std::vector<T> d_back;
 };
 
 MyQueue* obj = new MyQueue();

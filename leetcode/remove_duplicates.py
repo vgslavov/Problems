@@ -5,6 +5,8 @@ import sys
 import unittest
 
 # number: 26
+# title: Remove Duplicates from Sorted Array
+# url: https://leetcode.com/problems/remove-duplicates-from-sorted-array/
 # section: array/string
 # difficulty: easy
 # tags: array, two pointers, top 150, meta
@@ -17,7 +19,7 @@ import unittest
 
 # solution: sort
 # complexity
-# run-time: O(n * log(n))
+# run-time: O(n*log n)
 # space: O(1)
 def remove_duplicates(nums):
     dupes = 0
@@ -31,7 +33,7 @@ def remove_duplicates(nums):
 
     return len(nums) - dupes, nums
 
-# TODO: in O(n)
+# TODO: solve in O(n)
 
 class TestRemoveDuplicates(unittest.TestCase):
     def test_empty(self):

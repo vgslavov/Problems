@@ -16,11 +16,12 @@
 // complexity
 // run-time: O(1) per op
 // space: O(n)
+template <typename T>
 class RandomizedSet {
 public:
     RandomizedSet() = default;
     
-    bool insert(int val) {
+    bool insert(const T& val) {
         auto it = d_val2idx.find(val);
         // found
         if (it != d_val2idx.end()) {
@@ -33,21 +34,23 @@ public:
         return true;
     }
     
-    bool remove(int val) {
+    bool remove(const T& val) {
         auto it = d_val2idx.find(val);
         // not found
         if (it == d_val2idx.end()) {
             return false;
         }
 
+        // remove from map
         int idx = d_val2idx[val];
         d_val2idx.erase(val);
 
-        // swap
-        int lastElement = d_idx2val.back();
+        // swap with last element
+        T lastElement = d_idx2val.back();
         d_idx2val[idx] = lastElement;
         d_idx2val.pop_back();
 
+        // update map
         if (idx < d_idx2val.size()) {
             d_val2idx[lastElement] = idx;
         }
@@ -55,7 +58,7 @@ public:
         return true;
     }
     
-    int getRandom() {
+    T getRandom() {
         auto it = d_idx2val.cbegin();
         int random = rand() % d_idx2val.size();
         std::advance(it, random);
@@ -63,8 +66,11 @@ public:
     }
 
 private:
-    std::vector<int> d_idx2val;
-    std::unordered_map<int, int> d_val2idx;
+    std::vector<T> d_idx2val;
+    // if T non-hashable, use map instead
+    // run-time: O(log n)
+    //std::map<T, int> d_val2idx;
+    std::unordered_map<T, int> d_val2idx;
 };
 
 // Your RandomizedSet object will be instantiated and called as such:

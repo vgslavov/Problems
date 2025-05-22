@@ -2,6 +2,8 @@
 #include <vector>
 
 // number: 199
+// title: Binary Tree Right Side View
+// url: https://leetcode.com/problems/binary-tree-right-side-view/
 // section: binary tree bfs
 // difficulty: medium
 // tags: dfs, bfs, binary tree, top 150, meta

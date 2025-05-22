@@ -4,6 +4,8 @@ import sys
 import unittest
 
 # number: ?
+# title: ?
+# url: ?
 # section: assessment
 # difficulty: easy
 # tags: meta

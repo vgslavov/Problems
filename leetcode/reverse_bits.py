@@ -4,6 +4,8 @@ import sys
 import unittest
 
 # number: 190
+# title: Reverse Bits
+# url: https://leetcode.com/problems/reverse-bits/
 # section: bit manipulation
 # difficulty: easy
 # tags: divide & conquer, bit manipulation, top 150

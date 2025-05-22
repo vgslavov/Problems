@@ -4,6 +4,8 @@ import sys
 import unittest
 
 # number: 303
+# title: Range Sum Query - Immutable
+# url: https://leetcode.com/problems/range-sum-query-immutable/
 # section: assessments
 # difficulty: easy
 # tags: array, design, prefix sum, meta

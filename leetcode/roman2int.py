@@ -4,6 +4,8 @@ import sys
 import unittest
 
 # number: 13
+# title: Roman to Integer
+# url: https://leetcode.com/problems/roman-to-integer/
 # section: array/string, meta
 # difficulty: easy
 # tags: hash table, math, string, top 150, meta
@@ -34,7 +36,6 @@ import unittest
 # TODO: faster implementation?
 def roman2int(s):
     values = { 'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000 }
-    roman = s.upper()
     num = 0
 
     # from 0 to n-1

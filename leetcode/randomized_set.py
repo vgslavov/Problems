@@ -5,6 +5,8 @@ import sys
 import unittest
 
 # number: 380
+# title: Insert Delete GetRandom O(1)
+# url: https://leetcode.com/problems/insert-delete-getrandom-o1/
 # section: array / string
 # difficulty: medium 
 # tags: array, hash table, math, design, randomized, top 150
@@ -38,13 +40,15 @@ class RandomizedSet:
         if val not in self.__dict:
             return False
         
+        # remove from dict
         idx = self.__dict[val]
         del self.__dict[val]
 
-        # swap with last
+        # swap with last in list
         self.__list[idx] = self.__list[-1]
         self.__list.pop()
 
+        # update dict
         if idx < len(self.__list):
             self.__dict[self.__list[idx]] = idx
 
@@ -55,10 +59,11 @@ class RandomizedSet:
         if val not in self.__dict:
             return False
 
+        # swap with last in both
         last_element, idx = self.__list[-1], self.__dict[val]
         self.__dict[last_element], self.__list[idx] = idx, last_element
 
-        # remove
+        # remove from both
         del self.__dict[val]
         self.__list.pop()
 
@@ -71,7 +76,7 @@ class RandomizedSet:
 
 # non-solution: Python set
 # complexity
-# run-time: O(1) per op
+# run-time: O(n)
 # space: O(n)
 class RandomizedSet2:
 
@@ -94,10 +99,18 @@ class RandomizedSet2:
 
         return True
 
+    # run-time: O(n)
     def getRandom(self) -> int:
-        # removes random element from the set
-        val = self.__set.pop()
-        self.__set.add(val)
+        # poping from a set is no longer random
+        # (first element is always returned)
+        #val = self.__set.pop()
+        #self.__set.add(val)
+
+        # sampling from a set is deprecated
+        #val = random.sample(self.__set, 1)[0]
+
+        # convert to list to sample
+        val = random.sample(list(self.__set), 1)[0]
 
         return val
 

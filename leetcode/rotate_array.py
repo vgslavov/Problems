@@ -5,6 +5,8 @@ import sys
 import unittest
 
 # number: 189
+# title: Rotate Array
+# url: https://leetcode.com/problems/rotate-array/
 # section: array/string
 # difficulty: medium
 # tags: array, math, two pointers, top 150

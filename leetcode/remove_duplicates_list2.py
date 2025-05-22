@@ -4,6 +4,8 @@ import sys
 import unittest
 
 # number: 82
+# title: Remove Duplicates from Sorted List II
+# url: https://leetcode.com/problems/remove-duplicates-from-sorted-list-ii/
 # section: linked list
 # difficulty: medium
 # tags: linked list, two pointers, top 150

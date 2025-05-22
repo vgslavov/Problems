@@ -5,6 +5,8 @@ import sys
 import unittest
 
 # number: 151
+# title: Reverse Words in a String
+# url: https://leetcode.com/problems/reverse-words-in-a-string/
 # section: array/string
 # difficulty: medium
 # tags: two pointers, string, top 150, leetcode 75

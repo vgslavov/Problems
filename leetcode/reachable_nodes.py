@@ -22,7 +22,6 @@ import unittest
 # 1 <= restricted[i] < n
 # All the values of restricted are unique.
 
-
 # solution: recursive DFS
 # complexity:
 # run-time: O(n + e)
@@ -45,7 +44,6 @@ def reachable_nodes(n, edges, restricted) -> int:
     restricted = set(restricted)
     dfs(0)
     return len(seen)
-
 
 class TestReachableNodes(unittest.TestCase):
     def test_reachable_nodes(self):

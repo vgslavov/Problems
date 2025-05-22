@@ -3,10 +3,12 @@
 import sys
 import unittest
 
-# number:
+# number: 344
+# title: Reverse String
+# url: https://leetcode.com/problems/reverse-string/
 # section:
 # difficulty: easy
-# tags: recursion
+# tags: recursion, two pointers, string
 
 # constraints
 # 1 <= s.length <= 10^5
@@ -14,7 +16,7 @@ import unittest
 # s[i] is a printable ascii character.
 # in-place
 
-# solution: iterative
+# solution: iterative, two pointers
 # run-time: O(n)
 # space: O(1)
 def reverse_string(s):

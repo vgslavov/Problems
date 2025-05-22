@@ -5,6 +5,8 @@ import sys
 import unittest
 
 # number: 198
+# title: House Robber
+# url: https://leetcode.com/problems/house-robber/
 # section: 1D DP
 # difficulty: medium
 # tags: array, dp, top 150

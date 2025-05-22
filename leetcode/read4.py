@@ -4,6 +4,8 @@ import sys
 import unittest
 
 # number: 157
+# title: Read N Characters Given Read4
+# url: https://leetcode.com/problems/read-n-characters-given-read4/
 # section: meta
 # difficulty: easy
 # tags: meta, array, simulation, interactive

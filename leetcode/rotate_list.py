@@ -4,6 +4,8 @@ import sys
 import unittest
 
 # number: 61
+# title: Rotate List
+# url: https://leetcode.com/problems/rotate-list/
 # section: linked list
 # difficulty: medium
 # tags: linked list, two pointers, top 150
@@ -13,7 +15,13 @@ import unittest
 # -100 <= Node.val <= 100
 # 0 <= k <= 2 * 10^9
 
-# solution: manual
+# Definition for singly-linked list.
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+# non-solution: manual
 # complexity
 # run-time: O(n)
 # space: O(1)
@@ -102,7 +110,7 @@ def rotate_right2(head, k):
 
     return new_head
 
-# solution: leetcode
+# solution: Leetcode
 # complexity
 # run-time: O(n)
 # space: O(1)

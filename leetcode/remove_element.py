@@ -5,6 +5,8 @@ import sys
 import unittest
 
 # number: 27
+# title: Remove Element
+# url: https://leetcode.com/problems/remove-element/
 # section: array/string
 # difficulty: easy
 # tags: array, two pointers, top 150
@@ -17,7 +19,7 @@ import unittest
 
 # solution: sort
 # complexity
-# run-time: O(n * log(n))
+# run-time: O(n*log n)
 # space: O(1)
 def remove_element(nums, val):
     matches = 0

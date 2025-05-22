@@ -4,6 +4,8 @@ import sys
 import unittest
 
 # number: 622
+# title: Design Circular Queue
+# url: https://leetcode.com/problems/design-circular-queue/
 # section: citadel
 # difficulty: medium
 # tags: array, linked list, design, queue, citadel
