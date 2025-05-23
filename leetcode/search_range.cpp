@@ -2,6 +2,8 @@
 #include <vector>
 
 // number: 34
+// title: Find First and Last Position of Element in Sorted Array
+// url: https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/
 // section: binary search
 // difficulty: medium
 // tags: array, binary search, top 150, meta
@@ -41,7 +43,7 @@ int binarySearch(const std::vector<int>& nums, int target)
 
 // solution: manual binary search + two pointers
 // complexity
-// run-time: O(log n) average, O(n), if all duplicates
+// run-time: O(n) worst, O(log n) average
 // space: O(1)
 std::vector<int> searchRange(const std::vector<int>& nums, int target)
 {
@@ -82,11 +84,57 @@ std::vector<int> searchRange(const std::vector<int>& nums, int target)
     return std::vector<int>{left, right};
 }
 
-// solution: C++ lower_bound
 // complexity
-// run-time: O(log n) average, O(n), if all duplicates
+// run-time: O(log n)
+// space: O(1)
+int binarySearchLeft(const std::vector<int>& nums, int target)
+{
+    if (nums.empty()) {
+        return -1;
+    }
+
+    int left = 0;
+    int right = nums.size();
+
+    while (left < right) {
+        int mid = left + (right-left) / 2;
+
+        if (nums[mid] >= target) {
+            right = mid;
+        } else {
+            left = mid+1;
+        }
+    }
+
+    return left;
+}
+
+// solution: manual binary search left
+// complexity
+// run-time: O(n) worst, O(log n) average
 // space: O(1)
 std::vector<int> searchRange2(const std::vector<int>& nums, int target)
+{
+    int left = binarySearchLeft(nums, target);
+
+    if (left < 0 || left >= nums.size() || nums[left] != target) {
+        return std::vector<int>{-1,-1};
+    }
+
+    int right = left;
+
+    while (right < nums.size() && nums[right] == target) {
+        ++right;
+    }
+
+    return std::vector<int>{left, right-1};
+}
+
+// solution: C++ lower_bound
+// complexity
+// run-time: O(n) worst, O(log n) average
+// space: O(1)
+std::vector<int> searchRange3(const std::vector<int>& nums, int target)
 {
     auto lower = std::lower_bound(nums.begin(), nums.end(), target);
 

@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 
 import bisect
-import math
 import sys
 import unittest
 
 # number: 33
+# title: Search in Rotated Sorted Array
+# url: https://leetcode.com/problems/search-in-rotated-sorted-array/
 # section: binary search
 # difficulty: medium
 # tags: array, binary search, top 150, meta

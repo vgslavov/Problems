@@ -1,6 +1,8 @@
 #include <vector>
 
 // number: 35
+// title: Search Insert Position
+// url: https://leetcode.com/problems/search-insert-position/
 // section: binary search
 // difficulty: easy
 // tags: array, binary search, top 150

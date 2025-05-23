@@ -1,6 +1,8 @@
 #include <cstddef>
 
 // number: 700
+// title: Search in a Binary Search Tree
+// url: https://leetcode.com/problems/search-in-a-binary-search-tree/
 // section: recursion
 // difficulty: easy
 // tags: tree, bst, binary tree
@@ -22,7 +24,7 @@ struct TreeNode {
     : val(x), left(left), right(right) {}
 };
 
-// solution: dfs
+// solution: recursive dfs
 // complexity
 // run-time: O(log n)
 // space: O(log n)

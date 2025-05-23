@@ -5,6 +5,8 @@ import sys
 import unittest
 
 # number: 74
+# title: Search a 2D Matrix
+# url: https://leetcode.com/problems/search-a-2d-matrix/
 # section: binary search
 # difficulty: medium
 # tags: array, binary search, matrix
@@ -14,6 +16,8 @@ import unittest
 # n == matrix[i].length
 # 1 <= m, n <= 100
 # -10^4 <= matrix[i][j], target <= 10^4
+# Each row is sorted in non-decreasing order.
+# The first integer of each row is greater than the last integer of the previous row.
 
 # complexity
 # run-time: O(log m)

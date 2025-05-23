@@ -5,6 +5,8 @@ import sys
 import unittest
 
 # number: 34
+# title: Find First and Last Position of Element in Sorted Array
+# url: https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/
 # section: binary search
 # difficulty: medium
 # tags: array, binary search, top 150, meta
@@ -40,7 +42,7 @@ def binary_search(nums, target):
 
 # solution: manual binary search + two pointers
 # complexity
-# run-time: O(log n) average, O(n), if all duplicates
+# run-time: O(n) worst, O(log n) average
 # space: O(1)
 def search_range(nums, target):
     left = binary_search(nums, target)
@@ -48,6 +50,7 @@ def search_range(nums, target):
         return [-1,-1]
 
     right = left
+    # go both left & right
     while 0 < left and right < len(nums)-1:
         if nums[left-1] == target:
             left -= 1
@@ -71,11 +74,49 @@ def search_range(nums, target):
 
     return [left,right]
 
-# solution: Pythonic bisect
 # complexity
-# run-time: O(log n) average, O(n), if all duplicates
+# run-time: O(log n)
+# space: O(1)
+def binary_search_left(nums, target):
+    if not nums:
+        return -1
+
+    left = 0
+    right = len(nums)
+
+    while left < right:
+        mid = left + (right-left) // 2
+        #print(f"left:{left},mid:{mid},right:{right}")
+
+        if nums[mid] >= target:
+            right = mid
+        else:
+            left = mid+1
+
+    return left
+
+# solution: manual binary search left
+# complexity
+# run-time: O(n) worst, O(log n) average
 # space: O(1)
 def search_range2(nums, target):
+    left = binary_search_left(nums, target)
+    #print(f"left:{left}")
+    if left < 0 or left >= len(nums) or nums[left] != target:
+        return [-1,-1]
+
+    right = left
+
+    while right < len(nums) and nums[right] == target:
+        right += 1
+
+    return [left,right-1]
+
+# solution: Pythonic bisect
+# complexity
+# run-time: O(n) worst, O(log n) average
+# space: O(1)
+def search_range3(nums, target):
     left = bisect.bisect_left(nums, target)
     if left < 0 or left >= len(nums) or nums[left] != target:
         return [-1,-1]
@@ -94,6 +135,7 @@ class TestSearchRange(unittest.TestCase):
         expected = [-1,-1]
         self.assertEqual(search_range(nums, target), expected)
         self.assertEqual(search_range2(nums, target), expected)
+        self.assertEqual(search_range3(nums, target), expected)
 
     def test1(self):
         nums = [5,7,7,8,8,10]
@@ -101,6 +143,7 @@ class TestSearchRange(unittest.TestCase):
         expected = [3,4]
         self.assertEqual(search_range(nums, target), expected)
         self.assertEqual(search_range2(nums, target), expected)
+        self.assertEqual(search_range3(nums, target), expected)
 
     def test2(self):
         nums = [5,7,7,8,8,10]
@@ -108,6 +151,7 @@ class TestSearchRange(unittest.TestCase):
         expected = [-1,-1]
         self.assertEqual(search_range(nums, target), expected)
         self.assertEqual(search_range2(nums, target), expected)
+        self.assertEqual(search_range3(nums, target), expected)
 
     def test3(self):
         nums = [5,7,7,8,8,10]
@@ -115,6 +159,7 @@ class TestSearchRange(unittest.TestCase):
         expected = [-1,-1]
         self.assertEqual(search_range(nums, target), expected)
         self.assertEqual(search_range2(nums, target), expected)
+        self.assertEqual(search_range3(nums, target), expected)
 
     def test4(self):
         nums = [1]
@@ -122,6 +167,7 @@ class TestSearchRange(unittest.TestCase):
         expected = [0,0]
         self.assertEqual(search_range(nums, target), expected)
         self.assertEqual(search_range2(nums, target), expected)
+        self.assertEqual(search_range3(nums, target), expected)
 
     def test5(self):
         nums = [2,2]
@@ -129,6 +175,7 @@ class TestSearchRange(unittest.TestCase):
         expected = [0,1]
         self.assertEqual(search_range(nums, target), expected)
         self.assertEqual(search_range2(nums, target), expected)
+        self.assertEqual(search_range3(nums, target), expected)
 
     def test6(self):
         nums = [1,3]
@@ -136,6 +183,7 @@ class TestSearchRange(unittest.TestCase):
         expected = [0,0]
         self.assertEqual(search_range(nums, target), expected)
         self.assertEqual(search_range2(nums, target), expected)
+        self.assertEqual(search_range3(nums, target), expected)
 
     def test7(self):
         nums = [1,2,3]
@@ -143,6 +191,7 @@ class TestSearchRange(unittest.TestCase):
         expected = [0,0]
         self.assertEqual(search_range(nums, target), expected)
         self.assertEqual(search_range2(nums, target), expected)
+        self.assertEqual(search_range3(nums, target), expected)
 
     def test8(self):
         nums = [1,2,2]
@@ -150,6 +199,7 @@ class TestSearchRange(unittest.TestCase):
         expected = [1,2]
         self.assertEqual(search_range(nums, target), expected)
         self.assertEqual(search_range2(nums, target), expected)
+        self.assertEqual(search_range3(nums, target), expected)
 
     def test9(self):
         nums = [3,3,3]
@@ -157,6 +207,7 @@ class TestSearchRange(unittest.TestCase):
         expected = [0,2]
         self.assertEqual(search_range(nums, target), expected)
         self.assertEqual(search_range2(nums, target), expected)
+        self.assertEqual(search_range3(nums, target), expected)
 
     def test10(self):
         nums = [2,2]
@@ -164,6 +215,7 @@ class TestSearchRange(unittest.TestCase):
         expected = [-1,-1]
         self.assertEqual(search_range(nums, target), expected)
         self.assertEqual(search_range2(nums, target), expected)
+        self.assertEqual(search_range3(nums, target), expected)
 
 if __name__ == '__main__':
     sys.exit(unittest.main())

@@ -4,6 +4,8 @@ import sys
 import unittest
 
 # number: 35
+# title: Search Insert Position
+# url: https://leetcode.com/problems/search-insert-position/
 # section: binary search
 # difficulty: easy
 # tags: array, binary search, top 150
@@ -32,7 +34,7 @@ def search_insert(nums, target):
     while start <= end:
         # don't overflow
         mid = start + (end - start) // 2
-        print('start:{}, mid:{}, end:{}'.format(start, mid, end))
+        #print('start:{}, mid:{}, end:{}'.format(start, mid, end))
 
         # found
         if target == nums[mid]:

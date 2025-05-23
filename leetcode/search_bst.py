@@ -4,6 +4,8 @@ import sys
 import unittest
 
 # number: 700
+# title: Search in a Binary Search Tree
+# url: https://leetcode.com/problems/search-in-a-binary-search-tree/
 # section: recursion
 # difficulty: easy
 # tags: tree, bst, binary tree
@@ -21,7 +23,7 @@ class TreeNode:
         self.left = left
         self.right = right
 
-# solution: dfs
+# solution: recursive dfs
 # complexity
 # run-time: O(log n)
 # space: O(n)
