@@ -4,6 +4,8 @@ import sys
 import unittest
 
 # number: 69
+# title: Sqrt(x)
+# url: https://leetcode.com/problems/sqrtx/
 # section: math
 # difficulty: easy
 # tags: math, binary search, top 150, citadel
@@ -11,13 +13,13 @@ import unittest
 # constraints
 # 0 <= x <= 2^31 - 1
 
-# solution: binary search
-# complexity
-# run-time: O(n)
-# space: O(1)
 def check(x, k):
     return False if k*k > x else True
 
+# solution: binary search
+# complexity
+# run-time: O(log n)
+# space: O(1)
 def sqrt(x):
     if not x:
         return 0

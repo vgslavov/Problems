@@ -2,6 +2,8 @@
 #include <vector>
 
 // number: 108
+// title: Convert Sorted Array to Binary Search Tree
+// url: https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/
 // section: divide & conquer
 // difficulty: easy
 // tags: array, divide & conquer, tree, bst, binary tree, top 150
@@ -29,12 +31,12 @@ TreeNode* dfs(const std::vector<int>& nums, int left, int right)
     }
 
     // choose root as left middle
-    int p = (left+right) / 2;
+    int mid = (left+right) / 2;
 
     // pre-order traversal
-    TreeNode* root = new TreeNode(nums[p]);
-    root->left = dfs(nums, left, p-1);
-    root->right = dfs(nums, p+1, right);
+    TreeNode* root = new TreeNode(nums[mid]);
+    root->left = dfs(nums, left, mid-1);
+    root->right = dfs(nums, mid+1, right);
 
     return root;
 }

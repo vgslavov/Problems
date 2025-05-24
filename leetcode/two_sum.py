@@ -5,6 +5,8 @@ import sys
 import unittest
 
 # number: 1
+# title: Two Sum
+# url: https://leetcode.com/problems/two-sum/
 # section: hashmap
 # difficulty: easy
 # tags: array, hash table, top 150
@@ -29,7 +31,7 @@ def two_sum1(nums, target):
 
 # solution: dict of lists
 # complexity
-# run-time: O(n*k)?
+# run-time: O(n^2)
 # space: O(n)
 def two_sum2(nums, target):
     # value to list indices
@@ -44,7 +46,7 @@ def two_sum2(nums, target):
         if sub not in d:
             continue
 
-        # this can become O(n^2) if many/all duplicates?
+        # O(n^2) if all duplicates
         for idx in d[sub]:
             if idx != i:
                 return [i, idx]

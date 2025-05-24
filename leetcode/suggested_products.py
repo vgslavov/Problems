@@ -4,6 +4,8 @@ import sys
 import unittest
 
 # number: 1268
+# title: Search Suggestions System
+# url: https://leetcode.com/problems/search-suggestions-system/
 # section: citadel
 # difficulty: medium
 # tags: array, string, binary search, trie, sorting, heap, prio queue, citadel
@@ -18,11 +20,16 @@ import unittest
 # products[i] consists of lowercase English letters.
 # 1 <= m <= 1000
 # searchWord consists of lowercase English letters.
+#
+# If there are more than three products with a common prefix
+# return the three lexicographically minimums products.
 
 def check(item, pattern):
     return True if item[:len(pattern)] >= pattern else False
 
 # duplicates, return left-most
+# run-time: O(log n)
+# space: O(1)
 def binary_search(products, prefix):
     left = 0
     right = len(products)

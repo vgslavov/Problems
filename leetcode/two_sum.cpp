@@ -2,6 +2,8 @@
 #include <vector>
 
 // number: 1
+// title: Two Sum
+// url: https://leetcode.com/problems/two-sum/
 // section: hashmap
 // difficulty: easy
 // tags: array, hash table, top 150

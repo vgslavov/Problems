@@ -3,6 +3,8 @@
 #include <utility>
 
 // number: 1268
+// title: Search Suggestions System
+// url: https://leetcode.com/problems/search-suggestions-system/
 // section: citadel
 // difficulty: medium
 // tags: array, string, binary search, trie, sorting, heap, prio queue, citadel
@@ -17,17 +19,18 @@
 // products[i] consists of lowercase English letters.
 // 1 <= m <= 1000
 // searchWord consists of lowercase English letters.
+//
+// If there are more than three products with a common prefix
+// return the three lexicographically minimums products.
 
 bool check(const std::string& item, const std::string& prefix)
 {
-    if (item.substr(0, prefix.size()) >= prefix) {
-        return true;
-    }
-
-    return false;
+    return item.substr(0, prefix.size()) >= prefix;
 }
 
 // duplicates, return left-most
+// run-time: O(log n)
+// space: O(1)
 int binarySearch(
     const std::vector<std::string>& products, const std::string& prefix)
 {
@@ -58,8 +61,10 @@ std::vector<std::vector<std::string>> suggestedProducts(
     std::string prefix;
     size_t k = 3;
 
+    // O(n*log n)
     std::sort(products.begin(), products.end());
 
+    // O(m*log n)
     for (const auto& c: searchWord) {
         prefix += c;
 

@@ -1,6 +1,8 @@
 #include <cstddef>
 
 // number: 148
+// title: Sort List
+// url: https://leetcode.com/problems/sort-list/
 // section: divide & conquer
 // difficulty: medium
 // tags: linked list, two pointers, divide & conquer, sorting, merge sort,
@@ -19,7 +21,9 @@ struct ListNode {
     ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
 
+// solution: two pointers
 // run-time: O(n)
+// space: O(1)
 ListNode* merge(ListNode* list1, ListNode* list2)
 {
     ListNode* head = new ListNode();
@@ -42,7 +46,9 @@ ListNode* merge(ListNode* list1, ListNode* list2)
     return head->next;
 }
 
+// solution: fast & slow pointers
 // run-time: O(n)
+// space: O(1)
 ListNode* findMid(ListNode* head)
 {
     if (!head) {
@@ -64,7 +70,7 @@ ListNode* findMid(ListNode* head)
     return mid;
 }
 
-// solution: LeetCode fast/slow ptrs + merge sort
+// solution: LeetCode recursive divide & conquer
 // complexity:
 // run-time: O(n*log n)
 // space: O(log n)

@@ -4,6 +4,8 @@ import sys
 import unittest
 
 # number: 211
+# title: Add and Search Word - Data structure design
+# url: https://leetcode.com/problems/add-and-search-word-data-structure-design/
 # section: trie
 # difficulty: medium
 # tags: string, dfs, design, trie, top 150
@@ -56,8 +58,8 @@ class WordDictionary:
                     if dfs(i+1, node.children[child]):
                         return True
             else:
-                # not a loop!
                 # recursively go through children of word's char only
+                # not a loop!
                 if c in node.children:
                     if dfs(i+1, node.children[c]):
                         return True
@@ -66,7 +68,7 @@ class WordDictionary:
 
         return dfs(0, self.root)
 
-# bad
+# non-solution
 class WordDictionaryBad:
 
     def __init__(self):

@@ -1,7 +1,10 @@
 #include <map>
+#include <string>
 #include <utility>
 
 // number: 208
+// title: Implement Trie (Prefix Tree)
+// url: https://leetcode.com/problems/implement-trie-prefix-tree/
 // section: trie (prefix tree)
 // difficulty: medium
 // tags: hash table, string, design, trie, top 150, citadel
@@ -15,58 +18,48 @@
 // complexity
 // run-time: O(n)
 // space: O(n*m)
-#include <map>
-
 class Trie {
 public:
-    using ChildrenMap = std::map<char, Trie>;
+    using ChildrenMap = std::map<char, Trie*>;
 
-    Trie()
-    : d_isendword(false)
-    {
-    }
+    Trie() = default;
 
-    void insert(const string& word) {
+    void insert(const std::string& word) {
         Trie* curr = this;
 
         for (const auto& c: word) {
-            //ChildrenMap& children = curr->children();
             ChildrenMap& children = curr->d_children;
             auto itr = children.find(c);
             if (itr == children.end()) {
-                children[c] = Trie();
+                children[c] = new Trie();
                 // if we had to move it
                 //Trie newTrie = Trie();
                 //children.insert(std::make_pair(c, std::move(newTrie)));
             }
 
-            //curr = &curr->children()[c];
-            curr = &curr->d_children[c];
+            curr = curr->d_children[c];
         }
 
         curr->isendword(true);
     }
 
-    bool search(const string& word) {
+    bool search(const std::string& word) {
         return searchHelper(word, true);
     }
 
-    bool startsWith(const string& prefix) {
+    bool startsWith(const std::string& prefix) {
         return searchHelper(prefix);
     }
 
     void isendword(bool val) { d_isendword = val; }
 
-    //ChildrenMap& children() { return d_children; }
-
     bool isendword() const { return d_isendword; }
 
 private:
-    bool searchHelper(const string& word, bool checkEndWord=false) {
+    bool searchHelper(const std::string& word, bool checkEndWord=false) {
         Trie* curr = this;
 
         for (const auto& c: word) {
-            //ChildrenMap& children = curr->children();
             // can access private members of other instances of same class!
             ChildrenMap& children = curr->d_children;
             const auto itr = children.find(c);
@@ -74,8 +67,7 @@ private:
                 return false;
             }
 
-            //curr = &curr->children()[c];
-            curr = &curr->d_children[c];
+            curr = curr->d_children[c];
         }
 
         if (!checkEndWord || curr->isendword()) {
@@ -86,7 +78,7 @@ private:
     }
 
     ChildrenMap d_children;
-    bool        d_isendword;
+    bool        d_isendword = false;
 };
 
 // Your Trie object will be instantiated and called as such:

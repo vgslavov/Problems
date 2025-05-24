@@ -2,8 +2,8 @@
 #include <unordered_map>
 
 // number: 1971
-// title: Valid Path in a Graph
-// url: https://leetcode.com/problems/valid-path-in-a-graph/
+// title:  Find if Path Exists in Graph
+// url: https://leetcode.com/problems/find-if-path-exists-in-graph
 // section: graph
 // difficulty: easy
 // tags: dfs, bfs, union find, graph

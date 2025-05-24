@@ -4,6 +4,8 @@ import sys
 import unittest
 
 # number: 71
+# title: Simplify Path
+# url: https://leetcode.com/problems/simplify-path/
 # section: stack
 # difficulty: medium
 # tags: string, stack, top 150
@@ -13,6 +15,7 @@ import unittest
 # path consists of English letters, digits, period '.', slash '/' or '_'.
 # path is a valid absolute Unix path.
 
+# solution: stack
 # complexity
 # run-time: O(n)
 # space: O(n)
@@ -48,7 +51,7 @@ def simplify_path(path):
 
     return '/' + '/'.join(s)
 
-# TODO: refactor, ugly!
+# TODO: solve recursively & refactor, ugly!
 
 class TestSimplifyPath(unittest.TestCase):
 

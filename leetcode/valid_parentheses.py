@@ -4,6 +4,8 @@ import sys
 import unittest
 
 # number: 20
+# title: Valid Parentheses
+# url: https://leetcode.com/problems/valid-parentheses/
 # section: stack
 # difficulty: easy
 # tags: string, stack, top 150
@@ -12,34 +14,28 @@ import unittest
 # 1 <= s.length <= 10^4
 # s consists of parentheses only '()[]{}'.
 
+# solution: stack
 # complexity
 # run-time: O(n)
 # space: O(n)
-# TODO: refactor ugly code, use dict to match open/close
 def is_valid(s):
     stack = []
+    mapping = {')':'(', '}':'{', ']':'['}
 
     for i in range(len(s)):
-        if s[i] == '(' or s[i] == '{' or s[i] == '[':
+        # opening brackets: keep adding
+        if s[i] in mapping.values():
             stack.append(s[i])
-        elif s[i] == ')':
-            if not stack or stack[-1] != '(':
-                return False
-            else:
-                stack.pop()
-        elif s[i] == '}':
-            if not stack or stack[-1] != '{':
-                return False
-            else:
-                stack.pop()
-        elif s[i] == ']':
-            if not stack or stack[-1] != '[':
+        # closing brackets: match
+        elif s[i] in mapping.keys():
+            if not stack or stack[-1] != mapping[s[i]]:
                 return False
             else:
                 stack.pop()
         else:
             print("invalid char")
 
+    # if empty, everything matched
     return not len(stack)
 
 class TestValidParentheses(unittest.TestCase):

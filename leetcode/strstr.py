@@ -4,6 +4,8 @@ import sys
 import unittest
 
 # number: 28
+# title: Find the Index of the First Occurrence in a String
+# url: https://leetcode.com/problems/implement-strstr/
 # section: array/string
 # difficulty: easy
 # tags: two pointers, string, string matching, top 150
@@ -46,7 +48,7 @@ def strstr1(haystack, needle):
 
 # solution: slicing
 # complexity
-# run-time: O((n-m+1)*m)
+# run-time: O(n*m)
 # space: O(1)
 def strstr2(haystack, needle):
     if not haystack or not needle:
@@ -60,6 +62,32 @@ def strstr2(haystack, needle):
 
     return -1
 
+# solution: manual slicing
+# complexity
+# run-time: O(n*m)
+# space: O(1)
+def strstr3(haystack, needle):
+    if not haystack or not needle:
+        return -1
+    elif haystack == needle:
+        return 0
+
+    n = len(haystack)
+    m = len(needle)
+
+    # don't go to end of haystack
+    # because we need to check m characters
+    for i in range(n-m+1):
+        for j in range(m):
+            if haystack[i+j] != needle[j]:
+                break
+
+            # matched all characters of needle
+            if j == m-1:
+                return i
+
+    return -1
+
 # TODO: O(n) using sliding window?
 
 class TestStrstr(unittest.TestCase):
@@ -68,30 +96,35 @@ class TestStrstr(unittest.TestCase):
         n = ''
         self.assertEqual(strstr1(h, n), -1)
         self.assertEqual(strstr2(h, n), -1)
+        self.assertEqual(strstr3(h, n), -1)
 
     def test_single(self):
         h = 'a'
         n = 'a'
         self.assertEqual(strstr1(h, n), 0)
         self.assertEqual(strstr2(h, n), 0)
+        self.assertEqual(strstr3(h, n), 0)
 
     def test_last(self):
         h = 'abc'
         n = 'c'
         self.assertEqual(strstr1(h, n), 2)
         self.assertEqual(strstr2(h, n), 2)
+        self.assertEqual(strstr3(h, n), 2)
 
     def test_first(self):
         h = 'sadbutsad'
         n = 'sad'
         self.assertEqual(strstr1(h, n), 0)
         self.assertEqual(strstr2(h, n), 0)
+        self.assertEqual(strstr3(h, n), 0)
 
     def test_notfound(self):
         h = 'leetcode'
         n = 'leeto'
         self.assertEqual(strstr1(h, n), -1)
         self.assertEqual(strstr2(h, n), -1)
+        self.assertEqual(strstr3(h, n), -1)
 
     def test_repetition(self):
         h = 'mississipi'
@@ -99,6 +132,7 @@ class TestStrstr(unittest.TestCase):
         # TODO: fix bug
         #self.assertEqual(strstr1(h, n), 4)
         self.assertEqual(strstr2(h, n), 4)
+        self.assertEqual(strstr3(h, n), 4)
 
 if __name__ == '__main__':
     sys.exit(unittest.main())

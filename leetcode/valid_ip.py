@@ -6,6 +6,8 @@ import sys
 import unittest
 
 # number: 468
+# title: Validate IP Address
+# url: https://leetcode.com/problems/validate-ip-address/
 # section: meta
 # difficulty: medium
 # tags: string, meta

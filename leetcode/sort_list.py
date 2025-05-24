@@ -4,6 +4,8 @@ import sys
 import unittest
 
 # number: 148
+# title: Sort List
+# url: https://leetcode.com/problems/sort-list/
 # section: divide & conquer
 # difficulty: medium
 # tags: linked list, two pointers, divide & conquer, sorting, merge sort,
@@ -19,6 +21,7 @@ class ListNode:
         self.val = val
         self.next = next
 
+# solution: two pointers
 # run-time: O(n)
 def merge(list1, list2):
     head = ListNode()
@@ -39,7 +42,9 @@ def merge(list1, list2):
 
     return head.next
 
+# solution: fast & slow pointers
 # run-time: O(n)
+# space: O(1)
 def find_mid(head):
     if not head:
         return None
@@ -57,7 +62,7 @@ def find_mid(head):
 
     return mid
 
-# solution: LeetCode fast/slow ptrs + merge sort
+# solution: LeetCode recursive divide & conquer
 # complexity:
 # run-time: O(n*log n)
 # space: O(log n)

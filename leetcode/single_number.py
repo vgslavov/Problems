@@ -4,6 +4,8 @@ import sys
 import unittest
 
 # number: 136
+# title: Single Number
+# url: https://leetcode.com/problems/single-number/
 # section: bit manipulation
 # difficulty: easy
 # tags: array, bit manipulation, top 150, leetcode 75

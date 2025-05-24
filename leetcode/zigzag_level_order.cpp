@@ -3,6 +3,8 @@
 #include <vector>
 
 // number: 103
+// title: Binary Tree Zigzag Level Order Traversal
+// url: https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/
 // section: binary tree bfs
 // difficulty: medium
 // tags: tree, bfs, binary tree, top 150

@@ -4,6 +4,8 @@ import sys
 import unittest
 
 # number: 290
+# title: Word Pattern
+# url: https://leetcode.com/problems/word-pattern/
 # section: hashmap
 # difficulty: easy
 # tags: hash table, string, top 150
@@ -33,15 +35,13 @@ def word_pattern1(pattern, s):
     w2p = {}
 
     for i in range(len(pattern)):
-        if pattern[i] in p2w:
-            if p2w[pattern[i]] != words[i]:
-                return False
+        if pattern[i] in p2w and p2w[pattern[i]] != words[i]:
+            return False
         else:
             p2w[pattern[i]] = words[i]
 
-        if words[i] in w2p:
-            if w2p[words[i]] != pattern[i]:
-                return False
+        if words[i] in w2p and w2p[words[i]] != pattern[i]:
+            return False
         else:
             w2p[words[i]] = pattern[i]
 
@@ -49,8 +49,8 @@ def word_pattern1(pattern, s):
 
 # solution: two pointers + 2 dicts
 # complexity
-# run-time: O(n), slow?
-# space: O(n)?
+# run-time: O(n), slow
+# space: O(n)
 def word_pattern2(pattern, s):
     p2w = {}
     w2p = {}

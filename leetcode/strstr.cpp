@@ -1,6 +1,8 @@
 #include <string>
 
 // number: 28
+// title: Find the Index of the First Occurrence in a String
+// url: https://leetcode.com/problems/implement-strstr/
 // section: array/string
 // difficulty: easy
 // tags: two pointers, string, string matching, top 150
@@ -11,7 +13,7 @@
 
 // solution: substr
 // complexity
-// run-time: O((n-m+1)*m)
+// run-time: O(n*m)
 // space: O(1)
 int strStr(const std::string& haystack, const std::string& needle)
 {
@@ -24,6 +26,33 @@ int strStr(const std::string& haystack, const std::string& needle)
     for (size_t i = 0; i != haystack.size(); ++i) {
         if (haystack.substr(i, needle.size()) == needle) {
             return i;
+        }
+    }
+
+    return -1;
+}
+
+// non-solution: manual substr
+// complexity
+// run-time: O(n*m), TLE
+// space: O(1)
+int strStr2(const std::string& haystack, const std::string& needle) {
+    if (haystack.empty() || needle.empty()) {
+        return -1;
+    } else if (haystack == needle) {
+        return 0;
+    }
+
+    for (size_t i = 0; i != haystack.size()-needle.size()+1; ++i) {
+        for (size_t j = 0; j != needle.size(); ++j) {
+            // prevent index out of range
+            if (i+j >= haystack.size() || haystack[i+j] != needle[j]) {
+                break;
+            }
+
+            if (j == needle.size()-1) {
+                return i;
+            }
         }
     }
 

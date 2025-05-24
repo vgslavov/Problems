@@ -3,6 +3,8 @@
 #include <vector>
 
 // number: 167
+// title: Two Sum II - Input array is sorted
+// url: https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/
 // section: two pointers
 // difficulty: medium
 // tags: array, two pointers, binary search, top 150
@@ -30,7 +32,7 @@ std::vector<int> twoSum2(const std::vector<int>& numbers, int target)
             continue;
         }
 
-        if ((*it+*dit) == target) {
+        if ((*it + *dit) == target) {
             int first = std::distance(numbers.begin(), it);
             int second = std::distance(numbers.begin(), dit);
 
@@ -89,6 +91,28 @@ std::vector<int> twoSum2_2(const std::vector<int>& numbers, int target)
             std::sort(ans.begin(), ans.end());
 
             return ans;
+        }
+    }
+
+    return std::vector<int>{-1,-1};
+}
+
+// solution: Leetcode two pointers
+// complexity
+// run-time: O(n)
+// space: O(1)
+std::vector<int> twoSum2_3(const std::vector<int>& numbers, int target)
+{
+    int left = 0;
+    int right = numbers.size()-1;
+
+    while (left < right) {
+        if (numbers[left] + numbers[right] == target) {
+            return std::vector<int>{left+1,right+1};
+        } else if (numbers[left] + numbers[right] < target) {
+            ++left;
+        } else {
+            --right;
         }
     }
 

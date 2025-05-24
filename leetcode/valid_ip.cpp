@@ -4,6 +4,8 @@
 #include <vector>
 
 // number: 468
+// title: Validate IP Address
+// url: https://leetcode.com/problems/validate-ip-address/
 // section: meta
 // difficulty: medium
 // tags: string, meta
@@ -32,6 +34,7 @@ bool tokenize(
         //std::cout << "str:" << str << std::endl;
 
         tokens.push_back(str.substr(0, pos));
+        // delete from start to pos including delimeter
         str.erase(0, pos + delimeter.length());
         pos = str.find(delimeter);
     }

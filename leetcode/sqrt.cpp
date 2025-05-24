@@ -1,4 +1,6 @@
 // number: 69
+// title: Sqrt(x)
+// url: https://leetcode.com/problems/sqrtx/
 // section: math
 // difficulty: easy
 // tags: math, binary search, top 150, citadel
@@ -6,21 +8,17 @@
 // constraints
 // 0 <= x <= 2^31 - 1
 
-// solution: binary search
-// complexity
-// run-time: O(n)
-// space: O(1)
-
 // long int: prevent overflow when squaring!
 bool check(int x, long int k) {
-    if (k*k > x) {
-        return false;
-    }
-
-    return true;
+    return k*k <= x;
 }
 
-int mySqrt(int x) {
+// solution: binary search
+// complexity
+// run-time: O(log n)
+// space: O(1)
+int mySqrt(int x)
+{
     // start at 1!
     int left = 1;
     int right = x;

@@ -1,6 +1,8 @@
 #include <utility>
 
 // number: 24
+// title: Swap Nodes in Pairs
+// url: https://leetcode.com/problems/swap-nodes-in-pairs/
 // section: recursion
 // difficulty: medium
 // tags: linked list, recursion
