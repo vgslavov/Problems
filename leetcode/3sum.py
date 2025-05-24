@@ -6,6 +6,8 @@ import sys
 import unittest
 
 # number: 15
+# title: 3Sum
+# url: https://leetcode.com/problems/3sum/
 # section: two pointers
 # difficulty: medium
 # tags: array, two pointers, sorting, top 150, meta
@@ -18,7 +20,7 @@ import unittest
 # such that i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0.
 # the solution set must not contain duplicate triplets
 
-# solution: brute-force, dict + set
+# non-solution: brute-force, dict + set
 # run-time: O(n^3), too slow, TLE
 # space: O(n)
 def three_sum(nums):
@@ -167,7 +169,7 @@ def two_sum_binsearch(nums, k, ans):
 
         ans.add(tuple(sorted([nums[i],nums[diff_idx],nums[k]])))
 
-# solution: sort + two-sum using binary search
+# non-solution: sort + two-sum using binary search
 # run-time: O(n*log n + (n^2)*log n) ~ O((n^2)*log n), too slow, TLE
 # space: O(n)
 def three_sum3(nums):
@@ -191,49 +193,51 @@ def three_sum3(nums):
 
     return sorted([list(v) for v in ans])
 
-# WIP solution: two pointers
-# run-time: O(n^2)?
-# space: O(1)
-# TODO: finish/fix
+# number: 167
+# complexity
+# run-time: O(n)
+# space: O(n)
+def twoSum2(nums, k, ans):
+    left = 0
+    right = len(nums)-1
+
+    while left < right:
+        if left == k or nums[left] + nums[right] < -nums[k]:
+            left += 1
+        elif right == k or nums[left] + nums[right] > -nums[k]:
+            right -= 1
+        # i + j + k = 0
+        # i + j = -k
+        else:
+            ans.add(tuple(sorted([nums[left],nums[right],nums[k]])))
+            left += 1
+            right -= 1
+
+# solution: Leetcode, sort + two-sum using two pointers 
+# complexity
+# run-time: O(n*log n + n^2) ~ O(n^2)
+# space: O(n)
 def three_sum4(nums):
+    if not nums:
+        return []
+
     # O(n*log n)
     nums.sort()
-
-    i = 0
-    j = len(nums)-1
 
     ans = set()
 
     # O(n)
-    while i < j:
-        third = -nums[i] - nums[j]
+    for k in range(len(nums)):
+        # optimization: can't add to 0 w/o negative number
+        if nums[k] > 0:
+            break
 
-        # O(log n)
-        k = bisect.bisect_left(nums, third)
-        print(f"third:{third} @ k:{k}")
-
-        # not found
-        if k >= len(nums) or nums[k] != third:
-            if nums[i] > nums[j]:
-                i += 1
-            else:
-                j -= 1
+        # optimization: skip dupes
+        if k != 0 and nums[k-1] == nums[k]:
             continue
 
-        # same
-        if i == j or i == k or j == k:
-            if nums[i] > nums[j]:
-                i += 1
-            else:
-                j -= 1
-            continue
-
-        ans.add(tuple(sorted([nums[i],nums[j],nums[k]])))
-
-        if nums[i] > nums[j]:
-            i += 1
-        else:
-            j -= 1
+        # O(n)
+        twoSum2(nums, k, ans)
 
     return sorted([list(v) for v in ans])
 
@@ -244,6 +248,7 @@ class TestThreeSum(unittest.TestCase):
         self.assertEqual(three_sum(nums), expected)
         self.assertEqual(three_sum2(nums), expected)
         self.assertEqual(three_sum3(nums), expected)
+        self.assertEqual(three_sum4(nums), expected)
 
     def test_0s(self):
         nums = [0,0,0]
@@ -251,6 +256,7 @@ class TestThreeSum(unittest.TestCase):
         self.assertEqual(three_sum(nums), expected)
         self.assertEqual(three_sum2(nums), expected)
         self.assertEqual(three_sum3(nums), expected)
+        self.assertEqual(three_sum4(nums), expected)
 
     def test_many_0s(self):
         nums = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -277,6 +283,7 @@ class TestThreeSum(unittest.TestCase):
         self.assertEqual(three_sum(nums), expected)
         self.assertEqual(three_sum2(nums), expected)
         self.assertEqual(three_sum3(nums), expected)
+        self.assertEqual(three_sum4(nums), expected)
 
     def test1(self):
         nums = [-1,0,1,2,-1,-4]
@@ -284,6 +291,7 @@ class TestThreeSum(unittest.TestCase):
         self.assertEqual(three_sum(nums), expected)
         self.assertEqual(three_sum2(nums), expected)
         self.assertEqual(three_sum3(nums), expected)
+        self.assertEqual(three_sum4(nums), expected)
 
     def test2(self):
         nums = [3,0,-2,-1,1,2]
@@ -291,6 +299,7 @@ class TestThreeSum(unittest.TestCase):
         self.assertEqual(three_sum(nums), expected)
         self.assertEqual(three_sum2(nums), expected)
         self.assertEqual(three_sum3(nums), expected)
+        self.assertEqual(three_sum4(nums), expected)
 
 if __name__ == '__main__':
     sys.exit(unittest.main())

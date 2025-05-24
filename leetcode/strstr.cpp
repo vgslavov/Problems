@@ -34,7 +34,7 @@ int strStr(const std::string& haystack, const std::string& needle)
 
 // non-solution: manual substr
 // complexity
-// run-time: O(n*m), TLE
+// run-time: O(n*m), why TLE? (same as Python)
 // space: O(1)
 int strStr2(const std::string& haystack, const std::string& needle) {
     if (haystack.empty() || needle.empty()) {

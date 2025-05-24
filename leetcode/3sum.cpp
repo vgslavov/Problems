@@ -5,6 +5,8 @@
 #include <vector>
 
 // number: 15
+// title: 3Sum
+// url: https://leetcode.com/problems/3sum/
 // section: two pointers
 // difficulty: medium
 // tags: array, two pointers, sorting, top 150, meta
@@ -17,7 +19,7 @@
 // such that i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0.
 // the solution set must not contain duplicate triplets
 
-// solution: brute-force, map + set
+// non-solution: brute-force, map + set
 // run-time: O(n^3), too slow, TLE
 // space: O(n)
 std::vector<std::vector<int>> threeSum(const std::vector<int>& nums)
@@ -106,9 +108,10 @@ void twoSum(const std::vector<int>& nums, int k, std::set<std::vector<int>>& ans
 }
 
 // solution: LeetCode, sort + two-sum using set
+// complexity
 // run-time: O(n*log n + n^2) ~ O(n^2)
 // space: O(n)
-std::vector<std::vector<int>> threeSum(std::vector<int>& nums) {
+std::vector<std::vector<int>> threeSum2(std::vector<int>& nums) {
     std::vector<std::vector<int>> ans;
 
     if (nums.empty()) {
@@ -131,6 +134,85 @@ std::vector<std::vector<int>> threeSum(std::vector<int>& nums) {
         }
 
         twoSum(nums, k, seen);
+    }
+
+    std::copy(seen.begin(), seen.end(), std::back_inserter(ans));
+    std::sort(ans.begin(), ans.end());
+
+    return ans;
+}
+
+// number: 167
+// complexity
+// run-time: O(n)
+// space: O(n)
+void twoSum2(const std::vector<int>& nums, int k, std::set<std::vector<int>>& seen)
+{
+    int left = 0;
+    int right = nums.size()-1;
+
+    while (left < right) {
+        if (left == k || nums[left] + nums[right] < -nums[k]) {
+            ++left;
+        } else if (right == k || nums[left] + nums[right] > -nums[k]) {
+            --right;
+        // i + j + k = 0
+        // i + j = -k
+        } else if (nums[left] + nums[right] == -nums[k]) {
+            std::vector<int> v{nums[left], nums[right], nums[k]};
+            std::sort(v.begin(), v.end());
+            seen.insert(v);
+
+            // optimization: skip dupes
+            while (left < right && nums[left] == nums[left+1]) {
+                ++left;
+            }
+            while (left < right && nums[right] == nums[right-1]) {
+                --right;
+            }
+
+            ++left;
+            --right;
+        } else {
+            std::vector<int> v{nums[left],nums[right],nums[k]};
+            std::sort(v.begin(), v.end());
+            seen.insert(v);
+            ++left;
+            --right;
+        }
+    }
+}
+
+// solution: LeetCode, sort + two-sum using two pointers
+// complexity
+// run-time: O(n*log n + n^2) ~ O(n^2)
+// space: O(n)
+std::vector<std::vector<int>> threeSum3(std::vector<int>& nums)
+{
+    std::vector<std::vector<int>> ans;
+    if (nums.empty()) {
+        return ans;
+    }
+
+    std::set<std::vector<int>> seen;
+
+    // O(n*log n)
+    std::sort(nums.begin(), nums.end());
+
+    // O(n)
+    for (size_t k = 0; k != nums.size(); ++k) {
+        // optimization
+        if (nums[k] > 0) {
+            break;
+        }
+
+        // optimization: skip dupes
+        if (k != 0 && nums[k-1] == nums[k]) {
+            continue;
+        }
+
+        // O(n)
+        twoSum2(nums, k, seen);
     }
 
     std::copy(seen.begin(), seen.end(), std::back_inserter(ans));
