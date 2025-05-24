@@ -259,6 +259,17 @@ def fn(root):
 
     return ans
 
+# Graph: build adjacency list
+def fn(edges):
+    graph = defaultdict(list)
+
+    for x,y in edges:
+        graph[x].append(y)
+        # if undirected graph
+        graph[y].append(x)
+
+    return graph
+
 # Graph: DFS (recursive)
 def fn(graph):
     def dfs(node):

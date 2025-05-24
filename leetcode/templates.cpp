@@ -394,6 +394,21 @@ int bfs(TreeNode* root)
     return ans;
 }
 
+// Graph: build adjacency list
+std::unordered_map<int, std::vector<int>> fn(
+    const std::vector<std::vector<int>>& edges)
+{
+    std::unordered_map<int, std::vector<int>> graph;
+
+    for (const auto& e : edges) {
+        graph[e[0]].push_back(e[1]);
+        // undirected graph
+        graph[e[1]].push_back(e[0]);
+    }
+
+    return graph;
+}
+
 // Graph: recursive DFS
 int dfs(int node,
         const std::unordered_map<int, std::vector<int>>& graph,
