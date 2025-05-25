@@ -4,7 +4,9 @@
 #include <vector>
 
 // number: 703
-// related: 215
+// similar: 215
+// title: Kth Largest Element in a Stream
+// url: https://leetcode.com/problems/kth-largest-element-in-a-stream/
 // section:
 // difficulty: easy
 // tags: tree, design, bst, heap, binary tree, data stream
@@ -24,7 +26,7 @@
 // space: O(k)
 class KthLargest {
 public:
-    KthLargest(int k, const vector<int>& nums)
+    KthLargest(int k, const std::vector<int>& nums)
     : d_k(k)
     {
         // don't init, have to go through all nums!

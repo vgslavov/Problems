@@ -67,10 +67,13 @@ public:
     {
         // have to check self-assign!
         if (this == &rhs) return *this;
+
         d_size = rhs.d_size;
         rhs.d_size = 0;
+
         d_buf = rhs.d_buf;
         rhs.d_buf = nullptr;
+
         return *this;
     }
 
@@ -87,7 +90,7 @@ private:
     T* d_buf = nullptr;
 };
 
-// non-member assign op
+// non-member cmp op
 template <typename T>
 bool operator==(const Example<T>& rhs, const Example<T>& lhs) noexcept
 {
@@ -103,7 +106,7 @@ void swap(Example<T>& rhs, Example<T>& lhs)
 }
 
 // Two pointers: one input, opposite ends
-int fn(const std::vector<int>& v)
+int twoPointers(const std::vector<int>& v)
 {
     int ans = 0;
     int left = 0;
@@ -121,7 +124,7 @@ int fn(const std::vector<int>& v)
 }
 
 // Two pointers: two inputs, exhaust both
-int fn(const std::vector<int>& v1, const std::vector<int>& v2)
+int twoPointers(const std::vector<int>& v1, const std::vector<int>& v2)
 {
     int i = 0;
     int j = 0;
@@ -150,7 +153,7 @@ int fn(const std::vector<int>& v1, const std::vector<int>& v2)
 }
 
 // Sliding window
-int fn(const std::vector<int>& v)
+int slidingWindow(const std::vector<int>& v)
 {
     int ans = 0;
     int left = 0;
@@ -172,7 +175,7 @@ int fn(const std::vector<int>& v)
 }
 
 // Sliding *fixed* window
-int fn(const std::vector<int>& v, int k)
+int slidingWindow(const std::vector<int>& v, int k)
 {
     int ans = 0;
     int curr = 0;
@@ -194,10 +197,11 @@ int fn(const std::vector<int>& v, int k)
 }
 
 // Build a prefix sum
-std::vector<int> fn(const std::vector<int>& v)
+std::vector<int> prefixSum(const std::vector<int>& v)
 {
     std::vector<int> prefix{v[0]};
 
+    // start at 1
     for (size_t i = 1; i != v.size(); ++i) {
         prefix.push_back(prefix[i-1] + v[i]);
     }
@@ -207,7 +211,7 @@ std::vector<int> fn(const std::vector<int>& v)
 
 // Efficient string building
 // v is a list of chars
-std::string fn(const std::vector<std::string>& v)
+std::string buildString(const std::vector<std::string>& v)
 {
     return std::string(v.begin(), v.end());
 }
@@ -221,7 +225,7 @@ struct ListNode {
 };
 
 // Linked list: fast and slow pointer
-int fn(ListNode* head)
+int fastSlowPtr(ListNode* head)
 {
     ListNode* slow = head;
     ListNode* fast = head;
@@ -237,7 +241,7 @@ int fn(ListNode* head)
 }
 
 // Linked list: fast & slow k apart
-ListNode* fn(ListNode* head, int k)
+ListNode* fastSlowPtr(ListNode* head, int k)
 {
     ListNode* slow = head;
     ListNode* fast = head;
@@ -257,7 +261,7 @@ ListNode* fn(ListNode* head, int k)
 }
 
 // Linked list: dummy nodes
-ListNode* fn(ListNode* head)
+ListNode* dummyNodes(ListNode* head)
 {
     ListNode* dummy = new ListNode(0, head);
     ListNode* fast = head;
@@ -276,7 +280,7 @@ ListNode* fn(ListNode* head)
 }
 
 // Reversing a linked list
-ListNode* fn(ListNode* head)
+ListNode* reverseList(ListNode* head)
 {
     ListNode* curr = head;
     ListNode* prev = nullptr;
@@ -291,8 +295,8 @@ ListNode* fn(ListNode* head)
     return prev;
 }
 
-// intervals
-std::vector<std::vector<int>> fn(std::vector<std::vector<int>> intervals)
+// merge intervals
+std::vector<std::vector<int>> mergeIntervals(std::vector<std::vector<int>> intervals)
 {
     std::sort(intervals.begin(), intervals.end());
     std::vector<std::vector<int>> ans;
@@ -343,7 +347,7 @@ int dfs(TreeNode* root)
 // Binary tree: iterative DFS (less common)
 int dfs(TreeNode* root)
 {
-    std::stack<TreeNode*> s;
+    std::stack<TreeNode *> s;
     int ans = 0;
 
     while (!s.empty()) {
@@ -387,6 +391,7 @@ int bfs(TreeNode* root)
                 level.push(node_p->right);
             }
 
+            // don't forget to decrement size
             --size;
         }
     }
@@ -395,7 +400,7 @@ int bfs(TreeNode* root)
 }
 
 // Graph: build adjacency list
-std::unordered_map<int, std::vector<int>> fn(
+std::unordered_map<int, std::vector<int>> adjacencyList(
     const std::vector<std::vector<int>>& edges)
 {
     std::unordered_map<int, std::vector<int>> graph;
@@ -431,13 +436,13 @@ int dfs(int node,
 }
 
 // Find top k elements with heap
-std::vector<int> fn(const std::vector<int>& v, int k)
+std::vector<int> findMax(const std::vector<int>& v, int k)
 {
     std::priority_queue<int, std::vector<int>, std::greater<int>> minHeap;
 
     for (const auto& num : v) {
         // do some logic to push onto heap according to problem's criteria
-        //minHeap.push(std::tuple(CRITERIA, num));
+        //minHeap.push(std::tuple<int, int>(CRITERIA, num));
         minHeap.push(num);
 
         if (minHeap.size() > k) {
@@ -455,13 +460,13 @@ std::vector<int> fn(const std::vector<int>& v, int k)
 }
 
 // Binary search: using binary_search, return if found
-bool fn(const std::vector<int>& v, int target)
+bool binarySearch(const std::vector<int>& v, int target)
 {
     return std::binary_search(v.begin(), v.end(), target);
 }
 
 // Binary search: using lower_bound, return if found
-bool fn(const std::vector<int>& v, int target)
+bool binarySearchLeft(const std::vector<int>& v, int target)
 {
     int lower = *std::lower_bound(v.begin(), v.end(), target);
     if (lower != target) {
@@ -472,7 +477,7 @@ bool fn(const std::vector<int>& v, int target)
 }
 
 // Binary search: using lower_bound, return index of element
-int fn(const std::vector<int>& v, int target)
+int binarySearchLeft(const std::vector<int>& v, int target)
 {
     auto it = std::lower_bound(v.begin(), v.end(), target);
     if (it == v.end() || *it != target) {
@@ -483,7 +488,7 @@ int fn(const std::vector<int>& v, int target)
 }
 
 // Binary search: manual, ala lower_bound
-int fn(const std::vector<int>& v, int target)
+int binarySearch(const std::vector<int>& v, int target)
 {
     int left = 0;
     int right = v.size()-1;
@@ -560,13 +565,13 @@ public:
         Trie* curr = this;
 
         for (const auto& c: word) {
-            ChildrenMap& children = curr->children();
+            ChildrenMap& children = curr->d_children;
             auto it = children.find(c);
             if (it == children.end()) {
                 children[c] = Trie();
             }
 
-            curr = &curr->children()[c];
+            curr = &curr->d_children[c];
         }
     }
 
@@ -574,20 +579,18 @@ public:
         Trie* curr = this;
 
         for (const auto& c: word) {
-            ChildrenMap& children = curr->children();
+            ChildrenMap& children = curr->d_children;
             const auto cit = children.find(c);
             if (cit == children.end()) {
                 return false;
             }
 
-            curr = &curr->children()[c];
+            curr = &curr->d_children[c];
         }
 
         return true;
     }
 
-    // TODO: don't expose children?
-    ChildrenMap& children() { return d_children; }
 private:
     ChildrenMap d_children;
 };

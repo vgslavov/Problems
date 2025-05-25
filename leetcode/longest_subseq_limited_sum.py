@@ -3,12 +3,22 @@
 import sys
 import unittest
 
+# number: 2389
+# title: Longest Subsequence With Limited Sum
+# url: https://leetcode.com/problems/longest-subsequence-with-limited-sum/
+# difficulty: easy
+# tags: array, binary search, greedy, sorting, prefix sum
+
+# constraints
 # n == nums.length
 # m == queries.length
 # 1 <= n, m <= 1000
 # 1 <= nums[i], queries[i] <= 10^6
 
-# O(n^2): slow!
+# solution: brute-force
+# complexity
+# run-time: O(n^2)
+# space: O(n)
 def longest_subseq_limited_sum(nums, queries):
     # optimization:
     # to maximize longest subseq, start w/ smaller numbers

@@ -2,6 +2,8 @@
 #include <vector>
 
 // number: 102
+// title: Binary Tree Level Order Traversal
+// url: https://leetcode.com/problems/binary-tree-level-order-traversal/
 // section: binary tree bfs
 // difficulty: medium
 // tags: tree, bfs, binary tree, top 150
@@ -20,6 +22,10 @@ struct TreeNode {
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
 
+// solution: iterative bfs
+// complexity
+// run-time: O(n)
+// space: O(n)
 std::vector<std::vector<int>> levelOrder(TreeNode* root)
 {
     std::vector<std::vector<int>> ans;

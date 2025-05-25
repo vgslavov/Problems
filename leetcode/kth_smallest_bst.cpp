@@ -2,6 +2,8 @@
 #include <vector>
 
 // number: 230
+// title: Kth Smallest Element in a BST
+// url: https://leetcode.com/problems/kth-smallest-element-in-a-bst/
 // section: binary search tree
 // difficulty: medium
 // tags: tree, dfs, bst, binary tree, top 150

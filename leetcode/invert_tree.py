@@ -4,6 +4,8 @@ import sys
 import unittest
 
 # number: 226
+# title: Invert Binary Tree
+# url: https://leetcode.com/problems/invert-binary-tree/
 # section: binary tree general
 # difficulty: easy
 # tags: tree, dfs, bfs, binary tree, top 150
@@ -28,8 +30,8 @@ def invert_tree(root):
         return
 
     root.left, root.right = root.right, root.left
-    self.invertTree(root.left)
-    self.invertTree(root.right)
+    invert_tree(root.left)
+    invert_tree(root.right)
 
     return root
 

@@ -2,6 +2,8 @@
 #include <vector>
 
 // number: 872
+// title: Leaf-Similar Trees
+// url: https://leetcode.com/problems/leaf-similar-trees/
 // section: assessments
 // difficulty: easy
 // tags: tree, dfs, binary tree, microsoft

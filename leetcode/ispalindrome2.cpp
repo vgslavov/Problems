@@ -1,6 +1,8 @@
 #include <string>
 
 // number: 680
+// title: Valid Palindrome II
+// url: https://leetcode.com/problems/valid-palindrome-ii/
 // section: meta
 // difficulty: easy
 // tags: two pointers, string, greedy,  meta
@@ -25,7 +27,7 @@ bool checkPalindrome(const std::string& s, int i, int j) {
     return true;
 }
 
-// non-solution: Leetcode two pointers
+// solution: Leetcode recursive two pointers
 // complexity:
 // run-time: O(n)
 // space: O(1)
@@ -35,6 +37,7 @@ bool validPalindrome(const std::string& s) {
 
     while (i < j) {
         if (s[i] != s[j]) {
+            // fix i or j and check neighboring characters
             return checkPalindrome(s, i, j-1) ||
                     checkPalindrome(s, i+1, j);
         }

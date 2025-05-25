@@ -5,6 +5,8 @@ import sys
 import unittest
 
 # number: 128
+# title: Longest Consecutive Sequence
+# url: https://leetcode.com/problems/longest-consecutive-sequence/
 # section: hashmap
 # difficulty: medium
 # tags: array, hash table, union find, top 150
@@ -15,9 +17,9 @@ import unittest
 # 0 <= n <= 10^5
 # -10^9 <= nums[i] <= 10^9
 
-# solution: sort
+# non-solution: sort
 # complexity
-# run-time: O(n log n)
+# run-time: O(n*log n)
 # space: O(1)
 def longest_seq(nums):
     if not nums:
@@ -72,6 +74,7 @@ def calc_seq(counts, k):
     while k in counts:
         # visit
         counts[k] = 0
+        # keep walking to next consecutive number until gap
         k += 1
         length += 1
 
@@ -85,7 +88,7 @@ def longest_seq3(nums):
     if not nums:
         return 0
 
-    print(f"len(nums):{len(nums)},nums:{nums}")
+    #print(f"len(nums):{len(nums)},nums:{nums}")
 
     counts = defaultdict(int)
     for n in nums:
@@ -95,11 +98,11 @@ def longest_seq3(nums):
     for k,v in counts.items():
         # optimization: skip visited
         if not v:
-            print(f"skipping 0 value at k:{k}")
+            #print(f"skipping 0 value at k:{k}")
             continue
         # optimization: skip if in same seq
         elif k-1 in counts:
-            print(f"skipping k:{k} already in seq")
+            #print(f"skipping k:{k} already in seq")
             continue
 
         ans = max(ans, calc_seq(counts, k))

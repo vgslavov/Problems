@@ -5,7 +5,9 @@ import sys
 import unittest
 
 # number: 703
-# related: 215
+# similar: 215
+# title: Kth Largest Element in a Stream
+# url: https://leetcode.com/problems/kth-largest-element-in-a-stream/
 # section:
 # difficulty: easy
 # tags: tree, design, bst, heap, binary tree, data stream

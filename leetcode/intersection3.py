@@ -4,6 +4,8 @@ import sys
 import unittest
 
 # number: 1213
+# title: Intersection of Three Sorted Arrays
+# url: https://leetcode.com/problems/intersection-of-three-sorted-arrays/
 # section: assessment
 # difficulty: easy
 # tags: array, hash table, binary search, counting, meta

@@ -5,6 +5,8 @@ import sys
 import unittest
 
 # number: 161
+# title: One Edit Distance
+# url: https://leetcode.com/problems/one-edit-distance/
 # section: meta
 # difficulty: medium
 # tags: two pointers, string, meta
@@ -83,7 +85,7 @@ def isoneeditdistance_bad2(s: str, t: str) -> bool:
     # single edit
     return ndiff == 1
 
-# complexity:
+# complexity
 # run-time: O(n)
 # space: O(1)
 def same_length(s, t):
@@ -97,7 +99,7 @@ def same_length(s, t):
 
     return False
 
-# solution: leetcode using two pointers
+# solution: Leetcode two pointers
 # complexity
 # run-time: O(min(n,m))
 # space: O(1)

@@ -4,10 +4,21 @@ from collections import defaultdict
 import sys
 import unittest
 
+# number: 1133
+# title: Largest Unique Number
+# url: https://leetcode.com/problems/largest-unique-number/
+# section: hash table
+# difficulty: easy
+# tags: hash table, array, sorting
+
+# constraints
 # 1 <= nums.length <= 2000
 # 0 <= nums[i] <= 1000
 
-# O(n)
+# solution: dict 
+# complexity
+# run-time: O(n)
+# space: O(n)
 def largest_unique_number(nums):
     d = defaultdict(int)
 
@@ -23,7 +34,10 @@ def largest_unique_number(nums):
 
     return ans
 
-# O(n): max+filter
+# solution: dict + Pythonic filter & max
+# complexity
+# run-time: O(n)
+# space: O(n)
 def largest_unique_number2(nums):
     d = defaultdict(int)
 

@@ -3,6 +3,8 @@
 #include <vector>
 
 // number: 1428
+// title: Leftmost Column with at Least a One
+// url: https://leetcode.com/problems/leftmost-column-with-at-least-a-one/
 // section: assessments
 // difficulty: medium
 // tags: array, binary search, matrix, interactive, meta
@@ -52,6 +54,8 @@ int leftmostCol(BinaryMatrix &binaryMatrix)
     int ans = std::numeric_limits<int>::max();
 
     for (int i = 0; i != rows; ++i) {
+        // fix the row &
+        // search for the leftmost column with a one
         int j = binarySearch(binaryMatrix, i, cols, 1);
         if (j < cols && binaryMatrix.get(i, j) == 1) {
             ans = std::min(ans, j);

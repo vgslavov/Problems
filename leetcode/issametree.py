@@ -4,6 +4,8 @@ import sys
 import unittest
 
 # number: 100
+# title: Same Tree
+# url: https://leetcode.com/problems/same-tree/
 # section: binary tree general
 # difficulty: easy
 # tags: tree, dfs, bfs, binary tree, top 150
@@ -29,7 +31,7 @@ def issametree(p, q):
     elif not p or not q:
         return False
 
-    print("p.val={}, q.val={}".format(p.val, q.val))
+    #print("p.val={}, q.val={}".format(p.val, q.val))
     if p.val != q.val:
         return False
 

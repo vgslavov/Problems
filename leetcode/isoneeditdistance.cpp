@@ -2,6 +2,8 @@
 #include <string>
 
 // number: 161
+// title: One Edit Distance
+// url: https://leetcode.com/problems/one-edit-distance/
 // section: meta
 // difficulty: medium
 // tags: two pointers, string, meta

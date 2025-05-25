@@ -4,6 +4,8 @@ import sys
 import unittest
 
 # number: 125
+# title: Valid Palindrome
+# url: https://leetcode.com/problems/valid-palindrome/
 # section: two pointers
 # difficulty: easy
 # tags: two pointers, string, top 150, meta

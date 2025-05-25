@@ -5,6 +5,8 @@ import sys
 import unittest
 
 # number: 102
+# title: Binary Tree Level Order Traversal
+# url: https://leetcode.com/problems/binary-tree-level-order-traversal/
 # section: binary tree bfs
 # difficulty: medium
 # tags: tree, bfs, binary tree, top 150

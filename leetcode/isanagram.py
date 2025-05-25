@@ -5,6 +5,8 @@ import sys
 import unittest
 
 # number: 242
+# title: Valid Anagram
+# url: https://leetcode.com/problems/valid-anagram/
 # section: hashmap
 # difficulty: easy
 # tags: hash table, string, sorting, top 150
@@ -14,7 +16,7 @@ import unittest
 # s and t consist of lowercase English letters.
 
 # complexity: dict
-# run-time: O(n+m)?
+# run-time: O(n+m)
 # space: O(n)
 def isanagram(s, t):
     if len(s) != len(t):
@@ -35,7 +37,7 @@ def isanagram(s, t):
 
 # solution: sort
 # complexity
-# run-time: O(n * log(n))
+# run-time: O(n*log n)
 # space: O(1)
 def isanagram2(s, t):
     if len(s) != len(t):

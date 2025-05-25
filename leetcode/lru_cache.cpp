@@ -4,6 +4,8 @@
 #include <unordered_map>
 
 // number: 146
+// title: LRU Cache
+// url: https://leetcode.com/problems/lru-cache/
 // section: linked list
 // difficulty: medium
 // tags: hash table, linked list, design, doubly-linked list, top 150, meta,
@@ -72,7 +74,7 @@ private:
         }
 
         d_list.erase(listIter);
-        d_list.push_back(std::tuple(key, value));
+        d_list.push_back(std::tuple<int, int>(key, value));
 
         // get iter to last element, not end placeholder
         d_cache[key] = std::prev(d_list.end());
@@ -92,6 +94,8 @@ private:
 // TODO: add unit tests
 
 // Your LRUCache object will be instantiated and called as such:
-LRUCache* obj = new LRUCache(capacity);
-int param_1 = obj->get(key);
-obj->put(key,value);
+int capacity = 2;
+int key = 1;
+LRUCache obj = LRUCache(capacity);
+int param_1 = obj.get(key);
+obj.put(key,value);

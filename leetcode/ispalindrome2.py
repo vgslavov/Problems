@@ -4,6 +4,8 @@ import sys
 import unittest
 
 # number: 680
+# title: Valid Palindrome II
+# url: https://leetcode.com/problems/valid-palindrome-ii/
 # section: meta
 # difficulty: easy
 # tags: two pointers, string, greedy,  meta
@@ -25,16 +27,17 @@ def check_palindrome(s: str, i: int, j: int) -> bool:
 
     return True
 
-# non-solution: Leetcode two pointers
-# complexity:
+# solution: Leetcode recursive two pointers
+# complexity
 # run-time: O(n)
 # space: O(1)
 def ispalindrome2(s: str) -> bool:
-    i = nomatch = 0
+    i = 0
     j = len(s)-1
 
     while i < j:
         if s[i] != s[j]:
+            # fix i or j and check neighboring characters
             return check_palindrome(s, i, j-1) or check_palindrome(s, i+1, j)
 
         i += 1
@@ -69,7 +72,6 @@ class TestIsPalindrome2(unittest.TestCase):
 
     def test7(self):
         s = "ebcbbececabbacecbbcbe"
-        # TODO: fix algo
         self.assertTrue(ispalindrome2(s))
 
 if __name__ == '__main__':

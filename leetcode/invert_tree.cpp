@@ -2,6 +2,8 @@
 #include <cstddef>
 
 // number: 226
+// title: Invert Binary Tree
+// url: https://leetcode.com/problems/invert-binary-tree/
 // section: binary tree general
 // difficulty: easy
 // tags: tree, dfs, bfs, binary tree, top 150

@@ -5,10 +5,12 @@ import sys
 import unittest
 
 # number: 5
+# similar: 647
+# title: Longest Palindromic Substring
+# url: https://leetcode.com/problems/longest-palindromic-substring/
 # section: meta
 # difficulty: medium
 # tags: meta, two pointers, string, dp
-# similar: 647
 
 # constraints
 # 1 <= s.length <= 1000

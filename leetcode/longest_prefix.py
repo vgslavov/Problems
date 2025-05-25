@@ -4,6 +4,8 @@ import sys
 import unittest
 
 # number: 14
+# title: Longest Common Prefix
+# url: https://leetcode.com/problems/longest-common-prefix/
 # section: array/string
 # difficulty: easy
 # tags: string, trie, top 150
@@ -13,7 +15,7 @@ import unittest
 # 0 <= strs[i].length <= 200
 # strs[i] consists of only lowercase English letters.
 
-# solution: brute-force
+# non-solution: brute-force
 # complexity
 # run-time: O(n^2)
 # space: O(1)
@@ -41,7 +43,6 @@ def longest_prefix1(strs):
 
     return prefix if prefix else ''
 
-# solution: trie
 # complexity
 # run-time: O(n)
 # space: O(n)
@@ -82,6 +83,10 @@ class Trie:
 
         return prefix if curr.count == count else prefix[:-1]
 
+# solution: trie
+# complexity
+# run-time: O(n)
+# space: O(n)
 def longest_prefix2(strs):
     trie = Trie()
 

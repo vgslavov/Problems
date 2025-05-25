@@ -6,6 +6,8 @@ import sys
 import unittest
 
 # number: 1143
+# title: Longest Common Subsequence
+# url: https://leetcode.com/problems/longest-common-subsequence/
 # section: dp (multi-d)
 # difficulty: medium
 # tags: string, dp

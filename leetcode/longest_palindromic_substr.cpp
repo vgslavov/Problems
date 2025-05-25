@@ -4,6 +4,8 @@
 #include <string_view>
 
 // number: 5
+// title: Longest Palindromic Substring
+// url: https://leetcode.com/problems/longest-palindromic-substring/
 // section: meta
 // difficulty: medium
 // tags: meta, two pointers, string, dp
@@ -45,7 +47,7 @@ std::string expandCenter(const std::string& s, int left, int right)
 std::string longestPalindrome(const std::string& s)
 {
     std::string ans;
-    auto longest = [](const string_view s1, const string_view s2) {
+    auto longest = [](const std::string_view s1, const std::string_view s2) {
         return s1.size() < s2.size();
     };
 

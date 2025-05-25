@@ -1,8 +1,12 @@
 #!/usr/bin/env python3
 
 import math
+import sys
+import unittest
 
 # number: 1428
+# title: Leftmost Column with at Least a One
+# url: https://leetcode.com/problems/leftmost-column-with-at-least-a-one/
 # section: assessments
 # difficulty: medium
 # tags: array, binary search, matrix, interactive, meta
@@ -21,9 +25,11 @@ import math
 # You should not implement it, or speculate about its implementation
 class BinaryMatrix(object):
     def get(self, row: int, col: int) -> int:
-    def dimensions(self) -> list[]:
+        pass
+    def dimensions(self) -> list[int]:
+        pass
 
-# solution: brute-force
+# non-solution: brute-force
 # complexity
 # run-time: O(n^2)
 # space: O(1)
@@ -37,7 +43,7 @@ def leftmost_col(binaryMatrix: 'BinaryMatrix') -> int:
 
     return -1
 
-# solution: left-most match binary-search
+# solution: left match binary-search
 # complexity
 # run-time: O(log n)
 # space: O(1)
@@ -66,6 +72,8 @@ def leftmost_col2(binaryMatrix: 'BinaryMatrix') -> int:
     ans = math.inf
 
     for i in range(rows):
+        # fix the row &
+        # search for the leftmost column with a one
         j = binary_search(binaryMatrix, i, cols, 1)
         #print(f"j:{j}")
         if j < cols and binaryMatrix.get(i,j) == 1:

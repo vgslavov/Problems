@@ -4,6 +4,8 @@ import sys
 import unittest
 
 # number: 925
+# title: Long Pressed Name
+# url: https://leetcode.com/problems/long-pressed-name/
 # section: assessments
 # difficulty: easy
 # tags: two pointers, string, google

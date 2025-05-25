@@ -4,6 +4,8 @@ import sys
 import unittest
 
 # number: 350
+# title: Intersection of Two Arrays II
+# url: https://leetcode.com/problems/intersection-of-two-arrays-ii/
 # section: meta
 # difficulty: easy
 # tags: array, hash table, two pointers, binary search, sorting, meta

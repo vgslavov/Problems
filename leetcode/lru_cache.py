@@ -5,6 +5,8 @@ import sys
 import unittest
 
 # number: 146
+# title: LRU Cache
+# url: https://leetcode.com/problems/lru-cache/
 # section: linked list
 # difficulty: medium
 # tags: hash table, linked list, design, doubly-linked list, top 150, meta,
@@ -44,7 +46,7 @@ class LRUCache:
     def put(self, key: int, value: int) -> None:
         #print(f"put cache:{self.__cache} for key:{key}")
 
-        # existing key
+        # overwrite existing key
         if key in self.__cache:
             self.__cache[key] = value
             # end of queue: like deque.append()
@@ -89,7 +91,7 @@ class LRUCache2:
     def put(self, key: int, value: int) -> None:
         #print(f"put cache:{self.__cache} for key:{key}")
 
-        # existing key
+        # overwrite existing key
         if key in self.__cache:
             # mark as recent by readding
             del self.__cache[key]

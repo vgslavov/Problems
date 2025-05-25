@@ -4,6 +4,8 @@ import sys
 import unittest
 
 # number: 9
+# title: Palindrome Number
+# url: https://leetcode.com/problems/palindrome-number/
 # section: math
 # difficulty: easy
 # tags: math, top 150

@@ -1,6 +1,8 @@
 #include <cstddef>
 
 // number: 100
+// title: Same Tree
+// url: https://leetcode.com/problems/same-tree/
 // section: binary tree general
 // difficulty: easy
 // tags: tree, dfs, bfs, binary tree, top 150

@@ -4,6 +4,8 @@ import sys
 import unittest
 
 # number: 230
+# title: Kth Smallest Element in a BST
+# url: https://leetcode.com/problems/kth-smallest-element-in-a-bst/
 # section: binary search tree
 # difficulty: medium
 # tags: tree, dfs, bst, binary tree, top 150
@@ -20,9 +22,9 @@ def dfs(root, values):
     if not root:
         return
 
-    left = dfs(root.left, values)
+    dfs(root.left, values)
     values.append(root.val)
-    right = dfs(root.right, values)
+    dfs(root.right, values)
 
 # solution: recursive in-order dfs
 # complexity

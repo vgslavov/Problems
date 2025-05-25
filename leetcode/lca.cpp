@@ -1,6 +1,8 @@
 #include <cstddef>
 
 // number: 236
+// title: Lowest Common Ancestor of a Binary Tree
+// url: https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/
 // section: binary tree
 // difficulty: medium
 // tags: tree, dfs, binary tree, top 150

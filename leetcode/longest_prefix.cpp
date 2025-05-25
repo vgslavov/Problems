@@ -2,6 +2,8 @@
 #include <map>
 
 // number: 14
+// title: Longest Common Prefix
+// url: https://leetcode.com/problems/longest-common-prefix/
 // section: array/string
 // difficulty: easy
 // tags: string, trie, top 150
@@ -11,9 +13,8 @@
 // 0 <= strs[i].length <= 200
 // strs[i] consists of only lowercase English letters.
 
-// solution: brute-force
 // complexity
-// run-time: O(n^2)
+// run-time: O(n)
 // space: O(1)
 class Trie {
 public:
@@ -28,13 +29,13 @@ public:
         node->count() += 1;
 
         for (const auto& c: word) {
-            ChildrenMap& children = node->children();
+            ChildrenMap& children = node->d_children;
             auto iter = children.find(c);
             if (iter == children.end()) {
                 children[c] = Trie();
             }
 
-            node = &node->children()[c];
+            node = &node->d_children[c];
             node->count() += 1;
         }
     }
@@ -42,10 +43,10 @@ public:
     std::string commonPrefix() {
         Trie* node = this;
         std::string prefix;
-        auto iter = node->children().begin();
+        auto iter = node->d_children.begin();
 
         while (1) {
-            if (node->children().empty()) {
+            if (node->d_children.empty()) {
                 break;
             }
 
@@ -68,7 +69,7 @@ public:
             }
 
             prefix += c;
-            node = &node->children()[c];
+            node = &node->d_children[c];
         }
 
         if (node->count() != d_count) {
@@ -81,8 +82,6 @@ public:
         return prefix;
     }
 
-    ChildrenMap& children() { return d_children; }
-
     int& count() { return d_count; }
     void count(int value) { d_count = value; }
 
@@ -91,6 +90,10 @@ private:
     int         d_count;
 };
 
+// WIP solution: trie
+// complexity:
+// run-time: O(n)
+// space: O(n)
 std::string longestCommonPrefix(const std::vector<std::string>& strs) {
     Trie trie;
 

@@ -2,6 +2,8 @@
 #include <iostream>
 
 // number: 701
+// title: Insert into a Binary Search Tree
+// url: https://leetcode.com/problems/insert-into-a-binary-search-tree/
 // section:
 // difficulty: medium
 // tags: tree, bst, binary tree

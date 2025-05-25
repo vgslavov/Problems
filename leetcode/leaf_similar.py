@@ -4,6 +4,8 @@ import sys
 import unittest
 
 # number: 872
+# title: Leaf-Similar Trees
+# url: https://leetcode.com/problems/leaf-similar-trees/
 # section: assessments
 # difficulty: easy
 # tags: tree, dfs, binary tree, microsoft
@@ -45,10 +47,10 @@ def leaf_similar(root1, root2) -> bool:
         return False
 
     leaves1 = []
-    self.dfs(root1, leaves1)
+    dfs(root1, leaves1)
 
     leaves2 = []
-    self.dfs(root2, leaves2)
+    dfs(root2, leaves2)
 
     return leaves1 == leaves2
 

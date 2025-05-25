@@ -3,9 +3,11 @@
 import sys
 import unittest
 
-# number:
+# number: 273
+# title: Integer to English Words
+# url: https://leetcode.com/problems/integer-to-english-words/
 # section: meta
-# difficulty:
+# difficulty: hard
 # tags: meta
 
 # constraints
@@ -74,7 +76,7 @@ def get_hundredths(digits: [], place=100) -> str:
 
     return ' '.join(words)
 
-# solution: dict
+# non-solution: dict
 # complexity
 # run-time: O(n)
 # space: O(1)

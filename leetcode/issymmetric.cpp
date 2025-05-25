@@ -1,6 +1,8 @@
 #include <cstddef>
 
 // number: 101
+// title: Symmetric Tree
+// url: https://leetcode.com/problems/symmetric-tree/
 // section: binary tree general
 // difficulty: easy
 // tags: tree, dfs, bfs, binary tree, top 150

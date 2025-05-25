@@ -4,6 +4,8 @@ import sys
 import unittest
 
 # number: 202
+# title: Happy Number
+# url: https://leetcode.com/problems/happy-number/
 # section: hashmap
 # difficulty: easy
 # tags: hash table, math, two pointers, top 150
@@ -16,6 +18,9 @@ import unittest
 #   loops endlessly in a cycle which does not include 1.
 # * Those numbers for which this process ends in 1 are happy.
 
+# constraints
+# 1 <= n <= 2^31 - 1
+
 def pow_digits(n):
     s = str(n)
 
@@ -24,9 +29,6 @@ def pow_digits(n):
         sum += pow(int(s[i]), 2)
 
     return sum
-
-# constraints
-# 1 <= n <= 2^31 - 1
 
 # complexity
 # run-time: O(log n)

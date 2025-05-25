@@ -5,6 +5,8 @@ import sys
 import unittest
 
 # number: 98
+# title: Validate Binary Search Tree
+# url: https://leetcode.com/problems/validate-binary-search-tree/
 # section: binary search tree
 # difficulty: medium
 # tags: tree, dfs, bfs, binary tree, top 150, meta, sig

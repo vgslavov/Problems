@@ -5,6 +5,8 @@ import sys
 import unittest
 
 # number: 3
+# title: Longest Substring Without Repeating Characters
+# url: https://leetcode.com/problems/longest-substring-without-repeating-characters/
 # section: sliding window
 # difficulty: medium
 # tags: hash table, string, sliding window, top 150
@@ -26,7 +28,6 @@ def longest_substr(s):
     # key: char, value: index in s
     d = {}
     left = ans = 0
-    curr = ''
     slist = list(s)
 
     for right in range(len(slist)):
@@ -49,7 +50,7 @@ def longest_substr(s):
         # d always contains chars within current window
         ans = max(ans, len(d))
 
-        print(f"left:{left},right:{right},ans:{ans},d:{d}")
+        #print(f"left:{left},right:{right},ans:{ans},d:{d}")
 
     return ans
 

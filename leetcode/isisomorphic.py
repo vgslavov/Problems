@@ -4,6 +4,8 @@ import sys
 import unittest
 
 # number: 205
+# title: Isomorphic Strings
+# url: https://leetcode.com/problems/isomorphic-strings/
 # section: hashmap
 # difficulty: easy
 # tags: hash table, string, top 150
@@ -14,7 +16,7 @@ import unittest
 # s and t consist of any valid ascii character.
 
 # complexity
-# run-time: O(n), slow?
+# run-time: O(n)
 # space: O(n+m) or O(n)?
 def isisomorphic(s, t):
     if len(s) != len(t):
