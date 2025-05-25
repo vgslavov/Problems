@@ -4,6 +4,8 @@
 #include <string>
 
 // number: 8
+// title: String to Integer (atoi)
+// url: https://leetcode.com/problems/string-to-integer-atoi/
 // section: meta
 // difficulty: medium
 // tags: string, meta
@@ -17,7 +19,7 @@
 // complexity
 // run-time: O(n)
 // space: O(1)
-int myAtoi(const std::string& s)
+int myAtoi(std::string s)
 {
     if (s.empty()) {
         return 0;
@@ -36,7 +38,7 @@ int myAtoi(const std::string& s)
         s.erase(0, 1);
     }
 
-    // up to non-number
+    // delete non-digit suffix
     for (size_t i = 0; i != s.size(); ++i) {
         if (!std::isdigit(s[i])) {
             s.erase(i, s.length());

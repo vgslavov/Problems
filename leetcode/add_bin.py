@@ -4,6 +4,8 @@ import sys
 import unittest
 
 # number: 67
+# title: Add Binary
+# url: https://leetcode.com/problems/add-binary/
 # section: bit manipulation
 # difficulty: easy
 # tags: math, string, bit manipulation, simulation, top 150, meta

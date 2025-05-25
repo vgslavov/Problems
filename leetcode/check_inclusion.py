@@ -6,6 +6,8 @@ import unittest
 
 # number: 567
 # similar: 438
+# title: Permutation in String
+# url: https://leetcode.com/problems/permutation-in-string/
 # section: meta 
 # difficulty: medium
 # tags: hash table, two pointers, string, sliding window, meta
@@ -33,6 +35,7 @@ def checkInclusion(s1: str, s2: str) -> bool:
     left = 0
 
     for right in range(len(s2)):
+        # count the frequency of each character in the current window
         win_d[s2[right]] += 1
 
         # window is smaller than s1

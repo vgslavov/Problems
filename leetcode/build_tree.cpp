@@ -3,6 +3,8 @@
 #include <vector>
 
 // number: 105
+// title: Construct Binary Tree from Preorder and Inorder Traversal
+// url: https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
 // section: binary tree general
 // difficulty: medium
 // tags: array, hash table, divide & conquer, tree, binary tree
@@ -51,7 +53,7 @@ TreeNode* array2Tree(const std::vector<int>& preorder, int left, int right)
     return root;
 }
 
-// solution: leetcode recursive dfs
+// solution: Leetcode recursive dfs
 // run-time: O(n)
 // space: O(n)
 TreeNode* buildTree(

@@ -5,6 +5,8 @@ import sys
 import unittest
 
 # number: 219
+# title: Contains Duplicate II
+# url: https://leetcode.com/problems/contains-duplicate-ii/
 # section: hashmap
 # difficulty: easy
 # tags: array, hash table, sliding window, top 150

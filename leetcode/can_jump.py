@@ -5,6 +5,8 @@ import sys
 import unittest
 
 # number: 55
+# title: Jump Game
+# url: https://leetcode.com/problems/jump-game/
 # section: array / string
 # difficulty: medium
 # tags: array, dp, greedy, top 150
@@ -29,7 +31,7 @@ def can_jump_i(nums, i):
     # nothing was Good
     return False
 
-# non-solution: LeetCode backtracking
+# non-solution: LeetCode backtracking (recursion w/o memoization)
 # complexity:
 # run-time: O(2^n)
 # space: O(n)

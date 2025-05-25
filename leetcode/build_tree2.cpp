@@ -3,6 +3,8 @@
 #include <vector>
 
 // number: 106
+// title: Construct Binary Tree from Inorder and Postorder Traversal
+// url: https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/
 // section: binary tree
 // difficulty: medium
 // tags: array, hash table, divide & conquer, tree, binary tree

@@ -1,6 +1,8 @@
 #include <cstddef>
 
 // number: 2
+// title: Add Two Numbers
+// url: https://leetcode.com/problems/add-two-numbers/
 // section: linked list
 // difficulty: medium
 // tags: linked list, math, recursion, top 150, meta

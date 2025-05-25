@@ -1,7 +1,10 @@
 #include <cstddef>
+# include <iostream>
 #include <vector>
 
 // number: 173
+// title: Binary Search Tree Iterator
+// url: https://leetcode.com/problems/binary-search-tree-iterator/
 // section: binary tree general
 // difficulty: medium
 // tags: stack, tree, design, bst, binary tree, iterator
@@ -59,3 +62,13 @@ private:
     std::vector<int> d_nodes;
     int d_index = -1;
 };
+
+int main() {
+    TreeNode* root = nullptr;
+    // populate the tree as needed
+    auto it = BSTIterator(root);
+    while (it.hasNext()) {
+        std::cout << it.next() << std::endl;
+    }
+    return 0;
+}

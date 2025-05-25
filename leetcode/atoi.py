@@ -4,6 +4,8 @@ import sys
 import unittest
 
 # number: 8
+# title: String to Integer (atoi)
+# url: https://leetcode.com/problems/string-to-integer-atoi/
 # section: meta
 # difficulty: medium
 # tags: string, meta
@@ -34,7 +36,7 @@ def atoi(s: str) -> int:
     elif ss and ss[0] == '+':
         ss = ss[1:]
 
-    # read up to non-number
+    # delete non-digit suffix
     for i in range(len(ss)):
         if not ss[i].isdigit():
             ss = ss[:i]

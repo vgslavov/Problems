@@ -2,6 +2,8 @@
 #include <vector>
 
 // number: 55
+// title: Jump Game
+// url: https://leetcode.com/problems/jump-game/
 // section: array / string
 // difficulty: medium
 // tags: array, greedy, dp, top 150

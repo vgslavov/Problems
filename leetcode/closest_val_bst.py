@@ -5,6 +5,8 @@ import sys
 import unittest
 
 # number: 270
+# title: Closest Binary Search Tree Value
+# url: https://leetcode.com/problems/closest-binary-search-tree-value/
 # section: assessment
 # difficulty: easy
 # tags: binary search, tree, dfs, bst, bineary tree, meta

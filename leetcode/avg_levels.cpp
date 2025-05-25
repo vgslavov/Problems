@@ -2,6 +2,8 @@
 #include <vector>
 
 // number: 637
+// title: Average of Levels in Binary Tree
+// url: https://leetcode.com/problems/average-of-levels-in-binary-tree/
 // section: binary tree BFS
 // difficulty: easy
 // tags: tree, dfs, bfs, binary tree, top 150

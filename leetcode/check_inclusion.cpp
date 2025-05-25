@@ -3,6 +3,8 @@
 
 // number: 567
 // similar: 438
+// title: Permutation in String
+// url: https://leetcode.com/problems/permutation-in-string/
 // section: meta 
 // difficulty: medium
 // tags: hash table, two pointers, string, sliding window, meta
@@ -40,6 +42,7 @@ bool checkInclusion(const std::string& s1, const std::string& s2)
     int left = 0;
 
     for (size_t right = 0; right != s2.size(); ++right) {
+        // count the frequency of each character in the current window
         auto it = winmap.find(s2[right]);
         if (it != winmap.end()) {
             it->second += 1;

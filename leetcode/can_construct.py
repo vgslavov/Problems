@@ -5,6 +5,8 @@ import sys
 import unittest
 
 # number: 383
+# title: Ransom Note
+# url: https://leetcode.com/problems/ransom-note/
 # section: hashmap
 # difficulty: easy
 # tags: hash table, string, counting, top 150

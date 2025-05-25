@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 
 # number: 173
+# title: Binary Search Tree Iterator
+# url: https://leetcode.com/problems/binary-search-tree-iterator/
 # section: binary tree general
 # difficulty: medium
 # tags: stack, tree, design, bst, binary tree, iterator
@@ -22,7 +24,7 @@ class BSTIterator:
     # complexity
     # run-time: O(n)
     # space: O(n)
-    def __init__(self, root: Optional[TreeNode]):
+    def __init__(self, root: TreeNode):
         self.nodes = []
         self.index = -1
         self.dfs(root)
@@ -51,6 +53,7 @@ class BSTIterator:
 # TODO: add unit tests & solve w/ O(log n) space
 
 # Your BSTIterator object will be instantiated and called as such:
-# obj = BSTIterator(root)
-# param_1 = obj.next()
-# param_2 = obj.hasNext()
+root = TreeNode(7)
+obj = BSTIterator(root)
+while obj.hasNext():
+    print(obj.next())

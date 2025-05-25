@@ -5,6 +5,8 @@ import sys
 import unittest
 
 # number: 70
+# title: Climbing Stairs
+# url: https://leetcode.com/problems/climbing-stairs/
 # section: 1D DP
 # difficulty: easy
 # tags: math, dp, memoization, top 150

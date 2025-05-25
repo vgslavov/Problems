@@ -6,6 +6,8 @@ import sys
 import unittest
 
 # number: 819
+# title: Most Common Word
+# url: https://leetcode.com/problems/most-common-word/
 # section: assessments
 # difficulty: easy
 # tags: array, hash able, string, counting, amazon
@@ -37,7 +39,7 @@ def common_word(paragraph, banned):
         elif paragraph[i] in delim and not word:
             continue
 
-        if word in banned:
+        if word in banned_set:
             word = ""
             continue
 

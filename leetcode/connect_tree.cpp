@@ -2,6 +2,8 @@
 #include <queue>
 
 // number: 117
+// title: Populating Next Right Pointers in Each Node II
+// url: https://leetcode.com/problems/populating-next-right-pointers-in-each-node-ii/
 // section: binary tree
 // difficulty: medium
 // tags: linked list, tree, dfs, bfs, binary tree
