@@ -5,6 +5,8 @@ import sys
 import unittest
 
 # number: 373
+# title: Find K Pairs with Smallest Sums
+# url: https://leetcode.com/problems/find-k-pairs-with-smallest-sums/
 # section: heap
 # difficulty: medium
 # tags: array, heap, priority queue, top 150
@@ -18,9 +20,9 @@ import unittest
 # 1 <= k <= 10^4
 # k <= m * n
 
-# solution: brute-force
+# non-solution: brute-force
 # complexity
-# run-time: O(m*n log m*n), slow (TLE)
+# run-time: O(m*n log m*n), TLE
 # space: O(k)
 def find_k_smallest_pairs(nums1, nums2, k):
     if not nums1 or not nums2:
@@ -40,11 +42,11 @@ def find_k_smallest_pairs(nums1, nums2, k):
     #print(heap)
     return sorted([heapq.heappop(heap)[1] for _ in range(k)])
 
-# solution: brute force, heap + 2 pointers
+# non-solution: brute force, heap + two pointers
 # complexity
-# run-time: O(m*n log m*n)? too slow
+# run-time: O(m*n log m*n), TLE
 # space: O(k)
-# TODO: optimize, TLE, when to break?
+# TODO: optimize, when to break?
 def find_k_smallest_pairs2(nums1, nums2, k):
     heap = []
     i = j = 0
@@ -90,7 +92,7 @@ def find_k_smallest_pairs2(nums1, nums2, k):
 
     return sorted([heapq.heappop(heap)[1] for _ in range(k)])
 
-# solution: leetcode, Dijkstra-like using heap
+# solution: Leetcode, Dijkstra-like using heap
 # complexity
 # run-time: O(k log k)
 # space: O(k)

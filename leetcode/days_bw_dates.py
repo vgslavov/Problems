@@ -5,6 +5,8 @@ import sys
 import unittest
 
 # number: 1360
+# title: Number of Days Between Two Dates
+# url: https://leetcode.com/problems/number-of-days-between-two-dates/
 # section: assessments
 # difficulty: easy
 # tags: math, string, meta

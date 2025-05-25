@@ -5,6 +5,8 @@ import sys
 import unittest
 
 # number: 1302
+# title: Deepest Leaves Sum
+# url: https://leetcode.com/problems/deepest-leaves-sum/
 # section:
 # difficulty: medium
 # tags: tree, dfs, bfs, binary tree
@@ -20,6 +22,7 @@ class TreeNode:
         self.left = left
         self.right = right
 
+# solution: iterative bfs
 # complexity
 # run-time: O(n)
 # space: O(n)
@@ -28,10 +31,12 @@ def deepest_leaves_sum(root):
 
     while queue:
         current_len = len(queue)
+        # reset sum on every level
         ans = 0
 
         for _ in range(current_len):
             node = queue.popleft()
+            # count sum on every level
             ans += node.val
 
             if node.left:
@@ -40,6 +45,7 @@ def deepest_leaves_sum(root):
             if node.right:
                 queue.append(node.right)
 
+    # sum on deepest level will not be reset
     return ans
 
 if __name__ == '__main__':

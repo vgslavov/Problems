@@ -1,6 +1,8 @@
 #include <cstddef>
 
 // number: 114
+// title: Flatten Binary Tree to Linked List
+// url: https://leetcode.com/problems/flatten-binary-tree-to-linked-list/
 // section: binary tree general
 // difficulty: medium
 // tags: linked list, stack, tree, dfs, binary tree
@@ -39,7 +41,7 @@ TreeNode* dfs(TreeNode* root) {
     return right_tail ? right_tail : left_tail;
 }
 
-// solution: leetcode recursive dfs
+// solution: Leetcode recursive dfs
 // complexity
 // run-time: O(n)
 // space: O(n)

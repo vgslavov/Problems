@@ -5,6 +5,8 @@ import sys
 import unittest
 
 # number: 575
+# title: Distribute Candies
+# url: https://leetcode.com/problems/distribute-candies/
 # section: assessments
 # difficulty: easy
 # tags: array, hash table, microsoft

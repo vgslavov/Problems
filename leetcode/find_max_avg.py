@@ -5,6 +5,8 @@ import sys
 import unittest
 
 # number: 643
+# title: Maximum Average Subarray I
+# url: https://leetcode.com/problems/maximum-average-subarray-i/
 # section: sliding window
 # difficulty: easy
 # tags: array, sliding window, leetcode 75

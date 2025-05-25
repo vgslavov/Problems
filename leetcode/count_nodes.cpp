@@ -1,6 +1,8 @@
 #include <cstddef>
 
 // number: 222
+// title: Count Complete Tree Nodes
+// url: https://leetcode.com/problems/count-complete-tree-nodes/
 // section: binary tree general
 // difficulty: easy
 // tags: binary search, bit manipulation, tree, binary tree, top 150

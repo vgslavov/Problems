@@ -4,6 +4,8 @@ import sys
 import unittest
 
 # number: 287
+# title: Find the Duplicate Number
+# url: https://leetcode.com/problems/find-the-duplicate-number/
 # section:
 # difficulty: medium
 # tags: array, two pointers, binary search, bit manipulation

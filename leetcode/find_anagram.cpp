@@ -3,6 +3,8 @@
 
 // number: 438
 // similar: 567
+// title: Find All Anagrams in a String
+// url: https://leetcode.com/problems/find-all-anagrams-in-a-string/
 // section: meta
 // difficulty: medium
 // tags: hash table, string, sliding window, meta

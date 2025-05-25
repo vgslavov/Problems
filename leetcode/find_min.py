@@ -4,6 +4,8 @@ import sys
 import unittest
 
 # number: 153
+# title: Find Minimum in Rotated Sorted Array
+# url: https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/
 # section: binary search
 # difficulty: medium
 # tags: array, binary search, top 150
@@ -15,6 +17,7 @@ import unittest
 # All the integers of nums are unique.
 # nums is sorted and rotated between 1 and n times.
 
+# solution: binary search
 # complexity
 # run-time: O(log n)
 # space: O(1)

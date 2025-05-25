@@ -4,6 +4,8 @@ import sys
 import unittest
 
 # number: 274
+# title: H-Index
+# url: https://leetcode.com/problems/h-index/
 # section: array / string
 # difficulty: medium
 # tags: array, sorting, couting sort, top 150
@@ -13,12 +15,12 @@ import unittest
 # 1 <= n <= 5000
 # 0 <= citations[i] <= 1000
 
-# solution: LeetCode sorting
+# solution: Leetcode sorting
 # complexity
 # run-time: O(n*log n)
 # space: O(1)
 def h_index(citations) -> int:
-    # descending order
+    # descending order of citations
     citations.sort(reverse=True)
 
     i = 0

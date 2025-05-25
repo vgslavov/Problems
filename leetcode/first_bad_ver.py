@@ -4,6 +4,8 @@ import sys
 import unittest
 
 # number: 278
+# title: First Bad Version
+# url: https://leetcode.com/problems/first-bad-version/
 # section: meta
 # difficulty: easy
 # tags: binary search, interactive, meta
@@ -24,9 +26,8 @@ def first_bad_ver(n: int) -> int:
 
     while left <= right:
         mid = left + (right-left) // 2
-        isbad = isBadVersion(mid)
 
-        if isbad:
+        if isBadVersion(mid):
             if mid < min_bad:
                 min_bad = mid
             right = mid-1

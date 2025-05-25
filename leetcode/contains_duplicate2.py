@@ -20,9 +20,9 @@ import unittest
 # -10^9 <= nums[i] <= 10^9
 # 0 <= k <= 10^5
 
-# solution: brute-force
+# solution: dict
 # complexity
-# run-time: O(n^2), slow!
+# run-time: O(n)
 # space: O(k)
 def contains_nearby_duplicate(nums, k):
     d = defaultdict(list)

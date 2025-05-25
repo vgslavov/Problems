@@ -5,10 +5,12 @@ import sys
 import unittest
 
 # number: 647
+# similar: 5
+# title: Palindromic Substrings
+# url: https://leetcode.com/problems/palindromic-substrings/
 # section: citadel
 # difficulty: medium
 # tags: two pointers, string, dp, citadel
-# similar: 5
 
 # constraints
 # 1 <= s.length <= 1000
@@ -24,7 +26,7 @@ def ispalindrome(s: str, left: int, right: int) -> bool:
 
     return True
 
-# solution: brute-force
+# non-solution: brute-force
 # complexity
 # run-time: O(n^3), too slow: TLE
 # space: O(1)
@@ -178,7 +180,7 @@ class TestCountSubstr(unittest.TestCase):
         expected = 15
         self.assertEqual(count_substr(s), expected)
         #self.assertEqual(count_substr2(s), expected)
-        # TODO: fix
+        # TODO: fix bug
         #self.assertEqual(count_substr3(s), expected)
         self.assertEqual(count_substr4(s), expected)
 

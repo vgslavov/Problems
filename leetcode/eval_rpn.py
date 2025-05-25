@@ -4,6 +4,8 @@ import sys
 import unittest
 
 # number: 150
+# title: Evaluate Reverse Polish Notation
+# url: https://leetcode.com/problems/evaluate-reverse-polish-notation/
 # section: stack
 # difficulty: medium
 # tags: array, math, stack, top 150, citadel
@@ -13,21 +15,14 @@ import unittest
 # tokens[i] is either an operator: "+", "-", "*", or "/", or an integer in the
 # range [-200, 200].
 
-# TODO: refactor using dict?
 def apply(op1, op2, op):
-    if op == '+':
-        return int(op2 + op1)
-    elif op == '-':
-        return int(op2 - op1)
-    elif op == '*':
-        return int(op2 * op1)
-    elif op == '/':
-        return int(op2 / op1)
-    else:
-        print(f"error on op:{op}")
-        return 0
-
-    return 0
+    ops = {
+        '+': lambda x, y: int(x + y),
+        '-': lambda x, y: int(x - y),
+        '*': lambda x, y: int(x * y),
+        '/': lambda x, y: int(x / y),
+    }
+    return ops.get(op, lambda x, y: 0)(op2, op1)
 
 # solution: stack
 # complexity
@@ -35,7 +30,6 @@ def apply(op1, op2, op):
 # space: O(n)
 def eval_rpn(tokens):
     stack = []
-    ans = 0
 
     for t in tokens:
         if not t:

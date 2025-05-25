@@ -96,12 +96,13 @@ Node* dfs(Node* oldNode, std::map<Node*, Node*>& visited)
     return newNode;
 }
 
-// solution: leetcode recursive dfs
+// solution: Leetcode recursive dfs
 // complexity
 // run-time: O(n)
 // space: O(n)
 Node* copyRandomList2(Node* head)
 {
+    // old node to new node
     std::map<Node*,Node*> visited;
 
     return dfs(head, visited);

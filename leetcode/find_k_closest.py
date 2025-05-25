@@ -5,11 +5,21 @@ import math
 import sys
 import unittest
 
+# number: 973
+# title: K Closest Points to Origin
+# url: https://leetcode.com/problems/k-closest-points-to-origin/
+# section: meta
+# difficulty: medium
+# tags: heap, math, meta
+
+# constraints
 # 1 <= k <= points.length <= 10^4
 # -10^4 <= x_i, y_i <= 10^4
 
-# runtime O(n * log n): slow!
-# space O(n)
+# solution: min heap
+# complexity
+# run-time: O(n*log n)
+# space: O(n)
 def find_k_closest(points, k):
     if not points:
         return None
@@ -29,8 +39,10 @@ def find_k_closest(points, k):
     ans.sort()
     return ans
 
-# runtime O(n * log k): faster!
-# space O(k)
+# solution: max heap
+# complexity
+# run-time: O(n*log k)
+# space: O(k)
 def find_k_closest2(points, k):
     if not points:
         return None

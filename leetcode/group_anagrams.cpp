@@ -4,6 +4,8 @@
 #include <vector>
 
 // number: 49
+// title: Group Anagrams
+// url: https://leetcode.com/problems/group-anagrams/
 // section: hashmap
 // difficulty: medium
 // tags: array, hash table, string, sorting, top 150, meta, citadel
@@ -26,16 +28,8 @@ std::vector<std::vector<std::string>> groupAnagrams(std::vector<std::string>& st
 
     for (auto& s: strs) {
         std::string org(s);
-        // TODO: use not in-place sort
         std::sort(s.begin(), s.end());
-        auto iter = freqs.find(s);
-        if (iter != freqs.end()) {
-            freqs[s].push_back(org);
-        } else {
-            // create vector on the fly
-            freqs.insert(std::make_pair(s, std::vector<std::string>{org}));
-            // or use insert_or_assign() in C++17
-        }
+        freqs[s].push_back(org);
     }
 
     std::vector<std::vector<std::string>> ans;

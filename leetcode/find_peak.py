@@ -4,6 +4,8 @@ import sys
 import unittest
 
 # number: 162
+# title: Find Peak Element
+# url: https://leetcode.com/problems/find-peak-element/
 # section: binary search
 # difficulty: medium
 # tags: array, binary search, top 150, meta
@@ -31,7 +33,7 @@ def find_peak(nums):
 
     while left < right:
         mid = left + (right-left) // 2
-        print(f'left:{left},mid:{mid},right:{right}')
+        #print(f'left:{left},mid:{mid},right:{right}')
 
         # peak
         if nums[mid-1] < nums[mid] and nums[mid] > nums[mid+1]:

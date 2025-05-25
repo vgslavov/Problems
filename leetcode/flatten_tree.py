@@ -4,20 +4,22 @@ import sys
 import unittest
 
 # number: 114
+# title: Flatten Binary Tree to Linked List
+# url: https://leetcode.com/problems/flatten-binary-tree-to-linked-list/
 # section: binary tree general
 # difficulty: medium
 # tags: linked list, stack, tree, dfs, binary tree
 
-# constraint
+# constraints
 # The number of nodes in the tree is in the range [0, 2000].
 # -100 <= Node.val <= 100
 
 # Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
 
 def dfs(root):
     if not root:
@@ -42,7 +44,7 @@ def dfs(root):
     # return rightmost tail
     return right_tail if right_tail else left_tail
 
-# solution: leetcode recursive dfs
+# solution: Leetcode recursive dfs
 # complexity
 # run-time: O(n)
 # space: O(n)

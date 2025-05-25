@@ -4,6 +4,8 @@ import sys
 import unittest
 
 # number: 191
+# title: Number of 1 Bits
+# url: https://leetcode.com/problems/number-of-1-bits/
 # section: bit manipulation
 # difficulty: easy
 # tags: divide & conquer, bit manipulation, top 150

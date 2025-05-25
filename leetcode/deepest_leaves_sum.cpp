@@ -1,6 +1,8 @@
 #include <queue>
 
 // number: 1302
+// title: Deepest Leaves Sum
+// url: https://leetcode.com/problems/deepest-leaves-sum/
 // section:
 // difficulty: medium
 // tags: tree, dfs, bfs, binary tree
@@ -31,12 +33,14 @@ int deepestLeavesSum(TreeNode* root)
 
     while (!queue.empty()) {
         int len = queue.size();
+        // reset sum for each level
         ans = 0;
 
         for (size_t i = 0; i != len; ++i) {
             TreeNode* node_p = queue.front();
             queue.pop();
 
+            // sum values on every level
             ans += node_p->val;
 
             if (node_p->right) {
@@ -49,5 +53,6 @@ int deepestLeavesSum(TreeNode* root)
         }
     }
 
+    // only last level sum will not be reset
     return ans;
 }

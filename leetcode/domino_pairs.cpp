@@ -1,8 +1,11 @@
+#include <algorithm>
 #include <iostream>
 #include <map>
 #include <vector>
 
 // number: 1128
+// title: Number of Equivalent Domino Pairs
+// url: https://leetcode.com/problems/number-of-equivalent-domino-pairs/
 // section: assessments
 // difficulty: easy
 // tags: array, hash table, counting, amazon
@@ -56,7 +59,7 @@ int dominoPairs(std::vector<std::vector<int>>& dominoes)
     std::map<std::vector<int>, int> counts;
 
     for (auto pair : dominoes) {
-        sort(pair.begin(), pair.end());
+        std::sort(pair.begin(), pair.end());
         auto it = counts.find(pair);
         if (it != counts.end()) {
             counts[pair] += 1;

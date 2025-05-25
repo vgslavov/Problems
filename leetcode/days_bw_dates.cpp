@@ -3,6 +3,8 @@
 #include <map>
 
 // number: 1360
+// title: Number of Days Between Two Dates
+// url: https://leetcode.com/problems/number-of-days-between-two-dates/
 // section: assessments
 // difficulty: easy
 // tags: math, string, meta, optiver
@@ -12,7 +14,7 @@
 
 // solution: manual
 // complexity
-// run-time: O(n)?
+// run-time: O(n)
 // space: O(1)
 const int START_YEAR = 1900;
 const int START_MONTH = 1;

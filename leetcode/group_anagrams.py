@@ -5,6 +5,8 @@ import sys
 import unittest
 
 # number: 49
+# title: Group Anagrams
+# url: https://leetcode.com/problems/group-anagrams/
 # section: hashmap
 # difficulty: medium
 # tags: array, hash table, string, sorting, top 150, meta, citadel
@@ -24,6 +26,7 @@ def group_anagrams(strs):
     d = defaultdict(list)
 
     for i in range(len(strs)):
+        # sort each string
         ss = ''.join(sorted(strs[i]))
         # key: sorted str, value: list of original str
         d[ss].append(i)

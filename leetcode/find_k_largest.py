@@ -5,6 +5,8 @@ import sys
 import unittest
 
 # number: 215
+# title: Kth Largest Element in an Array
+# url: https://leetcode.com/problems/kth-largest-element-in-an-array/
 # section: heap
 # difficulty: medium
 # tags: array, divide & conquer, sorting, heap, prio queue, quickselect, top 150,
@@ -66,7 +68,7 @@ def find_k_largest3(nums, k):
 
     return ans
 
-# solution: slower sort & Pythonic slicing
+# solution: sorted & Pythonic slicing
 # complexity
 # run-time: O(n*log n)
 # space: O(1)

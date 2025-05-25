@@ -4,10 +4,21 @@ from collections import defaultdict
 import sys
 import unittest
 
+# number: 1426
+# title: Counting Elements
+# url: https://leetcode.com/problems/counting-elements/
+# section: array
+# difficulty: easy
+# tags: array, hash table
+
+# constraints
 # 1 <= nums.length <= 1000
 # 0 <= nums[i] <= 1000
 
-# O(n)
+# solution: hash table
+# complexity
+# run-time: O(n)
+# space: O(n)
 def count_elements(nums):
     d = defaultdict(int)
 
@@ -20,8 +31,6 @@ def count_elements(nums):
             count += 1
 
     return count
-
-# TODO: faster O(n)?
 
 class TestCountElements(unittest.TestCase):
     def test_empty(self):

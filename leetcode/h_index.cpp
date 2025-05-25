@@ -2,6 +2,8 @@
 #include<vector>
 
 // number: 274
+// title: H-Index
+// url: https://leetcode.com/problems/h-index/
 // section: array / string
 // difficulty: medium
 // tags: array, sorting, counting sort, top 150
@@ -17,7 +19,7 @@
 // space: O(1)
 int hIndex(std::vector<int>& citations)
 {
-    // descending order
+    // descending order of citations
     std::sort(citations.begin(), citations.end(), std::greater<int>());
 
     int i = 0;

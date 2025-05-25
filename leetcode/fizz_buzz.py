@@ -4,6 +4,8 @@ import sys
 import unittest
 
 # number: 412
+# title: Fizz Buzz
+# url: https://leetcode.com/problems/fizz-buzz/
 # section: citadel
 # difficulty: easy
 # tags: math, string, simulation, citadel
@@ -14,7 +16,7 @@ import unittest
 # complexity
 # run-time: O(n)
 # space: O(1)
-def fizz_buzz(n: int) -> []:
+def fizz_buzz(n: int):
     ans = []
 
     for i in range(1, n+1):

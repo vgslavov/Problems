@@ -4,6 +4,8 @@ import sys
 import unittest
 
 # number: 832
+# title: Flipping an Image
+# url: https://leetcode.com/problems/flipping-an-image/
 # section: assessments
 # difficulty: easy
 # tags: array, two pointers, bit manipulation, matrix, simulation, microsoft

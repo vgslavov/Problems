@@ -1,6 +1,8 @@
 #include <map>
 
 // number: 172
+// title: Factorial Trailing Zeroes
+// url: https://leetcode.com/problems/factorial-trailing-zeroes/
 // section: math
 // difficulty: medium
 // tags: math, top 150

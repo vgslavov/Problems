@@ -4,6 +4,8 @@ import sys
 import unittest
 
 # number: 1051
+# title: Height Checker
+# url: https://leetcode.com/problems/height-checker/
 # section: assessments
 # difficulty: easy
 # tags: array, sorting, counting sort, google
@@ -12,6 +14,7 @@ import unittest
 # 1 <= heights.length <= 100
 # 1 <= heights[i] <= 100
 
+# solution: sorted
 # complexity
 # run-time: O(n)
 # space: O(1)

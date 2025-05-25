@@ -4,6 +4,8 @@ import sys
 import unittest
 
 # number: 138
+# title: Copy List with Random Pointer
+# url: https://leetcode.com/problems/copy-list-with-random-pointer/
 # section: linked list
 # difficulty: medium
 # tags: linked list, hash table, top 150
@@ -70,7 +72,7 @@ def copy_random_list(head):
 
     return new_head.next
 
-# solution: leetcode recursive dfs
+# solution: Leetcode recursive dfs
 # complexity
 # run-time: O(n)
 # space: O(n)
@@ -90,6 +92,7 @@ def copy_random_list2(head):
 
         return new_node
 
+    # old node to new node
     visited = {}
     return dfs(head)
 

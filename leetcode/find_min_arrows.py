@@ -4,6 +4,8 @@ import sys
 import unittest
 
 # number: 452
+# title: Minimum Number of Arrows to Burst Balloons
+# url: https://leetcode.com/problems/minimum-number-of-arrows-to-burst-balloons/
 # section: intervals
 # difficulty: medium
 # tags: array, greedy, sorting, top 150
@@ -13,7 +15,7 @@ import unittest
 # points[i].length == 2
 # -2^31 <= xstart < xend <= 2^31 - 1
 
-# solution: leetcode greedy
+# solution: Leetcode greedy
 # run-time: O(n*log n)
 # space: O(1)
 def find_min_arrows(points):

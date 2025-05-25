@@ -6,6 +6,8 @@ import sys
 import unittest
 
 # number: 791
+# title: Custom Sort String
+# url: https://leetcode.com/problems/custom-sort-string/
 # section: assessment
 # difficulty: medium
 # tags: hash table, string, sorting, meta
@@ -86,7 +88,7 @@ def custom_sort2(order: str, s: str) -> str:
     for c in s:
         counts[c] += 1
 
-    # O(m): build answer from order
+    # O(m): build prefix from order if in s
     for c in order:
         if c in counts:
             ans += c * counts[c]

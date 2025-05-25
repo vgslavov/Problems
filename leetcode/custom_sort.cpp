@@ -35,6 +35,7 @@ std::string customSort(const std::string& order, const std::string& s)
 
     std::string ans;
 
+    // build prefix from order if in s
     // O(m)
     for (const auto& c : order) {
         auto it = counts.find(c);
@@ -44,6 +45,7 @@ std::string customSort(const std::string& order, const std::string& s)
         }
     }
 
+    // add the rest
     // no need to sort, already sorted by key
     for (const auto& item : counts) {
         if (item.second) {

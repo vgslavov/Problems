@@ -1,6 +1,9 @@
 #include <string>
 
 // number: 647
+// similar: 5
+// title: Palindromic Substrings
+// url: https://leetcode.com/problems/palindromic-substrings/
 // section: citadel
 // difficulty: medium
 // tags: two pointers, string, dp, citadel

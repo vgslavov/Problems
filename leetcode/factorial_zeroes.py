@@ -5,6 +5,8 @@ import sys
 import unittest
 
 # number: 172
+# title: Factorial Trailing Zeroes
+# url: https://leetcode.com/problems/factorial-trailing-zeroes/
 # section: math
 # difficulty: medium
 # tags: math, top 150
@@ -14,8 +16,7 @@ import unittest
 
 # complexity
 # run-time: O(n)
-# space: O(n)
-# uses a lot of mem
+# space: O(n), uses a lot of mem
 @cache
 def factorial(n):
     if not n:

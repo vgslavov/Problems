@@ -7,6 +7,8 @@ import sys
 import unittest
 
 # number: 1128
+# title: Number of Equivalent Domino Pairs
+# url: https://leetcode.com/problems/number-of-equivalent-domino-pairs/
 # section: assessments
 # difficulty: easy
 # tags: array, hash table, counting, amazon
@@ -21,7 +23,6 @@ import unittest
 # run-time: O(n)
 # space: O(n)
 def domino_pairs(dominoes) -> int:
-    ans = 0
     counts = defaultdict(int)
 
     for i in range(len(dominoes)):

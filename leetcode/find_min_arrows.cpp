@@ -2,6 +2,8 @@
 #include <vector>
 
 // number: 452
+// title: Find Minimum Number of Arrows to Burst Balloons
+// url: https://leetcode.com/problems/find-minimum-number-of-arrows-to-burst-balloons/
 // section: intervals
 // difficulty: medium
 // tags: array, greedy, sorting, top 150
@@ -14,11 +16,11 @@
 // solution: leetcode greedy
 // run-time: O(n*log n)
 // space: O(1)
-int findMinArrowShots(std::vector<std::vector<int>>& points)
+int findMinArrowShots(const std::vector<std::vector<int>>& points)
 {
     // sort by end
     std::sort(points.begin(), points.end(),
-              [](const std::vector<int>& a, std::vector<int>& b) {
+              [](const std::vector<int>& a, const std::vector<int>& b) {
         return a[1] < b[1];
 
     });

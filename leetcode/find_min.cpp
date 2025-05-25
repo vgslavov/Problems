@@ -2,6 +2,8 @@
 #include <vector>
 
 // number: 153
+// title: Find Minimum in Rotated Sorted Array
+// url: https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/
 // section: binary search
 // difficulty: medium
 // tags: array, binary search, top 150
@@ -13,6 +15,7 @@
 // All the integers of nums are unique.
 // nums is sorted and rotated between 1 and n times.
 
+// solution: binary search
 // complexity
 // run-time: O(log n)
 // space: O(1)
@@ -38,7 +41,7 @@ int findMin(const std::vector<int>& nums)
         {
             return nums[mid];
         // go right, rotation is there
-        } else if (nums[mid] > nums[nums.size()-1]) {
+        } else if (nums[mid] > nums.back()) {
             left = mid+1;
         } else {
             right = mid-1;

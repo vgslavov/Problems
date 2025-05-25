@@ -3,9 +3,11 @@
 import sys
 import unittest
 
-# number:
+# number: 29
+# title: Divide Two Integers
+# url: https://leetcode.com/problems/divide-two-integers/
 # section: meta
-# difficulty:
+# difficulty: medium
 # tags: meta
 
 # constraints
@@ -13,9 +15,9 @@ import unittest
 # divisor != 0
 # without using multiplication, division, and mod operator
 
-# solution: brute force subtraction
+# non-solution: brute force subtraction
 # complexity
-# run-time: O(n), too slow! TLE
+# run-time: O(n), TLE
 # space: O(1)
 def divide(dividend: int, divisor: int) -> int:
     count = 0

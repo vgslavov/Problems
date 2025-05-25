@@ -5,6 +5,8 @@
 #include <vector>
 
 // number: 150
+// title: Evaluate Reverse Polish Notation
+// url: https://leetcode.com/problems/evaluate-reverse-polish-notation/
 // section: stack
 // difficulty: medium
 // tags: array, math, stack, top 150, citadel
@@ -14,6 +16,7 @@
 // tokens[i] is either an operator: "+", "-", "*", or "/", or an integer in the
 // range [-200, 200].
 
+// TODO: refactor as lambdas
 int apply(int left, int right, const std::string& op) {
     if (op == "+") {
         return right + left;
