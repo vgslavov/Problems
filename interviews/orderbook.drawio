@@ -1,0 +1,41 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="OrderBook UML" id="orderbook-uml">
+    <mxGraphModel dx="1000" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        
+        <!-- OrderBookCollection -->
+        <mxCell id="2" value="OrderBookCollection&#xa;- d_orderBooks: vector&lt;OrderBook&gt;&#xa;- d_ticker2index: map&lt;string, size_t&gt;&#xa;+ addOrderBook(ticker: string): void&#xa;+ getOrderBook(ticker: string): OrderBook&amp;&#xa;+ addOrder(...): bool&#xa;+ removeOrder(...): bool&#xa;+ orderExecuted(...): bool" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="260" height="180" as="geometry"/>
+        </mxCell>
+        
+        <!-- OrderBook -->
+        <mxCell id="3" value="OrderBook&#xa;- d_ticker: string&#xa;- d_orders: vector&lt;Order&gt;&#xa;- d_orderToIndex: map&lt;size_t, size_t&gt;&#xa;- d_priceLevels: vector&lt;PriceLevel&gt;&#xa;+ addOrder(...): bool&#xa;+ removeOrder(orderId): bool&#xa;+ orderExecuted(orderId, qty): bool&#xa;enum OrderType { BUY, SELL }" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="380" y="40" width="260" height="210" as="geometry"/>
+        </mxCell>
+        
+        <!-- Order -->
+        <mxCell id="4" value="Order&#xa;- d_orderId: size_t&#xa;- d_side: OrderBook::OrderType&#xa;- d_price: double&#xa;- d_quantity: int&#xa;+ orderId(): size_t&#xa;+ side(): OrderBook::OrderType&#xa;+ price(): double&#xa;+ quantity(): int&#xa;+ setQuantity(quantity: int): void" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="380" y="300" width="260" height="200" as="geometry"/>
+        </mxCell>
+        
+        <!-- PriceLevel -->
+        <mxCell id="5" value="PriceLevel&#xa;- d_price: double&#xa;- d_orders: vector&lt;size_t&gt;&#xa;+ price(): double&#xa;+ addOrder(orderId): void&#xa;+ removeOrder(orderId): void&#xa;+ orders(): vector&lt;size_t&gt;&amp;" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="40" y="300" width="260" height="170" as="geometry"/>
+        </mxCell>
+        
+        <!-- Relationships -->
+        <mxCell id="6" style="endArrow=block;endFill=1;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="2" target="3">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="7" style="endArrow=block;endFill=1;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="3" target="4">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="8" style="endArrow=block;endFill=1;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="3" target="5">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,50 @@
+@startuml
+
+class OrderBookCollection {
+    - d_orderBooks : vector<OrderBook>
+    - d_ticker2index : map<string, size_t>
+    + addOrderBook(ticker: string) : void
+    + getOrderBook(ticker: string) : OrderBook&
+    + addOrder(ticker, orderId, side, price, quantity) : bool
+    + removeOrder(ticker, orderId) : bool
+    + orderExecuted(ticker, orderId, quantity) : bool
+}
+
+class OrderBook {
+    - d_ticker : string
+    - d_orders : vector<Order>
+    - d_orderToIndex : map<size_t, size_t>
+    - d_priceLevels : vector<PriceLevel>
+    + addOrder(orderId, side, price, quantity) : bool
+    + removeOrder(orderId) : bool
+    + orderExecuted(orderId, quantity) : bool
+    enum OrderType { BUY; SELL }
+}
+
+class Order {
+    - d_orderId : size_t
+    - d_side : OrderBook::OrderType
+    - d_price : double
+    - d_quantity : int
+    + orderId() : size_t
+    + side() : OrderBook::OrderType
+    + price() : double
+    + quantity() : int
+    + setQuantity(quantity: int) : void
+}
+
+class PriceLevel {
+    - d_price : double
+    - d_orders : vector<size_t>
+    + price() : double
+    + addOrder(orderId: size_t) : void
+    + removeOrder(orderId: size_t) : void
+    + orders() : vector<size_t>&
+}
+
+OrderBookCollection "1" o-- "*" OrderBook
+OrderBook "1" o-- "*" Order
+OrderBook "1" o-- "*" PriceLevel
+PriceLevel "1" o-- "*" Order
+
+@enduml

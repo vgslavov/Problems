@@ -7,43 +7,59 @@ public:
     OrderBookCollection() = default;
 
     void addOrderBook(const std::string& ticker) {
-        if (d_tickerToIndex.find(ticker) != d_tickerToIndex.end()) {
-            throw std::runtime_error("Order book already exists for ticker: " + ticker);
+        if (d_ticker2index.find(ticker) != d_ticker2index.end()) {
+            throw std::runtime_error(
+                "Order book already exists for ticker: " + ticker);
         }
 
+        // Creates a new OrderBook and init it with the ticker
         d_orderBooks.emplace_back(ticker);
-        d_tickerToIndex[ticker] = d_orderBooks.size() - 1;
+        d_ticker2index[ticker] = d_orderBooks.size() - 1;
     }
 
-    bool addOrder(const std::string& ticker, size_t orderId, OrderBook::OrderType side, double price, int quantity) {
-        auto it = d_tickerToIndex.find(ticker);
-        if (it == d_tickerToIndex.end()) {
-            throw std::runtime_error("Order book not found for ticker: " + ticker);
+    OrderBook& getOrderBook(const std::string& ticker) {
+        auto it = d_ticker2index.find(ticker);
+        if (it == d_ticker2index.end()) {
+            throw std::runtime_error(
+                "Order book not found for ticker: " + ticker);
         }
 
-        return d_orderBooks[it->second].addOrder(orderId, side, price, quantity);
+        return d_orderBooks[it->second];
     }
 
-    bool removeOrder(const std::string& ticker, size_t orderId) {
-        auto it = d_tickerToIndex.find(ticker);
-        if (it == d_tickerToIndex.end()) {
-            throw std::runtime_error("Order book not found for ticker: " + ticker);
-        }
+    bool addOrder(
+            const std::string& ticker,
+            size_t orderId,
+            OrderBook::OrderType side,
+            double price,
+            int quantity)
+    {
+        OrderBook& orderBook = getOrderBook(ticker);
 
-        return d_orderBooks[it->second].removeOrder(orderId);
+        return orderBook.addOrder(orderId, side, price, quantity);
     }
 
-    bool orderExecuted(const std::string& ticker, size_t orderId, int quantity) {
-        auto it = d_tickerToIndex.find(ticker);
-        if (it == d_tickerToIndex.end()) {
-            throw std::runtime_error("Order book not found for ticker: " + ticker);
-        }
+    bool removeOrder(
+            const std::string& ticker,
+            size_t orderId)
+    {
+        OrderBook& orderBook = getOrderBook(ticker);
 
-        return d_orderBooks[it->second].orderExecuted(orderId, quantity);
+        return orderBook.removeOrder(orderId);
+    }
+
+    bool orderExecuted(
+            const std::string& ticker,
+            size_t orderId,
+            int quantity)
+    {
+        OrderBook& orderBook = getOrderBook(ticker);
+
+        return orderBook.orderExecuted(orderId, quantity);
     }
 private:
     std::vector<OrderBook> d_orderBooks;
-    std::map<std::string, size_t> d_tickerToIndex;
+    std::map<std::string, size_t> d_ticker2index;
 };
 
 class OrderBook {
@@ -57,7 +73,12 @@ public:
     : d_ticker(ticker)
     {}
 
-    bool addOrder(size_t orderId,  OrderType side, double price, int quantity) {
+    bool addOrder(
+            size_t orderId,
+            OrderType side,
+            double price,
+            int quantity)
+    {
         if (side != OrderType::BUY && side != OrderType::SELL) {
             throw std::runtime_error("Invalid order type");
         }
@@ -106,6 +127,7 @@ private:
     std::string d_ticker;
     std::vector<Order> d_orders;
     std::map<size_t, size_t> d_orderToIndex;
+    // sort?
     std::vector<PriceLevel> d_priceLevels; 
 };
 
