@@ -19,9 +19,9 @@ import unittest
 # 1 <= banned[i].length <= 10
 # banned[i] consists of only lowercase English letters.
 
-# solution: manual tokenize + dict + sort
+# solution: manual tokenize + dict + max
 # complexity
-# run-time: O(n*log n)
+# run-time: O(n)
 # space: O(n)
 def common_word(paragraph, banned):
     if not paragraph:
@@ -29,33 +29,29 @@ def common_word(paragraph, banned):
 
     counts = defaultdict(int)
     banned_set = set(banned)
-    delim = set("!?',;. ")
     word = ""
 
-    for i in range(len(paragraph)):
-        if paragraph[i].isalpha():
-            word += paragraph[i].lower()
-            continue
-        elif paragraph[i] in delim and not word:
-            continue
-
-        if word in banned_set:
+    for c in paragraph:
+        if c.isalpha():
+            word += c.lower()
+        elif word in banned_set:
             word = ""
-            continue
+        elif word:
+            counts[word] += 1
+            word = ""
 
-        counts[word] += 1
-        word = ""
-
-    if word:
+    if word and word not in banned_set:
         counts[word] += 1
 
     #print(f"counts:{counts}")
 
-    return sorted(zip(counts.values(), counts.keys()))[-1][1]
+    # O(n*log n)
+    #return sorted(zip(counts.values(), counts.keys()))[-1][1]
+    return max(counts, key=counts.get)
 
-# solution: re.split + dict + sort
+# solution: re.split + dict + max
 # complexity
-# run-time: O(n*log n)
+# run-time: O(n)
 # space: O(n)
 def common_word2(paragraph, banned):
     if not paragraph:
@@ -74,7 +70,7 @@ def common_word2(paragraph, banned):
 
         counts[wl] += 1
 
-    return sorted(zip(counts.values(), counts.keys()))[-1][1]
+    return max(counts, key=counts.get)
 
 class TestCommonWord(unittest.TestCase):
     def test_empty(self):
