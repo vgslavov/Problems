@@ -295,6 +295,25 @@ ListNode* reverseList(ListNode* head)
     return prev;
 }
 
+// monotonically increasing stack
+std::vector<int> monotonicallyIncreasing(const std::vector<int>& nums)
+{
+    // can use vector instead of stack
+    std::vector<int> stack;
+
+    for (const auto& n : nums) {
+        // for monotonically decreasing, just flip the > to <
+        while (!stack.empty() && stack.back() > n) {
+            // do logic
+            stack.pop_back();
+        }
+
+        stack.push_back(n);
+    }
+
+    return stack;
+}
+
 // merge intervals
 std::vector<std::vector<int>> mergeIntervals(std::vector<std::vector<int>> intervals)
 {
