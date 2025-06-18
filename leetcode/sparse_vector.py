@@ -61,5 +61,19 @@ num2 = [0,3,4,33]
 v2 = SparseVector(num2)
 ans = v1.dotProduct(v2)
 
+class TestSparseVector(unittest.TestCase):
+    def test_sparse_vector(self):
+        v1 = SparseVector([1, 0, 0, 2, 3])
+        v2 = SparseVector([0, 3, 0, 4, 0])
+        self.assertEqual(v1.dotProduct(v2), 8)
+
+        v1 = SparseVector([0, 1, 0, 0, 2])
+        v2 = SparseVector([1, 0, 0, 3, 0])
+        self.assertEqual(v1.dotProduct(v2), 0)
+
+        v1 = SparseVector([1])
+        v2 = SparseVector([1])
+        self.assertEqual(v1.dotProduct(v2), 1)
+
 if __name__ == '__main__':
     sys.exit(unittest.main())

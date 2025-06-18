@@ -53,5 +53,25 @@ def lca3(p: 'Node', q: 'Node') -> 'Node':
 
     return None
 
+class TestLCA3(unittest.TestCase):
+    def test_lca3(self):
+        # Create a simple binary tree
+        root = Node(1)
+        p = Node(2)
+        q = Node(3)
+        root.left = p
+        root.right = q
+        p.parent = root
+        q.parent = root
+
+        self.assertEqual(lca3(p, q), root)
+
+        # Test with a deeper tree
+        r = Node(4)
+        p.left = r
+        r.parent = p
+
+        self.assertEqual(lca3(r, q), root)
+
 if __name__ == '__main__':
     sys.exit(unittest.main())

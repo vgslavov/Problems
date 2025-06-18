@@ -52,7 +52,14 @@ def minrm2makevalid(s: str) -> str:
 
     return ''.join(ans)
 
-# TODO: add unit tests
+class TestMinRm2MakeValid(unittest.TestCase):
+    def test_examples(self):
+        self.assertEqual(minrm2makevalid("lee(t(c)o)de)"), "lee(t(c)o)de")
+        self.assertEqual(minrm2makevalid("a)b(c)d"), "ab(c)d")
+        self.assertEqual(minrm2makevalid("))(("), "")
+        self.assertEqual(minrm2makevalid("(a(b(c)d)"), "a(b(c)d)")
+        self.assertEqual(minrm2makevalid(")("), "")
+        self.assertEqual(minrm2makevalid("abc"), "abc")
 
 if __name__ == '__main__':
     sys.exit(unittest.main())
