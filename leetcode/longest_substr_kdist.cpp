@@ -14,7 +14,7 @@
 // 1 <= s.length <= 5 * 10^4
 // 0 <= k <= 50
 
-// solution: sliding window
+// solution: Leetcode sliding window
 // complexity:
 // run-time: O(n)
 // space: O(k)

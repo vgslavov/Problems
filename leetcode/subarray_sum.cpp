@@ -1,4 +1,5 @@
 #include <vector>
+#include <unordered_map>
 
 // number: 560
 // title: Subarray Sum Equals K
@@ -11,7 +12,7 @@
 // -1000 <= nums[i] <= 1000
 // -107 <= k <= 10^7
 
-// solution: prefix sum with brute force
+// non-solution: prefix sum with brute force
 // complexity:
 // run-time: O(n^2), not TLE!
 // space: O(n)
@@ -31,6 +32,37 @@ int subarraySum(const std::vector<int>& nums, int k)
                 ++ans;
             }
         }
+    }
+
+    return ans;
+}
+
+// solution: Leetcode prefix sum + unordered_map
+// complexity:
+// run-time: O(n)
+// space: O(n)
+int subarraySum2(const std::vector<int>& nums, int k)
+{
+    int prefixSum = 0;
+    int ans = 0;
+
+    // prefix sum to count
+    std::unordered_map<int, int> counts;
+    // edge case: -1 index of prefix sum is 0
+    counts[0] = 1;
+
+    for (const auto& n : nums) {
+        // build prefix sum but don't store intermediate results
+        prefixSum += n;
+        // prefixSum - diff = k
+        int diff = prefixSum - k;
+        
+        auto it = counts.find(diff);            
+        if (it != counts.end()) {
+            ans += counts[diff];
+        }
+
+        ++counts[prefixSum]; 
     }
 
     return ans;
