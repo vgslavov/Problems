@@ -18,7 +18,7 @@
 // complexity
 // run-time: O(m + n)
 // space: O(m + n)
-void merge_lists(
+void merge_arrays(
         std::vector<int>& nums1,
         int m,
         const std::vector<int>& nums2,

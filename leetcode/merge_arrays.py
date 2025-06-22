@@ -22,7 +22,7 @@ import unittest
 # complexity
 # run-time: O((m+n) * log(m+n))
 # space: O(1)
-def merge_lists1(nums1, m, nums2, n):
+def merge_arrays1(nums1, m, nums2, n):
     # don't extend as len(nums1) > m
     nums1[m:] = nums2
     nums1.sort()
@@ -31,7 +31,7 @@ def merge_lists1(nums1, m, nums2, n):
 # complexity
 # run-time: O(m + n)
 # space: O(m + n)
-def merge_lists2(nums1, m, nums2, n):
+def merge_arrays2(nums1, m, nums2, n):
     merged = []
     i = j = 0
     while i < m and j < n:
@@ -63,10 +63,10 @@ class TestMergeLists(unittest.TestCase):
         n = 1
         expected = [1]
 
-        merge_lists1(nums1, m, nums2, n)
+        merge_arrays1(nums1, m, nums2, n)
         self.assertEqual(nums1, expected)
 
-        merge_lists2(nums1, m, nums2, n)
+        merge_arrays2(nums1, m, nums2, n)
         self.assertEqual(nums1, expected)
 
     def test_empty2(self):
@@ -76,10 +76,10 @@ class TestMergeLists(unittest.TestCase):
         n = 0
         expected = [1]
 
-        merge_lists1(nums1, m, nums2, n)
+        merge_arrays1(nums1, m, nums2, n)
         self.assertEqual(nums1, expected)
 
-        merge_lists2(nums1, m, nums2, n)
+        merge_arrays2(nums1, m, nums2, n)
         self.assertEqual(nums1, expected)
 
     def test_merged(self):
@@ -89,10 +89,10 @@ class TestMergeLists(unittest.TestCase):
         n = 3
         expected = [1,2,2,3,5,6]
 
-        merge_lists1(nums1, m, nums2, n)
+        merge_arrays1(nums1, m, nums2, n)
         self.assertEqual(nums1, expected)
 
-        merge_lists2(nums1, m, nums2, n)
+        merge_arrays2(nums1, m, nums2, n)
         self.assertEqual(nums1, expected)
 
 if __name__ == '__main__':

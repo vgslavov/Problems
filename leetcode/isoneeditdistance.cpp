@@ -31,7 +31,7 @@ bool sameLength(const std::string& s, std::string& t)
     return false;
 }
 
-// solution: leetcode using two pointers
+// solution: Leetcode using two pointers
 // complexity
 // run-time: O(min(n,m))
 // space: O(1)

@@ -19,7 +19,7 @@
 // complexity
 // run-time: O(n)
 // space: O(1)
-int myAtoi(std::string s)
+int atoi(std::string s)
 {
     if (s.empty()) {
         return 0;
