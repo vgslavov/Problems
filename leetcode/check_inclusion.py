@@ -20,7 +20,7 @@ import unittest
 # complexity
 # run-time: O(n^2)
 # space: O(1) (only 26 letters per dict)
-def checkInclusion(s1: str, s2: str) -> bool:
+def check_inclusion(s1: str, s2: str) -> bool:
     # s1 cannot be longer than s2 and be a permutation of s2
     if len(s1) > len(s2):
         return False
@@ -62,31 +62,31 @@ class TestCheckInclusion(unittest.TestCase):
         s1 = ""
         s2 = ""
         expected = False
-        self.assertEqual(checkInclusion(s1, s2), expected)
+        self.assertEqual(check_inclusion(s1, s2), expected)
 
     def test_1(self):
         s1 = "ab"
         s2 = "eidbaooo"
         expected = True
-        self.assertEqual(checkInclusion(s1, s2), expected)
+        self.assertEqual(check_inclusion(s1, s2), expected)
 
     def test_2(self):
         s1 = "ab"
         s2 = "eidboaoo"
         expected = False
-        self.assertEqual(checkInclusion(s1, s2), expected)
+        self.assertEqual(check_inclusion(s1, s2), expected)
 
     def test_3(self):
         s1 = "abc"
         s2 = "ccccbbbbaaaa"
         expected = False
-        self.assertEqual(checkInclusion(s1, s2), expected)
+        self.assertEqual(check_inclusion(s1, s2), expected)
 
     def test_4(self):
         s1 = "abc"
         s2 = "abccba"
         expected = True
-        self.assertEqual(checkInclusion(s1, s2), expected)
+        self.assertEqual(check_inclusion(s1, s2), expected)
 
 if __name__ == '__main__':
     sys.exit(unittest.main())

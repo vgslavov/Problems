@@ -62,7 +62,7 @@ def fn(arr, k):
 
     # update ans
 
-    for i in range(min(k, len(nums))):
+    for i in range(min(k, len(arr))):
         pass
         # add arr[i] & remove arr[i-k] from curr
 
@@ -125,8 +125,7 @@ class ListNode:
 
 # Linked list: dummy nodes
 def fn(head):
-    dummy = ListNode(0)
-    dummy.next = head
+    dummy = ListNode(0, head)
     fast = slow = dummy
 
     # move fast pointer k ahead
