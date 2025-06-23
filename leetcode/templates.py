@@ -141,13 +141,13 @@ def fn(head):
 
 # Reversing a linked list
 def fn(head):
-    curr = head
     prev = None
-    while curr:
-        next_node = curr.next
-        curr.next = prev
-        prev = curr
-        curr = next_node
+
+    while head:
+        next_node = head.next
+        head.next = prev
+        prev = head
+        head = next_node
 
     return prev
 
