@@ -2,9 +2,11 @@
 #include <map>
 
 // number: 138
+// title: Copy List with Random Pointer
+// url: https://leetcode.com/problems/copy-list-with-random-pointer/
 // section: linked list
 // difficulty: medium
-// tags: linked list, hash table, top 150
+// tags: linked list, hash table, top 150, meta
 
 // constraints
 // 0 <= n <= 1000

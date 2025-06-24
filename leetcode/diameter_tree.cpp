@@ -4,7 +4,7 @@
 // title: Diameter of Binary Tree
 // url: https://leetcode.com/problems/diameter-of-binary-tree/
 // difficulty: easy
-// tags: tree, dfs, binary tree
+// tags: tree, dfs, binary tree, meta
 
 // constraints
 // The number of nodes in the tree is in the range [1, 10^4].

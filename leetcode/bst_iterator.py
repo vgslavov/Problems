@@ -5,7 +5,7 @@
 # url: https://leetcode.com/problems/binary-search-tree-iterator/
 # section: binary tree general
 # difficulty: medium
-# tags: stack, tree, design, bst, binary tree, iterator
+# tags: stack, tree, design, bst, binary tree, iterator, meta
 
 # constraints
 # The number of nodes in the tree is in the range [1, 10^5].

@@ -33,12 +33,15 @@ def clone_graph(node):
         if not node:
             return node
 
+        # look up clone node given original node
         if node in visited:
             return visited[node]
 
+        # create a clone node and add it to visited
         clone_node = Node(node.val, [])
         visited[node] = clone_node
 
+        # recursively clone all neighbors
         for neighbor in node.neighbors:
             clone_node.neighbors.append(dfs(neighbor))
 

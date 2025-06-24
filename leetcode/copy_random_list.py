@@ -8,7 +8,7 @@ import unittest
 # url: https://leetcode.com/problems/copy-list-with-random-pointer/
 # section: linked list
 # difficulty: medium
-# tags: linked list, hash table, top 150
+# tags: linked list, hash table, top 150, meta
 
 # constraints
 # 0 <= n <= 1000
@@ -81,18 +81,22 @@ def copy_random_list2(head):
         if not head:
             return None
 
+        # did we visit this node?
         if head in visited:
             return visited[head]
 
+        # create a new node
         new_node = Node(head.val)
+        # cache
         visited[head] = new_node
 
+        # recursively set next and random pointers
         new_node.next = dfs(head.next)
         new_node.random = dfs(head.random)
 
         return new_node
 
-    # old node to new node
+    # key: old node, value: new node
     visited = {}
     return dfs(head)
 

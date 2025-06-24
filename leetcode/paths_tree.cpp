@@ -6,7 +6,7 @@
 // url: https://leetcode.com/problems/binary-tree-paths/
 // section: binary tree general
 // difficulty: easy
-// tags: tree, dfs, backtracking, string
+// tags: tree, dfs, backtracking, string, meta
 
 // constraints
 // The number of nodes in the tree is in the range [1, 100].

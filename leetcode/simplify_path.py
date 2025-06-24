@@ -8,7 +8,7 @@ import unittest
 # url: https://leetcode.com/problems/simplify-path/
 # section: stack
 # difficulty: medium
-# tags: string, stack, top 150
+# tags: string, stack, top 150, meta
 
 # constraints
 # 1 <= path.length <= 3000
@@ -51,7 +51,31 @@ def simplify_path(path):
 
     return '/' + '/'.join(s)
 
-# TODO: solve recursively & refactor, ugly!
+# solution: stack
+# complexity
+# run-time: O(n)
+# space: O(n)
+def simplify_path2(path):
+    if not path:
+        return ''
+
+    stack = []
+
+    # split by / to get rid of duplicate /
+    for dir in path.split('/'):
+        # current dir or empty dir
+        if not dir or dir == '.':
+            continue
+        # parent dir
+        elif dir == '..':
+            # pop if not empty
+            if stack:
+                stack.pop()
+        # keep adding
+        else:
+            stack.append(dir)
+
+    return '/' + '/'.join(stack)
 
 class TestSimplifyPath(unittest.TestCase):
 
@@ -59,51 +83,61 @@ class TestSimplifyPath(unittest.TestCase):
         path = ''
         expected = path
         self.assertEqual(simplify_path(path), expected)
+        self.assertEqual(simplify_path2(path), expected)
 
     def test_trailslash(self):
         path = '/home/'
         expected = '/home'
         self.assertEqual(simplify_path(path), expected)
+        self.assertEqual(simplify_path2(path), expected)
 
     def test_2dots(self):
         path = '/../'
         expected = '/'
         self.assertEqual(simplify_path(path), expected)
+        self.assertEqual(simplify_path2(path), expected)
 
     def test_2dots2(self):
         path = "/home/user/Documents/../Pictures"
         expected = "/home/user/Pictures"
         self.assertEqual(simplify_path(path), expected)
+        self.assertEqual(simplify_path2(path), expected)
 
     def test_doubleslash(self):
         path = '/home//foo/'
         expected = '/home/foo'
         self.assertEqual(simplify_path(path), expected)
+        self.assertEqual(simplify_path2(path), expected)
 
     def test_2dots2dots(self):
         path = '/a/./b/../../c/'
         expected = '/c'
         self.assertEqual(simplify_path(path), expected)
+        self.assertEqual(simplify_path2(path), expected)
 
     def test_2dots2dots2dots(self):
         path = '/home/../../..'
         expected = '/'
         self.assertEqual(simplify_path(path), expected)
+        self.assertEqual(simplify_path2(path), expected)
 
     def test_3dots(self):
         path = '/...'
         expected = '/...'
         self.assertEqual(simplify_path(path), expected)
+        self.assertEqual(simplify_path2(path), expected)
 
     def test_3dots2dots2dots(self):
         path = "/.../a/../b/c/../d/./"
         expected = "/.../b/d"
         self.assertEqual(simplify_path(path), expected)
+        self.assertEqual(simplify_path2(path), expected)
 
     def test_abcd(self):
         path = '/a//b////c/d//././/..'
         expected = '/a/b/c'
         self.assertEqual(simplify_path(path), expected)
+        self.assertEqual(simplify_path2(path), expected)
 
 if __name__ == '__main__':
     sys.exit(unittest.main())

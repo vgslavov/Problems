@@ -4,6 +4,8 @@ import sys
 import unittest
 
 # number: 977
+# title: Squares of a Sorted Array
+# url: https://leetcode.com/problems/squares-of-a-sorted-array/
 # section: assessments
 # difficulty: easy
 # tags: array, two pointers, sorting, meta
@@ -117,6 +119,7 @@ def sorted_squares3(nums):
     ans = []
 
     while left <= right:
+        # read positive & negative numbers independently
         # sort descending
         if abs(nums[left]) < abs(nums[right]):
             square = nums[right]

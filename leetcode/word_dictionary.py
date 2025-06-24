@@ -8,7 +8,7 @@ import unittest
 # url: https://leetcode.com/problems/add-and-search-word-data-structure-design/
 # section: trie
 # difficulty: medium
-# tags: string, dfs, design, trie, top 150
+# tags: string, dfs, design, trie, top 150, meta
 
 # contraints
 # m: len(word)

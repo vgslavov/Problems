@@ -8,7 +8,7 @@ import unittest
 # url: https://leetcode.com/problems/flatten-binary-tree-to-linked-list/
 # section: binary tree general
 # difficulty: medium
-# tags: linked list, stack, tree, dfs, binary tree
+# tags: linked list, stack, tree, dfs, binary tree, meta
 
 # constraints
 # The number of nodes in the tree is in the range [0, 2000].

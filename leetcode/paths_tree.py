@@ -8,7 +8,7 @@ import unittest
 # url: https://leetcode.com/problems/binary-tree-paths/
 # section: binary tree general
 # difficulty: easy
-# tags: tree, dfs, backtracking, string
+# tags: tree, dfs, backtracking, string, meta
 
 # constraints
 # The number of nodes in the tree is in the range [1, 100].
@@ -28,7 +28,7 @@ def join_str(s1, s2):
 # complexity
 # run-time: O(n)
 # space: O(n)
-def binaryTreePaths(root):
+def binary_tree_paths(root):
     # pass string, not a list!
     # need to pass by value, not by reference
     def dfs(node, p):
@@ -52,19 +52,19 @@ class TestBinaryTreePaths(unittest.TestCase):
         # Example 1
         root = TreeNode(1, TreeNode(2), TreeNode(3))
         expected = ["1->2", "1->3"]
-        self.assertEqual(binaryTreePaths(root), expected)
+        self.assertEqual(binary_tree_paths(root), expected)
 
     def test_example_2(self):
         # Example 2
         root = TreeNode(1, None, TreeNode(2, TreeNode(3)))
         expected = ["1->2->3"]
-        self.assertEqual(binaryTreePaths(root), expected)
+        self.assertEqual(binary_tree_paths(root), expected)
 
     def test_single_node(self):
         # Single node
         root = TreeNode(5)
         expected = ["5"]
-        self.assertEqual(binaryTreePaths(root), expected)
+        self.assertEqual(binary_tree_paths(root), expected)
 
 if __name__ == '__main__':
     sys.exit(unittest.main())
