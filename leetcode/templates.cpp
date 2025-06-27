@@ -528,7 +528,22 @@ int binarySearch(const std::vector<int>& v, int target)
     return left;
 }
 
-// TODO: Backtracking
+void backtrack(curr)
+{
+    // base case
+    if (BASE_CASE) {
+        // modify the answer
+        return;
+    }
+
+    // do logic
+
+    for (const auto& choice : CHOICES) {
+        // make choice
+        backtrack();
+        // undo choice
+    }
+}
 
 // Dynamic programming: recursive top-down w/ memoization
 int dp(int STATE, const std::vector<int>& v, std::map<int, STATE>& memo)
