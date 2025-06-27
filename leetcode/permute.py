@@ -20,31 +20,59 @@ import unittest
 # complexity
 # run-time: O(n*n!)?
 # space: O(n*n!)?
-def permute(nums):
+def permute(nums: list[int]) -> list[list[int]]:
     return [list(v) for v in itertools.permutations(nums)]
 
-# TODO: solve manually
+# solution: LeetCode backtracking
+# complexity
+# run-time: O(n^2*n!)
+# space: O(n*n!)
+def permute2(nums: list[int]) -> list[list[int]]:
+    def backtrack(curr):
+        # base case: permutation as long as input
+        if len(curr) == len(nums):
+            # append a *copy* of the current permutation to the answer
+            ans.append(curr[:])
+            return
+
+        # iterate through input on each level of the tree
+        for n in nums:
+            # TODO: put in dict to optimize: O(n*n!)
+            if n not in curr:
+                curr.append(n)
+                backtrack(curr)
+                curr.pop()
+
+    # root of the backtracking tree is an empty list
+    ans = []
+    backtrack([])
+
+    return ans
 
 class TestPermute(unittest.TestCase):
     def test_empty(self):
         nums = []
         expected = [[]]
         self.assertEqual(permute(nums), expected)
+        self.assertEqual(permute2(nums), expected)
 
     def test1(self):
         nums = [1,2,3]
         expected = [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
         self.assertEqual(permute(nums), expected)
+        self.assertEqual(permute2(nums), expected)
 
     def test2(self):
         nums = [0,1]
         expected = [[0,1],[1,0]]
         self.assertEqual(permute(nums), expected)
+        self.assertEqual(permute2(nums), expected)
 
     def test3(self):
         nums = [1]
         expected = [[1]]
         self.assertEqual(permute(nums), expected)
+        self.assertEqual(permute2(nums), expected)
 
 if __name__ == '__main__':
     sys.exit(unittest.main())
