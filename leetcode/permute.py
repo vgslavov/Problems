@@ -44,6 +44,7 @@ def permute2(nums: list[int]) -> list[list[int]]:
                 curr.pop()
 
     # root of the backtracking tree is an empty list
+    # nodes are the leaves of the tree
     ans = []
     backtrack([])
 

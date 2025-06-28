@@ -38,8 +38,7 @@ void backtrack(const std::vector<int>& nums, std::vector<int> curr)
 // run-time: O(n*n!)?
 // space: O(n*n!)?
 std::vector<std::vector<int>> permute(const std::vector<int>& nums) {
-    std::vector<int> curr;
-    backtrack(nums, curr);
+    backtrack(nums, std::vector<int>{});
 
     return ans;
 }
