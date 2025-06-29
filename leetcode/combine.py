@@ -27,6 +27,7 @@ def combine(n: int, k: int) -> list[list[int]]:
 # complexity
 # run-time: O(n choose k)?
 # space: O(k)
+# TODO: understand better
 def combine2(n: int, k: int) -> list[list[int]]:
     def backtrack(curr, i):
         # base
@@ -37,6 +38,7 @@ def combine2(n: int, k: int) -> list[list[int]]:
 
         # iterate through input on each level of the tree 
         # start from i to avoid duplicates
+        # loop over: [i, n] to avoid duplicates
         for num in range(i, n+1):
             curr.append(num)
             backtrack(curr, num+1)

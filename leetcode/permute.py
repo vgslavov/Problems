@@ -27,6 +27,7 @@ def permute(nums: list[int]) -> list[list[int]]:
 # complexity
 # run-time: O(n^2*n!)
 # space: O(n*n!)
+# TODO: understand better
 def permute2(nums: list[int]) -> list[list[int]]:
     def backtrack(curr):
         # base case: permutation as long as input
