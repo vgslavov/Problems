@@ -259,6 +259,8 @@ def fn(root):
     return ans
 
 # Graph: build adjacency list
+# input: array of edges, [[0,1],[1,2],[2,0],[2,3]]
+# output: adjacency list/dict, {0: [1], 1: [0, 2], 2: [1, 0, 3], 3: [2]}
 def fn(edges):
     graph = defaultdict(list)
 

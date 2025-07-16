@@ -68,7 +68,9 @@
         * `[[0,1],[1,2],[2,0],[2,3]]`
         * least efficient: iterate over entire array to find neighbors
     * adjacency lists
-        * `[[1],[2],[0, 3],[]]`
+        * directed (list): `[[1],[2],[0, 3],[]]`
+        * undirected (list): `[[1],[0, 2],[1, 0, 3],[2]]`
+        * undirected (dict): `{0: [1], 1: [0, 2], 2: [1, 0, 3], 3: [2]}`
         * list of outgoing edges from `i`th node
         * most convenient: convert other inputs to it
     * adjacency matrix

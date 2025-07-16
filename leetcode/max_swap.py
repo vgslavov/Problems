@@ -37,6 +37,7 @@ def max_swap(num: int) -> int:
 # complexity
 # run-time: O(n)
 # space: O(n)
+# TODO: understand better
 def max_swap2(num: int) -> int:
     # need only a list, no str
     num_l = list(str(num))

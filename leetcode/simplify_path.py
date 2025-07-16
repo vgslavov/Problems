@@ -51,7 +51,7 @@ def simplify_path(path):
 
     return '/' + '/'.join(s)
 
-# solution: stack
+# solution: LeetCode stack
 # complexity
 # run-time: O(n)
 # space: O(n)
