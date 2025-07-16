@@ -58,4 +58,39 @@ int closestValue(TreeNode* root, double target)
     return std::get<1>(minDiff(root, target));
 }
 
+int dfs(TreeNode* node, double target, int closest)
+{
+    if (!node) {
+        return closest;
+    }
+
+    float newDiff = abs(node->val-target);
+    float oldDiff = abs(closest-target);
+
+    if (newDiff < oldDiff) {
+        closest = node->val;
+    } else if (newDiff == oldDiff) {
+        closest = std::min(closest, node->val);
+    }
+
+    if (target == node->val) {
+        return node->val;
+    } else if (target > node->val) {
+        return dfs(node->right, target, closest);
+    } else {
+        return dfs(node->left, target, closest);
+    }
+
+    return closest;
+}
+
+// solution: recursive dfs
+// complexity
+// run-time: O(log n)
+// space: O(n)
+int closestValue2(TreeNode* root, double target)
+{
+    return dfs(root, target, root->val);
+}
+
 // TODO: add unit tests
