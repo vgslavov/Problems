@@ -30,10 +30,10 @@
 
 ## Design Template
 
+Source: [LeetCode: My System Design Template](https://leetcode.com/discuss/post/229177/my-system-design-template-by-topcat-vtk2/)
+
 ### Feature Expectations
 [5 min]
-
-Source: [LeetCode: My System Design Template](https://leetcode.com/discuss/post/229177/my-system-design-template-by-topcat-vtk2/)
 
 1. Use cases
 2. Scenarios that will not be covered
@@ -254,6 +254,8 @@ Power           Exact Value         Approx Value        Bytes
 ```
 
 ### Latencies
+
+* HDD IOPS (I/O Operations per Second): 120
 
 ```
 Latency Comparison Numbers

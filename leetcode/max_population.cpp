@@ -4,7 +4,7 @@
 // number: 1854
 // title: Maximum Population Year
 // url: https://leetcode.com/problems/maximum-population-year/
-// difficulty: medium
+// difficulty: easy
 // tags: array, counting, prefix sum
 
 // constraints:

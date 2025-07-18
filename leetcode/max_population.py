@@ -7,7 +7,7 @@ import unittest
 # number: 1854
 # title: Maximum Population Year
 # url: https://leetcode.com/problems/maximum-population-year/
-# difficulty: medium
+# difficulty: easy
 # tags: array, counting, prefix sum
 
 # constraints:
@@ -15,7 +15,7 @@ import unittest
 # 1950 <= logs[i][0] < logs[i][1] <= 250
 
 # solution: brute force
-# time complexity: O(n * (last_year - first_year)) ~ O(n^2)
+# time complexity: O(n^2)
 # space complexity: O(n)
 def max_population(logs: list[list[int]]) -> int:
     count = defaultdict(int)
@@ -27,7 +27,9 @@ def max_population(logs: list[list[int]]) -> int:
     return max(count, key=count.get)
 
 # solution: difference array + prefix sum
-# time complexity: O(n)
+# n: len(logs)
+# m: last_year - first_year (const)
+# time complexity: O(n+m) ~ O(n)
 # space complexity: O(n)
 def max_population2(logs: list[list[int]]) -> int:
     first_year = 1950

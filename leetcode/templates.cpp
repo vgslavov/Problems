@@ -209,6 +209,23 @@ std::vector<int> prefixSum(const std::vector<int>& v)
     return prefix;
 }
 
+// Build a diff array
+std::vector<int> diffArray(
+    const std::vector<int>& v,
+    const std::vector<std::vector<int>>& shifts)
+{
+    std::vector<int> diff(v.size());
+
+    for (const auto& range : shifts) {
+        diff[range[0]] += 1;
+        if (range[1] + 1 < diff.size()) {
+            diff[range[1] + 1] -= 1;
+        }
+    }
+
+    return diff;
+}
+
 // Efficient string building
 // v is a list of chars
 std::string buildString(const std::vector<std::string>& v)

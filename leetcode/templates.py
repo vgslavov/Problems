@@ -78,6 +78,18 @@ def fn(arr):
 
     return prefix
 
+# Build a diff array
+def fn(arr, shifts):
+    diff = [0] * len(arr)
+
+    for start, end in shifts:
+        diff[start] += 1
+        # if inclusive
+        if end + 1 < len(diff):
+            diff[end + 1] -= 1
+
+    return diff
+
 # Efficient string building
 # arr is a list of characters
 def fn(arr):
