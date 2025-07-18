@@ -12,7 +12,7 @@ import unittest
 
 # constraints:
 # 1 <= logs.length <= 100
-# 1950 <= logs[i][0] < logs[i][1] <= 205
+# 1950 <= logs[i][0] < logs[i][1] <= 250
 
 # solution: brute force
 # time complexity: O(n * (last_year - first_year)) ~ O(n^2)
