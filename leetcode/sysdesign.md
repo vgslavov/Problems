@@ -4,31 +4,107 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-- [Design Template](#design-template)
+- [Concepts](#concepts)
+  - [CAP](#cap)
+    - [Consistency](#consistency)
+    - [Availability](#availability)
+    - [Levels of Consistency](#levels-of-consistency)
+  - [Caching](#caching)
+- [LeetCode Design Template](#leetcode-design-template)
   - [Feature Expectations](#feature-expectations)
   - [Estimations](#estimations)
   - [Design Goals](#design-goals)
   - [High Level Design](#high-level-design)
   - [Deep Dive](#deep-dive)
   - [Justify](#justify)
+- [Hello Interview Design Template](#hello-interview-design-template)
+  - [Requirements](#requirements)
+  - [Core Entities](#core-entities)
+  - [API or System Interface](#api-or-system-interface)
+  - [Data Flow](#data-flow)
+  - [High-Level Design](#high-level-design)
+  - [Deep Dive](#deep-dive-1)
 - [System Requirements](#system-requirements)
 - [Non-functional Requirements](#non-functional-requirements)
-  - [Availability](#availability)
+  - [Availability](#availability-1)
   - [Scalability](#scalability)
   - [Performance](#performance)
   - [Durability](#durability)
-  - [Consistency](#consistency)
+  - [Consistency](#consistency-1)
   - [Maintainability](#maintainability)
   - [Security](#security)
   - [Cost](#cost)
 - [Appendix](#appendix)
   - [Powers of 2](#powers-of-2)
+  - [Powers of 10](#powers-of-10)
+  - [Modern Hardware Limits](#modern-hardware-limits)
+  - [Storage](#storage)
   - [Latencies](#latencies)
   - [Formulas](#formulas)
+  - [Terminology](#terminology)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-## Design Template
+## Concepts
+
+Source:
+* [Hello Interview: System Design](https://www.hellointerview.com/learn/system-design/)
+
+### CAP
+
+> "Does every read need to read the most recent write?" If the answer is yes, you need to prioritize *consistency*. If the answer is no, you can prioritize *availability*.
+
+1. **Consistency**: All nodes see the same data at the same time.
+2. **Availability**: Every request to a non-failing node receives a response.
+3. **Partition Tolerance**: The system continues to operate despite arbitrary message loss or failure of part of the system
+
+Real-world systems frequently need both availability and consistency - just for different features:
+* strong consistency to prevent double-booking
+* eventual consistency to see event description
+
+#### Consistency
+
+* **Distributed Transactions**: Ensuring multiple data stores (like cache and database) remain in sync through two-phase commit protocols.
+* **Single-Node Solutions**: Using a single database instance to avoid propagation issues entirely.
+* **Technology Choices**
+    * Traditional RDBMS (PostgresSQL, MySQL)
+    * Google Spanner
+    * DynamoDB (in strong consistency mode)
+
+#### Availability
+
+* **Multiple Replicas**: Scaling to additional read replicas with asynchronous replication, allowing reads to be served from any replica.
+* **Change Data Capture (CDC)**: Using CDC to track changes in the primary database and propagate them asynchronously to replicas, caches, and other systems.
+* **Technology Choices**
+    * Cassandra
+    * DynamoDB (in multiple AZ configuration)
+    * Redis clusters
+
+#### Levels of Consistency
+
+* **Strong Consistency**: All reads reflect the most recent write.
+* **Causal Consistency**: Related events appear in the same order to all users.
+* **Read-your-own-writes Consistency**: Users always see their own updates immediately, though other users might see older versions.
+* **Eventual Consistency**: The system will become consistent over time but may temporarily have inconsistencies.
+
+### Caching
+
+* Goals
+    * Save aggregated metrics
+    * Reduce # of db queries
+    * Speed up expensive queries
+* Eviction policies
+    * Least Recently Used (LRU): Evicts the least recently accessed items first.
+    * First In, First Out (FIFO): Evicts items in the order they were added.
+    * Least Frequently Used (LFU): Removes items that are least frequently accessed.
+* Cache invalidation strategy
+* Cache write strategy
+    * Write-Through Cache: Writes data to both the cache and the underlying datastore simultaneously. Ensures consistency but can be slower for write operations.
+    * Write-Around Cache: Writes data directly to the datastore, bypassing the cache. This can minimize cache pollution but might increase data fetch times on subsequent reads.
+    * Write-Back Cache: Writes data to the cache and then asynchronously writes the data to the datastore. This can be faster for write operations but can lead to data loss if the cache fails before the data is written to the datastore.
+
+
+## LeetCode Design Template
 
 Source: [LeetCode: My System Design Template](https://leetcode.com/discuss/post/229177/my-system-design-template-by-topcat-vtk2/)
 
@@ -36,7 +112,7 @@ Source: [LeetCode: My System Design Template](https://leetcode.com/discuss/post/
 [5 min]
 
 1. Use cases
-2. Scenarios that will not be covered
+2. Out of scope
 3. Who will use
 4. How many will use
 5. Usage patterns
@@ -46,7 +122,7 @@ Source: [LeetCode: My System Design Template](https://leetcode.com/discuss/post/
 
 1. Throughput (QPS for read and write queries)
 2. Latency expected from the system (for read and write queries)
-3. Read/Write ratio
+3. Read/Write ratio (typical: 10:1 -> 100:1)
 4. Traffic estimates
     - Write (QPS, Volume of data)
     - Read  (QPS, Volume of data)
@@ -133,7 +209,35 @@ Source: [LeetCode: My System Design Template](https://leetcode.com/discuss/post/
 2. Latency caused between each layer
 3. Overall latency justification
 
+## Hello Interview Design Template
+
+### Requirements
+[5 min]
+
+1. Functional (*features* of system)
+2. Non-functional (*qualities* of system)
+3. Capacity estimations (skip for later)
+
+### Core Entities
+[2 min]
+
+### API or System Interface
+[5 min]
+
+### Data Flow
+[5 min]
+
+Optional
+
+### High-Level Design
+[10-15min]
+
+### Deep Dive
+[10 min]
+
 ## System Requirements
+
+Source: [LeetCode: System Design for Interviews and Beyond](https://leetcode.com/explore/featured/card/system-design-for-interviews-and-beyond/)
 
 * functional
     * define behavior: what a system is supposed to do
@@ -236,7 +340,9 @@ How to design systems with the most effective use of resources.
 
 ## Appendix
 
-Source: [System Design Primer](https://github.com/donnemartin/system-design-primer?tab=readme-ov-file#appendix)
+* Sources
+    * [System Design Primer](https://github.com/donnemartin/system-design-primer?tab=readme-ov-file#appendix)
+    * [What is Scalability Anyway](https://brooker.co.za/blog/2024/01/18/scalability.html)
 
 ### Powers of 2
 
@@ -253,9 +359,64 @@ Power           Exact Value         Approx Value        Bytes
 40              1,099,511,627,776   1 trillion           1 TB
 ```
 
+### Powers of 10
+
+Source: [Hello Interview: Mastering Estimation](https://www.hellointerview.com/blog/mastering-estimation)
+
+```
+Power of 1000	Number	        Prefix
+(1000^x)
+----------------------------------------
+0	            Unit	
+1	            Thousand	    Kilo
+2	            Million	        Mega
+3	            Billion	        Giga
+4	            Trillion	    Tera
+5	            Quadrillion	    Peta
+```
+
+### Modern Hardware Limits
+
+* In 2025,
+    * Single databases can handle terabytes of data
+    * Caches can hold entire datasets in memory
+    * Message queues are fast enough for synchronous flows (as long as there is no backlog!)
+    * Application servers have enough memory for significant local optimization
+* 1st bottleneck: CPU utilization, not memory capacity
+    * CPU > memory > network
+* network latency in same cloud region: 1-2ms
+
+|Component|Key Metrics|Scale Triggers|
+|---------|-----------|--------------|
+|Caching|~1ms latency|Hit rate < 80%|
+||100k+ operations/second|Latency > 1ms|
+||Memory-bound (up to 1TB)|Memory usage > 80%|
+|||Cache churn/thrashing|
+|Databases|Up to 50k transactions/second|Write throughput > 10k TPS|
+||Sub-5ms read latency (cached)|Read latency > 5ms uncached|
+||64 TiB+ storage capacity|Geographic distribution needs|
+|App Servers|100k+ concurrent connections|CPU > 70% utilization|
+||8-64 cores @ 2-4 GHz|Response latency > SLA|
+||64-512GB RAM standard, up to 2TB|Connections near 100k/instance|
+|||Memory > 80%|
+|Message Queues|Up to 1 million msgs/sec per broker|Throughput near 800k msgs/sec|
+||Sub-5ms end-to-end latency|Partition count ~200k per cluster|
+||Up to 50TB storage|Growing consumer lag|
+
+### Storage
+
+```
+Item	                    Size
+----------------------------------------
+A two-hour movie	        1gb
+A small book of plain text	1mb
+A high-resolution photo	    1mb
+A medium-resolution image (or a site layout graphic)	100kb
+```
+
 ### Latencies
 
-* HDD IOPS (I/O Operations per Second): 120
+* HDD IOPS: 120
 
 ```
 Latency Comparison Numbers
@@ -308,3 +469,10 @@ queue length = max latency / (transaction time / number of threads)
 ```
 
 If queue is unbounded, latency increases. To set max response time, limit queue length.
+
+### Terminology
+
+* linearizability: all nodes reflect the most recent write operation
+* scalable: a system is scalable in the range where the cost of adding incremental work is approximately constant
+* IOPS: I/O per second
+* WPS: writes per second
