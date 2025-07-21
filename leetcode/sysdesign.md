@@ -11,6 +11,17 @@
     - [Availability](#availability)
     - [Levels of Consistency](#levels-of-consistency)
   - [Caching](#caching)
+    - [Goals](#goals)
+    - [Eviction policies](#eviction-policies)
+    - [Cache invalidation strategy](#cache-invalidation-strategy)
+    - [Cache write strategy](#cache-write-strategy)
+  - [Database Indexes](#database-indexes)
+    - [B-Tree Indexes](#b-tree-indexes)
+    - [LSM Trees](#lsm-trees)
+    - [Hash Indexes](#hash-indexes)
+    - [Geospatial Indexes](#geospatial-indexes)
+    - [Inverted Indexes](#inverted-indexes)
+    - [Index Optimizations](#index-optimizations)
 - [LeetCode Design Template](#leetcode-design-template)
   - [Feature Expectations](#feature-expectations)
   - [Estimations](#estimations)
@@ -100,19 +111,27 @@ Real-world systems frequently need both availability and consistency - just for 
 
 ### Caching
 
-* Goals
-    * Save aggregated metrics
-    * Reduce # of db queries
-    * Speed up expensive queries
-* Eviction policies
-    * Least Recently Used (LRU): Evicts the least recently accessed items first.
-    * First In, First Out (FIFO): Evicts items in the order they were added.
-    * Least Frequently Used (LFU): Removes items that are least frequently accessed.
-* Cache invalidation strategy
-* Cache write strategy
-    * Write-Through Cache: Writes data to both the cache and the underlying datastore simultaneously. Ensures consistency but can be slower for write operations.
-    * Write-Around Cache: Writes data directly to the datastore, bypassing the cache. This can minimize cache pollution but might increase data fetch times on subsequent reads.
-    * Write-Back Cache: Writes data to the cache and then asynchronously writes the data to the datastore. This can be faster for write operations but can lead to data loss if the cache fails before the data is written to the datastore.
+#### Goals
+
+* Save aggregated metrics
+* Reduce # of db queries
+* Speed up expensive queries
+
+#### Eviction policies
+
+* **Least Recently Used (LRU)**: Evicts the least recently accessed items first.
+* **First In, First Out (FIFO)**: Evicts items in the order they were added.
+* **Least Frequently Used (LFU)**: Removes items that are least frequently accessed.
+
+#### Cache invalidation strategy
+
+* TTL
+
+#### Cache write strategy
+
+* **Write-Through Cache**: Writes data to both the cache and the underlying datastore simultaneously. Ensures consistency but can be slower for write operations.
+* **Write-Around Cache**: Writes data directly to the datastore, bypassing the cache. This can minimize cache pollution but might increase data fetch times on subsequent reads.
+* **Write-Back Cache**: Writes data to the cache and then asynchronously writes the data to the datastore. This can be faster for write operations but can lead to data loss if the cache fails before the data is written to the datastore.
 
 ### Database Indexes
 
