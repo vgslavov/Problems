@@ -4,6 +4,7 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
+- [Sources](#sources)
 - [Concepts](#concepts)
   - [CAP](#cap)
     - [Consistency](#consistency)
@@ -37,18 +38,28 @@
 - [Appendix](#appendix)
   - [Powers of 2](#powers-of-2)
   - [Powers of 10](#powers-of-10)
+  - [Time](#time)
   - [Modern Hardware Limits](#modern-hardware-limits)
   - [Storage](#storage)
   - [Latencies](#latencies)
   - [Formulas](#formulas)
   - [Terminology](#terminology)
+  - [REST API](#rest-api)
+  - [HTTP Codes](#http-codes)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-## Concepts
+## Sources
 
-Source:
+* [Hello Interview: Mastering Estimation](https://www.hellointerview.com/blog/mastering-estimation)
 * [Hello Interview: System Design](https://www.hellointerview.com/learn/system-design/)
+* [Latency Numbers Every Programmer Should Know](https://gist.github.com/jboner/2841832)
+* [LeetCode: My System Design Template](https://leetcode.com/discuss/post/229177/my-system-design-template-by-topcat-vtk2/)
+* [LeetCode: System Design for Interviews and Beyond](https://leetcode.com/explore/featured/card/system-design-for-interviews-and-beyond/)
+* [System Design Primer](https://github.com/donnemartin/system-design-primer/)
+* [What is Scalability Anyway](https://brooker.co.za/blog/2024/01/18/scalability.html)
+
+## Concepts
 
 ### CAP
 
@@ -104,8 +115,6 @@ Real-world systems frequently need both availability and consistency - just for 
     * Write-Back Cache: Writes data to the cache and then asynchronously writes the data to the datastore. This can be faster for write operations but can lead to data loss if the cache fails before the data is written to the datastore.
 
 ## LeetCode Design Template
-
-Source: [LeetCode: My System Design Template](https://leetcode.com/discuss/post/229177/my-system-design-template-by-topcat-vtk2/)
 
 ### Feature Expectations
 [5 min]
@@ -236,8 +245,6 @@ Optional
 
 ## System Requirements
 
-Source: [LeetCode: System Design for Interviews and Beyond](https://leetcode.com/explore/featured/card/system-design-for-interviews-and-beyond/)
-
 * functional
     * define behavior: what a system is supposed to do
     * example: exchange messages
@@ -339,10 +346,6 @@ How to design systems with the most effective use of resources.
 
 ## Appendix
 
-* Sources
-    * [System Design Primer](https://github.com/donnemartin/system-design-primer?tab=readme-ov-file#appendix)
-    * [What is Scalability Anyway](https://brooker.co.za/blog/2024/01/18/scalability.html)
-
 ### Powers of 2
 
 ```
@@ -359,8 +362,6 @@ Power           Exact Value         Approx Value        Bytes
 ```
 
 ### Powers of 10
-
-Source: [Hello Interview: Mastering Estimation](https://www.hellointerview.com/blog/mastering-estimation)
 
 ```
 Power of 1000	Number          Prefix
@@ -383,8 +384,6 @@ Power of 1000	Number          Prefix
 * 400 requests per second = 1 billion requests per month
 
 ### Modern Hardware Limits
-
-Source: [Hello Interview: Numbers to Know](https://www.hellointerview.com/learn/system-design/deep-dives/numbers-to-know)
 
 * In 2025,
     * Single databases can handle terabytes of data
