@@ -114,6 +114,73 @@ Real-world systems frequently need both availability and consistency - just for 
     * Write-Around Cache: Writes data directly to the datastore, bypassing the cache. This can minimize cache pollution but might increase data fetch times on subsequent reads.
     * Write-Back Cache: Writes data to the cache and then asynchronously writes the data to the datastore. This can be faster for write operations but can lead to data loss if the cache fails before the data is written to the datastore.
 
+### Database Indexes
+
+#### B-Tree Indexes
+
+* the default choice
+* benefits
+    * maintain sorted order, making range queries & `ORDER BY` operations efficient
+    * self-balancing, ensuring predictable performance even as data grows
+    * minimize disk I/O by matching their structure to how databases store data
+    * handle both equality searches (email = 'x') and range searches (age > 25) equally well
+    * remain balanced even with random inserts and deletes, avoiding the performance cliffs you might see with simpler tree structures
+* real-world examples
+    * PostgresSQL
+    * DynamoDB
+    * MongoDB
+
+#### LSM Trees
+
+* for write-heavy loads
+    * time-series dbs
+    * logging sys
+    * analytics platforms
+* Log-Structured Merge Trees
+* convert many small random writes into fewer large sequential writes, increasing efficiency
+* on write
+    * **Memtable (Memory Component)**: New writes go into an in-memory structure called a memtable, typically implemented as a sorted data structure like a red-black tree or skip list. This is extremely fast since it's all in RAM.
+    * **Write-Ahead Log (WAL)**: To ensure durability, every write is also appended to a write-ahead log on disk. This is a sequential append operation, which is much faster than random writes.
+    * **Flush to SSTable**: Once the memtable reaches a certain size (often a few megabytes), it's frozen and flushed to disk as an immutable Sorted String Table (SSTable). This is a single sequential write operation that can write megabytes of data at once.
+    * **Compaction**: Over time, you accumulate many SSTables on disk. A background process called compaction periodically merges these files, removing duplicates and deleted entries. This keeps the number of files manageable and maintains read performance.
+* on read
+    * Bloom Filters
+    * Sparse Indexes
+    * Compaction Strategies
+* real-world examples
+    * Cassandra
+    * RocksDB
+    * DynamoDB
+
+#### Hash Indexes
+
+* for exact match queries
+* persistent hash maps, `O(1)` lookups
+* useless for range queries or sorting
+* real-world examples
+    * Redis
+
+#### Geospatial Indexes
+
+* Geocash
+* Quadtree
+* R-Tree
+
+#### Inverted Indexes
+
+* for advanced text search
+* word to docs lists
+* real-world examples
+    * ElasticSearch
+
+#### Index Optimizations
+
+* Composite Indexes
+    * multi-column indexes
+    * order matters: order columns from most selective to least selective
+* Covering Indexes
+    * all columns needed by query
+
 ## LeetCode Design Template
 
 ### Feature Expectations
@@ -222,9 +289,13 @@ Real-world systems frequently need both availability and consistency - just for 
 ### Requirements
 [5 min]
 
-1. Functional (*features* of system)
-2. Non-functional (*qualities* of system)
-3. Capacity estimations (skip for later)
+1. Functional: *features* of system
+    * core
+    * out of scope
+2. Non-functional: *qualities* of system
+    * core
+    * out of scope
+3. Capacity estimations [can skip for later]
 
 ### Core Entities
 [2 min]
@@ -416,22 +487,23 @@ Power of 1000	Number          Prefix
 ```
 Item	                    Size
 ----------------------------------------
-A two-hour movie	        1gb
-A small book of plain text	1mb
+A two-hour movie            1gb
+A small book of plain text  1mb
 A high-resolution photo	    1mb
-A medium-resolution image (or a site layout graphic)	100kb
+A medium-resolution image
+(or a site layout graphic)  100kb
 ```
 
 ### Latencies
 
 * Access times
     * Memory: ~100 nanoseconds (0.0001 ms)
+        * 1000x faster than SSD
+        * 100,000x faster than HDD
     * SSD: ~0.1 milliseconds
     * HDD: ~10 milliseconds
 * IOPS
     * Memory: millions of reads per second
-        * 100x faster than SSD
-        * 100,000x faster than HDD
     * SSD: ~100,000 IOPS
     * HDD: ~100-200 IOPS
 
@@ -489,18 +561,20 @@ If queue is unbounded, latency increases. To set max response time, limit queue 
 
 ### Terminology
 
+* CRUD: Create, Read, Update, Delete
+* DAU: Daily Active Users
+* IOPS: I/O Per Second
 * linearizability: all nodes reflect the most recent write operation
 * scalable: a system is scalable in the range where the cost of adding incremental work is approximately constant
-* IOPS: I/O Per Second
 * WPS: Writes Per Second
-* DAU: Daily Active Users
 
 ### REST API
 
-* `POST`: Create a new resource
-* `GET`: Read an existing resource
-* `PUT`: Update an existing resource
 * `DELETE`: Delete an existing resource
+* `GET`: Read an existing resource
+* `PATCH`: Submit partial modification to a resource
+* `POST`: Create a new resource
+* `PUT`: Update an existing resource
 
 ### HTTP Codes
 
