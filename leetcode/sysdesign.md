@@ -103,7 +103,6 @@ Real-world systems frequently need both availability and consistency - just for 
     * Write-Around Cache: Writes data directly to the datastore, bypassing the cache. This can minimize cache pollution but might increase data fetch times on subsequent reads.
     * Write-Back Cache: Writes data to the cache and then asynchronously writes the data to the datastore. This can be faster for write operations but can lead to data loss if the cache fails before the data is written to the datastore.
 
-
 ## LeetCode Design Template
 
 Source: [LeetCode: My System Design Template](https://leetcode.com/discuss/post/229177/my-system-design-template-by-topcat-vtk2/)
@@ -364,18 +363,28 @@ Power           Exact Value         Approx Value        Bytes
 Source: [Hello Interview: Mastering Estimation](https://www.hellointerview.com/blog/mastering-estimation)
 
 ```
-Power of 1000	Number	        Prefix
+Power of 1000	Number          Prefix
 (1000^x)
 ----------------------------------------
 0	            Unit	
-1	            Thousand	    Kilo
+1	            Thousand        Kilo
 2	            Million	        Mega
 3	            Billion	        Giga
-4	            Trillion	    Tera
-5	            Quadrillion	    Peta
+4	            Trillion        Tera
+5	            Quadrillion     Peta
 ```
 
+### Time
+
+* 86,400 seconds per day
+* 2.5 million seconds per month
+* 1 request per second = 2.5 million requests per month
+* 40 requests per second = 100 million requests per month
+* 400 requests per second = 1 billion requests per month
+
 ### Modern Hardware Limits
+
+Source: [Hello Interview: Numbers to Know](https://www.hellointerview.com/learn/system-design/deep-dives/numbers-to-know)
 
 * In 2025,
     * Single databases can handle terabytes of data
@@ -416,7 +425,16 @@ A medium-resolution image (or a site layout graphic)	100kb
 
 ### Latencies
 
-* HDD IOPS: 120
+* Access times
+    * Memory: ~100 nanoseconds (0.0001 ms)
+    * SSD: ~0.1 milliseconds
+    * HDD: ~10 milliseconds
+* IOPS
+    * Memory: millions of reads per second
+        * 100x faster than SSD
+        * 100,000x faster than HDD
+    * SSD: ~100,000 IOPS
+    * HDD: ~100-200 IOPS
 
 ```
 Latency Comparison Numbers
@@ -474,5 +492,20 @@ If queue is unbounded, latency increases. To set max response time, limit queue 
 
 * linearizability: all nodes reflect the most recent write operation
 * scalable: a system is scalable in the range where the cost of adding incremental work is approximately constant
-* IOPS: I/O per second
-* WPS: writes per second
+* IOPS: I/O Per Second
+* WPS: Writes Per Second
+* DAU: Daily Active Users
+
+### REST API
+
+* `POST`: Create a new resource
+* `GET`: Read an existing resource
+* `PUT`: Update an existing resource
+* `DELETE`: Delete an existing resource
+
+### HTTP Codes
+
+* `200`: OK
+* `301`: permanent redirect
+* `302`: temporary redirect
+* `404`: not found
