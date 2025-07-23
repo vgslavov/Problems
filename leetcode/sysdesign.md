@@ -10,11 +10,12 @@
     - [Consistency](#consistency)
     - [Availability](#availability)
     - [Levels of Consistency](#levels-of-consistency)
+  - [ACID](#acid)
   - [Caching](#caching)
     - [Goals](#goals)
-    - [Eviction policies](#eviction-policies)
-    - [Cache invalidation strategy](#cache-invalidation-strategy)
-    - [Cache write strategy](#cache-write-strategy)
+    - [Eviction Policies](#eviction-policies)
+    - [Cache Invalidation Strategies](#cache-invalidation-strategies)
+    - [Cache Write Strategies](#cache-write-strategies)
   - [Database Indexes](#database-indexes)
     - [B-Tree Indexes](#b-tree-indexes)
     - [LSM Trees](#lsm-trees)
@@ -22,6 +23,14 @@
     - [Geospatial Indexes](#geospatial-indexes)
     - [Inverted Indexes](#inverted-indexes)
     - [Index Optimizations](#index-optimizations)
+- [Patterns](#patterns)
+  - [Scaling Reads](#scaling-reads)
+  - [Scaling Writes](#scaling-writes)
+- [Key Technologies](#key-technologies)
+  - [Redis](#redis)
+  - [Kafka](#kafka)
+  - [PostgresSQL](#postgressql)
+  - [ElasticSearch](#elasticsearch)
 - [LeetCode Design Template](#leetcode-design-template)
   - [Feature Expectations](#feature-expectations)
   - [Estimations](#estimations)
@@ -109,6 +118,13 @@ Real-world systems frequently need both availability and consistency - just for 
 * **Read-your-own-writes Consistency**: Users always see their own updates immediately, though other users might see older versions.
 * **Eventual Consistency**: The system will become consistent over time but may temporarily have inconsistencies.
 
+### ACID
+
+* Atomicity
+* Consistency
+* Isolation
+* Durability
+
 ### Caching
 
 #### Goals
@@ -117,17 +133,20 @@ Real-world systems frequently need both availability and consistency - just for 
 * Reduce # of db queries
 * Speed up expensive queries
 
-#### Eviction policies
+#### Eviction Policies
 
 * **Least Recently Used (LRU)**: Evicts the least recently accessed items first.
 * **First In, First Out (FIFO)**: Evicts items in the order they were added.
 * **Least Frequently Used (LFU)**: Removes items that are least frequently accessed.
 
-#### Cache invalidation strategy
+#### Cache Invalidation Strategies
 
-* TTL
+* **Time-based expiration (TTL)** - Set a fixed lifetime for cached entries. Simple to implement but means serving potentially stale data until expiration.
+* **Write-through invalidation** - Update or delete cache entries immediately when writing to the database. Ensures consistency but adds latency to write operations and requires careful error handling.
+* **Write-behind invalidation** - Queue invalidation events to process asynchronously. Reduces write latency but introduces a window where stale data might be served.
+* **Tagged invalidation** - Associate cache entries with tags (e.g., `user:123:posts`). Invalidate all entries with a specific tag when related data changes. Powerful for complex dependencies but requires maintaining tag relationships.
 
-#### Cache write strategy
+#### Cache Write Strategies
 
 * **Write-Through Cache**: Writes data to both the cache and the underlying datastore simultaneously. Ensures consistency but can be slower for write operations.
 * **Write-Around Cache**: Writes data directly to the datastore, bypassing the cache. This can minimize cache pollution but might increase data fetch times on subsequent reads.
@@ -199,6 +218,38 @@ Real-world systems frequently need both availability and consistency - just for 
     * order matters: order columns from most selective to least selective
 * Covering Indexes
     * all columns needed by query
+
+## Patterns
+
+### Scaling Reads
+
+1. Optimize read performance within your database
+    * indexing
+    * hardware upgrades
+    * denormalization strategies
+2. Scale your database horizontally
+    * read replicas: leader-follower replication
+    * DB sharding
+3. Add external caching layers
+    * application-level caching
+    * CDN and edge caching
+
+### Scaling Writes
+
+1. Vertical Scaling and Database Choices
+2. Sharding and Partitioning
+3. Handling Bursts with Queues and Load Shedding
+4. Batching and Hierarchical Aggregation
+
+## Key Technologies
+
+### Redis
+
+### Kafka
+
+### PostgresSQL
+
+### ElasticSearch
 
 ## LeetCode Design Template
 
@@ -459,8 +510,8 @@ Power of 1000	Number          Prefix
 ----------------------------------------
 0	            Unit	
 1	            Thousand        Kilo
-2	            Million	        Mega
-3	            Billion	        Giga
+2	            Million         Mega
+3	            Billion         Giga
 4	            Trillion        Tera
 5	            Quadrillion     Peta
 ```
@@ -490,7 +541,7 @@ Power of 1000	Number          Prefix
 ||100k+ operations/second|Latency > 1ms|
 ||Memory-bound (up to 1TB)|Memory usage > 80%|
 |||Cache churn/thrashing|
-|Databases|Up to 50k transactions/second|Write throughput > 10k TPS|
+|Databases|Up to 50k TPS|Write throughput > 10k TPS|
 ||Sub-5ms read latency (cached)|Read latency > 5ms uncached|
 ||64 TiB+ storage capacity|Geographic distribution needs|
 |App Servers|100k+ concurrent connections|CPU > 70% utilization|
@@ -584,7 +635,10 @@ If queue is unbounded, latency increases. To set max response time, limit queue 
 * DAU: Daily Active Users
 * IOPS: I/O Per Second
 * linearizability: all nodes reflect the most recent write operation
+* QPS: Queries Per Second
 * scalable: a system is scalable in the range where the cost of adding incremental work is approximately constant
+* SSE: Server-Sent Events
+* TPS: Transactions Per Second
 * WPS: Writes Per Second
 
 ### REST API
