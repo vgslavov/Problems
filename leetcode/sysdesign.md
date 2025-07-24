@@ -6,6 +6,11 @@
 
 - [Sources](#sources)
 - [Concepts](#concepts)
+  - [API Types](#api-types)
+    - [REST (Representational State Transfer)](#rest-representational-state-transfer)
+    - [GraphQL](#graphql)
+    - [RPC (Remote Procedure Call)](#rpc-remote-procedure-call)
+    - [Patterns](#patterns)
   - [CAP](#cap)
     - [Consistency](#consistency)
     - [Availability](#availability)
@@ -16,6 +21,7 @@
     - [Eviction Policies](#eviction-policies)
     - [Cache Invalidation Strategies](#cache-invalidation-strategies)
     - [Cache Write Strategies](#cache-write-strategies)
+    - [Hot Keys](#hot-keys)
   - [Database Indexes](#database-indexes)
     - [B-Tree Indexes](#b-tree-indexes)
     - [LSM Trees](#lsm-trees)
@@ -23,12 +29,20 @@
     - [Geospatial Indexes](#geospatial-indexes)
     - [Inverted Indexes](#inverted-indexes)
     - [Index Optimizations](#index-optimizations)
-- [Patterns](#patterns)
+- [Patterns](#patterns-1)
   - [Scaling Reads](#scaling-reads)
   - [Scaling Writes](#scaling-writes)
 - [Key Technologies](#key-technologies)
   - [Redis](#redis)
   - [Kafka](#kafka)
+    - [Terms](#terms)
+    - [Design & Processes](#design--processes)
+    - [Use Cases](#use-cases)
+    - [Scalability](#scalability)
+    - [Fault Tolerance & Durability](#fault-tolerance--durability)
+    - [Handling Retries & Errors](#handling-retries--errors)
+    - [Performance Optimizations](#performance-optimizations)
+    - [Retention Policies](#retention-policies)
   - [PostgresSQL](#postgressql)
   - [ElasticSearch](#elasticsearch)
 - [LeetCode Design Template](#leetcode-design-template)
@@ -48,7 +62,7 @@
 - [System Requirements](#system-requirements)
 - [Non-functional Requirements](#non-functional-requirements)
   - [Availability](#availability-1)
-  - [Scalability](#scalability)
+  - [Scalability](#scalability-1)
   - [Performance](#performance)
   - [Durability](#durability)
   - [Consistency](#consistency-1)
@@ -64,7 +78,6 @@
   - [Latencies](#latencies)
   - [Formulas](#formulas)
   - [Terminology](#terminology)
-  - [REST API](#rest-api)
   - [HTTP Codes](#http-codes)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -80,6 +93,100 @@
 * [What is Scalability Anyway](https://brooker.co.za/blog/2024/01/18/scalability.html)
 
 ## Concepts
+
+### API Types
+
+#### REST (Representational State Transfer)
+
+* default choice
+* JSON-over-HTTP
+* resources represent *things* not actions
+* resources are the [entities](#core-entities)
+* always use plural nouns!
+```
+GET /events                    # Get all events
+GET /events/{id}               # Get a specific event
+GET /venues/{id}               # Get a specific venue
+GET /events/{id}/tickets       # Get available tickets for an event
+POST /bookings                 # Create a new booking
+GET /bookings/{id}             # Get a specific booking
+```
+* verbs
+    * `DELETE`: Delete an existing resource
+        * idempotent
+    * `GET`: Read an existing resource (like `SELECT`)
+        * safe
+        * idempotent
+    * `PATCH`: Submit partial modification to a resource (like `UPDATE`)
+        * idempotent
+    * `POST`: Create a *new* resource (like `INSERT`)
+        * not safe
+        * not idempotent
+    * `PUT`: Update an existing resource (like `UPDATE`)
+        * idempotent
+* arguments
+    * path parameters: `/events/123`
+        * use nested resources: `/events/{id}/tickets`
+            * to specify parent-child relationship
+            * when value is required
+    * query parameters: `/events?page=2&limit=20`
+        * when filter is optional
+    * request body
+
+#### GraphQL
+
+* consolidates resource endpoints into single one
+* use for diverse clients with different data needs
+* use to avoid over/under fetching
+
+#### RPC (Remote Procedure Call)
+
+* *action*-oriented (instead of resource-oriented)
+* like calling a procedure on a server as if it's local
+* faster than REST
+* compare to REST
+```
+// Instead of GET /events/123/tickets
+getAvailableTickets(eventId: "123", section: "VIP")
+```
+* examples
+    * gRPC: protobuf to serialize + HTTP/2 to transport
+        * much faster than REST
+        * great for service-to-service
+    * Apache Thrift
+* use cases
+    * performance is critical: binary serialization
+    * type safety matters
+    * service-to-service communication
+    * streaming is needed
+
+#### Patterns
+
+* pagination
+    * offset-based
+        * `/events?offset=20&limit=10`
+        * simpler but not for large datasets
+    * cursor-based
+        * `/events?cursor=cmd9atj3p000007ky19w1dpy2&limit=10`
+        * use pointer to specific record: get cursor from previous response
+* versioning strategies
+    * URL versioning: `/v2/events`
+    * (HTTP) header versioning: `API-Version: 2`
+* security considerations
+    * authenticaion: verifies identity
+    * authorization: verifies permissions
+    * API keys
+        * long, randomly generated strings acting like passwords for apps
+        * for service-to-service communication
+    * JWT (JSON Web Tokens)
+        * signed tokens
+        * contains user ID, permissions, expire time
+        * for client-facing services to establish a user session
+    * Role-Based Access Control (RBAC)
+    * rate limiting & throttling
+        * per-user limits: 1000 reqs/hour per auth. users
+        * per-IP limits: 100 reqs/hour for unauth. users
+        * endpoint-specific limits: 10 booking attempts per min
 
 ### CAP
 
@@ -145,12 +252,17 @@ Real-world systems frequently need both availability and consistency - just for 
 * **Write-through invalidation** - Update or delete cache entries immediately when writing to the database. Ensures consistency but adds latency to write operations and requires careful error handling.
 * **Write-behind invalidation** - Queue invalidation events to process asynchronously. Reduces write latency but introduces a window where stale data might be served.
 * **Tagged invalidation** - Associate cache entries with tags (e.g., `user:123:posts`). Invalidate all entries with a specific tag when related data changes. Powerful for complex dependencies but requires maintaining tag relationships.
+* **Versioned keys** - Include version numbers in cache keys. Increment the version on updates, naturally invalidating old cache entries. Simple and reliable but requires version tracking.
 
 #### Cache Write Strategies
 
 * **Write-Through Cache**: Writes data to both the cache and the underlying datastore simultaneously. Ensures consistency but can be slower for write operations.
 * **Write-Around Cache**: Writes data directly to the datastore, bypassing the cache. This can minimize cache pollution but might increase data fetch times on subsequent reads.
 * **Write-Back Cache**: Writes data to the cache and then asynchronously writes the data to the datastore. This can be faster for write operations but can lead to data loss if the cache fails before the data is written to the datastore.
+
+#### Hot Keys
+
+* distribute load across multiple nodes
 
 ### Database Indexes
 
@@ -200,9 +312,22 @@ Real-world systems frequently need both availability and consistency - just for 
 
 #### Geospatial Indexes
 
-* Geocash
+* Geohash
+    * B-Tree indexes treat latitude & longitude as independent dimensions
+    * converts a 2D location into a 1D string
+    * locations close to each other have same prefix (i.e. preserve proximity)
+    * use a B-Tree index to handle spatial queries for matching prefixes
 * Quadtree
+    * not as common as other 2
+    * uses recursive spatial subdivision
+    * key insight
+        * dense areas get subdivided more finely
+        * sparse regions maintain large quadrants
+    * disadvantage: require specialized tree structures
 * R-Tree
+    * default spatial indexing in PostgresSQL and MySQL
+    * more flexible & accurate grouping of nearby objects using overlapping rectangles
+    * can handle both points & larger shapes in same index struct
 
 #### Inverted Indexes
 
@@ -224,32 +349,233 @@ Real-world systems frequently need both availability and consistency - just for 
 ### Scaling Reads
 
 1. Optimize read performance within your database
-    * indexing
-    * hardware upgrades
+    * [indexing](#database-indexes)
+        * prevent DBs from doing full table scans for `WHERE` clauses
+        * under-indexing kills more applications than over-indexing ever will
+    * [*modern* hardware](#modern-hardware-limits) upgrades
     * denormalization strategies
+        * consider read/write ratio
+        * use materialized views to precompute expensive aggregations
+        ```
+        -- Instead of this expensive query on every page load:
+        SELECT p.*, AVG(r.rating) as avg_rating 
+        FROM products p 
+        JOIN reviews r ON p.id = r.product_id 
+        GROUP BY p.id;
+
+        -- Precompute and store the average:
+        CREATE MATERIALIZED VIEW product_ratings AS
+        SELECT p.*, AVG(r.rating) as avg_rating
+        FROM products p 
+        JOIN reviews r ON p.id = r.product_id 
+        GROUP BY p.id;
+        ```
 2. Scale your database horizontally
-    * read replicas: leader-follower replication
+    * read replicas
+        * consider replication lag
+        * leader-follower replication
+            * write to leader/primary
+            * read from replicas
+        * *synchronous* replication ensures data consistency but introduces latency
+        * *asynchronous* replication is faster but introduces potential data inconsistencies
     * DB sharding
-3. Add external caching layers
+        * smaller DBs, faster queries: distribute load across multiple DBs
+        * functional sharding (federation?)
+            * `user` data in one DB
+            * `product` data in another
+3. Add external [caching](#caching) layers
     * application-level caching
     * CDN and edge caching
 
 ### Scaling Writes
 
+Key insight: goal is to **reduce throughput per component**.
+
 1. Vertical Scaling and Database Choices
+    * consider [*modern* hardware limits](#modern-hardware-limits)
+    * DB choices
+        * Time-series databases: InfluxDB, TimescaleDB
+        * Log-structured databases: LevelDB
+        * Column stores: ClickHouse
+    * optimize for *writes*
+        * disable expensive features: foreign key constraints, expensive triggers
+        * tune write-ahead logging: batch transactions
+        * reduce index overhead: fewer indexes, faster writes
 2. Sharding and Partitioning
+    * horizontal sharding (partitioning): split *rows*
+        * slot numbers: Redis
+        * consistent hasing: Cassandra, DynamoDB
+    * select a good partitioning key
+        * `userId` vs `country`
+        * minimize variance in # of writes/shard
+    * vertical partitioning: split *columns*/tables
+        * split tables (e.g. `post`) by reads/writes
+        * core `post_content`: write-once, read-many
+        * engagement `post_metrics`: high-frequency writes
+        * `post_analytics` data: append-only, time-series
 3. Handling Bursts with Queues and Load Shedding
+    * write queues for burst handling: burst absorption
+    * load shedding strategies
+        * drop overwritables writes
+        * example: location updates in Uber
 4. Batching and Hierarchical Aggregation
 
 ## Key Technologies
 
 ### Redis
 
+TODO
+
 ### Kafka
+
+A distributed commit log
+
+#### Terms
+
+* brokers
+    * physical/virtual servers
+    * a Kafka cluster consistes of brokers
+* partition
+    * a *physical* grouping of messages
+    * a way to scale data
+    * *immutable* seq of msgs, many per broker
+    * an append-only log file
+* topic
+    * a *logical* grouping of partitions/messages
+    * a way to organize data
+    * multi-producer: 0, 1, many per topic
+    * publishing/consuming mgs to/from topics
+* producer
+* consumer
+    * pull-based model
+    * organized in consumer groups
+* consumer group
+    * ensure messages consumed by *exactly one* consumer in group
+* message: record
+    * headers
+    * key: optional (determines partition assignment)
+    * value
+    * timestamp
+
+#### Design & Processes
+
+* publishing a message
+    * partition determination
+        * hash msg key to partition
+        * if no key, round-robin
+        * ensurs msgs w/ same key assigned to same paritition
+    * broker assignment
+        * given partition, get me broker
+        * determined by Kafka controller
+        * producer sends directly to broker
+* append-only design benefits
+    * immutability: simplifies replciation/recovery/consistency
+    * efficiency: minimizes disk seek times
+    * scalability: horizontal scaling by increasing partitions & brokers
+* replication: leader-follower model
+    * leader replication assignment
+        * assigned to a broker
+        * responsible for all reads/writes for partition
+    * follower replication
+        * multiple replicas across brokers
+        * do not handle clients requests
+        * passively replicate data
+        * act as backups
+    * synchronization & consistency
+        * continuous sync of followers w/ leader replica
+        * auto-promotion of follower replica to leader
+    * controller's role
+        * manages replication process
+        * monitors health of brokers
+        * manages leadership & replication
+* pull-based model
+    * lets consumers control consumption rate
+    * simplifies error handling
+    * prevents overwhelming slow consumers
+    * enables efficient batching
+
+#### Use Cases
+
+* as message queue: consumers ack
+    * asynchronous processing: uploading large files
+    * in order message processing: waiting queues
+    * decouple producer from consumer to scale independently
+* as stream: consumers don't ack
+    * real-time flow: continuous & immediate process of incoming data
+    * simultaneous processing by multiple consumers: pub/sub system
+
+#### Scalability
+
+* numbers
+    * small messages: up to 1MB
+    * store up to 1TB per broker
+    * up to 1M msgs/s per broker
+* horizontal scaling w/ more brokers
+    * add more brokers to cluster
+    * need sufficient partitions/topic to use additional brokers
+    * more paritions, better load distribution through parallelism
+* paritition strategy: main focus
+    * `partition = hash(key) % num_partitions`
+    * `hash()` is murmur2
+    * evenly distribute keys across paritions
+    * scaling topics based on throughput
+        * high: many partitions
+        * low: single partition
+* handling hot partitions
+    * random paritioning w/o key
+        * even distribution
+        * but lose order guarantee
+    * random salting
+        * adding random number/timestamp to key
+        * helps distribute load across partitions
+        * complicates aggregation logic on consumer side
+    * use a compound key
+        * combine multiple attributes into a key: `adId`, `userId`
+        * better if both attributes vary independently
+    * back pressure
+        * slow down producer by making it check the lag
+
+#### Fault Tolerance & Durability
+
+* max durability: `acks=all`, msg acked only when all replicas recv-ed it
+* replication factor: 3 by default (2 replicas/partition)
+* "always available, sometimes consistent"
+* Kafka going down: not very realistic!
+* consumer goes down
+    * offset management
+        * offset committed by consumer after processing msg
+        * read last committed offset on consumer restart
+    * rebalancing
+        * consumer goes down, redistribute partitions across remaining consumers
+* commit offset *after* doing the work
+* keep the consumer work as small as possible
+
+#### Handling Retries & Errors
+
+* producer retries: automatic, but set idempotent to true
+* consumer retries: not supported, but can be implemented using retry topics
+
+#### Performance Optimizations
+
+* batch msgs in producer
+    * batch size & time to wait before sending batch
+    * linger time for broker?
+* compress msgs in producer
+* maximize parallelism by ensuring msgs evently distributed across partitions
+
+#### Retention Policies
+
+* default: 7 days (168h)
+* `retention.ms`
+* `retention.bytes`: -1 (no size limit)
 
 ### PostgresSQL
 
+TODO
+
 ### ElasticSearch
+
+TODO
 
 ## LeetCode Design Template
 
@@ -372,6 +698,10 @@ Real-world systems frequently need both availability and consistency - just for 
 
 ### API or System Interface
 [5 min]
+
+* mistakes
+    * spending too much time
+    * getting bogged down in details
 
 ### Data Flow
 [5 min]
@@ -525,14 +855,13 @@ Power of 1000	Number          Prefix
 * 400 requests per second = 1 billion requests per month
 
 ### Modern Hardware Limits
+[as of 2025]
 
-* In 2025,
-    * Single databases can handle terabytes of data
-    * Caches can hold entire datasets in memory
-    * Message queues are fast enough for synchronous flows (as long as there is no backlog!)
-    * Application servers have enough memory for significant local optimization
-* 1st bottleneck: CPU utilization, not memory capacity
-    * CPU > memory > network
+* Single databases can handle terabytes of data
+* Caches can hold entire datasets in memory
+* Message queues are fast enough for synchronous flows (as long as there is no backlog!)
+* Application servers have enough memory for significant local optimization
+* 1st bottleneck: CPU utilization, not memory capacity (CPU > memory > network)
 * network latency in same cloud region: 1-2ms
 
 |Component|Key Metrics|Scale Triggers|
@@ -641,17 +970,16 @@ If queue is unbounded, latency increases. To set max response time, limit queue 
 * TPS: Transactions Per Second
 * WPS: Writes Per Second
 
-### REST API
-
-* `DELETE`: Delete an existing resource
-* `GET`: Read an existing resource
-* `PATCH`: Submit partial modification to a resource
-* `POST`: Create a new resource
-* `PUT`: Update an existing resource
-
 ### HTTP Codes
 
+* client errors: `4xx`
+* server errors: `5xx`
 * `200`: OK
+* `201`: created resource
 * `301`: permanent redirect
 * `302`: temporary redirect
+* `400`: bad request
+* `401`: authentication required
 * `404`: not found
+* `429`: too many requests
+* `500`: server error
