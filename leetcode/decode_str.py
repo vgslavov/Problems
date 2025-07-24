@@ -88,13 +88,25 @@ def decode_str2(s: str) -> str:
     ans = ''
     num = 0
 
+    # example: 3[a]2[bc]
+    # 3: num = 3
+    # [: count_stack = [3], num = 0
+    # a: ans = 'a'
+    # ]: ans = 3 * 'a' = 'aaa', count_stack = [], ans = ''
+    # 2: num = 2
+    # [: count_stack = [2], str_stack = ['aaa']
+    # b: ans = 'b'
+    # c: ans = 'bc'
+    # ]: ans = 'aaa' + 2 * 'bc' = 'aaabcbc'
     for c in s:
         # read number digit-by-digit
         if c.isdigit():
             num = (num*10) + ord(c) - ord('0')
         # push to both stacks
         elif c == '[':
+            # count stack: last count
             count_stack.append(num)
+            # string stack: current ans
             str_stack.append(ans)
             num = 0
             ans = ''
@@ -103,8 +115,8 @@ def decode_str2(s: str) -> str:
             ans += c
         # decode
         elif c == ']':
-            decoded = str_stack.pop() + count_stack.pop() * ans
-            ans = decoded
+            # current ans + latest decoded string
+            ans = str_stack.pop() + count_stack.pop() * ans
         else:
             print(f"invalid char: {c}")
 
