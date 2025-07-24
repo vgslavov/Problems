@@ -9,7 +9,7 @@ import unittest
 # url: https://leetcode.com/problems/longest-substring-without-repeating-characters/
 # section: sliding window
 # difficulty: medium
-# tags: hash table, string, sliding window, top 150, meta
+# tags: hash table, string, sliding window, top 150, meta, grind 75
 
 # constraints
 # 0 <= s.length <= 5 * 10^4

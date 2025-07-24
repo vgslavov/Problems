@@ -7,7 +7,7 @@
 // url: https://leetcode.com/problems/min-stack/
 // section: stack
 // difficulty: medium
-// tags: stack, design, top 150
+// tags: stack, design, top 150, grind 75
 
 // constraints
 // -2^31 <= val <= 2^31 - 1

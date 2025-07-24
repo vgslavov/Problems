@@ -6,7 +6,7 @@
 // url: https://leetcode.com/problems/ransom-note/
 // section: hashmap
 // difficulty: easy
-// tags: hash table, string, counting, top 150
+// tags: hash table, string, counting, top 150, grind 75
 
 // constraints
 // 1 <= ransom_note.length, magazine.length <= 10^5

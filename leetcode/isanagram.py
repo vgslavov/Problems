@@ -9,7 +9,7 @@ import unittest
 # url: https://leetcode.com/problems/valid-anagram/
 # section: hashmap
 # difficulty: easy
-# tags: hash table, string, sorting, top 150
+# tags: hash table, string, sorting, top 150, grind 75
 
 # constraints
 # 1 <= s.length, t.length <= 5 * 10^4

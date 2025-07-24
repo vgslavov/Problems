@@ -8,7 +8,7 @@ import unittest
 # url: https://leetcode.com/problems/implement-trie-prefix-tree/
 # section: trie (prefix tree)
 # difficulty: medium
-# tags: hash table, string, design, trie, top 150, citadel
+# tags: hash table, string, design, trie, top 150, citadel, grind 75
 
 # constraints
 # 1 <= word.length, prefix.length <= 2000

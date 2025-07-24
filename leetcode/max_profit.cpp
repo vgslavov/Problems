@@ -6,7 +6,7 @@
 // url: https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
 // section: array/string
 // difficulty: easy
-// tags: array, dynamic programming, top 150, citadel
+// tags: array, dynamic programming, top 150, citadel, grind 75
 
 // constraints
 // 1 <= prices.length <= 10^5

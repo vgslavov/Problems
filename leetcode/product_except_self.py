@@ -9,7 +9,7 @@ import unittest
 # url: https://leetcode.com/problems/product-of-array-except-self/
 # section: array/string
 # difficulty: medium
-# tags: array, prefix sum, top 150, meta
+# tags: array, prefix sum, top 150, meta, grind 75
 
 # constraints
 # 2 <= nums.length <= 10^5

@@ -8,7 +8,7 @@ import unittest
 # url: https://leetcode.com/problems/simplify-path/
 # section: stack
 # difficulty: medium
-# tags: string, stack, top 150, meta
+# tags: string, stack, top 150, meta, me
 
 # constraints
 # 1 <= path.length <= 3000

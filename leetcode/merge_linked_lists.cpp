@@ -5,7 +5,7 @@
 // url: https://leetcode.com/problems/merge-two-sorted-lists/
 // section: linked list
 // difficulty: easy
-// tags: link list, recursion, top 150, meta
+// tags: link list, recursion, top 150, meta, grind 75
 
 // constraints
 // The number of nodes in both lists is in the range [0, 50].

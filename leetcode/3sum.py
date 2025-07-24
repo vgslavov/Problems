@@ -10,7 +10,7 @@ import unittest
 # url: https://leetcode.com/problems/3sum/
 # section: two pointers
 # difficulty: medium
-# tags: array, two pointers, sorting, top 150, meta
+# tags: array, two pointers, sorting, top 150, meta, grind 75
 
 # constraints
 # 3 <= nums.length <= 3000
@@ -197,7 +197,7 @@ def three_sum3(nums):
 # complexity
 # run-time: O(n)
 # space: O(n)
-def twoSum2(nums, k, ans):
+def two_sum2(nums, k, ans):
     left = 0
     right = len(nums)-1
 
@@ -237,7 +237,7 @@ def three_sum4(nums):
             continue
 
         # O(n)
-        twoSum2(nums, k, ans)
+        two_sum2(nums, k, ans)
 
     return sorted([list(v) for v in ans])
 

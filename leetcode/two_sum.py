@@ -9,7 +9,7 @@ import unittest
 # url: https://leetcode.com/problems/two-sum/
 # section: hashmap
 # difficulty: easy
-# tags: array, hash table, top 150
+# tags: array, hash table, top 150, grind 75
 
 # constraints
 # 2 <= nums.length <= 10^4

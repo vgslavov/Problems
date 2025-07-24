@@ -8,7 +8,7 @@ import unittest
 # url: https://leetcode.com/problems/merge-two-sorted-lists/
 # section: linked list
 # difficulty: easy
-# tags: link list, recursion, top 150, meta
+# tags: link list, recursion, top 150, meta, grind 75
 
 # Definition for singly-linked list.
 class ListNode:

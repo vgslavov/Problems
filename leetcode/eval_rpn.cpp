@@ -9,7 +9,7 @@
 // url: https://leetcode.com/problems/evaluate-reverse-polish-notation/
 // section: stack
 // difficulty: medium
-// tags: array, math, stack, top 150, citadel
+// tags: array, math, stack, top 150, citadel, grind 75
 
 // constraints
 // 1 <= tokens.length <= 10^4

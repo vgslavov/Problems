@@ -5,7 +5,7 @@
 // url: https://leetcode.com/problems/validate-binary-search-tree/
 // section: binary search tree
 // difficulty: medium
-// tags: tree, dfs, bfs, binary tree, top 150, meta, sig
+// tags: tree, dfs, bfs, binary tree, top 150, meta, sig, me, grind 75
 
 // constraints
 // The number of nodes in the tree is in the range [1, 10^4].

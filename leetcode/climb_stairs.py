@@ -9,7 +9,7 @@ import unittest
 # url: https://leetcode.com/problems/climbing-stairs/
 # section: 1D DP
 # difficulty: easy
-# tags: math, dp, memoization, top 150
+# tags: math, dp, memoization, top 150, grind 75
 
 # constraints
 # 1 <= n <= 45

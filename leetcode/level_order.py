@@ -9,7 +9,7 @@ import unittest
 # url: https://leetcode.com/problems/binary-tree-level-order-traversal/
 # section: binary tree bfs
 # difficulty: medium
-# tags: tree, bfs, binary tree, top 150
+# tags: tree, bfs, binary tree, top 150, grind 75
 
 # constraints
 # The number of nodes in the tree is in the range [0, 2000].

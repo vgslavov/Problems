@@ -8,7 +8,7 @@ import unittest
 # url: https://leetcode.com/problems/valid-palindrome/
 # section: two pointers
 # difficulty: easy
-# tags: two pointers, string, top 150, meta
+# tags: two pointers, string, top 150, meta, grind 75
 
 # constraints
 # 1 <= s.length <= 2 * 10^5

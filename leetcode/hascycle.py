@@ -8,7 +8,7 @@ import unittest
 # url: https://leetcode.com/problems/linked-list-cycle/
 # section: linked list
 # difficulty: easy
-# tags: hash table, linked list, two pointers, top 150
+# tags: hash table, linked list, two pointers, top 150, grind 75
 
 # constraints
 # The number of the nodes in the list is in the range [0, 10^4].

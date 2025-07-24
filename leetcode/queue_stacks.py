@@ -8,7 +8,7 @@ import unittest
 # url: https://leetcode.com/problems/implement-queue-using-stacks/
 # section: 
 # difficulty: easy
-# tags: stack, design, queue
+# tags: stack, design, queue, grind 75
 
 # constraints
 # 1 <= x <= 9

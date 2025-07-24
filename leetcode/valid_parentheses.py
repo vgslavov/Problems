@@ -8,7 +8,7 @@ import unittest
 # url: https://leetcode.com/problems/valid-parentheses/
 # section: stack
 # difficulty: easy
-# tags: string, stack, top 150
+# tags: string, stack, top 150, grind 75
 
 # constraints
 # 1 <= s.length <= 10^4
