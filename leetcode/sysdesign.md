@@ -263,6 +263,30 @@ Real-world systems frequently need both availability and consistency - just for 
 #### Hot Keys
 
 * distribute load across multiple nodes
+* read hot keys
+    * create multiple copies w/ different suffixes stored on different nodes
+        * `user:123#1` on node A
+        * `user:123#2` on node B
+        * `user:123#3` on node C
+    * reads: randomly choose one of suffixed keys
+    * writes: update all keys to maintain consistency
+* written hot keys
+    * write batching: buffer writes every 50-100ms
+    * sharding hot keys w/ suffixesa
+        * split values across shards
+        * reading requires summing across shards
+* connection pooling
+
+#### High-Performant Caches
+
+* data structs
+    * A hash table for storing our key-value pairs
+    * A linked list for our LRU eviction policy
+
+1. Asynchronous replication for high availability and handling hot key reads.
+2. Consistent hashing for sharding and routing.
+3. Random suffixes for distributing hot key writes across nodes.
+4. Write batching and connection pooling for decreasing network latency/overhead.
 
 ### Database Indexes
 
@@ -402,6 +426,9 @@ Key insight: goal is to **reduce throughput per component**.
         * tune write-ahead logging: batch transactions
         * reduce index overhead: fewer indexes, faster writes
 2. Sharding and Partitioning
+    * sharding ~ partitioning
+        * sharding: splitting data across multiple machines/nodes
+        * partitioning: splitting data within a single db/sys
     * horizontal sharding (partitioning): split *rows*
         * slot numbers: Redis
         * consistent hasing: Cassandra, DynamoDB
