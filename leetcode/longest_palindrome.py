@@ -8,6 +8,7 @@ import unittest
 # title: Longest Palindrome
 # url: https://leetcode.com/problems/longest-palindrome/
 # difficulty: easy
+# tags: hash table, string, greedy, grind 75
 
 # constraints:
 # 1 <= s.length <= 2000
