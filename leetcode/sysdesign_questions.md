@@ -4,6 +4,7 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
+- [Sources](#sources)
 - [Design URL Shortener](#design-url-shortener)
   - [System Qualities](#system-qualities)
   - [Components & Tech. Stack](#components--tech-stack)
@@ -29,6 +30,11 @@
 - [Design a Distributed Cache](#design-a-distributed-cache)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+## Sources
+
+* [Hello Interview: Question Breakdowns](https://www.hellointerview.com/learn/system-design/problem-breakdowns/overview)
+* [LeetCode: System Design Interviews and Beyond: Problems](https://leetcode.com/explore/featured/card/system-design-for-interviews-and-beyond/735/practice-problems/)
 
 ## Design URL Shortener
 
