@@ -14,8 +14,14 @@
   - [CAP](#cap)
     - [Consistency](#consistency)
     - [Availability](#availability)
+    - [Partition Tolerance](#partition-tolerance)
     - [Levels of Consistency](#levels-of-consistency)
   - [ACID](#acid)
+    - [Atomicity](#atomicity)
+    - [Consistency](#consistency-1)
+    - [Isolation](#isolation)
+    - [Durability](#durability)
+  - [SQL](#sql)
   - [Caching](#caching)
     - [Goals](#goals)
     - [Eviction Policies](#eviction-policies)
@@ -74,8 +80,8 @@
   - [Availability](#availability-1)
   - [Scalability](#scalability-1)
   - [Performance](#performance)
-  - [Durability](#durability)
-  - [Consistency](#consistency-1)
+  - [Durability](#durability-1)
+  - [Consistency](#consistency-2)
   - [Maintainability](#maintainability)
   - [Security](#security)
   - [Cost](#cost)
@@ -100,6 +106,7 @@
 * [LeetCode: My System Design Template](https://leetcode.com/discuss/post/229177/my-system-design-template-by-topcat-vtk2/)
 * [LeetCode: System Design for Interviews and Beyond](https://leetcode.com/explore/featured/card/system-design-for-interviews-and-beyond/)
 * [System Design Primer](https://github.com/donnemartin/system-design-primer/)
+* [PG's Transaction Isolation](https://www.postgresql.org/docs/current/transaction-iso.html)
 * [What is Scalability Anyway](https://brooker.co.za/blog/2024/01/18/scalability.html)
 
 ## Concepts
@@ -227,6 +234,10 @@ Real-world systems frequently need both availability and consistency - just for 
     * DynamoDB (in multiple AZ configuration)
     * Redis clusters
 
+#### Partition Tolerance
+
+* not possible in a *distributed* system
+
 #### Levels of Consistency
 
 * **Strong Consistency**: All reads reflect the most recent write.
@@ -235,12 +246,82 @@ Real-world systems frequently need both availability and consistency - just for 
 * **Eventual Consistency**: The system will become consistent over time but may temporarily have inconsistencies.
 
 ### ACID
-[TODO]
 
-* Atomicity: all or nothing
-* Consistency: data integrity
-* Isolation: concurrent transactions
-* Durability: permanent storage
+#### Atomicity
+
+* all or nothing
+* transactions
+* prevent partial failures: roll back changes if failure
+
+####  Consistency
+
+* data integrity
+* follow defined rules & constraints (e.g. value can't be negative)
+* != C in CAP (always return correct result)
+
+#### Isolation
+
+* concurrent transactions
+* dirty read
+    * A transaction reads data written by a concurrent *uncommitted* transaction
+* nonrepeatable read
+    * A transaction re-reads data it has previously read and finds that data has been modified by another transaction (that committed since the initial read).
+* phantom read
+    * A transaction re-executes a query returning a set of rows that satisfy a search condition and finds that the set of rows satisfying the condition has changed due to another recently-committed transaction
+* serialization anomaly
+    * The result of successfully committing a group of transactions is inconsistent with all possible orderings of running those transactions one at a time.
+* SQL standard isolation levels
+
+|Isolation Level|Dirty Read|Nonrepeatable Read|Phantom Read|Serialization Anomaly|
+|---------------|----------|------------------|------------|---------|
+|Read uncommitted|Allowed, but not in PG|Possible|Possible|Possible|
+|Read committed^|Not possible|Possible|Possible|Possible|
+|Repeatable read|Not possible|Not possible|Allowed, but not in PG|Possible
+|Serializable|Not possible|Not possible|Not possible|Not possible|
+
+^default in PG
+
+#### Durability
+
+* permanent storage
+* committed transactions guaranteed to be on disk
+* Write-Ahead Logging (WAL)
+    1. Changes are first written to a log
+    2. The log is flushed to disk
+    3. Only then is the transaction considered committed
+* performance cost
+    * relax durability for speed
+    * `synchronous_commit = off` writes not on disk can be lost on crash
+
+### SQL
+
+* primary keys (PK): `id SERIAL PRIMARY KEY`
+* foreign keys (FK): `user_id INTEGER REFERENCES users(id)`
+* relationships
+    * One-to-One: a user and their profile settings
+    * One-to-Many: our users and posts (one user can have many posts)
+    * Many-to-Many: users and the posts they like
+* normalization
+    * avoid duplicating data
+    * maintain data integrity
+    * make data model flexible
+    * denormalize for performance (to avoid joins)
+* `JOIN`
+
+#### Commands
+
+1. DDL (Data Definition Language)
+    * Creates and modifies database structure
+    * Examples: `CREATE TABLE`, `ALTER TABLE`, `DROP TABLE`
+2. DML (Data Manipulation Language)
+    * Manages data within tables
+    * Examples: `SELECT`, `INSERT`, `UPDATE`, `DELETE`
+3. DCL (Data Control Language)
+    * Controls access permissions
+    * Examples: `GRANT`, `REVOKE`
+4. TCL (Transaction Control Language)
+    * Manages transactions
+    * Examples: `BEGIN`, `COMMIT`, `ROLLBACK`
 
 ### Caching
 
@@ -353,7 +434,7 @@ Real-world systems frequently need both availability and consistency - just for 
     * great for high freq of writes
     * locations close to each other have same prefix (i.e. preserve proximity)
     * use a B-Tree index to handle spatial queries for matching prefixes
-* QuadTree: PostGIS in PostgresSQL
+* QuadTree
     * not as common as other 2
     * uses recursive spatial subdivision
     * good for uneven densities & low freq of updates
@@ -505,7 +586,7 @@ A distributed commit log
     * partition determination
         * hash msg key to partition
         * if no key, round-robin
-        * ensurs msgs w/ same key assigned to same paritition
+        * ensures msgs w/ same key assigned to same paritition
     * broker assignment
         * given partition, get me broker
         * determined by Kafka controller
@@ -671,7 +752,7 @@ WHERE metadata @> '{"type": "video"}'
 SELECT * FROM posts 
 WHERE metadata @> '{"mentions": ["user123"]}';
 ```
-* **Geospatial Search with PostGIS**: index location data for efficient geospatial queries implemented as QuadTree
+* **Geospatial Search with PostGIS**: index location data for efficient geospatial queries implemented as R-tree 
 ```sql
 -- Enable PostGIS
 CREATE EXTENSION postgis;
@@ -697,6 +778,7 @@ WHERE ST_DWithin(
     * Various distance calculations (as-the-crow-flies, driving distance)
     * Spatial operations (intersections, containment)
     * Different coordinate systems
+    * uses GIST (Generalized Search Tree) implemented as R-trees
 * GIN + PostGIS example
 ```sql
 SELECT * FROM posts 
@@ -776,11 +858,11 @@ WHERE search_vector @@ to_tsquery('food')
 
 ####  Writes: Throughput Limitations
 
-Assuming PostgreSQL's *default* transaction isolation level (Read Committed)
+Assuming PostgreSQL's *default* transaction isolation level (**Read Committed**: preventing dirty reads)
 
 * single instance on *good* hardware
-    * Simple inserts: ~5,000 per second per core
-    * Updates with index modifications: ~1,000-2,000 per second per core
+    * Simple inserts: ~5,000/s per core
+    * Updates with index modifications: ~1,000-2,000/s per core
     * Complex transactions (multiple tables/indexes): Hundreds per second
     * Bulk operations: Tens of thousands of rows per second
 * factors
@@ -797,7 +879,7 @@ Assuming PostgreSQL's *default* transaction isolation level (Read Committed)
 4. Table Partitioning
     * most common: time-based
     * split by multiple physical tables
-5. Sharding
+5. (Horizontal) Sharding
     * common: by `user_id`
     * adds complexity
         * need to handle cross-shard queries
@@ -901,14 +983,14 @@ Default DB choice because:
 6. Complex relationships between data
 
 Alternatives for:
-1. **Extreme Write Throughput**: each write requires WAL entry and index update
+1. **Extreme Write Throughput**: in PG, each write requires WAL entry and index update
     * NoSQL databases (like Cassandra) for event streaming
     * Key-value stores (like Redis) for real-time counters
-2. **Global Multi-Region Requirements**: single-primary arch, 1 primary writer
+2. **Global Multi-Region Requirements**: in PG, single-primary arch, 1 primary writer
     * CockroachDB for global ACID compliance
     * Cassandra for eventual consistency at global scale
     * DynamoDB for managed global tables
-3. **Simple Key-Value Access Patterns**: PostgresSQL is overkill! 
+3. **Simple Key-Value Access Patterns**: PG is overkill! 
     * Redis for in-memory performance
     * DynamoDB for managed scalability
     * Cassandra for write-heavy workloads
@@ -1058,6 +1140,7 @@ Alternatives for:
 [5 min]
 
 * optional
+* do for Web Crawler & data pipelineing: helps with high-design
 
 ### High-Level Design
 [10-15min]
@@ -1075,6 +1158,7 @@ Alternatives for:
 * satisfy non-functional requirements
 * go over at least 3 areas
 * do estimates here (unless you had to in high-level already)
+* talk about scalability last so you don't optimize a solution that changes
 
 ## System Requirements
 
