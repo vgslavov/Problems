@@ -53,6 +53,8 @@
     - [Writes: Throughput Limitations](#writes-throughput-limitations)
     - [Writes: Optimizations](#writes-optimizations)
     - [Replication](#replication)
+    - [Transactions](#transactions)
+    - [Use Cases](#use-cases-1)
 - [LeetCode Design Template](#leetcode-design-template)
   - [Feature Expectations](#feature-expectations)
   - [Estimations](#estimations)
@@ -235,10 +237,10 @@ Real-world systems frequently need both availability and consistency - just for 
 ### ACID
 [TODO]
 
-* Atomicity
-* Consistency
-* Isolation
-* Durability
+* Atomicity: all or nothing
+* Consistency: data integrity
+* Isolation: concurrent transactions
+* Durability: permanent storage
 
 ### Caching
 
@@ -344,14 +346,17 @@ Real-world systems frequently need both availability and consistency - just for 
 
 #### Geospatial Indexes
 
-* Geohash
+* Geohash: Redis
     * B-Tree indexes treat latitude & longitude as independent dimensions
     * converts a 2D location into a 1D string
+    * not density-dependent: everything is split in 4s
+    * great for high freq of writes
     * locations close to each other have same prefix (i.e. preserve proximity)
     * use a B-Tree index to handle spatial queries for matching prefixes
-* Quadtree
+* QuadTree: PostGIS in PostgresSQL
     * not as common as other 2
     * uses recursive spatial subdivision
+    * good for uneven densities & low freq of updates
     * key insight
         * dense areas get subdivided more finely
         * sparse regions maintain large quadrants
@@ -460,6 +465,8 @@ Key insight: goal is to **reduce throughput per component**.
 ### Redis
 
 TODO
+
+* Geohashing > PostGIS
 
 ### Kafka
 
@@ -664,7 +671,7 @@ WHERE metadata @> '{"type": "video"}'
 SELECT * FROM posts 
 WHERE metadata @> '{"mentions": ["user123"]}';
 ```
-* **Geospatial Search with PostGIS**: index location data for efficient geospatial queries
+* **Geospatial Search with PostGIS**: index location data for efficient geospatial queries implemented as QuadTree
 ```sql
 -- Enable PostGIS
 CREATE EXTENSION postgis;
@@ -800,11 +807,111 @@ Assuming PostgreSQL's *default* transaction isolation level (Read Committed)
 
 #### Replication
 
+* purpose
+    * scaling reads by distributing queries across replicas
+    * providing high availability in case of node failures
 * synchronous: stronger consistency, higher latency
 * asynchronous: better performance, potential inconsistencies b/w replicas
 * hybrid approach
     * small number of sync replicas for consistency
     * more async replicas for read scaling
+* scaling reads
+    * distribute read queries across multiple dbs
+    * send writes to primary
+    * replication lag: "read-your-writes" consistency
+* high availability: promote replicas to become primaries if primary fails
+
+#### Transactions
+
+* a set of ops to execute together
+* must all succeed or fail
+* simple transaction: ensures atomicity
+```sql
+BEGIN;
+UPDATE accounts SET balance = balance - 100 WHERE id = 1;
+UPDATE accounts SET balance = balance + 100 WHERE id = 2;
+COMMIT;
+```
+* transactions by themselves don't guarantee consistency
+* concurrent transactions: consistency problem!
+```sql
+BEGIN;
+-- Get current max bid for item 123
+SELECT maxBid from Auction where id = 123;
+
+-- Place new bid if it's higher:
+-- if 2 bids get inserted at the same time based on value of maxBid
+-- the committed bid may not be the highest!
+INSERT INTO bids (item_id, user_id, amount) 
+VALUES (123, 456, 100);
+
+-- Update the max bid
+UPDATE Auction SET maxBid = 100 WHERE id = 123;
+COMMIT;
+```
+* solving concurrency issues
+    * row-level locking
+        * lock rows you are reading
+        * by using `FOR UPDATE` at end of `SELECT` *inside* transaction
+        * preferred when you know which row to lock
+    * higher isolation level
+        * stricter isolation levels
+        ```sql
+        BEGIN;
+        SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
+
+        -- Same code as before...
+
+        COMMIT;
+        ```
+        * conflicting transactions get rolled back
+        * requires app-level retry
+        * for complex transactions
+* consistency guarantees
+    * **Read Committed** (Default)
+        * default isolation level
+        * only sees data that was committed before the query began
+    * **Repeatable Read**
+        * provides stronger guarantees than the SQL standard requires
+        * creates a consistent snapshot of the data as of the start of the transaction
+        * prevents non-repeatables reads AND phantom reads
+    * **Serializable**
+        * strongest isolation level
+        * makes transactions behave as if they were executed one after another in sequence
+
+|Aspect|Serializable Isolation|Row-Level Locking|
+|------|----------------------|-----------------|
+|Concurrency|Lower - transactions might need to retry on conflict|Higher - only conflicts when touching same rows|
+|Performance|More overhead - must track all read/write dependencies|	Less overhead - only locks specific rows
+|Use Case|Complex transactions where it's hard to know what to lock|When you know exactly which rows need atomic updates
+|Complexity|Simple to implement but requires retry logic|More explicit in code but no retries needed
+|Error Handling|Must handle serialization failures|Must handle deadlock scenarios
+|Example|Complex financial calculations across multiple tables|Auction bidding, inventory updates
+|Memory Usage|Higher - tracks entire transaction history|Lower - only tracks locks
+|Scalability|Doesn't scale as well with concurrent transactions|Scales better when conflicts are rare
+
+#### Use Cases
+
+Default DB choice because:
+1. Provides strong ACID guarantees while still scaling effectively with replication and partitioning
+2. Handles both structured and unstructured data through JSONB support
+3. Includes built-in solutions for common needs like full-text search and geospatial queries
+4. Can scale reads effectively through replication
+5. Offers excellent tooling and a mature ecosystem
+6. Complex relationships between data
+
+Alternatives for:
+1. **Extreme Write Throughput**: each write requires WAL entry and index update
+    * NoSQL databases (like Cassandra) for event streaming
+    * Key-value stores (like Redis) for real-time counters
+2. **Global Multi-Region Requirements**: single-primary arch, 1 primary writer
+    * CockroachDB for global ACID compliance
+    * Cassandra for eventual consistency at global scale
+    * DynamoDB for managed global tables
+3. **Simple Key-Value Access Patterns**: PostgresSQL is overkill! 
+    * Redis for in-memory performance
+    * DynamoDB for managed scalability
+    * Cassandra for write-heavy workloads
 
 ## LeetCode Design Template
 
@@ -911,7 +1018,10 @@ Assuming PostgreSQL's *default* transaction isolation level (Read Committed)
 
 ## Hello Interview Design Template
 
-Requirements -> Core Entities -> API -> High-Level Design -> Deep Dive
+* flow: Requirements -> Core Entities -> API -> High-Level Design -> Deep Dive
+* overcommunicate!
+    * explain what you are doing
+    * and what you are not doing and why
 
 ### Requirements
 [5 min]
@@ -920,7 +1030,7 @@ Requirements -> Core Entities -> API -> High-Level Design -> Deep Dive
     * core: limit to 3 or so
     * out of scope
 2. Non-functional: *qualities* of system
-    * core
+    * core: very important, needed for deep dives
     * out of scope
 3. Capacity estimations [can skip for later]
     * ask to come back to it during high-level design
@@ -931,6 +1041,7 @@ Requirements -> Core Entities -> API -> High-Level Design -> Deep Dive
 
 * data model
 * tables in storage
+* define/document tables next to high-level design for easier updates
 
 ### API or System Interface
 [5 min]
@@ -946,19 +1057,24 @@ Requirements -> Core Entities -> API -> High-Level Design -> Deep Dive
 ### Data Flow
 [5 min]
 
-Optional
+* optional
 
 ### High-Level Design
 [10-15min]
 
-Satisfy functional requirements
-
+* satisfy functional requirements
 * use ... for non-important details (e.g. user metadata)
+* split into microservices to
+    * scale independently
+    * satisfy different non-functional reqs: C or A
+    * maintain/own by different teams
 
 ### Deep Dive
 [10 min]
 
-Satisfy non-functional requirements
+* satisfy non-functional requirements
+* go over at least 3 areas
+* do estimates here (unless you had to in high-level already)
 
 ## System Requirements
 
