@@ -8,7 +8,7 @@ import unittest
 # url: https://leetcode.com/problems/add-binary/
 # section: bit manipulation
 # difficulty: easy
-# tags: math, string, bit manipulation, simulation, top 150, meta
+# tags: math, string, bit manipulation, simulation, top 150, meta, grind 75
 
 # constraints
 # 1 <= a.length, b.length <= 10^4
@@ -28,6 +28,7 @@ def add_bin(a, b):
 # solution: Leetcode Pythonic int/bin & bitwise operators
 # run-time: O(n+m)
 # space: O(max(n,m))
+# TODO: understand better
 def add_bin2(a, b):
     # convert binary to int
     x, y = int(a, 2), int(b, 2)

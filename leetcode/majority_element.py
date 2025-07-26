@@ -9,7 +9,7 @@ import unittest
 # url: https://leetcode.com/problems/majority-element/
 # section: array/string
 # difficulty: easy
-# tags: array, hash table, divide & conquer, sorting, counting, top 150
+# tags: array, hash table, divide & conquer, sorting, counting, top 150, grind 75
 
 # constraints
 # n == nums.length
@@ -29,7 +29,8 @@ def majority_element(nums):
     for v in nums:
         counts[v] += 1
 
-    return max(zip(counts.values(), counts.keys()))[1]
+    #return max(zip(counts.values(), counts.keys()))[1]
+    return max(counts, key=counts.get)
 
 # TODO: O(n) time & O(1) space using bitmap/int?
 

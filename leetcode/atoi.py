@@ -8,7 +8,7 @@ import unittest
 # url: https://leetcode.com/problems/string-to-integer-atoi/
 # section: meta
 # difficulty: medium
-# tags: string, meta
+# tags: string, meta, grind 75
 
 # constraints
 # 0 <= s.length <= 200

@@ -5,7 +5,7 @@
 // url: https://leetcode.com/problems/add-binary/
 // section: bit manipulation
 // difficulty: easy
-// tags: math, string, bit manipulation, simulation, top 150, meta
+// tags: math, string, bit manipulation, simulation, top 150, meta, grind 75
 
 // constraints
 // 1 <= a.length, b.length <= 10^4

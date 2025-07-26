@@ -5,7 +5,7 @@
 // url: https://leetcode.com/problems/maximum-depth-of-binary-tree/
 // section: binary tree general
 // difficulty: easy
-// tags: tree, dfs, bfs, binary tree, top 150, leetcode 75
+// tags: tree, dfs, bfs, binary tree, top 150, leetcode 75, grind 75
 
 // constraints
 // The number of nodes in the tree is in the range [0, 10^4].

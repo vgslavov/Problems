@@ -9,7 +9,7 @@ import unittest
 # url: https://leetcode.com/problems/search-in-rotated-sorted-array/
 # section: binary search
 # difficulty: medium
-# tags: array, binary search, top 150, meta
+# tags: array, binary search, top 150, meta, grind 75
 
 # constraints
 # 1 <= nums.length <= 5000

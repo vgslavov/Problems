@@ -6,7 +6,7 @@
 // url: https://leetcode.com/problems/binary-tree-right-side-view/
 // section: binary tree bfs
 // difficulty: medium
-// tags: dfs, bfs, binary tree, top 150, meta
+// tags: dfs, bfs, binary tree, top 150, meta, grind 75
 //
 // constraints
 // The number of nodes in the tree is in the range [0, 100].

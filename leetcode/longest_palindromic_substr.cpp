@@ -8,7 +8,7 @@
 // url: https://leetcode.com/problems/longest-palindromic-substring/
 // section: meta
 // difficulty: medium
-// tags: meta, two pointers, string, dp
+// tags: meta, two pointers, string, dp, grind 75
 // similar: 647
 
 // constraints
