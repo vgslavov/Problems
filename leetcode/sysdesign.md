@@ -22,6 +22,7 @@
     - [Cache Invalidation Strategies](#cache-invalidation-strategies)
     - [Cache Write Strategies](#cache-write-strategies)
     - [Hot Keys](#hot-keys)
+    - [High-Performant Caches](#high-performant-caches)
   - [Database Indexes](#database-indexes)
     - [B-Tree Indexes](#b-tree-indexes)
     - [LSM Trees](#lsm-trees)
@@ -44,7 +45,14 @@
     - [Performance Optimizations](#performance-optimizations)
     - [Retention Policies](#retention-policies)
   - [PostgresSQL](#postgressql)
-  - [ElasticSearch](#elasticsearch)
+    - [Reads: Basic Indexing](#reads-basic-indexing)
+    - [Reads: Beyond Basic Indexes](#reads-beyond-basic-indexes)
+    - [Reads: Query Optimization Essentials](#reads-query-optimization-essentials)
+    - [Reads: Practical Performance Limits](#reads-practical-performance-limits)
+    - [Writes: Steps](#writes-steps)
+    - [Writes: Throughput Limitations](#writes-throughput-limitations)
+    - [Writes: Optimizations](#writes-optimizations)
+    - [Replication](#replication)
 - [LeetCode Design Template](#leetcode-design-template)
   - [Feature Expectations](#feature-expectations)
   - [Estimations](#estimations)
@@ -106,7 +114,6 @@
 ```
 GET /events                    # Get all events
 GET /events/{id}               # Get a specific event
-GET /venues/{id}               # Get a specific venue
 GET /events/{id}/tickets       # Get available tickets for an event
 POST /bookings                 # Create a new booking
 GET /bookings/{id}             # Get a specific booking
@@ -226,6 +233,7 @@ Real-world systems frequently need both availability and consistency - just for 
 * **Eventual Consistency**: The system will become consistent over time but may temporarily have inconsistencies.
 
 ### ACID
+[TODO]
 
 * Atomicity
 * Consistency
@@ -275,7 +283,6 @@ Real-world systems frequently need both availability and consistency - just for 
     * sharding hot keys w/ suffixesa
         * split values across shards
         * reading requires summing across shards
-* connection pooling
 
 #### High-Performant Caches
 
@@ -293,6 +300,7 @@ Real-world systems frequently need both availability and consistency - just for 
 #### B-Tree Indexes
 
 * the default choice
+* B-tree: self-balancing tree
 * benefits
     * maintain sorted order, making range queries & `ORDER BY` operations efficient
     * self-balancing, ensuring predictable performance even as data grows
@@ -380,7 +388,7 @@ Real-world systems frequently need both availability and consistency - just for 
     * denormalization strategies
         * consider read/write ratio
         * use materialized views to precompute expensive aggregations
-        ```
+        ```sql
         -- Instead of this expensive query on every page load:
         SELECT p.*, AVG(r.rating) as avg_rating 
         FROM products p 
@@ -537,6 +545,7 @@ A distributed commit log
     * small messages: up to 1MB
     * store up to 1TB per broker
     * up to 1M msgs/s per broker
+    * 50KB per topic: cap on max topics
 * horizontal scaling w/ more brokers
     * add more brokers to cluster
     * need sufficient partitions/topic to use additional brokers
@@ -598,11 +607,204 @@ A distributed commit log
 
 ### PostgresSQL
 
-TODO
+#### Reads: Basic Indexing
 
-### ElasticSearch
+* B-tree indexes use cases
+    * exact matching: `WHERE email = 'user@example.com'`
+    * range queries: `WHERE created_at > '2024-01-01'`
+    * sorting: `ORDER BY` username if the `ORDER BY` column match the index columns' order
+* indexing cost
+    * make writes slower (index updates)
+    * take up space
+    * may be unused if planner chooses sequential scanning
+* example
+```sql
+-- This is your bread and butter index
+CREATE INDEX idx_users_email ON users(email);
 
-TODO
+-- Multi-column indexes for common query patterns
+CREATE INDEX idx_posts_user_date ON posts(user_id, created_at);
+```
+
+#### Reads: Beyond Basic Indexes
+
+* **GIN (Generalized Inverted Indexes)**: full-text search
+```sql
+-- Add a tsvector column for search
+ALTER TABLE posts ADD COLUMN search_vector tsvector;
+CREATE INDEX idx_posts_search ON posts USING GIN(search_vector);
+
+-- Now you can do full-text search
+SELECT * FROM posts 
+WHERE search_vector @@ to_tsquery('postgresql & database');
+```
+* GIN features
+    * Word stemming (finding/find/finds all match)
+    * Relevance ranking
+    * Multiple languages
+    * Complex queries with AND/OR/NOT
+* consider ElasticSearch instead for
+    * More sophisticated relevancy scoring
+    * Faceted search capabilities
+    * Fuzzy matching and "search as you type" features
+    * Distributed search across very large datasets
+    * Advanced analytics and aggregations
+* **JSONB columns with GIN indexes**: store metadata on posts
+```sql
+-- Add a JSONB column for post metadata
+ALTER TABLE posts ADD COLUMN metadata JSONB;
+CREATE INDEX idx_posts_metadata ON posts USING GIN(metadata);
+
+-- Now we can efficiently query posts with specific metadata
+SELECT * FROM posts 
+WHERE metadata @> '{"type": "video"}' 
+  AND metadata @> '{"hashtags": ["coding"]}';
+
+-- Or find all posts that mention a specific user
+SELECT * FROM posts 
+WHERE metadata @> '{"mentions": ["user123"]}';
+```
+* **Geospatial Search with PostGIS**: index location data for efficient geospatial queries
+```sql
+-- Enable PostGIS
+CREATE EXTENSION postgis;
+
+-- Add a location column to posts
+ALTER TABLE posts 
+ADD COLUMN location geometry(Point);
+
+-- Create a spatial index
+CREATE INDEX idx_posts_location 
+ON posts USING GIST(location);
+
+-- Find all posts within 5km of a user
+SELECT * FROM posts 
+WHERE ST_DWithin(
+    location::geography,
+    ST_MakePoint(-122.4194, 37.7749)::geography, -- SF coordinates
+    5000  -- 5km in meters
+);
+```
+* PostGIS features
+    * Different types of spatial data (points, lines, polygons)
+    * Various distance calculations (as-the-crow-flies, driving distance)
+    * Spatial operations (intersections, containment)
+    * Different coordinate systems
+* GIN + PostGIS example
+```sql
+SELECT * FROM posts 
+WHERE search_vector @@ to_tsquery('food')
+  AND metadata @> '{"type": "video", "hashtags": ["restaurant"]}'
+  AND ST_DWithin(
+    location::geography,
+    ST_MakePoint(-122.4194, 37.7749)::geography,
+    5000
+  );
+```
+
+#### Reads: Query Optimization Essentials
+
+* covering indexes
+    * store all data (`SELECT` columns) in index
+    * pros: satisfy entire query from index w/o reading table
+    * cons: bigger indexes & slower writes
+    * example
+    ```sql
+    -- Let's say this is a common query in our social media app:
+    SELECT title, created_at 
+    FROM posts 
+    WHERE user_id = 123 
+    ORDER BY created_at DESC;
+
+    -- A covering index that includes all needed columns
+    CREATE INDEX idx_posts_user_include 
+    ON posts(user_id) INCLUDE (title, created_at);
+    ```
+* partial indexes
+    * index a subset of data (e.g. active users only)
+    * example
+    ```sql
+    -- Standard index indexes everything
+    CREATE INDEX idx_users_email ON users(email);  -- Indexes ALL users
+
+    -- Partial index only indexes active users
+    CREATE INDEX idx_active_users 
+    ON users(email) WHERE status = 'active';  -- Smaller, faster index
+    ```
+
+#### Reads: Practical Performance Limits
+
+1. Query Performance
+    * Simple indexed lookups: tens of thousands per second per core
+    * Complex joins: thousands per second
+    * Full-table scans: depends heavily on whether data fits in memory
+2. Scale Limits
+    * Tables start getting unwieldy past 100M rows
+    * Full-text search works well up to tens of millions of documents
+    * Complex joins become challenging with tables >10M rows
+    * Performance drops significantly when working set exceeds available RAM
+
+#### Writes: Steps
+
+1. **Transaction Log (WAL) Write** [Disk]
+    * changes are first written to the WAL on disk
+    * a sequential write operation, making it relatively fast
+    * the WAL is critical for durability
+    * once changes are written here, the transaction is considered durable because even if the server crashes
+2. **Buffer Cache Update** [Memory]
+    * changes are made to the data pages in PostgreSQL's shared buffer cache, where the actual tables and indexes live in memory
+    * when pages are modified, they're marked as "dirty" to indicate they need to be written to disk eventually
+3. **Background Writer** [Memory → Disk]
+    * dirty pages in memory are periodically written to the actual data files on disk
+    * happens *asynchronously* through the background writer, when memory pressure gets too high, or when a checkpoint occurs
+    * delayed write strategy allows PostgreSQL to batch multiple changes together for better performance
+4. **Index Updates** [Memory & Disk]
+    * Each index needs to be updated to reflect the changes
+    * Like table data, index changes also go through the WAL for durability
+    * This is why having many indexes can significantly slow down writes - each index requires additional WAL entries and memory updates.
+* write performance bounded by
+    * how fast you can write to the WAL (disk I/O)
+    * how many indexes need to be updated
+    * how much memory is available for the buffer cache
+
+####  Writes: Throughput Limitations
+
+Assuming PostgreSQL's *default* transaction isolation level (Read Committed)
+
+* single instance on *good* hardware
+    * Simple inserts: ~5,000 per second per core
+    * Updates with index modifications: ~1,000-2,000 per second per core
+    * Complex transactions (multiple tables/indexes): Hundreds per second
+    * Bulk operations: Tens of thousands of rows per second
+* factors
+    * Hardware: Write throughput is often bottlenecked by disk I/O for the WAL
+    * Indexes: Each additional index reduces write throughput
+    * Replication: If configured, synchronous replication adds latency as we wait for replicas to confirm
+    * Transaction Complexity: More tables or indexes touched = slower transactions
+
+#### Writes: Optimizations
+
+1. Vertical Scaling: faster machines
+2. Batch Processing: batch writes together
+3. Write Offloading: write async using queues
+4. Table Partitioning
+    * most common: time-based
+    * split by multiple physical tables
+5. Sharding
+    * common: by `user_id`
+    * adds complexity
+        * need to handle cross-shard queries
+        * maintain consistent schemas across shards
+        * manage multiple dbs
+    * no native PostgresSQL support
+
+#### Replication
+
+* synchronous: stronger consistency, higher latency
+* asynchronous: better performance, potential inconsistencies b/w replicas
+* hybrid approach
+    * small number of sync replicas for consistency
+    * more async replicas for read scaling
 
 ## LeetCode Design Template
 
@@ -709,19 +911,26 @@ TODO
 
 ## Hello Interview Design Template
 
+Requirements -> Core Entities -> API -> High-Level Design -> Deep Dive
+
 ### Requirements
 [5 min]
 
 1. Functional: *features* of system
-    * core
+    * core: limit to 3 or so
     * out of scope
 2. Non-functional: *qualities* of system
     * core
     * out of scope
 3. Capacity estimations [can skip for later]
+    * ask to come back to it during high-level design
+    * if the result will have a direct influence on design
 
 ### Core Entities
 [2 min]
+
+* data model
+* tables in storage
 
 ### API or System Interface
 [5 min]
@@ -729,6 +938,10 @@ TODO
 * mistakes
     * spending too much time
     * getting bogged down in details
+    * specifying types for each req/resp input/output
+    * putting user ids in the req body: instead read from req headers
+* 1-1 mapping b/w functional requirements & API
+* use core entities to satisfy functional requirements
 
 ### Data Flow
 [5 min]
@@ -738,8 +951,14 @@ Optional
 ### High-Level Design
 [10-15min]
 
+Satisfy functional requirements
+
+* use ... for non-important details (e.g. user metadata)
+
 ### Deep Dive
 [10 min]
+
+Satisfy non-functional requirements
 
 ## System Requirements
 
@@ -875,7 +1094,7 @@ Power of 1000	Number          Prefix
 
 ### Time
 
-* 86,400 seconds per day
+* 86,400 seconds per day: ~10^5
 * 2.5 million seconds per month
 * 1 request per second = 2.5 million requests per month
 * 40 requests per second = 100 million requests per month
@@ -922,6 +1141,7 @@ A medium-resolution image
 
 ### Latencies
 
+* Human's perception of real-time: 200ms
 * Access times
     * Memory: ~100 nanoseconds (0.0001 ms)
         * 1000x faster than SSD
