@@ -6,6 +6,7 @@
 
 - [Sources](#sources)
 - [Concepts](#concepts)
+  - [Communication Protocols](#communication-protocols)
   - [API Types](#api-types)
     - [REST (Representational State Transfer)](#rest-representational-state-transfer)
     - [GraphQL](#graphql)
@@ -22,6 +23,7 @@
     - [Isolation](#isolation)
     - [Durability](#durability)
   - [SQL](#sql)
+    - [Commands](#commands)
   - [Caching](#caching)
     - [Goals](#goals)
     - [Eviction Policies](#eviction-policies)
@@ -41,6 +43,15 @@
   - [Scaling Writes](#scaling-writes)
 - [Key Technologies](#key-technologies)
   - [Redis](#redis)
+    - [Data Structures](#data-structures)
+    - [Cache](#cache)
+    - [Distributed Lock](#distributed-lock)
+    - [Leaderboard](#leaderboard)
+    - [Rate Limiting](#rate-limiting)
+    - [Proximity Search](#proximity-search)
+    - [Event Sourcing](#event-sourcing)
+    - [Pub/Sub](#pubsub)
+    - [Limitations](#limitations)
   - [Kafka](#kafka)
     - [Terms](#terms)
     - [Design & Processes](#design--processes)
@@ -110,6 +121,27 @@
 * [What is Scalability Anyway](https://brooker.co.za/blog/2024/01/18/scalability.html)
 
 ## Concepts
+
+### Communication Protocols
+
+In order of increasing complexity and functionality:
+
+1. REST
+    * Request -> Response
+    * stateless!
+2. Long Polling
+    * client sends req to server
+    * server holds it open until data is available
+    * client keeps sending req to keep the connection open
+    * works with load balancers
+3. SSE (Server-Side Events)
+    * similar to long polling
+    * more efficient for unidirectional comm. from server to client
+    * over single, long-lived HTTP connection
+4. Websockets
+    * for real-time, bi-directional communication b/w client & server
+    * have to maintain connection
+    * challenging to maintain across load balancers
 
 ### API Types
 
@@ -545,9 +577,85 @@ Key insight: goal is to **reduce throughput per component**.
 
 ### Redis
 
-TODO
+* a "datastructure store" written in C.
+* mode
+    * single-node
+    * replicated: for HA
+    * cluster
+        * client uses hash slots to map keys to nodes
+        * nodes use gossip protocol to redirect to correct node
+* scale by structuring keys
 
-* Geohashing > PostGIS
+#### Data Structures
+
+* Strings
+* Hashes (Objects)
+* Lists
+* Sets
+* Sorted Sets (Priority Queues)
+* Bloom Filters
+* Geospatial Indexes
+* Time Series
+
+#### Cache
+
+
+#### Distributed Lock
+
+* single instance, no replicas to avoid race conditions
+* simple lock
+    * acquire a lock using `INCR` w/ TTL
+    * if response is 1, we own it
+    * else, not ours, retry
+    * `DEL` when done
+* acquire lock
+```
+SET resource_name my_random_value NX PX 30000
+```
+
+#### Leaderboard
+
+* sorted sets
+* log run-time
+* high throughput, low latency
+
+#### Rate Limiting
+
+* fixed-window rate limiter: guarantee reqs < `N` over fixed window `W`
+
+#### Proximity Search
+
+* geospatial indexes using `GEOADD` and `GEOSEARCH`
+* runs in `O(N+log(M))` time
+    * `N`: the number of elements in the radius
+    * `M`: the number of items inside the shape
+* Geohashing >> PostGIS
+
+#### Event Sourcing
+
+* streams: append-only logs similar to Kafka's topics
+* durably add items to a log
+* distributed mechanism for consuming items from the logs
+* use cases
+    * worker queues
+
+#### Pub/Sub
+
+* broadcast msgs to multiple subscribers in real-time
+```
+SPUBLISH channel message   # Sends a message to all subscribers of 'channel' (the S prefix means "sharded")
+SSUBSCRIBE channel        # Listens for messages on 'channel'
+```
+* use cases
+    * chat systems
+    * real-time notifications
+* sharding is supported in newer versions
+* 1 connection per node, not per channel: `connections == nodes`!
+* no persistence!
+
+#### Limitations
+
+* see [hot key](#hot-keys) issues
 
 ### Kafka
 
@@ -1103,7 +1211,8 @@ Alternatives for:
 * flow: Requirements -> Core Entities -> API -> High-Level Design -> Deep Dive
 * overcommunicate!
     * explain what you are doing
-    * and what you are not doing and why
+    * and what you are not doing
+    * and why
 
 ### Requirements
 [5 min]
@@ -1113,7 +1222,7 @@ Alternatives for:
     * out of scope
 2. Non-functional: *qualities* of system
     * core: very important, needed for deep dives
-    * out of scope
+    * out of scope: check in to get feedback on scope
 3. Capacity estimations [can skip for later]
     * ask to come back to it during high-level design
     * if the result will have a direct influence on design
@@ -1134,18 +1243,20 @@ Alternatives for:
     * specifying types for each req/resp input/output
     * putting user ids in the req body: instead read from req headers
 * 1-1 mapping b/w functional requirements & API
+* go over each functional requirement and define an API call
 * use core entities to satisfy functional requirements
 
 ### Data Flow
 [5 min]
 
 * optional
-* do for Web Crawler & data pipelineing: helps with high-design
+* do for Web Crawler & data pipelineing: helps with high-level design
 
 ### High-Level Design
 [10-15min]
 
 * satisfy functional requirements
+* go over each API call and build the high-level design
 * use ... for non-important details (e.g. user metadata)
 * split into microservices to
     * scale independently
