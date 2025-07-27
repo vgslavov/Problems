@@ -32,8 +32,12 @@
   - [Components & Tech. Stack](#components--tech-stack-5)
   - [Deep Dives](#deep-dives-5)
 - [Design Ad Click Aggregator](#design-ad-click-aggregator)
+  - [System Qualities](#system-qualities-6)
+  - [System Interface & Flow](#system-interface--flow)
+  - [Deep Dives](#deep-dives-6)
 - [Design Facebook's Post Search](#design-facebooks-post-search)
 - [Design a Distributed Cache](#design-a-distributed-cache)
+- [Design a Distributed Job Scheduler](#design-a-distributed-job-scheduler)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -43,6 +47,8 @@
 * [LeetCode: System Design Interviews and Beyond: Problems](https://leetcode.com/explore/featured/card/system-design-for-interviews-and-beyond/735/practice-problems/)
 
 ## Design URL Shortener
+
+Type: Product Design
 
 * [x] read
 * [x] watched
@@ -94,6 +100,8 @@
 
 ## Design Dropbox
 
+Type: Product Design
+
 * [x] read
 * [x] watched
 
@@ -144,6 +152,8 @@
     * access control: ACLs
 
 ## Design Ticketmaster
+
+Type: Product Design
 
 * [x] read
 * [x] watched
@@ -212,10 +222,14 @@
 
 ## Design Facebook's News Feed
 
+Type: Product Design
+
 * [x] read
 * [ ] watched
 
 ## Design WhatsApp
+
+Type: Product Design
 
 * [x] read
 * [x] watched
@@ -249,7 +263,7 @@
         * echoes requests across sockets
     * at most once delivery of messages: no guarantee of delivery
     * however, msgs are persisted to PG and are acked
-    * NxM connections (b/w Chat Servers & Redis nodes)
+    * `N x M` connections (b/w Chat Servers & Redis nodes)
     * uses consistent hashing for adding/removing nodes to Redis cluster
 * Database: PG or DynamoDB
     * high throughput & writes
@@ -276,7 +290,7 @@
         * lightweight hash map of socket connections 
         * on connection
             * chat servers subscribe users to topics based on `userId`
-            * messages recved on sub, fwd-ed to websocket for that user
+            * messages recv-ed on sub, fwd-ed to websocket for that user
         * on msg
             * publish msg to topic for `userId`
             * msg recved by all subscribing Chat Servers
@@ -289,6 +303,8 @@
     * store `clientId` in msg/chat/inbox tables
 
 ## Design LeetCode
+
+Type: Product Design
 
 * [x] read
 * [ ] watched
@@ -365,6 +381,8 @@
 
 ## Design Web Crawler
 
+Type: Infrastructure Design
+
 * [ ] read
 * [x] watched
 
@@ -388,7 +406,7 @@
     * store webpages to S3
     * queue S3 links to Parsing Queue
 * Parsing workers
-    * rad S3 links from Parsing Queue
+    * read S3 links from Parsing Queue
     * get raw HTML from S3
     * parse!
     * store parsed HTML to S3
@@ -430,15 +448,34 @@
 
 ## Design Ad Click Aggregator
 
+Type: Infrastructure Design
+
 * [ ] read
 * [ ] watched
 
+### System Qualities
+
+### System Interface & Flow
+
+### Deep Dives
+
 ## Design Facebook's Post Search
+
+Type: Product Design
 
 * [ ] read
 * [ ] watched
 
 ## Design a Distributed Cache
 
+Type: Infrastructure Design
+
 * [x] read
+* [ ] ~~watched~~
+
+## Design a Distributed Job Scheduler 
+
+Type: Infrastructure Design
+
+* [ ] read
 * [ ] watched

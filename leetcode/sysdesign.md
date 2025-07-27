@@ -606,6 +606,7 @@ Key insight: goal is to **reduce throughput per component**.
 
 #### Cache
 
+#TODO: add
 
 #### Distributed Lock
 
@@ -1231,7 +1232,14 @@ Alternatives for:
 
 ## Hello Interview Design Template
 
-* flow: Requirements -> Core Entities -> API -> High-Level Design -> Deep Dive
+* Product Design Questions
+```
+Requirements -> Core Entities -> API -> High-Level Design -> Deep Dive
+```
+* Infrastructure Design Questions
+```
+Requirements -> System Interface & Data Flow -> High-Level Design -> Deep Dive
+```
 * overcommunicate!
     * explain what you are doing
     * and what you are NOT doing
@@ -1253,6 +1261,8 @@ Alternatives for:
 ### Core Entities
 [2 min]
 
+* required for Product Design Qs
+* optional for Infrastructure Design Qs
 * data model
 * tables in storage
 * define/document tables next to high-level design for easier updates
@@ -1260,6 +1270,11 @@ Alternatives for:
 ### API or System Interface
 [5 min]
 
+* API for Product Design
+    * schema of API calls
+* System Interface for Infrastructure Design
+    * Inputs to system
+    * Outputs to system
 * mistakes
     * spending too much time
     * getting bogged down in details
@@ -1272,7 +1287,9 @@ Alternatives for:
 ### Data Flow
 [5 min]
 
-* optional
+* optional for Product Design Qs
+* required for Infrastructure Design Qs
+* should satisfy functional requirements
 * do for Web Crawler & data pipelineing: helps with high-level design
 
 ### High-Level Design
@@ -1285,6 +1302,7 @@ Alternatives for:
     * scale independently
     * satisfy different non-functional reqs: C or A
     * maintain/own by different teams
+* don't leave in design obviously non-scalable components
 
 ### Deep Dive
 [10 min]
@@ -1540,6 +1558,7 @@ queue length = max latency / (transaction time / number of threads)
 
 ### Terminology
 
+* CPS: Clicks Per Second
 * CRUD: Create, Read, Update, Delete
 * DAU: Daily Active Users
 * DLQ: Dead Letter Queues
