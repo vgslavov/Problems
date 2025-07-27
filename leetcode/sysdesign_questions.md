@@ -14,17 +14,23 @@
   - [Components & Tech. Stack](#components--tech-stack-1)
   - [Deep Dives](#deep-dives-1)
 - [Design Ticketmaster](#design-ticketmaster)
-- [Design Facebook's News Feed](#design-facebooks-news-feed)
-- [Design WhatsApp](#design-whatsapp)
-- [Design LeetCode](#design-leetcode)
-- [Design Uber](#design-uber)
   - [System Qualities](#system-qualities-2)
   - [Components & Tech. Stack](#components--tech-stack-2)
   - [Deep Dives](#deep-dives-2)
-- [Design Web Crawler](#design-web-crawler)
+- [Design Facebook's News Feed](#design-facebooks-news-feed)
+- [Design WhatsApp](#design-whatsapp)
   - [System Qualities](#system-qualities-3)
   - [Components & Tech. Stack](#components--tech-stack-3)
   - [Deep Dives](#deep-dives-3)
+- [Design LeetCode](#design-leetcode)
+- [Design Uber](#design-uber)
+  - [System Qualities](#system-qualities-4)
+  - [Components & Tech. Stack](#components--tech-stack-4)
+  - [Deep Dives](#deep-dives-4)
+- [Design Web Crawler](#design-web-crawler)
+  - [System Qualities](#system-qualities-5)
+  - [Components & Tech. Stack](#components--tech-stack-5)
+  - [Deep Dives](#deep-dives-5)
 - [Design Ad Click Aggregator](#design-ad-click-aggregator)
 - [Design Facebook's Post Search](#design-facebooks-post-search)
 - [Design a Distributed Cache](#design-a-distributed-cache)
@@ -106,7 +112,7 @@
 * Downloader client 
     * poll for changes
     * sync w/ remote S3 or CDN
-* API Gateway & Load Balancer
+* API Gateway & Load Balancer (L7?)
     * routing
     * auth
     * rate limiting
@@ -140,7 +146,69 @@
 ## Design Ticketmaster
 
 * [x] read
-* [ ] watched
+* [x] watched
+
+### System Qualities
+
+1. Availability for searching/viewing events, Consistency for booking events
+2. Scalable: high throughput for popular events (10M users per event)
+3. Low latency searches (< 500ms)
+4. Read heavy: read >> write (100:1)
+
+### Components & Tech. Stack
+
+* API Gateway
+    * auth
+    * route calls
+    * rate limit
+* Search Service
+    * searching of events
+* Event Service
+    * viewing of events
+* Booking Service
+    * reserve: set ticket lock
+    * confirm: write to DB ticket booking
+    * interact with Payment Processor
+* Database: PG
+    * store event/ticket/etc. metadata
+* Inverted Index DB
+    * terms to events index
+    * ElasticSearch: PG -CDC-> ElasticSearch
+    * PG only: use GIN index
+* Distributed Ticket Lock: redis
+    * lock tickets for a pre-defined TTL
+* Virtual Waiting Queue: redis
+    * hold batches of users pre-booking
+* Payment Processor: Stripe
+
+### Deep Dives
+
+1. Reserving tickets
+    * distributed lock with TTL: redis
+    * DB ticket table has only 2 states: available & booked
+    * locking entirely in redis
+    * challenges
+        * single redis node for simple distributed lock
+        * no double booking on failure
+        * but possibility for bad user experience: error on purchase of already sold tickets due to no reservation
+2. Supporting millions of requests for popular events
+    * caching: popular events in redis, use TTL
+    * load balancing: round robin or least connections across instances
+    * horizontal scaling: Events Service is stateless
+3. Good user experience for simultaneous bookings
+    * virtual waiting queues: redis + WebSockets/SSEs
+4. Improve search latencies
+    * B-tree indexes are bad for term searches (full table scans)
+    * ElasticSearch: feed data from PG over CDC to keep in sync
+    * PG+GIN: or use only PG with own Inverted Index
+5. Speed up frequently repeated searches
+    * good: redis
+        * TTLs
+        * LRU/LFU
+    * great: CDN
+        * cache search results
+        * client -> CDN -> API Gateway
+        * very selective searches will result in cache misses
 
 ## Design Facebook's News Feed
 
@@ -150,7 +218,75 @@
 ## Design WhatsApp
 
 * [x] read
-* [ ] watched
+* [x] watched
+
+### System Qualities
+
+1. Messages delivered w/ low latency (< 500ms)
+2. Guaranteed message delivery
+3. High throughput for billions of users
+4. Don't unnecessarily store messages (privacy)
+5. Fault-tolerant (A > C)
+
+### Components & Tech. Stack
+
+* Client/Device
+    * use WebSockets for real-time connectivity
+* Load Balancer
+    * stateful!
+    * route to Chat Server based on least # of connections
+    * L4 (due to WebSockets)
+* Chat Servers
+    * stateful!
+    * users connect to any, routed by LB based on load
+    * registers a subscription in Redis for userId
+    * publish a notification to Redis for the topic on message sent
+* Redis Pub/Sub
+    * not Kafka!
+        * can't scale topics to billions of users
+        * topics are too big (50KB)
+    * light-weight, near real-time connectivity b/w Chat Servers
+        * echoes requests across sockets
+    * at most once delivery of messages: no guarantee of delivery
+    * however, msgs are persisted to PG and are acked
+    * NxM connections (b/w Chat Servers & Redis nodes)
+    * uses consistent hashing for adding/removing nodes to Redis cluster
+* Database: PG or DynamoDB
+    * high throughput & writes
+    * store msgs, groups, etc.
+        * composite PK on `chatId` & `participantId`
+        * look up participants for a chat: range lookup for `chatId`
+        * look up chats for a participant: #TODO
+    * store undelivered messages in Inbox for retrieval on Client connection
+* Blob Storage: S3
+    * store attachments
+    * client gets pre-signed URLs
+    * embeds URLs in msgs
+    * interacts w/ S3 directly for to upload/download
+* Cleanup Service
+    * query DB to delete old & delivered msgs
+
+### Deep Dives
+
+1. Handling billions of users
+    * good: consistent hashing of chat servers
+        * chat registry to look up chat server to connect to
+        * Zookeeper to coordinate
+    * great: redis pub/sub #TODO
+        * lightweight hash map of socket connections 
+        * on connection
+            * chat servers subscribe users to topics based on `userId`
+            * messages recved on sub, fwd-ed to websocket for that user
+        * on msg
+            * publish msg to topic for `userId`
+            * msg recved by all subscribing Chat Servers
+            * Chat Servers fwd msg to user's websocket
+    * BOTE
+        * msgs/day: `1B users x 100 msgs/day = 100B msgs/day`
+        * storage: `1 KB/msg x 100B msgs/day = 100B KB = 100 TB`
+2. Handling multiple clients/devices per user
+    * map `userId` to `clientId`
+    * store `clientId` in msg/chat/inbox tables
 
 ## Design LeetCode
 
@@ -170,7 +306,7 @@
 
 ### Components & Tech. Stack
 
-* API Gateway & Load Balancer
+* API Gateway & Load Balancer (L7?)
     * routing
     * auth
     * rate limiting
