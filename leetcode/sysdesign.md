@@ -111,13 +111,14 @@
 
 ## Sources
 
+* [Distributed Locks with Redis](https://redis.io/docs/latest/develop/clients/patterns/distributed-locks/)
 * [Hello Interview: Mastering Estimation](https://www.hellointerview.com/blog/mastering-estimation)
 * [Hello Interview: System Design](https://www.hellointerview.com/learn/system-design/)
 * [Latency Numbers Every Programmer Should Know](https://gist.github.com/jboner/2841832)
 * [LeetCode: My System Design Template](https://leetcode.com/discuss/post/229177/my-system-design-template-by-topcat-vtk2/)
 * [LeetCode: System Design for Interviews and Beyond](https://leetcode.com/explore/featured/card/system-design-for-interviews-and-beyond/)
-* [System Design Primer](https://github.com/donnemartin/system-design-primer/)
 * [PG's Transaction Isolation](https://www.postgresql.org/docs/current/transaction-iso.html)
+* [System Design Primer](https://github.com/donnemartin/system-design-primer/)
 * [What is Scalability Anyway](https://brooker.co.za/blog/2024/01/18/scalability.html)
 
 ## Concepts
@@ -138,7 +139,7 @@ In order of increasing complexity and functionality:
     * similar to long polling
     * more efficient for unidirectional comm. from server to client
     * over single, long-lived HTTP connection
-4. Websockets
+4. WebSockets
     * for real-time, bi-directional communication b/w client & server
     * have to maintain connection
     * challenging to maintain across load balancers
@@ -260,7 +261,7 @@ Real-world systems frequently need both availability and consistency - just for 
 #### Availability
 
 * **Multiple Replicas**: Scaling to additional read replicas with asynchronous replication, allowing reads to be served from any replica.
-* **Change Data Capture (CDC)**: Using CDC to track changes in the primary database and propagate them asynchronously to replicas, caches, and other systems.
+* **Change Data Capture (CDC)**: Using CDC to track changes in the primary database and propagate them *asynchronously* to replicas, caches, and other systems.
 * **Technology Choices**
     * Cassandra
     * DynamoDB (in multiple AZ configuration)
@@ -268,7 +269,7 @@ Real-world systems frequently need both availability and consistency - just for 
 
 #### Partition Tolerance
 
-* not possible in a *distributed* system
+* required in a *distributed* system
 
 #### Levels of Consistency
 
@@ -331,7 +332,7 @@ Real-world systems frequently need both availability and consistency - just for 
 * foreign keys (FK): `user_id INTEGER REFERENCES users(id)`
 * relationships
     * One-to-One: a user and their profile settings
-    * One-to-Many: our users and posts (one user can have many posts)
+    * One-to-Many: users and posts (one user can have many posts)
     * Many-to-Many: users and the posts they like
 * normalization
     * avoid duplicating data
@@ -339,6 +340,7 @@ Real-world systems frequently need both availability and consistency - just for 
     * make data model flexible
     * denormalize for performance (to avoid joins)
 * `JOIN`
+#TODO: add
 
 #### Commands
 
@@ -371,6 +373,8 @@ Real-world systems frequently need both availability and consistency - just for 
 
 #### Cache Invalidation Strategies
 
+#TODO: cleanup
+
 * **Time-based expiration (TTL)** - Set a fixed lifetime for cached entries. Simple to implement but means serving potentially stale data until expiration.
 * **Write-through invalidation** - Update or delete cache entries immediately when writing to the database. Ensures consistency but adds latency to write operations and requires careful error handling.
 * **Write-behind invalidation** - Queue invalidation events to process asynchronously. Reduces write latency but introduces a window where stale data might be served.
@@ -379,6 +383,8 @@ Real-world systems frequently need both availability and consistency - just for 
 
 #### Cache Write Strategies
 
+#TODO: cleanup
+
 * **Write-Through Cache**: Writes data to both the cache and the underlying datastore simultaneously. Ensures consistency but can be slower for write operations.
 * **Write-Around Cache**: Writes data directly to the datastore, bypassing the cache. This can minimize cache pollution but might increase data fetch times on subsequent reads.
 * **Write-Back Cache**: Writes data to the cache and then asynchronously writes the data to the datastore. This can be faster for write operations but can lead to data loss if the cache fails before the data is written to the datastore.
@@ -386,16 +392,16 @@ Real-world systems frequently need both availability and consistency - just for 
 #### Hot Keys
 
 * distribute load across multiple nodes
-* read hot keys
+* reading hot keys
     * create multiple copies w/ different suffixes stored on different nodes
         * `user:123#1` on node A
         * `user:123#2` on node B
         * `user:123#3` on node C
     * reads: randomly choose one of suffixed keys
     * writes: update all keys to maintain consistency
-* written hot keys
+* writing hot keys
     * write batching: buffer writes every 50-100ms
-    * sharding hot keys w/ suffixesa
+    * sharding hot keys w/ suffixes
         * split values across shards
         * reading requires summing across shards
 
@@ -415,12 +421,11 @@ Real-world systems frequently need both availability and consistency - just for 
 #### B-Tree Indexes
 
 * the default choice
-* B-tree: self-balancing tree
 * benefits
     * maintain sorted order, making range queries & `ORDER BY` operations efficient
     * self-balancing, ensuring predictable performance even as data grows
     * minimize disk I/O by matching their structure to how databases store data
-    * handle both equality searches (email = 'x') and range searches (age > 25) equally well
+    * handle both equality searches (`email = 'x'`) and range searches (`age > 25`) equally well
     * remain balanced even with random inserts and deletes, avoiding the performance cliffs you might see with simpler tree structures
 * real-world examples
     * PostgresSQL
@@ -429,11 +434,11 @@ Real-world systems frequently need both availability and consistency - just for 
 
 #### LSM Trees
 
+* Log-Structured Merge Trees
 * for write-heavy loads
     * time-series dbs
     * logging sys
     * analytics platforms
-* Log-Structured Merge Trees
 * convert many small random writes into fewer large sequential writes, increasing efficiency
 * on write
     * **Memtable (Memory Component)**: New writes go into an in-memory structure called a memtable, typically implemented as a sorted data structure like a red-black tree or skip list. This is extremely fast since it's all in RAM.
@@ -485,6 +490,7 @@ Real-world systems frequently need both availability and consistency - just for 
 * word to docs lists
 * real-world examples
     * ElasticSearch
+    * PG's GIN
 
 #### Index Optimizations
 
@@ -556,11 +562,12 @@ Key insight: goal is to **reduce throughput per component**.
         * sharding: splitting data across multiple machines/nodes
         * partitioning: splitting data within a single db/sys
     * horizontal sharding (partitioning): split *rows*
+        * select a good partitioning key
+            * `userId` vs `country`
+            * minimize variance in # of writes/shard
+        * rows for the same `userId` written to same shard
         * slot numbers: Redis
         * consistent hasing: Cassandra, DynamoDB
-    * select a good partitioning key
-        * `userId` vs `country`
-        * minimize variance in # of writes/shard
     * vertical partitioning: split *columns*/tables
         * split tables (e.g. `post`) by reads/writes
         * core `post_content`: write-once, read-many
@@ -577,7 +584,7 @@ Key insight: goal is to **reduce throughput per component**.
 
 ### Redis
 
-* a "datastructure store" written in C.
+* a "data structure store" written in C
 * mode
     * single-node
     * replicated: for HA
@@ -603,20 +610,35 @@ Key insight: goal is to **reduce throughput per component**.
 #### Distributed Lock
 
 * single instance, no replicas to avoid race conditions
-* simple lock
+* simple lock using `INCR`
     * acquire a lock using `INCR` w/ TTL
     * if response is 1, we own it
     * else, not ours, retry
     * `DEL` when done
-* acquire lock
-```
-SET resource_name my_random_value NX PX 30000
-```
+* simple lock using `SET`
+    * acquire lock by setting a specific key to random value w/ TTL
+    ```
+    SET resource_name my_random_value NX PX 30000
+    ```
+    * release lock: only if key exists and value matches
+    ```lua
+    if redis.call("get",KEYS[1]) == ARGV[1] then
+        return redis.call("del",KEYS[1])
+    else
+        return 0
+    end
+    ```
+    * avoids removing a lock created by another client
+* race condition if replicas
+    1. Client A acquires the lock in the master.
+    2. The master crashes before the write to the key is transmitted to the replica.
+    3. The replica gets promoted to master.
+    4. Client B acquires the lock to the same resource A already holds a lock for. SAFETY VIOLATION!
 
 #### Leaderboard
 
 * sorted sets
-* log run-time
+* `log(n)` run-time
 * high throughput, low latency
 
 #### Rate Limiting
@@ -644,7 +666,7 @@ SET resource_name my_random_value NX PX 30000
 * broadcast msgs to multiple subscribers in real-time
 ```
 SPUBLISH channel message   # Sends a message to all subscribers of 'channel' (the S prefix means "sharded")
-SSUBSCRIBE channel        # Listens for messages on 'channel'
+SSUBSCRIBE channel         # Listens for messages on 'channel'
 ```
 * use cases
     * chat systems
@@ -700,7 +722,7 @@ A distributed commit log
         * determined by Kafka controller
         * producer sends directly to broker
 * append-only design benefits
-    * immutability: simplifies replciation/recovery/consistency
+    * immutability: simplifies replication/recovery/consistency
     * efficiency: minimizes disk seek times
     * scalability: horizontal scaling by increasing partitions & brokers
 * replication: leader-follower model
@@ -728,7 +750,7 @@ A distributed commit log
 #### Use Cases
 
 * as message queue: consumers ack
-    * asynchronous processing: uploading large files
+    * asynchronous processing: uploading large files (but not on Kafka! queue events for processing them)
     * in order message processing: waiting queues
     * decouple producer from consumer to scale independently
 * as stream: consumers don't ack
@@ -776,22 +798,22 @@ A distributed commit log
 * consumer goes down
     * offset management
         * offset committed by consumer after processing msg
-        * read last committed offset on consumer restart
+        * read last committed offset on consumer restart/after crash
     * rebalancing
         * consumer goes down, redistribute partitions across remaining consumers
-* commit offset *after* doing the work
+* commit offset *after* work is done
 * keep the consumer work as small as possible
 
 #### Handling Retries & Errors
 
-* producer retries: automatic, but set idempotent to true
-* consumer retries: not supported, but can be implemented using retry topics
+* producer retries: automatic, but set `idempotent` to true
+* consumer retries: not supported, but can be implemented using retry & DLQ topics
 
 #### Performance Optimizations
 
 * batch msgs in producer
-    * batch size & time to wait before sending batch
-    * linger time for broker?
+    * increase `batch.size`
+    * increase `linger.ms` (wait) time for broker (default is 0)
 * compress msgs in producer
 * maximize parallelism by ensuring msgs evently distributed across partitions
 
@@ -989,6 +1011,7 @@ Assuming PostgreSQL's *default* transaction isolation level (**Read Committed**:
     * split by multiple physical tables
 5. (Horizontal) Sharding
     * common: by `user_id`
+    * rows for same `user_id` written to same shard
     * adds complexity
         * need to handle cross-shard queries
         * maintain consistent schemas across shards
@@ -1211,7 +1234,7 @@ Alternatives for:
 * flow: Requirements -> Core Entities -> API -> High-Level Design -> Deep Dive
 * overcommunicate!
     * explain what you are doing
-    * and what you are not doing
+    * and what you are NOT doing
     * and why
 
 ### Requirements
@@ -1274,12 +1297,12 @@ Alternatives for:
 ## System Requirements
 
 * functional
-    * define behavior: what a system is supposed to do
+    * define *behavior*: what a system is supposed to do
     * example: exchange messages
     * *who* is going to use the system?
     * *how* are they going to use it?
 * non-functional
-    * define qualities: how a system is supposed to behave
+    * define *qualities*: how a system is supposed to behave
     * example: scalable, highly available, fast
 
 ## Non-functional Requirements
@@ -1509,17 +1532,17 @@ Send packet CA->Netherlands->CA .... 150,000,000 ns  = 150 ms
 
 ### Formulas
 
+* If queue is unbounded, latency increases. To set max response time, limit queue length
 ```
 max latency = (transaction time / number of threads) * queue length
 queue length = max latency / (transaction time / number of threads)
 ```
 
-If queue is unbounded, latency increases. To set max response time, limit queue length.
-
 ### Terminology
 
 * CRUD: Create, Read, Update, Delete
 * DAU: Daily Active Users
+* DLQ: Dead Letter Queues
 * IOPS: I/O Per Second
 * linearizability: all nodes reflect the most recent write operation
 * QPS: Queries Per Second
