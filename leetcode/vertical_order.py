@@ -8,7 +8,7 @@ import sys
 # title: Binary Tree Vertical Order Traversal
 # difficulty: medium
 # url: https://leetcode.com/problems/binary-tree-vertical-order-traversal/
-# tags: hash table, tree, bfs, dfs, sorting, binary tree
+# tags: hash table, tree, bfs, dfs, sorting, binary tree, meta
 
 # constraints:
 # The number of nodes in the tree is in the range [0, 100].

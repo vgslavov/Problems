@@ -6,38 +6,39 @@
 
 - [Sources](#sources)
 - [Design URL Shortener](#design-url-shortener)
-  - [System Qualities](#system-qualities)
   - [Components & Tech. Stack](#components--tech-stack)
   - [Deep Dives](#deep-dives)
 - [Design Dropbox](#design-dropbox)
-  - [System Qualities](#system-qualities-1)
   - [Components & Tech. Stack](#components--tech-stack-1)
   - [Deep Dives](#deep-dives-1)
 - [Design Ticketmaster](#design-ticketmaster)
-  - [System Qualities](#system-qualities-2)
   - [Components & Tech. Stack](#components--tech-stack-2)
   - [Deep Dives](#deep-dives-2)
 - [Design Facebook's News Feed](#design-facebooks-news-feed)
 - [Design WhatsApp](#design-whatsapp)
-  - [System Qualities](#system-qualities-3)
+  - [System Qualities](#system-qualities)
   - [Components & Tech. Stack](#components--tech-stack-3)
   - [Deep Dives](#deep-dives-3)
 - [Design LeetCode](#design-leetcode)
 - [Design Uber](#design-uber)
-  - [System Qualities](#system-qualities-4)
+  - [System Qualities](#system-qualities-1)
   - [Components & Tech. Stack](#components--tech-stack-4)
   - [Deep Dives](#deep-dives-4)
 - [Design Web Crawler](#design-web-crawler)
-  - [System Qualities](#system-qualities-5)
+  - [System Qualities](#system-qualities-2)
   - [Components & Tech. Stack](#components--tech-stack-5)
   - [Deep Dives](#deep-dives-5)
 - [Design Ad Click Aggregator](#design-ad-click-aggregator)
-  - [System Qualities](#system-qualities-6)
+  - [System Qualities](#system-qualities-3)
   - [System Interface & Flow](#system-interface--flow)
   - [Deep Dives](#deep-dives-6)
 - [Design Facebook's Post Search](#design-facebooks-post-search)
 - [Design a Distributed Cache](#design-a-distributed-cache)
 - [Design a Distributed Job Scheduler](#design-a-distributed-job-scheduler)
+  - [System Qualities](#system-qualities-4)
+  - [Components](#components)
+  - [System Interface & Flow](#system-interface--flow-1)
+  - [Deep Dives](#deep-dives-7)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -52,13 +53,6 @@ Type: Product Design
 
 * [x] read
 * [x] watched
-
-### System Qualities
-
-1. Uniqueness of short codes
-2. Redirection w/ minimal latency (< 100ms)
-3. Reliable & available: A >> C
-4. Support up to 1B short URLs and 100M DAU
 
 ### Components & Tech. Stack
 
@@ -81,6 +75,9 @@ Type: Product Design
 
 ### Deep Dives
 
+0. Reliable & available: A >> C
+    * more important for each short URL to be resolvable
+    * than for strong consistency (eventual is fine)
 1. Uniqueness of short URLs
     * 6-chars: `62^6`
     * Base62 encoding: `[0-9A-Za-z]`
@@ -89,7 +86,7 @@ Type: Product Design
     * counter: redis `INCR` + Base62 encoding
         * predictable
         * rate limit users
-2. Fast redirects
+2. Fast redirects w/ minimal latency (< 100ms)
     * use in-memory read-through cache: redis
 3. Scaling: supporting 1B URLs & 100M DAU
     * cache lookups: short to long URL
@@ -104,13 +101,6 @@ Type: Product Design
 
 * [x] read
 * [x] watched
-
-### System Qualities
-
-1. Highly available: A >> C! (stale files are better than no files)
-2. Large files: <= 50GB
-3. Secure & reliable, file recovery
-4. Low latency: fast upload/download/sync
 
 ### Components & Tech. Stack
 
@@ -136,14 +126,16 @@ Type: Product Design
 
 ### Deep Dives
 
-1. Large files
+0. Highly available: A >> C!
+    * stale files are better than no files
+1. Large files (<= 50GB)
     * chunking: 5-10MB
     * fingerprinting
         * apply hash: SHA-256
         * fingerprint chunks & entire file
         * maintain status in metadata
     * AWS multi-part uploads API
-2. Fast uploads/downloads/sync
+2. Fast uploads/downloads/sync & reliability (data integrity)
     * use compression: consider file type
     * parallelize chunk uploads/downloads
 3. File security
@@ -157,13 +149,6 @@ Type: Product Design
 
 * [x] read
 * [x] watched
-
-### System Qualities
-
-1. Availability for searching/viewing events, Consistency for booking events
-2. Scalable: high throughput for popular events (10M users per event)
-3. Low latency searches (< 500ms)
-4. Read heavy: read >> write (100:1)
 
 ### Components & Tech. Stack
 
@@ -193,6 +178,8 @@ Type: Product Design
 
 ### Deep Dives
 
+0. Availability for searching/viewing events, Consistency for booking events
+    * read heavy: read >> write (100:1)
 1. Reserving tickets
     * distributed lock with TTL: redis
     * DB ticket table has only 2 states: available & booked
@@ -201,13 +188,13 @@ Type: Product Design
         * single redis node for simple distributed lock
         * no double booking on failure
         * but possibility for bad user experience: error on purchase of already sold tickets due to no reservation
-2. Supporting millions of requests for popular events
+2. Supporting millions of requests (high throughput) for popular events (10M users per event)
     * caching: popular events in redis, use TTL
     * load balancing: round robin or least connections across instances
     * horizontal scaling: Events Service is stateless
 3. Good user experience for simultaneous bookings
     * virtual waiting queues: redis + WebSockets/SSEs
-4. Improve search latencies
+4. Improve search latencies (< 500ms)
     * B-tree indexes are bad for term searches (full table scans)
     * ElasticSearch: feed data from PG over CDC to keep in sync
     * PG+GIN: or use only PG with own Inverted Index
@@ -238,7 +225,6 @@ Type: Product Design
 
 1. Messages delivered w/ low latency (< 500ms)
 2. Guaranteed message delivery
-3. High throughput for billions of users
 4. Don't unnecessarily store messages (privacy)
 5. Fault-tolerant (A > C)
 
@@ -451,7 +437,7 @@ Type: Infrastructure Design
 Type: Infrastructure Design
 
 * [ ] read
-* [ ] watched
+* [x] watched
 
 ### System Qualities
 
@@ -478,4 +464,70 @@ Type: Infrastructure Design
 Type: Infrastructure Design
 
 * [ ] read
-* [ ] watched
+* [x] watched
+
+### System Qualities
+
+1. HA: A > C
+2. Execute jobs w/i 2s of scheduled time
+3. Scalable to support up to 10k jobs/s
+4. Ensure at-least once execution of jobs
+
+### Components
+
+* API gateway
+* Scheduler Service
+    * write to DB
+    * enqueue to MQ if soon to be executed (< 5min)
+* Query Service
+    * ready only: split querying from scheduling to scale writes
+* Database: PG or DynamoDB
+    * job store
+    * tables: jobs & executions
+* Watcher Service
+    * poll jobs from DB for jobs to be executed in *next* 5 min
+    * enqueue jobId & taskId to Message Queue
+* Message Queue & Distributed Lock: redis
+    * Redis
+        * priority queue using sorted sets
+        * sort by exec time
+        * heapify on adding to queue
+        * HA: need replicas & Sentinel mode
+    * not Kafka!
+        * can't insert jobs if scheduled last min
+    * possible: Zookeeper for Distributed Lock
+    * Distributed Lock
+        * lock using jobId and set TTL so no other consumer can
+* Worker
+    * consume job from Queue
+* Execute Job
+    * x1000s of instances
+    * get jobs from Worker to execute
+    * check in redis to make sure not locked
+    * on retry due to *visible* failure, requeue to MQ
+    * on machine/svc crash, distributed lock's TTL expires
+    * update status in DB
+
+### System Interface & Flow
+
+### Deep Dives
+
+1. Execute w/i 2s
+    * split job execution
+        * Watcher polls db for future jobs
+        * enqueues to MQ
+        * MQ sorts by exec time
+2. Scalable system: 10k jobs/s
+    * Jobs DB
+        * jobs table
+            * partition by `jobId`
+        * execution table
+            * partition by `execTime`
+    * Message Queue capacity
+        * 5 min batches: `10k jobs/s * 300s = 3M jobs`
+    * Workers
+        * Containers
+        * Lambda functions
+3. At least once execution
+    * visible failures: enqueue retries back to MQ & backoff
+    * invisible failures: lock `jobId` in distributed lock w/ TTL
