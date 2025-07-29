@@ -47,6 +47,19 @@
 * [Hello Interview: Question Breakdowns](https://www.hellointerview.com/learn/system-design/problem-breakdowns/overview)
 * [LeetCode: System Design Interviews and Beyond: Problems](https://leetcode.com/explore/featured/card/system-design-for-interviews-and-beyond/735/practice-problems/)
 
+## Patterns
+
+|Problem|Potential Solutions|Technology|Common Problems|
+|-------|-------------------|----------|---------------|
+|Efficiently finding locations within a radius|Geospatial indexes (e.g., geohashing, quadtrees, R-trees)|PG's PostGIS, redis Geohashing|Uber, Tinder, Yelp|
+|Efficient full-text search over large datasets|Inverted indexes|PG's GIN, ElasticSearch|Yelp, Ticketmaster|
+|Pessimistically locking resources for extended periods|Distributed locks with TTL|redis|Ticketmaster, Uber|
+|Database consistency during high concurrency|Transactions with row locking or Optimistic Concurrency Control (OCC)|PG|Yelp, Online Auction|
+|High write throughput with low latency|In-memory data stores|redis, Memcached|Bit.ly, Ad click aggregators|
+|Isolation when concerned about running external code|Containers|Docker|LeetCode
+|Broadcasting messages to users in real-time|Pub/sub with SSE or WebSockets|redis pub/sub|Facebook Live Comments, WhatsApp|
+|Uploading or downloading large files|Chunking|S3|YouTube, Dropbox|
+
 ## Design URL Shortener
 
 Type: Product Design
