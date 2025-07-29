@@ -334,6 +334,18 @@ Real-world systems frequently need both availability and consistency - just for 
     * One-to-One: a user and their profile settings
     * One-to-Many: users and posts (one user can have many posts)
     * Many-to-Many: users and the posts they like
+        * use junction/associative tables to connect 2 tables together
+        ```sql
+        CREATE TABLE chatgroup_participant (
+        chatgroup_id INT,
+        user_id INT,
+
+        -- dedicate 'id' as PK is not required
+        PRIMARY KEY (chatgroup_id, user_id),
+        FOREIGN KEY (chatgroup_id) REFERENCES chatgroups(id),
+        FOREIGN KEY (user_id) REFERENCES users(id)
+        );
+        ```
 * normalization
     * avoid duplicating data
     * maintain data integrity
@@ -921,6 +933,11 @@ WHERE search_vector @@ to_tsquery('food')
     5000
   );
 ```
+* `UNIQUE` constraint on 2 columns
+```sql
+ALTER TABLE reviews
+ADD CONSTRAINT unique_user_business UNIQUE (user_id, business_id);
+```
 
 #### Reads: Query Optimization Essentials
 
@@ -1446,11 +1463,12 @@ Power of 1000	Number          Prefix
 
 ### Time
 
-* 86,400 seconds per day: ~10^5
-* 2.5 million seconds per month
-* 1 request per second = 2.5 million requests per month
-* 40 requests per second = 100 million requests per month
-* 400 requests per second = 1 billion requests per month
+* `86,400 s/day ~ 10^5 s`
+* 1 million reqs/s: `10^6 reqs/s / 10^5 s ~ 10 reqs/s` (= 12 reqs/s)
+* 2.5 million secs/month
+* 1 reqs/second = 2.5 million req/month
+* 40 reqs/second = 100 million reqs/month
+* 400 reqs/second = 1 billion reqs/month
 
 ### Modern Hardware Limits
 [as of 2025]

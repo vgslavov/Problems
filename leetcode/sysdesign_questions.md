@@ -5,6 +5,7 @@
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
 - [Sources](#sources)
+- [Patterns](#patterns)
 - [Design URL Shortener](#design-url-shortener)
   - [Components & Tech. Stack](#components--tech-stack)
   - [Deep Dives](#deep-dives)
@@ -39,6 +40,7 @@
   - [Components](#components)
   - [System Interface & Flow](#system-interface--flow-1)
   - [Deep Dives](#deep-dives-7)
+- [Design Yelp](#design-yelp)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -51,7 +53,7 @@
 
 |Problem|Potential Solutions|Technology|Common Problems|
 |-------|-------------------|----------|---------------|
-|Efficiently finding locations within a radius|Geospatial indexes (e.g., geohashing, quadtrees, R-trees)|PG's PostGIS, redis Geohashing|Uber, Tinder, Yelp|
+|Efficiently finding locations within a radius|Geospatial indexes (e.g., geohashing, quadtrees, R-trees)|PG's PostGIS, redis Geohashing, ElasticSearch|Uber, Tinder, Yelp|
 |Efficient full-text search over large datasets|Inverted indexes|PG's GIN, ElasticSearch|Yelp, Ticketmaster|
 |Pessimistically locking resources for extended periods|Distributed locks with TTL|redis|Ticketmaster, Uber|
 |Database consistency during high concurrency|Transactions with row locking or Optimistic Concurrency Control (OCC)|PG|Yelp, Online Auction|
@@ -544,3 +546,10 @@ Type: Infrastructure Design
 3. At least once execution
     * visible failures: enqueue retries back to MQ & backoff
     * invisible failures: lock `jobId` in distributed lock w/ TTL
+
+## Design Yelp
+
+Type: Product Design
+
+* [ ] read
+* [x] watched
