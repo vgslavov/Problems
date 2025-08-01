@@ -30,7 +30,7 @@ def count_components(n, edges) -> int:
                 seen.add(neighbor)
                 dfs(neighbor)
 
-    # build adjacency list
+    # 1. build adjacency list/dict
     graph = defaultdict(list)
 
     for x,y in edges:
@@ -43,7 +43,9 @@ def count_components(n, edges) -> int:
     for i in range(n):
         if i not in seen:
             ans += 1
+            # 2. add to visited set
             seen.add(i)
+            # 3. recursively visit all connected nodes
             dfs(i)
 
     return ans

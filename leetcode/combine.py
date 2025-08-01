@@ -25,7 +25,7 @@ def combine(n: int, k: int) -> list[list[int]]:
 
 # solution: LeetCode backtracking
 # complexity
-# run-time: O(n choose k)?
+# run-time: O(n choose k) ~ O(n!/(k!(n-k)!))
 # space: O(k)
 # TODO: understand better
 def combine2(n: int, k: int) -> list[list[int]]:
@@ -37,8 +37,9 @@ def combine2(n: int, k: int) -> list[list[int]]:
             return
 
         # iterate through input on each level of the tree 
-        # start from i to avoid duplicates
         # loop over: [i, n] to avoid duplicates
+        # compare to permutations loop:
+        # for n in nums:
         for num in range(i, n+1):
             curr.append(num)
             backtrack(curr, num+1)

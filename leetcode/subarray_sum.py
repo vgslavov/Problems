@@ -73,9 +73,12 @@ def subarray_sum3(nums: list[int], k: int) -> int:
 # space: O(n)
 def subarray_sum4(nums: list[int], k: int) -> int:
     ans = 0
+    # no need for an array, need running sum
     prefix_sum = 0
 
     # prefix sum to counts
+    # key: prefix sum so far
+    # value: freq of prefix sum
     counts = defaultdict(int)
     # edge case: -1 index of prefix sum is 0
     counts[0] = 1
@@ -84,7 +87,12 @@ def subarray_sum4(nums: list[int], k: int) -> int:
         # build prefix sum but don't store intermediate results
         prefix_sum += nums[i]
 
+        # sum[i]: prefix_sum
+        # 0-------j<---k--->i--->
         if prefix_sum-k in counts:
+            # intuition:
+            # sum[i] - sum[j] == k
+            # sum[j] == sum[i] - k
             ans += counts[prefix_sum-k]
 
         counts[prefix_sum] += 1

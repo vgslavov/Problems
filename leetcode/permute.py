@@ -24,9 +24,16 @@ def permute(nums: list[int]) -> list[list[int]]:
     return [list(v) for v in itertools.permutations(nums)]
 
 # solution: LeetCode backtracking
+# explanation:
+# * dfs traversal of an imaginary tree
+# * leaves of the tree are permutations
+# * each node is a partial permutation
+# * each level of the tree is a number in the permutation
+# * each node has n children, where n is the number of elements in the input
+# * each node has n-1 elements left to choose from
 # complexity
 # run-time: O(n^2*n!)
-# space: O(n*n!)
+# space: O(n)
 # TODO: understand better
 def permute2(nums: list[int]) -> list[list[int]]:
     def backtrack(curr):

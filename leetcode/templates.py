@@ -1,5 +1,12 @@
 #!/usr/bin/env python3
 
+import bisect
+from collections import defaultdict
+from collections import deque
+from functools import cache
+import heapq
+from math import inf
+
 # Two pointers: one input, opposite ends
 def fn(arr):
     left = ans = 0
@@ -163,8 +170,6 @@ def fn(head):
     return prev
 
 # Find number of subarrays that fit an exact criteria
-from collections import defaultdict
-
 def fn(arr, k):
     counts = defaultdict(int)
     counts[0] = 1
@@ -245,8 +250,6 @@ def dfs(root):
     return ans
 
 # Binary tree: iterative BFS (more common)
-from collections import deque
-
 def fn(root):
     # list of root!
     queue = deque([root])
@@ -270,7 +273,7 @@ def fn(root):
 
     return ans
 
-# Graph: build adjacency list
+# Graph: build adjacency list/dict
 # input: array of edges, [[0,1],[1,2],[2,0],[2,3]]
 # output: adjacency list/dict, {0: [1], 1: [0, 2], 2: [1, 0, 3], 3: [2]}
 def fn(edges):
@@ -317,8 +320,6 @@ def fn(graph):
 
 # Graph: BFS
 # data struct: queue
-from collections import deque
-
 def fn(graph):
     queue = deque([START_NODE])
     seen = {START_NODE}
@@ -335,8 +336,6 @@ def fn(graph):
     return ans
 
 # Find top k elements with heap
-import heapq
-
 def fn(arr, k):
     heap = []
     for num in arr:
@@ -348,8 +347,6 @@ def fn(arr, k):
     return [num for num in heap]
 
 # Binary search: using bisect, ascending sorted only!
-import bisect
-
 def fn(arr, target):
     i = bisect.bisect_left(arr, target)
     if i < len(arr) and arr[i] == target:
@@ -451,9 +448,42 @@ def backtrack(curr, OTHER_ARGUMENTS...):
 
     return ans
 
-# Dynamic programming: recursive top-down memoization
-from functools import cache
+# Backtracking: permutations
+def permute(nums):
+    def backtrack(curr):
+        # base case
+        if len(curr) == len(nums):
+            ans.append(curr[:])
+            return
 
+        for n in nums:
+            if n not in curr:
+                curr.append(n)
+                backtrack(curr)
+                curr.pop()
+
+    ans = []
+    backtrack([])
+    return ans
+
+# Backtracking: combinations
+def combine(n, k):
+    def backtrack(curr, i):
+        # base case
+        if len(curr) == k:
+            ans.append(curr[:])
+            return
+
+        for num in range(i, n+1):
+            curr.append(num)
+            backtrack(curr, num + 1)
+            curr.pop()
+
+    ans = []
+    backtrack([], 1)
+    return ans
+
+# Dynamic programming: recursive top-down memoization
 def fn(arr):
     #@cache
     def dp(STATE):
@@ -538,9 +568,6 @@ class Trie:
 
 # Dijkstra's algorithm
 # data struct: heap
-from math import inf
-from heapq import *
-
 distances = [inf] * n
 distances[source] = 0
 heap = [(0, source)]

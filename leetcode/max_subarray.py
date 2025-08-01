@@ -18,6 +18,7 @@ import unittest
 # complexity
 # run-time: O(n)
 # space: O(1)
+# TODO: understand better
 def max_subarray(nums) -> int:
     if not nums:
         return 0
@@ -26,8 +27,11 @@ def max_subarray(nums) -> int:
     curr_sum = 0
 
     for n in nums:
-        # discard sum so far if smaller than current number
+        # discard sum so far: curr_sum+n
+        # if smaller than current number: n
         curr_sum = max(n, curr_sum+n)
+
+        # compare max sum to current sum
         max_sum = max(max_sum, curr_sum)
 
     return max_sum
