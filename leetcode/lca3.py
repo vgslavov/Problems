@@ -8,7 +8,7 @@ import unittest
 # url: https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree-iii/
 # section: meta
 # difficulty: medium
-# tags: hash table, two pointers, tree, binary tree, meta
+# tags: hash table, two pointers, tree, binary tree, meta, me
 
 # constraints
 # The number of nodes in the tree is in the range [2, 10^5].
@@ -34,9 +34,9 @@ def traverse(node, path):
 
     return traverse(node.parent, path)
 
-# solution: traverse
+# solution: traverse + set
 # complexity
-# run-time: O(n)
+# run-time: O(n), if unbalanced, O(log n) if balanced
 # space: O(n)
 def lca3(p: 'Node', q: 'Node') -> 'Node':
     path = set()
@@ -53,6 +53,45 @@ def lca3(p: 'Node', q: 'Node') -> 'Node':
 
     return None
 
+def traverse2(node, n):
+    while node and n:
+        node = node.parent
+        n -= 1
+
+    return node
+
+def depth2(node):
+    d = 0
+
+    while node:
+        node = node.parent
+        d += 1
+
+    return d
+
+# solution: traverse + depth
+# complexity
+# run-time: O(n), if unbalanced, O(log n) if balanced
+# space: O(1)
+def lca3_2(p: 'Node', q: 'Node') -> 'Node':
+    depth_p = depth2(p)
+    depth_q = depth2(q)
+    diff = abs(depth_p-depth_q)
+
+    if depth_p > depth_q:
+        p = traverse2(p, diff)
+    elif depth_p < depth_q:
+        q = traverse2(q, diff)
+
+    while p and q:
+        if p == q:
+            return p
+
+        p = p.parent
+        q = q.parent
+
+    return None
+
 class TestLCA3(unittest.TestCase):
     def test_lca3(self):
         # Create a simple binary tree
@@ -65,6 +104,7 @@ class TestLCA3(unittest.TestCase):
         q.parent = root
 
         self.assertEqual(lca3(p, q), root)
+        self.assertEqual(lca3_2(p, q), root)
 
         # Test with a deeper tree
         r = Node(4)
@@ -72,6 +112,7 @@ class TestLCA3(unittest.TestCase):
         r.parent = p
 
         self.assertEqual(lca3(r, q), root)
+        self.assertEqual(lca3_2(r, q), root)
 
 if __name__ == '__main__':
     sys.exit(unittest.main())
