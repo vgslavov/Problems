@@ -1,9 +1,10 @@
-# LeetCode Cheatsheets
+# Cheatsheets
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
+- [Sources](#sources)
 - [Theory](#theory)
   - [Trees](#trees)
   - [Graphs](#graphs)
@@ -47,6 +48,11 @@
   - [Stage 7: Outro](#stage-7-outro)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+## Sources
+
+* [AlgoMonster: Runtime Overview](https://algo.monster/problems/runtime_summary)
+* [LeetCode: Code Templates](https://leetcode.com/explore/interview/card/cheatsheets/720/resources/4723/)
 
 ## Theory
 
@@ -194,6 +200,51 @@ Dynamic Programming = Recursion + Memoization
 ### Combinations & Permutations
 
 ## Time Complexity
+
+* `O(1)`: constant
+    * Hashmap lookup
+    * Array access and update
+    * Pushing and popping elements from a stack
+    * Finding and applying math formula
+    * Typically for `n > 10^9`
+* `O(log n)`: logarithmic
+    * assumed `log_2(n)`: log base 2 of n
+    * Binary search or variant
+    * Balanced binary search tree lookup
+    * Processing the digits of a number
+    * Typically for `n > 10^8`
+* `O(n)`: linear
+    * Going through array/linked list
+    * Two pointers
+    * Some types of greedy
+    * Tree/graph traversal
+    * Stack/Queue
+    * Typically for `n <= 10^6`
+* `O(k*log n)`
+    * Heap push/pop K times
+    * "top K elements"
+    * Binary search K times
+    * Typically for `n <= 10^6`
+* `O(n*log n)`
+    * Sorting
+    * Divide and conquer with a linear time merge operation
+        * divide is normally `O(log n)`
+        * merge is `O(n)`
+    * Typically for `n <= 10^6`
+* `O(n^2)`: quadratic
+    * Nested loops, e.g., visiting each matrix entry
+    * Many brute force solutions
+    * Typically for `n <= 3000`
+* `O(2^n)`: exponential
+    * grows very rapidly
+    * requires memoization
+    * Combinatorial problems, backtracking, e.g. subsets
+    * Often involves recursion and is harder to analyze time complexity
+    * Typically for `n <= 20`
+* `O(n!)`: factorial
+    * Combinatorial problems, backtracking, e.g. permutations
+    * Often involves recursion and is harder to analyze time complexity
+    * Typically for `n <= 12`
 
 ### Arrays (dynamic array/list)
 
