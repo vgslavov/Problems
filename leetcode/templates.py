@@ -7,27 +7,50 @@ from functools import cache
 import heapq
 from math import inf
 
-# Two pointers: one input, opposite ends
-def fn(arr):
+# Sources:
+# - https://leetcode.com/explore/interview/card/cheatsheets/720/resources/4723/
+# - https://algo.monster/templates
+
+# Two pointers: one input, opposite direction
+def condition(a, b):
+    # define the condition for two pointers
+    return a < b
+
+def two_pointers_opposite(arr):
     left = ans = 0
     right = len(arr) - 1
 
     while left < right:
-        # do some logic here with left and right
-        if CONDITION:
+        # do logic with left and right
+
+        if condition(arr[left], arr[right]):
             left += 1
         else:
             right -= 1
 
     return ans
 
+# Two pointers: one input, same direction
+def two_pointers_same(arr):
+    slow, fast = 0, 0
+
+    while fast < len(arr):
+        # do logic with slow and fast
+
+        # Update pointers based on condition
+        if condition(arr[slow], arr[fast]):
+            slow += 1
+
+        # Fast pointer *always* moves forward
+        fast += 1
+
 # Two pointers: two inputs, exhaust both
-def fn(arr1, arr2):
+def two_pointers(arr1, arr2):
     i = j = ans = 0
 
     while i < len(arr1) and j < len(arr2):
         # do some logic here
-        if CONDITION:
+        if condition(arr1[i], arr2[j]):
             i += 1
         else:
             j += 1
@@ -43,22 +66,29 @@ def fn(arr1, arr2):
     return ans
 
 # Sliding window
-def fn(arr):
+SOME_THRESHOLD = 10  # Example threshold, adjust as needed
+
+def invalid_condition(curr):
+    # define the condition for the sliding window to be invalid
+    return curr > SOME_THRESHOLD
+
+def sliding_window(arr):
     left = ans = curr = 0
 
     for right in range(len(arr)):
         # do logic here to add arr[right] to curr
 
-        while WINDOW_CONDITION_BROKEN:
+        while invalid_condition(curr):
             # remove arr[left] from curr
             left += 1
 
-        # update ans
+        # update ans: window guaranteed to be valid
+        ans = max(ans, right - left + 1)
 
     return ans
 
 # Sliding *fixed* window
-def fn(arr, k):
+def sliding_window_fixed(arr, k):
     ans = curr = 0
 
     # 1st window
@@ -77,16 +107,8 @@ def fn(arr, k):
 
     return ans
 
-# Build a prefix sum
-def fn(arr):
-    prefix = [arr[0]]
-    for i in range(1, len(arr)):
-        prefix.append(prefix[-1] + arr[i])
-
-    return prefix
-
-# Build a diff array
-def fn(arr, shifts):
+# Build a diff array, calculate prefix sum on it
+def diff_array(arr, shifts):
     diff = [0] * len(arr)
 
     for start, end in shifts:
@@ -97,14 +119,30 @@ def fn(arr, shifts):
 
     return diff
 
+# Build a prefix sum
+def prefix_sum(arr):
+    # or preallocate
+    #prefix = [0] * len(arr)
+    prefix = [arr[0]]
+
+    for i in range(1, len(arr)):
+        prefix.append(prefix[-1] + arr[i])
+        #prefix[i] = prefix[i-1] + arr[i]
+
+    return prefix
+
+# Query sum of range using prefix sum
+def query_prefix_sum(prefix, left, right):
+    if left == 0:
+        return prefix[right]
+
+    return prefix[right] - prefix[left - 1]
+
 # Efficient string building
 # arr is a list of characters
-def fn(arr):
-    ans = []
-    for c in arr:
-        ans.append(c)
-
-    return "".join(ans)
+def string(arr):
+    #return ''.join(c for c in arr)
+    return ''.join(arr)
 
 # Linked list: fast and slow pointer
 # traversing: iteratively more common
@@ -158,7 +196,7 @@ def fn(head):
     return dummy.next
 
 # Reversing a linked list
-def fn(head):
+def reverse(head):
     prev = None
 
     while head:
@@ -183,7 +221,7 @@ def fn(arr, k):
     return ans
 
 # Monotonic increasing stack/queue
-def fn(arr):
+def mono_stack(arr):
     stack = []
     ans = 0
 
@@ -192,12 +230,13 @@ def fn(arr):
         while stack and stack[-1] > num:
             # do logic
             stack.pop()
+
         stack.append(num)
 
     return ans
 
-# intervals
-def fn(intervals):
+# Merge intervals
+def merge_intervals(intervals):
     intervals.sort()
     ans = []
 
@@ -211,46 +250,55 @@ def fn(intervals):
     return ans
 
 # Binary tree: recursive DFS (more common)
-def dfs(root):
+# data struct: recursion stack (LIFO)
+def dfs(root, target=None):
+    # base case
     if not root:
-        return
+        return None
 
-    ans = 0
+    if root.val == target:
+        return root
 
     # preorder: order same as function calls
-    print("preorder: ".format(root.val))
+    #print("preorder: ".format(root.val))
 
     # do logic
-    dfs(root.left)
+    left = dfs(root.left, target)
+
+    if left:
+        return left
 
     # inorder: all left subtree printed before current and then right subtree
     # on BST: traversal is in sorted order
-    print("inorder: ".format(root.val))
+    #print("inorder: ".format(root.val))
 
-    dfs(root.right)
+    return dfs(root.right, target)
 
     # postorder: root is last to be traversed
-    print("postorder: ".format(root.val))
-
-    return ans
+    #print("postorder: ".format(root.val))
 
 # Binary tree: iterative DFS (less common)
-def dfs(root):
+# data struct: recursion stack (LIFO)
+def dfs(root, target=None):
     stack = [root]
-    ans = 0
 
     while stack:
         node = stack.pop()
+
         # do logic
+        if node.val == target:
+            return node
+
         if node.left:
             stack.append(node.left)
         if node.right:
             stack.append(node.right)
 
-    return ans
+    return None
 
 # Binary tree: iterative BFS (more common)
-def fn(root):
+# data struct: queue (FIFO)
+def bfs(root):
     # list of root!
     queue = deque([root])
     ans = 0
@@ -276,7 +324,7 @@ def fn(root):
 # Graph: build adjacency list/dict
 # input: array of edges, [[0,1],[1,2],[2,0],[2,3]]
 # output: adjacency list/dict, {0: [1], 1: [0, 2], 2: [1, 0, 3], 3: [2]}
-def fn(edges):
+def build_adj_list(edges):
     graph = defaultdict(list)
 
     for x,y in edges:
@@ -287,14 +335,18 @@ def fn(edges):
     return graph
 
 # Graph: DFS (recursive)
-def fn(graph):
+# data struct: recursion stack (LIFO)
+def dfs(graph):
     def dfs(node):
         ans = 0
         # do some logic
         for neighbor in graph[node]:
-            if neighbor not in seen:
-                seen.add(neighbor)
-                ans += dfs(neighbor)
+            if neighbor in seen:
+                continue
+
+            # mark neighbor as seen
+            seen.add(neighbor)
+            ans += dfs(neighbor)
 
         return ans
 
@@ -302,8 +354,8 @@ def fn(graph):
     return dfs(START_NODE)
 
 # Graph: DFS (iterative)
-# data struct: stack
-def fn(graph):
+# data struct: stack (LIFO)
+def dfs(graph):
     stack = [START_NODE]
     seen = {START_NODE}
     ans = 0
@@ -319,8 +371,8 @@ def fn(graph):
     return ans
 
 # Graph: BFS
-# data struct: queue
-def fn(graph):
+# data struct: queue (FIFO)
+def bfs(graph):
     queue = deque([START_NODE])
     seen = {START_NODE}
     ans = 0
@@ -328,15 +380,19 @@ def fn(graph):
     while queue:
         node = queue.popleft()
         # do some logic
+
         for neighbor in graph[node]:
-            if neighbor not in seen:
-                seen.add(neighbor)
-                queue.append(neighbor)
+            if neighbor in seen:
+                continue
+
+            # mark neighbor as seen
+            seen.add(neighbor)
+            queue.append(neighbor)
 
     return ans
 
 # Find top k elements with heap
-def fn(arr, k):
+def find_topk(arr, k):
     heap = []
     for num in arr:
         # do some logic to push onto heap according to problem's criteria
@@ -347,7 +403,7 @@ def fn(arr, k):
     return [num for num in heap]
 
 # Binary search: using bisect, ascending sorted only!
-def fn(arr, target):
+def binary_search(arr, target):
     i = bisect.bisect_left(arr, target)
     if i < len(arr) and arr[i] == target:
         return True
@@ -355,7 +411,7 @@ def fn(arr, target):
     return False
 
 # Binary search
-def fn(arr, target):
+def binary_search(arr, target):
     left = 0
     right = len(arr) - 1
     while left <= right:
@@ -374,7 +430,7 @@ def fn(arr, target):
     return left
 
 # Binary search: duplicate elements, left-most insertion point
-def fn(arr, target):
+def binary_search_left(arr, target):
     left = 0
     right = len(arr)
     while left < right:
@@ -387,7 +443,7 @@ def fn(arr, target):
     return left
 
 # Binary search: duplicate elements, right-most insertion point
-def fn(arr, target):
+def binary_search_right(arr, target):
     left = 0
     right = len(arr)
     while left < right:
@@ -399,9 +455,8 @@ def fn(arr, target):
 
     return left
 
-# Binary search: for greedy problems
-# find min
-def fn(arr):
+# Binary search: find min (for greedy problems)
+def binary_search_min(arr):
     def check(x):
         # this function is implemented depending on the problem
         return BOOLEAN
@@ -417,8 +472,8 @@ def fn(arr):
 
     return left
 
-# find max
-def fn(arr):
+# Binary search: find max
+def binary_search_max(arr):
     def check(x):
         # this function is implemented depending on the problem
         return BOOLEAN
@@ -527,7 +582,7 @@ class TrieNode:
         self.data = None
         self.children = {}
 
-def fn(words):
+def build_trie(words):
     root = TrieNode()
     for word in words:
         curr = root
@@ -542,8 +597,8 @@ def fn(words):
 
 # Build a trie: insert & search
 class Trie:
-    def __init__(self):
-        self.data = None
+    def __init__(self, value=None):
+        self.data = value
         self.children = {}
 
     def insert(self, word):
@@ -568,17 +623,33 @@ class Trie:
 
 # Dijkstra's algorithm
 # data struct: heap
-distances = [inf] * n
-distances[source] = 0
-heap = [(0, source)]
+def dijkstra(graph, source):
+    distances = [inf] * len(graph)
+    distances[source] = 0
+    heap = [(0, source)]
 
-while heap:
-    curr_dist, node = heappop(heap)
-    if curr_dist > distances[node]:
-        continue
+    while heap:
+        curr_dist, node = heapq.heappop(heap)
+        if curr_dist > distances[node]:
+            continue
 
-    for nei, weight in graph[node]:
-        dist = curr_dist + weight
-        if dist < distances[nei]:
-            distances[nei] = dist
-            heappush(heap, (dist, nei))
+        for nei, weight in graph[node]:
+            dist = curr_dist + weight
+            if dist < distances[nei]:
+                distances[nei] = dist
+                heapq.heappush(heap, (dist, nei))
+
+# Union-Find: DSU (Disjoint Set Union)
+class UnionFind:
+    def __init__(self):
+        self.id = {}
+
+    def find(self, x):
+        y = self.id.get(x, x)
+        if y != x:
+            self.id[x] = y = self.find(y)
+        return y
+
+    def union(self, x, y):
+        self.id[self.find(x)] = self.find(y)
+
