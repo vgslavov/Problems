@@ -16,6 +16,7 @@
   - [DP](#dp)
   - [Backtracking](#backtracking)
   - [Combinations & Permutations](#combinations--permutations)
+- [Patterns](#patterns)
 - [Time Complexity](#time-complexity)
   - [Arrays (dynamic array/list)](#arrays-dynamic-arraylist)
   - [Strings (immutable)](#strings-immutable)
@@ -138,6 +139,7 @@
 ```
 Dynamic Programming = Recursion + Memoization
 ```
+* if you don't know where to start: use DFS + memoization
 * characteristics
     * optimal substructure
     * overlapping subproblems
@@ -198,6 +200,32 @@ Dynamic Programming = Recursion + Memoization
 * implemented using recursion (almost always)
 
 ### Combinations & Permutations
+
+TODO
+
+## Patterns
+
+|Keyword|Algorithm|
+|-------|---------|
+|Top K|Heap|
+|How many ways|DFS, DP|
+|Substring|Sliding window|
+|Palindrome|Two pointers, DFS, DP|
+|Tree|BFS (shortest, level), DFS|
+|Parentheses|Stack|
+|Subarray|Sliding window, Prefix sum, Hashmap|
+|Max subarray|Greedy|
+|[N]Sum|Two pointers|
+|Max/longest seq|DP, DFS, mono stack|
+|Min/shortest|DP, DFS, BFS|
+|Partition/split array/string|DFS|
+|Subseq|DP, DFS, Sliding window|
+|Matrix|BFS, DFS, DP|
+|Jump|Greedy, DP|
+|Game|DP|
+|Connected component, Cut/remove, Regions/groups/connections|Union Find|
+|Transitive relationship|BFS, Union Find|
+|Interval|Greedy|
 
 ## Time Complexity
 

@@ -324,7 +324,7 @@ def bfs(root):
 # Graph: build adjacency list/dict
 # input: array of edges, [[0,1],[1,2],[2,0],[2,3]]
 # output: adjacency list/dict, {0: [1], 1: [0, 2], 2: [1, 0, 3], 3: [2]}
-def build_adj_list(edges):
+def build_adjlist(edges):
     graph = defaultdict(list)
 
     for x,y in edges:
@@ -363,10 +363,14 @@ def dfs(graph):
     while stack:
         node = stack.pop()
         # do some logic
+
         for neighbor in graph[node]:
-            if neighbor not in seen:
-                seen.add(neighbor)
-                stack.append(neighbor)
+            if neighbor in seen:
+                continue
+
+            # mark neighbor as seen
+            seen.add(neighbor)
+            stack.append(neighbor)
 
     return ans
 
@@ -512,10 +516,12 @@ def permute(nums):
             return
 
         for n in nums:
-            if n not in curr:
-                curr.append(n)
-                backtrack(curr)
-                curr.pop()
+            if n in curr:
+                continue
+
+            curr.append(n)
+            backtrack(curr)
+            curr.pop()
 
     ans = []
     backtrack([])
@@ -623,7 +629,7 @@ class Trie:
 
 # Dijkstra's algorithm
 # data struct: heap
-def dijkstra(graph, source):
+def shortest_path(graph, source):
     distances = [inf] * len(graph)
     distances[source] = 0
     heap = [(0, source)]
