@@ -407,7 +407,7 @@ def find_topk(arr, k):
     return [num for num in heap]
 
 # Binary search: using bisect, ascending sorted only!
-def binary_search(arr, target):
+def binary_search_bisect_left(arr, target):
     i = bisect.bisect_left(arr, target)
     if i < len(arr) and arr[i] == target:
         return True
@@ -415,13 +415,21 @@ def binary_search(arr, target):
     return False
 
 # Binary search
+# complexity:
+# run-time: O(log n)
+# space: O(1) vs O(log n) if using recursion
 def binary_search(arr, target):
     left = 0
     right = len(arr) - 1
+
+    # test for = don't miss an element!
     while left <= right:
         # prevent overflowing
-        mid = left + (right - left) // 2
-        #mid = (left + right) // 2
+        #mid = left + (right - left) // 2
+
+        # can't overflow: Python handles large integers
+        mid = (left + right) // 2
+
         if arr[mid] == target:
             # do something
             return

@@ -57,6 +57,24 @@
 
 ## Theory
 
+### Math
+
+* bases
+    * digits: `10^0 = 1`, `10^1 = 10`, `10^2 = 100`
+    * twos: `2^0 = 1`, `2^1 = 2`, `2^2 = 4`
+* `log`s: inverse of an exponential function
+* `sum` of
+    * arithmetic sequence: `(first + last) * len() / 2`
+    * geometrics sequence: `first * (1-ratio^len()) / (1-ratio)`
+* `mod`
+```py
+def mod(x, y):
+    while x >= y:
+        x -= y
+
+    return x
+```
+
 ### Trees
 
 * DFS: recursive
@@ -229,6 +247,7 @@ TODO
 
 ## Time Complexity
 
+* in-place != `O(1)`: if using recursion, space can be `O(n)` or `O(log n)`
 * `O(1)`: constant
     * Hashmap lookup
     * Array access and update
