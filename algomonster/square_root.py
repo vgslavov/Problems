@@ -2,6 +2,9 @@
 
 # tags: binary search
 
+# complexity:
+# run-time: O(log n)
+# space: O(1)
 def square_root(n: int) -> int:
     if not n:
         return 0

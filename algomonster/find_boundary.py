@@ -2,6 +2,9 @@
 
 # tags: binary search
 
+# complexity:
+# run-time: O(log n)
+# space: O(1)
 def find_boundary(arr: list[bool]) -> int:
     left = 0
     right = len(arr)-1
@@ -24,7 +27,10 @@ def find_boundary(arr: list[bool]) -> int:
 def feasible(arr: list[int], i: int) -> bool:
     return arr[i] == True
 
-# more generic, same as vanilla binary search
+# solution: more generic, same as vanilla binary search
+# complexity:
+# run-time: O(log n)
+# space: O(1)
 def find_boundary2(arr: list[int]) -> int:
     left, right = 0, len(arr) - 1
     first_true_index = -1
@@ -43,5 +49,5 @@ def find_boundary2(arr: list[int]) -> int:
 
 if __name__ == "__main__":
     arr = [x == "true" for x in input().split()]
-    res = find_boundary(arr)
+    res = find_boundary2(arr)
     print(res)

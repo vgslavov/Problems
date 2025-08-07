@@ -2,6 +2,9 @@
 
 # tags: binary search
 
+# complexity:
+# run-time: O(log n)
+# space: O(1)
 def find_first_occurrence(arr: list[int], target: int) -> int:
     left = 0
     right = len(arr)-1

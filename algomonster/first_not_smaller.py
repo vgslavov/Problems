@@ -4,7 +4,10 @@
 
 def feasible(num, target):
     return num >= target
-    
+
+# complexity:
+# run-time: O(log n)
+# space: O(1)
 def first_not_smaller(arr: list[int], target: int) -> int:
     left = 0
     right = len(arr)-1
