@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+# tags: binary search
+
 def find_boundary(arr: list[bool]) -> int:
     left = 0
     right = len(arr)-1
@@ -22,7 +24,7 @@ def find_boundary(arr: list[bool]) -> int:
 def feasible(arr: list[int], i: int) -> bool:
     return arr[i] == True
 
-# more generic
+# more generic, same as vanilla binary search
 def find_boundary2(arr: list[int]) -> int:
     left, right = 0, len(arr) - 1
     first_true_index = -1
