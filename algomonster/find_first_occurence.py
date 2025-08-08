@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 
+import argparse
+import sys
+import unittest
+
 # tags: binary search
 
 # complexity:
@@ -23,8 +27,26 @@ def find_first_occurrence(arr: list[int], target: int) -> int:
     
     return first
 
+class TestFindFirstOccurrence(unittest.TestCase):
+    def test_example_1(self):
+        arr = [1, 2, 2, 2, 3, 4, 5]
+        target = 2
+        self.assertEqual(find_first_occurrence(arr, target), 1)
+
+    def test_example_2(self):
+        arr = [1, 1, 1, 1, 1]
+        target = 1
+        self.assertEqual(find_first_occurrence(arr, target), 0)
+
 if __name__ == "__main__":
-    arr = [int(x) for x in input().split()]
-    target = int(input())
-    res = find_first_occurrence(arr, target)
-    print(res)
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--test', action='store_true', help='Run unit tests')
+    args = parser.parse_args()
+
+    if args.test:
+        sys.exit(unittest.main(argv=[sys.argv[0]]))
+    else:
+        arr = [int(x) for x in input().split()]
+        target = int(input())
+        res = find_first_occurrence(arr, target)
+        print(res)

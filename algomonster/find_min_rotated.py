@@ -1,11 +1,16 @@
 #!/usr/bin/env python3
 
+import argparse
+import sys
+import unittest
+
 # tags: binary search
 
+# ugly solution
 # complexity:
 # run-time: O(log n)
 # space: O(1)
-def find_min_rotated(arr: list[int]) -> int:
+def find_min_rotated2(arr: list[int]) -> int:
     left = 0
     right = len(arr)-1
 
@@ -26,7 +31,7 @@ def find_min_rotated(arr: list[int]) -> int:
 # complexity:
 # run-time: O(log n)
 # space: O(1)
-def find_min_rotated2(arr: list[int]) -> int:
+def find_min_rotated(arr: list[int]) -> int:
     left = 0
     right = len(arr)-1
     boundary = 0
@@ -45,6 +50,13 @@ def find_min_rotated2(arr: list[int]) -> int:
     return boundary
 
 if __name__ == "__main__":
-    arr = [int(x) for x in input().split()]
-    res = find_min_rotated2(arr)
-    print(res)
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--test', action='store_true', help='Run unit tests')
+    args = parser.parse_args()
+
+    if args.test:
+        sys.exit(unittest.main(argv=[sys.argv[0]]))
+    else:
+        arr = [int(x) for x in input().split()]
+        res = find_min_rotated(arr)
+        print(res)
