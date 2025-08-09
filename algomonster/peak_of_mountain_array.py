@@ -67,7 +67,7 @@ if __name__ == "__main__":
 
     if args.test:
         sys.exit(unittest.main(argv=[sys.argv[0]]))
-    else:
-        arr = [int(x) for x in input().split()]
-        res = peak_of_mountain_array(arr)
-        print(res)
+
+    arr = [int(x) for x in input().split()]
+    res = peak_of_mountain_array(arr)
+    print(res)

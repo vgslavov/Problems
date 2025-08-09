@@ -56,7 +56,7 @@ if __name__ == "__main__":
 
     if args.test:
         sys.exit(unittest.main(argv=[sys.argv[0]]))
-    else:
-        arr = [int(x) for x in input().split()]
-        res = find_min_rotated(arr)
-        print(res)
+
+    arr = [int(x) for x in input().split()]
+    res = find_min_rotated(arr)
+    print(res)

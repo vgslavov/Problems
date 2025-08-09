@@ -4,6 +4,11 @@ import argparse
 import sys
 import unittest
 
+# tags: binary search
+
+# complexity:
+# run-time: O(log n)
+# space: O(1)
 def binary_search(arr: list[int], target: int) -> int:
     left = 0
     right = len(arr)-1
@@ -36,8 +41,8 @@ if __name__ == "__main__":
 
     if args.test:
         sys.exit(unittest.main(argv=[sys.argv[0]]))
-    else:
-        arr = [int(x) for x in input().split()]
-        target = int(input())
-        res = binary_search(arr, target)
-        print(res)
+
+    arr = [int(x) for x in input().split()]
+    target = int(input())
+    res = binary_search(arr, target)
+    print(res)
