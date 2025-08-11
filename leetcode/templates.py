@@ -89,21 +89,20 @@ def sliding_window(arr):
 
 # Sliding *fixed* window
 def sliding_window_fixed(arr, k):
-    ans = curr = 0
+    ans = 0
 
     # 1st window
-    # if k <= n!
-    for i in range(k):
-        # do logic here to add arr[i] to curr
-        pass
-
-    # update ans
-
+    # works for k > len(arr)
+    #ans = sum(arr[:k])
     for i in range(min(k, len(arr))):
-        pass
-        # add arr[i] & remove arr[i-k] from curr
+        ans += arr[i]
 
-        # update ans
+    # start at k
+    for right in range(k, len(arr)):
+        left = right - k
+        curr -= arr[left]
+        curr += arr[right]
+        ans = max(ans, curr)
 
     return ans
 

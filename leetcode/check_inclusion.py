@@ -18,7 +18,7 @@ import unittest
 
 # solution: LeetCode solution of #438, sliding window + defaultdict
 # complexity
-# run-time: O(n^2)
+# run-time: O(n)
 # space: O(1) (only 26 letters per dict)
 def check_inclusion(s1: str, s2: str) -> bool:
     # s1 cannot be longer than s2 and be a permutation of s2

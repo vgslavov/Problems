@@ -18,7 +18,7 @@ import unittest
 
 # solution: LeetCode solution, sliding window + defaultdict
 # complexity
-# run-time: O(n^2)
+# run-time: O(n)
 # space: O(1) (only 26 letters per dict)
 def find_anagrams(s: str, p: str) -> list[int]:
     if len(p) > len(s):
@@ -73,6 +73,12 @@ class TestFindAnagram(unittest.TestCase):
         s = "abab"
         p = "ab"
         expected = [0, 1, 2]
+        self.assertEqual(find_anagrams(s, p), expected)
+
+    def test_3(self):
+        s = "nabanabannaabbaanana"
+        p = "banana"
+        expected = [0, 3, 5, 6, 7, 13]
         self.assertEqual(find_anagrams(s, p), expected)
 
 if __name__ == "__main__":
