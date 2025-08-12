@@ -11,7 +11,7 @@ import unittest
 # solution: sliding window + defaultdict
 # complexity:
 # run-time: O(n)
-# space:O(1)
+# space: O(26) ~ O(1)
 def find_all_anagrams(original: str, check: str) -> list[int]:
     if len(check) > len(original):
         return []

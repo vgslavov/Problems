@@ -72,18 +72,35 @@ def invalid_condition(curr):
     # define the condition for the sliding window to be invalid
     return curr > SOME_THRESHOLD
 
-def sliding_window(arr):
-    left = ans = curr = 0
+def sliding_window_longest(arr):
+    left = ans = win_sum = 0
 
     for right in range(len(arr)):
-        # do logic here to add arr[right] to curr
+        win_sum += arr[right]
 
-        while invalid_condition(curr):
-            # remove arr[left] from curr
+        while invalid_condition(win_sum):   # update left until window is valid again
+            win_sum -= arr[left]
             left += 1
 
-        # update ans: window guaranteed to be valid
-        ans = max(ans, right - left + 1)
+        ans = max(ans, right-left+1)     # window is guaranteed to be valid here
+
+    return ans
+
+def valid_condition(curr):
+    # define the condition for the sliding window to be valid
+    return curr >= SOME_THRESHOLD
+
+def sliding_window_shortest(arr):
+    left = win_sum = 0
+    ans = len(arr)
+
+    for right in range(len(arr)):
+        win_sum += arr[right]
+
+        while valid_condition(win_sum):
+            ans = min(ans, right-left+1) # window is guaranteed to be valid here
+            win_sum -= arr[left]
+            left += 1
 
     return ans
 
