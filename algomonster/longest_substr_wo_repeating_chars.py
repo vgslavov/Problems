@@ -58,15 +58,19 @@ def longest_substring_wo_repeating_characters(s: str) -> int:
 class TestLongestSubstringWithoutRepeatingCharacters(unittest.TestCase):
     def test_empty(self):
         self.assertEqual(longest_substring_wo_repeating_characters(""), 0)
+        self.assertEqual(longest_substring_wo_repeating_characters2(""), 0)
 
     def test_1(self):
         self.assertEqual(longest_substring_wo_repeating_characters("abcabcbb"), 3)
+        self.assertEqual(longest_substring_wo_repeating_characters2("abcabcbb"), 3)
 
     def test_2(self):
         self.assertEqual(longest_substring_wo_repeating_characters("bbbbb"), 1)
+        self.assertEqual(longest_substring_wo_repeating_characters2("bbbbb"), 1)
 
     def test_3(self):
         self.assertEqual(longest_substring_wo_repeating_characters("pwwkew"), 3)
+        self.assertEqual(longest_substring_wo_repeating_characters2("pwwkew"), 3)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()

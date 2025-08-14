@@ -55,10 +55,19 @@ class TestFindBoundary(unittest.TestCase):
 
     def test_find_boundary(self):
         self.assertEqual(find_boundary([False, False, True, True, True]), 2)
+        self.assertEqual(find_boundary2([False, False, True, True, True]), 2)
+
         self.assertEqual(find_boundary([False, False, False]), -1)
+        self.assertEqual(find_boundary2([False, False, False]), -1)
+
         self.assertEqual(find_boundary([True, True, True]), 0)
+        self.assertEqual(find_boundary2([True, True, True]), 0)
+
         self.assertEqual(find_boundary([False, True, True]), 1)
+        self.assertEqual(find_boundary2([False, True, True]), 1)
+
         self.assertEqual(find_boundary([False, False, False, True]), 3)
+        self.assertEqual(find_boundary2([False, False, False, True]), 3)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()

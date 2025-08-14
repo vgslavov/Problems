@@ -49,6 +49,24 @@ def find_min_rotated(arr: list[int]) -> int:
             
     return boundary
 
+class TestFindMinRotated(unittest.TestCase):
+
+    def test_find_min_rotated(self):
+        self.assertEqual(find_min_rotated([4, 5, 6, 7, 0, 1, 2]), 4)
+        self.assertEqual(find_min_rotated2([4, 5, 6, 7, 0, 1, 2]), 4)
+
+        self.assertEqual(find_min_rotated([1, 2, 3, 4, 5]), 0)
+        self.assertEqual(find_min_rotated2([1, 2, 3, 4, 5]), 0)
+
+        self.assertEqual(find_min_rotated([5, 1, 2, 3, 4]), 1)
+        self.assertEqual(find_min_rotated2([5, 1, 2, 3, 4]), 1)
+
+        self.assertEqual(find_min_rotated([2, 3, 4, 5, 1]), 4)
+        self.assertEqual(find_min_rotated2([2, 3, 4, 5, 1]), 4)
+
+        self.assertEqual(find_min_rotated([3, 4, 5, 1, 2]), 3)
+        self.assertEqual(find_min_rotated2([3, 4, 5, 1, 2]), 3)
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--test', action='store_true', help='Run unit tests')
