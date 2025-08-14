@@ -4,6 +4,7 @@ import bisect
 from collections import defaultdict
 from collections import deque
 from functools import cache
+from itertools import accumulate
 import heapq
 from math import inf
 
@@ -136,16 +137,31 @@ def diff_array(arr, shifts):
     return diff
 
 # Build a prefix sum
+#pythonic
+def prefix_sum_accumulate(arr):
+    return list(accumulate(arr))
+
+# Build a prefix sum
 def prefix_sum(arr):
+    prefix = [arr[0]]
     # or preallocate
     #prefix = [0] * len(arr)
-    prefix = [arr[0]]
 
     for i in range(1, len(arr)):
         prefix.append(prefix[-1] + arr[i])
         #prefix[i] = prefix[i-1] + arr[i]
 
     return prefix
+
+# Build a prefix sum for range queries
+def prefix_sum_range(arr, left, right):
+    # init first element to 0 if you need to do range sum queries
+    prefix = [0, arr[0]]
+
+    for i in range(1, len(arr)):
+        prefix.append(prefix[-1] + arr[i])
+
+    return prefix[right+1]-prefix[left]
 
 # Query sum of range using prefix sum
 def query_prefix_sum(prefix, left, right):
@@ -423,6 +439,7 @@ def find_topk(arr, k):
     return [num for num in heap]
 
 # Binary search: using bisect, ascending sorted only!
+#pythonic
 def binary_search_bisect_left(arr, target):
     i = bisect.bisect_left(arr, target)
     if i < len(arr) and arr[i] == target:

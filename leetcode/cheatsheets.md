@@ -53,6 +53,7 @@
 ## Sources
 
 * [AlgoMonster: Runtime Overview](https://algo.monster/problems/runtime_summary)
+* [AlgoMonster: Templates](https://algo.monster/templates)
 * [LeetCode: Code Templates](https://leetcode.com/explore/interview/card/cheatsheets/720/resources/4723/)
 
 ## Theory
@@ -222,6 +223,9 @@ Dynamic Programming = Recursion + Memoization
 TODO
 
 ## Patterns
+
+* **Prefix Sum**: Ideal for quick range sum queries on static arrays
+* **Sliding Window**: Better for problems involving contiguous subarrays with specific conditions or sizes (e.g., maximum sum of subarrays of size 'k')
 
 |Keyword|Algorithm|
 |-------|---------|
