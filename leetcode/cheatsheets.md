@@ -78,7 +78,14 @@ def mod(x, y):
 
 ### Trees
 
-* DFS: recursive
+* properties
+    * acyclic
+    * a path exists from the root to any node
+    * `n - 1` edges, where `n` is the number of nodes in the tree
+    * each node has exactly one parent node with the exception of the root node
+* DFS: recursive, **pre-order** traversal
+    * traverse and find/create/modify/delete node
+    * traverse with return value (finding max subtree, detect balanced tree)
 * BFS: iterative, using queue/deque
 * perfect binary tree
     * DFS: O(log n) space
@@ -111,6 +118,7 @@ def mod(x, y):
     * recursive more common
     * O(n + e)
     * easier to implement
+    * can use to detect cycles
 * BFS
     * iterative more common
     * use to find shortest path from a node
@@ -140,6 +148,9 @@ def mod(x, y):
 
 * characteristics
     * non-overlapping subproblems
+* steps
+    * partition
+    * merge
 
 ### Greedy
 
@@ -217,6 +228,7 @@ Dynamic Programming = Recursion + Memoization
     * backtracking: prune paths that cannot lead to solution, generating fewer possibilities
 * usually `O(2^n)`
 * implemented using recursion (almost always)
+* retracing using DFS
 
 ### Combinations & Permutations
 

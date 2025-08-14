@@ -170,6 +170,29 @@ def query_prefix_sum(prefix, left, right):
 
     return prefix[right] - prefix[left - 1]
 
+# recursive
+def factorial(n):
+    if n <= 1: # BASE CASE
+        return 1
+    return n * factorial(n - 1) # RECURSIVE CALL
+
+# iterative
+def factorial_stack(n):
+    stack = []
+
+    # push each call to a stack
+    # top of the stack is base case
+    while n > 0:
+        stack.append(n)
+        n -= 1
+
+    ans = 1
+    # pop and use return value until stack is empty
+    while stack:
+        ans *= stack.pop()
+
+    return ans
+
 # Efficient string building
 # arr is a list of characters
 def string(arr):
@@ -291,7 +314,7 @@ def dfs(root, target=None):
     if root.val == target:
         return root
 
-    # preorder: order same as function calls
+    # preorder: order same as recursive function calls
     #print("preorder: ".format(root.val))
 
     # do logic
