@@ -86,6 +86,9 @@ def mod(x, y):
 * DFS: recursive, **pre-order** traversal
     * traverse and find/create/modify/delete node
     * traverse with return value (finding max subtree, detect balanced tree)
+    * two options
+        * return value: passing value up from child to parent
+        * identify state(s): passing value down from parent to child
 * BFS: iterative, using queue/deque
 * perfect binary tree
     * DFS: O(log n) space
