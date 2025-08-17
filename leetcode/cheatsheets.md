@@ -89,6 +89,11 @@ def mod(x, y):
     * two options
         * return value: passing value up from child to parent
         * identify state(s): passing value down from parent to child
+* preorder traversal
+    * the first element is always the root of the tree
+* inorder traversal
+    * elements to the left of the root are in the left subtree
+    * elements to the right are in the right subtree
 * BFS: iterative, using queue/deque
 * perfect binary tree
     * DFS: O(log n) space
