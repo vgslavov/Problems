@@ -39,7 +39,9 @@ def compare(root, sub_root):
 # run-time: O(m*n)?
 # space: O(m+n)?
 def subtree_of_another_tree(root: Node, sub_root: Node) -> bool:
-    if not root:
+    if not root and not sub_root:
+        return True
+    elif not root or not sub_root:
         return False
 
     sub = find_sub(root, sub_root)
@@ -61,7 +63,7 @@ def is_same_tree(tree1, tree2):
 # complexity:
 # run-time: O(m*n)
 # space: O(m+n)
-def subtree_of_another_tree(root: Node, sub_root: Node) -> bool:
+def subtree_of_another_tree2(root: Node, sub_root: Node) -> bool:
     if not root:
         return False
     return is_same_tree(root, sub_root) or subtree_of_another_tree(root.left, sub_root) or subtree_of_another_tree(root.right, sub_root)
@@ -75,6 +77,23 @@ def build_tree(nodes, f):
     left = build_tree(nodes, f)
     right = build_tree(nodes, f)
     return Node(f(val), left, right)
+
+class TestSubtreeOfAnotherTree(unittest.TestCase):
+    def test_subtree_of_another_tree(self):
+        # Test case 1: Simple case
+        root = build_tree(iter("1 2 x x 3 x x".split()), int)
+        sub_root = build_tree(iter("2 x x".split()), int)
+        self.assertTrue(subtree_of_another_tree(root, sub_root))
+
+        # Test case 2: Not a subtree
+        sub_root = build_tree(iter("4 x x".split()), int)
+        self.assertFalse(subtree_of_another_tree(root, sub_root))
+
+        # Test case 3: Both trees are empty
+        self.assertTrue(subtree_of_another_tree(None, None))
+
+        # Test case 4: Root is a subtree of itself
+        self.assertTrue(subtree_of_another_tree(root, root))
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
