@@ -46,6 +46,7 @@ def construct_binary_tree(preorder: list[int], inorder: list[int]) -> Node:
 
     return array2tree(0, len(inorder)-1)
 
+# TODO: understand better
 def build_tree_recursive(preorder_index: int, inorder_start: int, size: int, value_to_index: dict) -> Node | None:
     if size <= 0:
         return None
