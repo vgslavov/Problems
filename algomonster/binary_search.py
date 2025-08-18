@@ -35,7 +35,7 @@ class TestBinarySearch(unittest.TestCase):
         self.assertEqual(binary_search([1, 2, 3, 4, 5], 6), -1)
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Binary Search Implementation")
+    parser = argparse.ArgumentParser()
     parser.add_argument('--test', action='store_true', help='Run unit tests')
     args = parser.parse_args()
 
