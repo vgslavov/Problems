@@ -304,6 +304,35 @@ def merge_intervals(intervals):
 
     return ans
 
+class TreeNode:
+    def __init__(self, val, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+# BST: find
+def bst_find(tree, val):
+   if not tree:
+       return False
+
+   if tree.val == val:
+       return True
+   elif tree.val < val:
+       return bst_find(tree.right, val)
+   else:
+       return bst_find(tree.left, val)
+
+# BST: insert
+def bst_insert(tree, val):
+    if not tree:
+        return TreeNode(val)
+
+    if tree.val < val:
+        tree.right = bst_insert(tree.right, val)
+    elif tree.val > val:
+        tree.left = bst_insert(tree.left, val)
+    return tree
+
 # Binary tree: recursive DFS (more common)
 # data struct: recursion stack (LIFO)
 def dfs(root, target=None):

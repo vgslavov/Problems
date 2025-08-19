@@ -44,6 +44,7 @@ def diameter_tree(root):
     dfs(root)
     return diameter
 
+# TODO: rewrite w/o nonlocal: return value
 class TestDiameterTree(unittest.TestCase):
     def test_example1(self):
         # Example 1

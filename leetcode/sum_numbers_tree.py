@@ -26,6 +26,7 @@ class TreeNode:
 # complexity
 # run-time: O(n)
 # space: O(n)
+# TODO: rewrite w/o nonlocal: return value
 def sum_numbers(root):
     def dfs(root, root_leaf):
         nonlocal total
