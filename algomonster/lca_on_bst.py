@@ -23,7 +23,7 @@ def lca_on_bst(bst: Node, p: int, q: int) -> int:
     # 2) p and q in left subtree
     elif p < bst.val and q < bst.val:
         return lca_on_bst(bst.left, p, q)
-    # 3) p or q is root
+    # 3) p or q is root: check last
     else:
         return bst.val
 
