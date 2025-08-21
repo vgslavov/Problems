@@ -240,7 +240,12 @@ Dynamic Programming = Recursion + Memoization
     * backtracking: prune paths that cannot lead to solution, generating fewer possibilities
 * usually `O(2^n)`
 * implemented using recursion (almost always)
-* retracing using DFS
+* `backtracking = dfs(tree)`
+* `backtracking + memoization = DP`
+* construct tree
+* complexity
+    * run-time: `O(total nodes) ~ O(# of children^h)`
+    * space: `O(h)`
 
 ### Combinations & Permutations
 
