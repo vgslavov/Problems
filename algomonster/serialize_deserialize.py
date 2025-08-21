@@ -17,17 +17,17 @@ class Node:
 # run-time: O(n)
 # space: O(n)
 def serialize(root):
-    def dfs(node, tree):
+    def dfs(node):
         if not node:
             tree.append('x')
             return
 
         tree.append(str(node.val))
-        dfs(node.left, tree)
-        dfs(node.right, tree)
+        dfs(node.left)
+        dfs(node.right)
 
     tree = []
-    dfs(root, tree)
+    dfs(root)
     return ' '.join(tree)
 
 def deserialize(s):

@@ -21,10 +21,6 @@ def range_sum_query_immutable(nums: list[int], left: int, right: int) -> int:
     for i in range(1, len(nums)):
         prefix_sum.append(prefix_sum[-1]+nums[i])
 
-    # Pythonic way
-    #from itertools import accumulate
-    #prefix_sum = list(accumulate(nums, initial=0))
-
     return prefix_sum[right+1]-prefix_sum[left]
 
 # solution: Pythonic accumulate
