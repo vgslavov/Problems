@@ -606,6 +606,7 @@ def backtrack_basic(start_index, path, [...additional states]):
     if is_leaf(start_index):
         ans.append(path[:]) # add a copy of the path to the result
         return
+
     for edge in get_edges(start_index, [...additional states]):
         # prune if needed
         if not is_valid(edge):
