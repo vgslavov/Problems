@@ -388,10 +388,10 @@ def bfs(root):
     ans = 0
 
     while queue:
-        current_length = len(queue)
+        n = len(queue)
         # do logic for current level
 
-        for _ in range(current_length):
+        for _ in range(n):
             # read from front
             node = queue.popleft()
 
@@ -614,8 +614,23 @@ def backtrack_basic(start_index, path, [...additional states]):
         path.add(edge)
         if additional states:
             update(...additional states)
-        dfs(start_index + len(edge), path, [...additional states])
+        backtrack_basic(start_index + len(edge), path, [...additional states])
         # revert(...additional states) if necessary e.g. permutations
+        path.pop()
+
+# Backtracking: pruning
+def backtrack_pruning(start_index, path):
+    if is_leaf(start_index):
+        report(path)
+        return
+
+    for edge in get_edges(start_index):
+        # prune if needed
+        if not is_valid(edge):
+            continue
+        path.add(edge)
+        # increment start_index
+        backtrack_pruning(start_index + len(edge), path)
         path.pop()
 
 # Backtracking: aggregation
@@ -626,7 +641,7 @@ def backtrack_agg(start_index, [...additional states]):
     for edge in get_edges(start_index, [...additional states]):
         if additional states: 
             update([...additional states])
-        ans = aggregate(ans, dfs(start_index + len(edge), [...additional states]))
+        ans = aggregate(ans, backtrack_agg(start_index + len(edge), [...additional states]))
         if additional states: 
             revert([...additional states])
     return ans

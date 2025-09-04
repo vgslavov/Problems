@@ -83,7 +83,11 @@ def mod(x, y):
     * a path exists from the root to any node
     * `n - 1` edges, where `n` is the number of nodes in the tree
     * each node has exactly one parent node with the exception of the root node
-* DFS: recursive, **pre-order** traversal
+* DFS
+    * recursive: using stack
+    * **pre-order** traversal
+    * order: LIFO
+    * best for: finding nodes far away from root
     * traverse and find/create/modify/delete node
     * traverse with return value (finding max subtree, detect balanced tree)
     * two options
@@ -98,7 +102,10 @@ def mod(x, y):
     * elements to the right are in the right subtree
 * postorder traversal
     * order: left, right, root
-* BFS: iterative, using queue/deque
+* BFS
+    * iterative: using queue/deque
+    * order: FIFO
+    * best for: finding nodes close/closest to the root
 * perfect binary tree
     * DFS: O(log n) space
     * BFS: O(n) space
