@@ -32,6 +32,7 @@ def letter_combinations_of_phone_number(digits: str) -> list[str]:
 
         digit = int(digits[start_index])
         
+        # go over letters per digit
         for c in digit2letters[digit]:
             if c in path:
                 continue

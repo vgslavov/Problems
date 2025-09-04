@@ -6,6 +6,7 @@ import unittest
 
 # tags: binary search
 
+# solution: binary search
 # complexity:
 # run-time: O(log n)
 # space: O(1)
