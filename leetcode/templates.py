@@ -460,22 +460,27 @@ def dfs(graph):
 
 # Graph: BFS
 # data struct: queue (FIFO)
+# input: adjacency list/dict
 def bfs(graph):
     queue = deque([START_NODE])
     seen = {START_NODE}
+    #seen = set([START_NODE])
     ans = 0
 
     while queue:
-        node = queue.popleft()
-        # do some logic
+        n = len(queue)
 
-        for neighbor in graph[node]:
-            if neighbor in seen:
-                continue
+        for _ in range(n):
+            node = queue.popleft()
+            # do some logic
 
-            # mark neighbor as seen
-            seen.add(neighbor)
-            queue.append(neighbor)
+            for neighbor in graph[node]:
+                if neighbor in seen:
+                    continue
+
+                # mark neighbor as seen
+                seen.add(neighbor)
+                queue.append(neighbor)
 
     return ans
 

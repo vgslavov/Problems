@@ -80,6 +80,8 @@ def mod(x, y):
 
 * properties
     * acyclic
+    * connected
+    * undirected
     * a path exists from the root to any node
     * `n - 1` edges, where `n` is the number of nodes in the tree
     * each node has exactly one parent node with the exception of the root node
@@ -138,9 +140,12 @@ def mod(x, y):
     * O(n + e)
     * easier to implement
     * can use to detect cycles
+    * can use less memory for wide graphs
+    * finding nodes far away from the root
 * BFS
     * iterative more common
-    * use to find shortest path from a node
+    * use to find shortest path from a node (unweighted only, weighted: Dijkstra's)
+    * when graph is of unknown size
 
 ### Binary
 
