@@ -5,7 +5,7 @@ from collections import deque
 import sys
 import unittest
 
-# tags: bfs
+# tags: bfs, tree
 
 class Node:
     def __init__(self, val, left=None, right=None):
