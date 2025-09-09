@@ -6,7 +6,7 @@ from collections import deque
 from functools import cache
 from itertools import accumulate
 import heapq
-from math import inf
+import math
 
 # Sources:
 # - https://leetcode.com/explore/interview/card/cheatsheets/720/resources/4723/
@@ -406,8 +406,8 @@ def bfs(root):
     return ans
 
 # Graph: build adjacency list/dict
-# input: array of edges, [[0,1],[1,2],[2,0],[2,3]]
-# output: adjacency list/dict, {0: [1], 1: [0, 2], 2: [1, 0, 3], 3: [2]}
+# input: array of edges
+# output: adjacency list/dict
 def build_adjlist(edges):
     graph = defaultdict(list)
 
@@ -418,13 +418,19 @@ def build_adjlist(edges):
 
     return graph
 
+# basic
+EDGES = [[0,1],[1,2],[2,0],[2,3]]
+GRAPH = {0: [1], 1: [0, 2], 2: [1, 0, 3], 3: [2]}
+def get_neighbors(node):
+    return GRAPH[node]
+
 # Graph: DFS (recursive)
 # data struct: recursion stack (LIFO)
-def dfs(graph):
+def dfs_recursive(root):
     def dfs(node):
         ans = 0
         # do some logic
-        for neighbor in graph[node]:
+        for neighbor in get_neighbors(node):
             if neighbor in seen:
                 continue
 
@@ -434,21 +440,21 @@ def dfs(graph):
 
         return ans
 
-    seen = {START_NODE}
-    return dfs(START_NODE)
+    seen = {root}
+    return dfs(root)
 
 # Graph: DFS (iterative)
 # data struct: stack (LIFO)
-def dfs(graph):
-    stack = [START_NODE]
-    seen = {START_NODE}
+def dfs_iterative(root):
+    stack = [root]
+    seen = {root}
     ans = 0
 
     while stack:
         node = stack.pop()
         # do some logic
 
-        for neighbor in graph[node]:
+        for neighbor in get_neighbors(node):
             if neighbor in seen:
                 continue
 
@@ -458,23 +464,48 @@ def dfs(graph):
 
     return ans
 
+GRID = [
+    [0, 1, 0],
+    [0, 0, 0],
+    [1, 0, 1]
+]
+NUM_ROWS, NUM_COLS = len(GRID), len(GRID[0])
+
+def get_neighbors_matrix(coord):
+    row, col = coord
+    delta_row = [-1, 0, 1, 0]
+    delta_col = [0, 1, 0, -1]
+    ans = []
+
+    for i in range(len(delta_row)):
+        neighbor_row = row + delta_row[i]
+        neighbor_col = col + delta_col[i]
+
+        if 0 <= neighbor_row < NUM_ROWS and 0 <= neighbor_col < NUM_COLS:
+            ans.append((neighbor_row, neighbor_col))
+
+    return ans
+
 # Graph: BFS
 # data struct: queue (FIFO)
 # input: adjacency list/dict
-def bfs(graph):
-    queue = deque([START_NODE])
-    seen = {START_NODE}
-    #seen = set([START_NODE])
-    ans = 0
+def bfs(root):
+    queue = deque([root])
+    seen = {root}
+    #seen = set([root])
+    level = 0
 
     while queue:
         n = len(queue)
 
+        # optional: if keep track of the current level
         for _ in range(n):
             node = queue.popleft()
             # do some logic
 
-            for neighbor in graph[node]:
+            # for matrix
+            #for neighbor in get_neighbors_matrix(node):
+            for neighbor in get_neighbors(node):
                 if neighbor in seen:
                     continue
 
@@ -482,7 +513,11 @@ def bfs(graph):
                 seen.add(neighbor)
                 queue.append(neighbor)
 
-    return ans
+        level += 1
+
+    return level
+
+CRITERIA = 0
 
 # Find top k elements with heap
 def find_topk(arr, k):
@@ -556,6 +591,9 @@ def binary_search_right(arr, target):
             left = mid + 1
 
     return left
+
+MINIMUM_POSSIBLE_ANSWER = -math.inf
+MAXIMUM_POSSIBLE_ANSWER = math.inf
 
 # Binary search: find min (for greedy problems)
 def binary_search_min(arr):
@@ -774,7 +812,7 @@ class Trie:
 # Dijkstra's algorithm
 # data struct: heap
 def shortest_path(graph, source):
-    distances = [inf] * len(graph)
+    distances = [math.inf] * len(graph)
     distances[source] = 0
     heap = [(0, source)]
 
@@ -802,4 +840,3 @@ class UnionFind:
 
     def union(self, x, y):
         self.id[self.find(x)] = self.find(y)
-
