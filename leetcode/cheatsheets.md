@@ -155,6 +155,21 @@ def mod(x, y):
     * setting bits: use OR & shift left
     * reading bits: use AND & shift left
 
+### Priority Queue / Heap
+
+* priority queue: abstract data type
+* heap: concret data structure to implement pq
+* max/min heap: a tree with 2 properties
+    * almost complete tree: deepest level is left justified
+    * a key (priority) is greater/smaller than parent's key
+* nodes in a heap tree are keys, not values
+* height of heap is guaranteed to be `O(log n)`
+* nodes in root-to-leaf path are sorted
+* nodes on same level are NOT sorted
+* implemented as an array
+    * children: `2i+1` & `2i+2`
+    * parent: `floor(i-1)/2`
+
 ### Substr/seq/set
 
 * substring/subarray
