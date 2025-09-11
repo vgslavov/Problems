@@ -105,19 +105,47 @@ void swap(Example<T>& rhs, Example<T>& lhs)
     rhs.swap(lhs);
 }
 
+bool condition(int a, int b)
+{
+    // define the condition for two pointers
+    return a < b;
+}
+
 // Two pointers: one input, opposite ends
-int twoPointers(const std::vector<int>& v)
+int twoPointersOpposite(const std::vector<int>& v)
 {
     int ans = 0;
     int left = 0;
     int right = v.size()-1;
 
     while (left < right) {
-        if (CONDITION) {
+        if (condition(v[left], v[right])) {
             ++left;
         } else {
             --right;
         }
+    }
+
+    return ans;
+}
+
+// Two pointers: one input, same direction
+int twoPointersSame(const std::vector<int>& v)
+{
+    int fast = 0;
+    int slow = 0;
+    int ans = 0;
+
+    while (fast < v.size()) {
+        // do logic
+
+        // slow pointer only moves if condition is true
+        if (condition(v[slow], v[fast])) {
+            ++slow;
+        }
+
+        // fast pointer *always* moves forward
+        ++fast;
     }
 
     return ans;
@@ -132,7 +160,7 @@ int twoPointers(const std::vector<int>& v1, const std::vector<int>& v2)
 
     while (i < v1.size() && j < v2.size()) {
         // do some logic here
-        if (CONDITION) {
+        if (condition(v1[i], v2[j])) {
             ++i;
         } else {
             ++j;
@@ -152,64 +180,87 @@ int twoPointers(const std::vector<int>& v1, const std::vector<int>& v2)
     return ans;
 }
 
+const int SOME_THRESHOLD = 10;
+
+bool invalidCondition(int curr)
+{
+    return curr > SOME_THRESHOLD;
+}
+
 // Sliding window
-int slidingWindow(const std::vector<int>& v)
+int slidingWindowLongest(const std::vector<int>& v)
 {
     int ans = 0;
     int left = 0;
-    int curr = 0;
+    int winSum = 0;
 
-    for (size_t right = 0; right != v.size(); ++right) {
-        // do logic here to add v[right] to curr
+    for (int right = 0; right != v.size(); ++right) {
+        winSum += v[right];
 
-        while (WINDOW_CONDITION_BROKEN) {
-            // remove v[left] from curr
+        // update left until window is valid again
+        while (invalidCondition(winSum)) {
+            winSum -= v[left];
             ++left;
         }
 
-        // update ans
+        // windows is guaranteed to be valid here
+        ans = std::max(ans, right - left + 1);
 
+    }
+
+    return ans;
+}
+
+bool validCondition(int curr)
+{
+    return curr >= SOME_THRESHOLD;
+}
+
+int slidingWindowShortest(const std::vector<int>& v)
+{
+    int left = 0;
+    int winSum = 0;
+    int ans = v.size();
+
+    for (int right = 0; right != v.size(); ++right) {
+        winSum += v[right];
+
+        while (validCondition(winSum)) {
+            // window is guaranteed to be valid here
+            ans = std::min(ans, right-left+1);
+
+            winSum -= v[left];
+            ++left;
+        }
     }
 
     return ans;
 }
 
 // Sliding *fixed* window
-int slidingWindow(const std::vector<int>& v, int k)
+int slidingWindowFixed(const std::vector<int>& v, int k)
 {
     int ans = 0;
-    int curr = 0;
+    int winSum = 0;
 
-    for (size_t i = 0; i < v.size() && i < k; ++i) {
-        // do logic here to add v[i] to curr
+    // 1st window
+    //for (size_t i = 0; i < v.size() && i < k; ++i)
+    for (size_t i = 0; std::min(k, static_cast<int>(v.size())); ++i) {
+        ans += v[i];
     }
 
-    // update ans
-
-    for (size_t i = 0; i < std::min(k, static_cast<int>(v.size())) ; ++i) {
-        // add v[i] & remove v[i-k] from curr
-
-        // update ans
-
+    // start at k
+    for (int right = k; right != v.size(); ++right) {
+        int left = right - k;
+        winSum -= v[left];
+        winSum += v[right];
+        ans = std::max(ans, winSum);
     }
 
     return ans;
 }
 
-// Build a prefix sum
-std::vector<int> prefixSum(const std::vector<int>& v)
-{
-    std::vector<int> prefix{v[0]};
-
-    // start at 1
-    for (size_t i = 1; i != v.size(); ++i) {
-        prefix.push_back(prefix[i-1] + v[i]);
-    }
-
-    return prefix;
-}
-
-// Build a diff array
+// Build a diff array, calculate prefix sum on it
 std::vector<int> diffArray(
     const std::vector<int>& v,
     const std::vector<std::vector<int>>& shifts)
@@ -217,13 +268,58 @@ std::vector<int> diffArray(
     std::vector<int> diff(v.size());
 
     for (const auto& range : shifts) {
-        diff[range[0]] += 1;
-        if (range[1] + 1 < diff.size()) {
-            diff[range[1] + 1] -= 1;
+        int start = range[0];
+        int end = range[1];
+
+        diff[start] += 1;
+
+        if (end + 1 < diff.size()) {
+            diff[end + 1] -= 1;
         }
     }
 
     return diff;
+}
+
+// Build a prefix sum
+std::vector<int> prefixSum(const std::vector<int>& v)
+{
+    std::vector<int> prefix{v[0]};
+    // or preallocate
+    //std::vector<int> prefix(v.size());
+
+    // start at 1!
+    for (size_t i = 1; i != v.size(); ++i) {
+        prefix.push_back(prefix[i-1] + v[i]);
+        //prefix[i] = prefix[i-1] + v[i];
+    }
+
+    return prefix;
+}
+
+// Build a prefix sum for range queries
+int prefixSumRange(
+    const std::vector<int>& v,
+    int left,
+    int right)
+{
+    std::vector<int> prefix{0, v[0]};
+
+    for (size_t i = 1; i != v.size(); ++i) {
+        prefix.push_back(prefix[i-1] + v[i]);
+    }
+
+    return prefix[right + 1] - prefix[left];
+}
+
+// Query sum of range using prefix sum
+int queryPrefixSum(const std::vector<int>& prefix, int left, int right)
+{
+    if (left == 0) {
+        return prefix[right];
+    }
+
+    return prefix[right] - prefix[left - 1];
 }
 
 // Efficient string building
@@ -231,6 +327,52 @@ std::vector<int> diffArray(
 std::string buildString(const std::vector<std::string>& v)
 {
     return std::string(v.begin(), v.end());
+}
+
+// recursive
+int factorial(int n)
+{
+    // base case
+    if (n <= 1) {
+        return 1;
+    }
+
+    // recursive call
+    return n * factorial(n-1);
+}
+
+// iterative
+int factorialIterative(int n)
+{
+    int ans = 1;
+
+    for (int i = 2; i <= n; ++i) {
+        ans *= i;
+    }
+
+    return ans;
+}
+
+// iterative: stack
+int factorialStack(int n)
+{
+    std::stack<int> s;
+    int ans = 1;
+
+    // push each call to a stack
+    // top of stack is base case
+    while (n > 0) {
+        s.push(n);
+        n -= 1;
+    }
+
+    // pop and use return value until stack is empty
+    while (!s.empty()) {
+        ans *= s.top();
+        s.pop();
+    }
+
+    return ans;
 }
 
 struct ListNode {

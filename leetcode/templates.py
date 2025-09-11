@@ -38,7 +38,7 @@ def two_pointers_same(arr):
     while fast < len(arr):
         # do logic with slow and fast
 
-        # Update pointers based on condition
+        # Slow pointer only moves if condition is true
         if condition(arr[slow], arr[fast]):
             slow += 1
 
@@ -79,11 +79,13 @@ def sliding_window_longest(arr):
     for right in range(len(arr)):
         win_sum += arr[right]
 
-        while invalid_condition(win_sum):   # update left until window is valid again
+        # update left until window is valid again
+        while invalid_condition(win_sum):
             win_sum -= arr[left]
             left += 1
 
-        ans = max(ans, right-left+1)     # window is guaranteed to be valid here
+        # window is guaranteed to be valid here
+        ans = max(ans, right-left+1)
 
     return ans
 
@@ -99,7 +101,9 @@ def sliding_window_shortest(arr):
         win_sum += arr[right]
 
         while valid_condition(win_sum):
-            ans = min(ans, right-left+1) # window is guaranteed to be valid here
+            # window is guaranteed to be valid here
+            ans = min(ans, right-left+1)
+
             win_sum -= arr[left]
             left += 1
 
@@ -172,11 +176,23 @@ def query_prefix_sum(prefix, left, right):
 
 # recursive
 def factorial(n):
-    if n <= 1: # BASE CASE
+    # base case
+    if n <= 1:
         return 1
-    return n * factorial(n - 1) # RECURSIVE CALL
+
+    # recursive call
+    return n * factorial(n - 1)
 
 # iterative
+def factorial_iterative(n):
+    ans = 1
+
+    for i in range(2, n + 1):
+        ans *= i
+
+    return ans
+
+# iterative: stack
 def factorial_stack(n):
     stack = []
 
