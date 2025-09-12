@@ -7,9 +7,27 @@ import unittest
 
 # tags: heap, pq
 
+# solution: min heap
+# complexity:
+# run-time: O(n*log n)
+# space: O(n)
+def merge_k_sorted_lists2(lists: list[list[int]]) -> list[int]:
+    heap = []
+    ans = []
+
+    # Add all elements to heap
+    for l in lists:
+        for n in l:
+            heapq.heappush(heap, n)
+
+    while heap:
+        ans.append(heapq.heappop(heap))
+
+    return ans
+
 # solution: AlgoMonster min heap
 # complexity:
-# runtime: O(n*log k)
+# run-time: O(n*log k)
 # space: O(k)
 def merge_k_sorted_lists(lists: list[list[int]]) -> list[int]:
     heap = []
@@ -29,14 +47,19 @@ def merge_k_sorted_lists(lists: list[list[int]]) -> list[int]:
 
         if index < len(lists[list_index]):
             heapq.heappush(heap, (lists[list_index][index], list_index, index))
-    
+
     return ans
 
 class TestMergeKSortedLists(unittest.TestCase):
     def test_merge_k_sorted_lists(self):
         self.assertEqual(merge_k_sorted_lists([[1, 4, 5], [1, 3, 4], [2, 6]]), [1, 1, 2, 3, 4, 4, 5, 6])
+        self.assertEqual(merge_k_sorted_lists2([[1, 4, 5], [1, 3, 4], [2, 6]]), [1, 1, 2, 3, 4, 4, 5, 6])
+
         self.assertEqual(merge_k_sorted_lists([[], [], []]), [])
+        self.assertEqual(merge_k_sorted_lists2([[], [], []]), [])
+
         self.assertEqual(merge_k_sorted_lists([[1], [2], [3]]), [1, 2, 3])
+        self.assertEqual(merge_k_sorted_lists2([[1], [2], [3]]), [1, 2, 3])
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
