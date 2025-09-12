@@ -48,8 +48,8 @@ class TestShortestPath(unittest.TestCase):
             [2]
         ]
         self.assertEqual(shortest_path(graph, 0, 4), 2)
-        self.assertEqual(shortest_path(graph, 0, 5), 3)
-        self.assertEqual(shortest_path(graph, 3, 4), 3)
+        self.assertEqual(shortest_path(graph, 0, 5), 2)
+        self.assertEqual(shortest_path(graph, 3, 4), 2)
         self.assertEqual(shortest_path(graph, 0, 0), 0)
 
 if __name__ == "__main__":

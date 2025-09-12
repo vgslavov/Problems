@@ -28,6 +28,21 @@ def has_cycle(nodes: Node) -> bool:
 
     return False
 
+class TestHasCycle(unittest.TestCase):
+    def test_has_cycle(self):
+        # Test case 1: No cycle
+        nodes = Node(1)
+        nodes.next = Node(2)
+        nodes.next.next = Node(3)
+        self.assertFalse(has_cycle(nodes))
+
+        # Test case 2: Cycle
+        nodes = Node(1)
+        nodes.next = Node(2)
+        nodes.next.next = Node(3)
+        nodes.next.next.next = nodes.next  # Create cycle
+        self.assertTrue(has_cycle(nodes))
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--test', action='store_true', help='Run unit tests')

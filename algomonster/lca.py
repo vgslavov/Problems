@@ -26,7 +26,7 @@ def lca(root: Node, node1: Node, node2: Node) -> Node:
 
     # 2) p is in left subtree, q is in right subtree
     left = lca(root.left, node1, node2)
-    right = lca(root.right, node2, node2)
+    right = lca(root.right, node1, node2)
 
     if left and right:
         return root

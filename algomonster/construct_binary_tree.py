@@ -47,7 +47,7 @@ def construct_binary_tree(preorder: list[int], inorder: list[int]) -> Node:
     return array2tree(0, len(inorder)-1)
 
 # TODO: understand better
-def build_tree_recursive(preorder_index: int, inorder_start: int, size: int, value_to_index: dict) -> Node | None:
+def build_tree_recursive(preorder_index: int, inorder_start: int, size: int, value_to_index: dict) -> Node:
     if size <= 0:
         return None
 
@@ -64,7 +64,7 @@ def build_tree_recursive(preorder_index: int, inorder_start: int, size: int, val
 # complexity:
 # run-time: O(n)
 # space: O(n)
-def construct_binary_tree2(preorder: list[int], inorder: list[int]) -> Node | None:
+def construct_binary_tree2(preorder: list[int], inorder: list[int]) -> Node:
     value_to_index = {val: idx for idx, val in enumerate(inorder)}
 
     return build_tree_recursive(0, 0, len(preorder), value_to_index)

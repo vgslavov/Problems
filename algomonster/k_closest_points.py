@@ -22,11 +22,12 @@ def k_closest_points(points: list[list[int]], k: int) -> list[list[int]]:
         #distance = math.sqrt(pow(x, 2) + pow(y, 2))
 
         # heapq is min heap by default
-        # make max heap by inverting the distance
+        # make *max* heap by inverting the distance
         heapq.heappush(heap, (-distance, (x,y)))
 
         # don't store n, store k
         if len(heap) > k:
+            # pop max value: k+1 closest to origin
             heapq.heappop(heap)
 
     # sort values, not keys!
