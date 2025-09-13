@@ -51,13 +51,13 @@ def find_kth_largest3(nums: list[int], k: int) -> int:
     if not nums:
         return 0
 
-    min_pointer = 0
-    max_pointer = len(nums) - 1
+    min_ptr = 0
+    max_ptr = len(nums) - 1
 
-    while min_pointer < max_pointer:
-        pivot = nums[max_pointer]
-        swap_left = min_pointer
-        swap_right = max_pointer
+    while min_ptr < max_ptr:
+        pivot = nums[max_ptr]
+        swap_left = min_ptr
+        swap_right = max_ptr
 
         while swap_left < swap_right:
             while swap_left < swap_right and nums[swap_left] > pivot:
@@ -67,16 +67,16 @@ def find_kth_largest3(nums: list[int], k: int) -> int:
             if swap_left < swap_right:
                 nums[swap_left], nums[swap_right] = nums[swap_right], nums[swap_left]
 
-        nums[swap_left], nums[max_pointer] = nums[max_pointer], nums[swap_left]
+        nums[swap_left], nums[max_ptr] = nums[max_ptr], nums[swap_left]
 
         if swap_left == k - 1:
             return nums[swap_left]
         elif swap_left < k - 1:
-            min_pointer = swap_left + 1
+            min_ptr = swap_left + 1
         else:
-            max_pointer = swap_left - 1
+            max_ptr = swap_left - 1
 
-    return nums[min_pointer]
+    return nums[min_ptr]
 
 class TestFindKthLargest(unittest.TestCase):
     def test_cases(self):
