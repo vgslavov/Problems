@@ -5,7 +5,7 @@ import heapq
 import sys
 import unittest
 
-# tags: heap, pq
+# tags: heap
 
 # solution: min heap
 # complexity:
