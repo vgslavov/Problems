@@ -6,9 +6,11 @@
 
 - [Sources](#sources)
 - [Theory](#theory)
+  - [Math](#math)
   - [Trees](#trees)
   - [Graphs](#graphs)
   - [Binary](#binary)
+  - [Priority Queue / Heap](#priority-queue--heap)
   - [Substr/seq/set](#substrseqset)
   - [Divide & Conquer](#divide--conquer)
   - [Greedy](#greedy)
@@ -16,6 +18,7 @@
   - [DP](#dp)
   - [Backtracking](#backtracking)
   - [Combinations & Permutations](#combinations--permutations)
+  - [Intervals](#intervals)
 - [Patterns](#patterns)
 - [Time Complexity](#time-complexity)
   - [Arrays (dynamic array/list)](#arrays-dynamic-arraylist)
@@ -277,6 +280,18 @@ Dynamic Programming = Recursion + Memoization
 ### Combinations & Permutations
 
 TODO
+
+### Intervals
+
+1. Determine if there's an overlap between two intervals
+    * intervals: `[x1, x2]`, `[y1, y2]`
+    * overlapping condition
+        * `not (x2 < y1 or y2 < x1)`
+        * or `x2 >= y1 and y2 >= x1` (Demorgan's Law)
+    * `max(x1, y1) <= min(x2, y2)`
+2. Finding the overlap
+    * `[max(x1, y1), min(x2, y2)]`
+3. Sort by start time
 
 ## Patterns
 

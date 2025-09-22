@@ -306,14 +306,23 @@ def mono_stack(arr):
 
     return ans
 
+def overlap(x, y):
+    # 2nd interval starts before 1st ends and vice versa
+    return not (x[1] < y[0] or y[1] < x[0])
+    # if [1, 5], [5, 6] not considered overlapping
+    #return not (x[1] <= y[0] or y[1] <= x[0])
+
 # Merge intervals
 def merge_intervals(intervals):
+    # sort by start time
     intervals.sort()
     ans = []
 
+    #for i in range(1, len(intervals)):
     for start, end in intervals:
         # merge
-        if ans and start <= ans[-1][1]:
+        #if overlap(intervals[i-1], intervals[i]):
+        if ans and overlap(ans[-1], [start, end]):
             ans[-1][1] = max(ans[-1][1], end)
         else:
             ans.append([start,end])

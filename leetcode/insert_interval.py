@@ -60,42 +60,70 @@ def insert_intervals(intervals, new_interval):
 
     return ans
 
+def overlap(x, y):
+    return not (x[1] < y[0] or y[1] < x[0])
+    
+# solution: append, sort & max
+# complexity:
+# run-time: O(n*log n)
+# space: O(n)
+def insert_intervals2(intervals, new_interval):
+    if not intervals:
+        return [new_interval]
+
+    intervals.append(new_interval)
+    intervals.sort()
+    ans = []
+
+    for start,end in intervals:
+        if ans and overlap(ans[-1], [start,end]):
+            ans[-1][1] = max(ans[-1][1], end)
+        else:
+            ans.append([start,end])
+        
+    return ans
 class TestInsertIntervals(unittest.TestCase):
     def test_empty_intervals(self):
         intervals = []
         new = [5,7]
         expected = [new]
         self.assertEqual(insert_intervals(intervals, new), expected)
+        self.assertEqual(insert_intervals2(intervals, new), expected)
 
     def test_empty_all(self):
         intervals = []
         new = []
         expected = [new]
         self.assertEqual(insert_intervals(intervals, new), expected)
+        self.assertEqual(insert_intervals2(intervals, new), expected)
 
     def test_empty_all(self):
         intervals = []
         new = []
         expected = [new]
         self.assertEqual(insert_intervals(intervals, new), expected)
+        self.assertEqual(insert_intervals2(intervals, new), expected)
 
     def test_1(self):
         intervals = [[1,3],[6,9]]
         new = [2,5]
         expected = [[1,5],[6,9]]
         self.assertEqual(insert_intervals(intervals, new), expected)
+        self.assertEqual(insert_intervals2(intervals, new), expected)
 
     def test_2(self):
         intervals = [[1,2],[3,5],[6,7],[8,10],[12,16]]
         new = [4,8]
         expected = [[1,2],[3,10],[12,16]]
         self.assertEqual(insert_intervals(intervals, new), expected)
+        self.assertEqual(insert_intervals2(intervals, new), expected)
 
     def test_3(self):
         intervals = [[1,5]]
         new = [2,7]
         expected = [[1,7]]
         self.assertEqual(insert_intervals(intervals, new), expected)
+        self.assertEqual(insert_intervals2(intervals, new), expected)
 
 if __name__ == '__main__':
     sys.exit(unittest.main())
