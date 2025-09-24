@@ -27,8 +27,10 @@ def sliding_window_max(nums: list[int], k: int) -> list[int]:
             while heap[0][1] < left:
                 heapq.heappop(heap)
 
+            # window max
             ans.append(-heap[0][0])
 
+            # slide window
             left += 1
 
     return ans
