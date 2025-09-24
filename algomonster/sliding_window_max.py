@@ -42,20 +42,24 @@ def sliding_window_max(nums: list[int], k: int) -> list[int]:
 # TODO: understand better
 def sliding_window_max2(nums: list[int], k: int) -> list[int]:
     ans = []
+    # value: index in nums
     dq = deque()
 
     for i in range(len(nums)):
-        # remove elements not in the window
+        # 1. remove elements not in the window
         if dq and dq[0] < i - k + 1:
             dq.popleft()
 
-        # remove smaller elements
+        # 2. remove smaller elements:
+        # monotonically increasing
         while dq and nums[dq[-1]] < nums[i]:
             dq.pop()
 
+        # 3. add to deque
         dq.append(i)
 
-        # add max for current window
+        # 4. add max for current window
+        # max is end of deque
         if i >= k - 1:
             ans.append(nums[dq[0]])
 
