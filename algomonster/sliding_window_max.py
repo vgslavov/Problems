@@ -51,7 +51,7 @@ def sliding_window_max2(nums: list[int], k: int) -> list[int]:
             dq.popleft()
 
         # 2. remove smaller elements:
-        # monotonically increasing
+        # monotonically decreasing
         while dq and nums[dq[-1]] < nums[i]:
             dq.pop()
 
@@ -59,7 +59,7 @@ def sliding_window_max2(nums: list[int], k: int) -> list[int]:
         dq.append(i)
 
         # 4. add max for current window
-        # max is end of deque
+        # max is beginning of deque
         if i >= k - 1:
             ans.append(nums[dq[0]])
 
