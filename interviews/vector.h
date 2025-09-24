@@ -1,5 +1,7 @@
+#include <cassert>
 #include <cstdio>
 #include <memory>
+#include <stdexcept>
 
 // section: interview
 // difficulty: medium
@@ -37,14 +39,16 @@ public:
         }
     }
 
-    // move ctor: default
-    vector(vector<T>&& rhs) = default;
-
-    // move ctor: manual
-    //vector(vector&& rhs) noexcept
-    //: d_capacity(rhs.size())
-    //, d_size(rhs.size())
-    //, d_buf(std::move(rhs.d_buf)) {}
+    // move ctor
+    vector(vector&& rhs) noexcept
+    : d_capacity(rhs.d_capacity)
+    , d_size(rhs.d_size)
+    , d_buf(std::move(rhs.d_buf))
+    {
+        rhs.d_capacity = 0;
+        rhs.d_size = 0;
+        rhs.d_buf = nullptr;
+    }
 
     // dtor
     ~vector() noexcept = default;
@@ -75,7 +79,9 @@ public:
         return const_cast<vector<T>&>(*this).at(i);
     }
 
-    T at(size_t i) && { return std::move(at(i)); }
+    T at(size_t i) && { 
+        return std::move(const_cast<vector<T>&>(*this).at(i)); 
+    }
 
     // copy assignment op
     vector<T>& operator=(const vector<T>& rhs);
@@ -87,7 +93,7 @@ public:
     void clear()
     {
         d_size = 0;
-        d_buf.reset();
+        // don't reset the buffer - keep the allocated capacity!
     }
 
     size_t capacity() const { return d_capacity; }

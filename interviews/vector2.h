@@ -1,3 +1,4 @@
+#include <cassert>
 #include <cstddef>
 #include <memory>
 
@@ -34,14 +35,11 @@ public:
 
     // move ctor: default
     vector2(vector2<T>&& rhs) noexcept
-    : d_capacity(rhs.size())
-    , d_size(rhs.size())
+    : d_capacity(rhs.d_capacity)  // Use d_capacity, not size()
+    , d_size(rhs.d_size)          // Use d_size, not size()
     , d_buf(rhs.d_buf)
     {
-        for (size_t i = 0; i != d_size; ++i) {
-            d_buf[i] = std::move(rhs[i]);
-        }
-
+        // Remove this loop - we're taking ownership, not copying
         rhs.d_buf = nullptr;
         rhs.d_size = 0;
         rhs.d_capacity = 0;
@@ -63,10 +61,10 @@ public:
         d_capacity = 0;
         d_size = 0;
 
-        // TODO: fix double delete
-        //if (d_buf) {
-        //    delete[] d_buf;
-        //}
+        if (d_buf) {
+            delete[] d_buf;
+            d_buf = nullptr;
+        }
     }
 
     void push_back(const T& item);
@@ -135,7 +133,10 @@ void vector2<T>::reserve(size_t newCapacity)
         newBuf[i] = std::move_if_noexcept(d_buf[i]);
     }
 
-    d_buf = std::move(newBuf);
+    // delete old buffer before replacing!
+    delete[] d_buf;
+    // std::move unnecessary for raw pointers
+    d_buf = newBuf;
     d_capacity = newCapacity;
 }
 

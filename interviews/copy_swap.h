@@ -17,12 +17,16 @@ public:
         ptr = nullptr;
     }
 
-    // copy ctor
+    // copy ctor - handle nullptr case
     copy_swap(const copy_swap& other)
-    : ptr(new T(*other.ptr)) {}
+    : ptr(other.ptr ? new T(*other.ptr) : nullptr) {}
 
-    // move ctor
-    copy_swap(copy_swap&& other) { swap(*this, other); }
+    // move ctor - direct pointer transfer
+    copy_swap(copy_swap&& other) noexcept
+    : ptr(other.ptr)
+    {
+        other.ptr = nullptr;
+    }
 
     // assign op: by value & same for copy/move
     copy_swap& operator=(copy_swap other)
@@ -31,19 +35,11 @@ public:
         return *this;
     }
 
-    // swap
-    //friend void swap(copy_swap& a, copy_swap& b)
-    //{
-    //    using std::swap;
-    //    swap(a.ptr, b.ptr);
-    //}
-
-    // manual swap
-    friend void swap(copy_swap& a, copy_swap& b)
+    // Use the commented std::swap version instead
+    friend void swap(copy_swap& a, copy_swap& b) noexcept
     {
-        copy_swap tmp(std::move(a));
-        a = std::move(b);
-        b = std::move(tmp);
+        using std::swap;
+        swap(a.ptr, b.ptr);
     }
 
 private:

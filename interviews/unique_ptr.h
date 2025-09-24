@@ -11,8 +11,9 @@ public:
 
     // ctor
     // don't throw!
+    // don't allocate memory, we are taking ownership of ptr
     explicit unique_ptr(T* ptr) noexcept
-    : d_ptr(new T(*ptr)) {}
+    : d_ptr(ptr) {}
 
     // dtor
     ~unique_ptr() noexcept { reset(); }

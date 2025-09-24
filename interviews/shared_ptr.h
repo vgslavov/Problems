@@ -59,14 +59,13 @@ public:
 
     void reset(T* ptr = nullptr)
     {
-        // only delete if last ptr!
-        if (--(*d_count) == 0) {
+        if (d_count && d_count->fetch_sub(1) == 1) {  // atomic decrement and check
             delete d_ptr;
             delete d_count;
         }
-
+        
         if (ptr) {
-            d_ptr = new T(*ptr);
+            d_ptr = ptr;  // Don't copy-construct, take ownership
             d_count = new std::atomic<size_t>(1);
         } else {
             d_ptr = nullptr;
@@ -77,16 +76,16 @@ public:
     // copy assignment op
     shared_ptr<T>& operator=(const shared_ptr<T>& rhs)
     {
-        // not necessary
-        //if (&rhs == this) return *this;
-
-        // don't leak mem!
-        reset();
-
+        if (&rhs == this) return *this;  // Essential for correctness
+        
+        // Increment first to handle self-assignment safely
+        if (rhs.d_count) ++(*rhs.d_count);
+        
+        reset();  // Now safe to reset
+        
         d_ptr = rhs.d_ptr;
         d_count = rhs.d_count;
-        ++(*d_count);
-
+        
         return *this;
     }
 
