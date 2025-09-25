@@ -66,6 +66,38 @@ def two_pointers(arr1, arr2):
 
     return ans
 
+# divide & conquer: recursive *stable* merge sort
+def merge_sort(arr):
+    # base case
+    if len(arr) < 2:
+        return arr
+
+    # 1. the divide step: split array into two components
+    mid = len(arr) // 2
+    left = merge_sort(arr[:mid])
+    right = merge_sort(arr[mid:])
+
+    # 2. the merging (conquer) step: combine two components to get the final result
+    l, r, result = 0, 0, []
+    while l < len(left) and r < len(right):
+        if left[l] <= right[r]:
+            result.append(left[l])
+            l += 1
+        else:
+            result.append(right[r])
+            r += 1
+    
+    # Add remaining elements
+    while l < len(left):
+        result.append(left[l])
+        l += 1
+    
+    while r < len(right):
+        result.append(right[r])
+        r += 1
+
+    return result
+
 # Sliding window
 SOME_THRESHOLD = 10  # Example threshold, adjust as needed
 

@@ -624,7 +624,7 @@ int dfs(int node,
 }
 
 // Find top k elements with heap
-std::vector<int> findMax(const std::vector<int>& v, int k)
+std::vector<int> findTopk(const std::vector<int>& v, int k)
 {
     std::priority_queue<int, std::vector<int>, std::greater<int>> minHeap;
 
