@@ -309,7 +309,7 @@ def mono_stack(arr):
 def overlap(x, y):
     # 2nd interval starts before 1st ends and vice versa
     return not (x[1] < y[0] or y[1] < x[0])
-    # if [1, 5], [5, 6] not considered overlapping
+    # if inclusive: [1, 5], [5, 6] not considered overlapping
     #return not (x[1] <= y[0] or y[1] <= x[0])
 
 # Merge intervals
