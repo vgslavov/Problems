@@ -96,6 +96,7 @@ private:
 // Your LRUCache object will be instantiated and called as such:
 int capacity = 2;
 int key = 1;
+int value = 10;
 LRUCache obj = LRUCache(capacity);
 int param_1 = obj.get(key);
 obj.put(key,value);

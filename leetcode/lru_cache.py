@@ -91,20 +91,15 @@ class LRUCache2:
     def put(self, key: int, value: int) -> None:
         #print(f"put cache:{self.__cache} for key:{key}")
 
-        # overwrite existing key
+        # mark existing key as recent by readding
         if key in self.__cache:
-            # mark as recent by readding
             del self.__cache[key]
-            self.__cache[key] = value
-            return
-
-        # at capacity, free up
-        if len(self.__cache) == self.__capacity:
-            # read first key
+        # at capacity, free up LRU
+        elif len(self.__cache) == self.__capacity:
             old_key = next(iter(self.__cache))
             del self.__cache[old_key]
 
-        # new key
+        # add/update key
         self.__cache[key] = value
 
 class TestLRUCache(unittest.TestCase):
