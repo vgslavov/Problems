@@ -8,7 +8,7 @@ import unittest
 
 # tags: heap, sliding window, monotonic queue
 
-# solution: max heap
+# solution: max heap + sliding window
 # complexity:
 # run-time: O(n*log k)
 # space: O(k)
@@ -43,6 +43,8 @@ def sliding_window_max(nums: list[int], k: int) -> list[int]:
 def sliding_window_max2(nums: list[int], k: int) -> list[int]:
     ans = []
     # value: index in nums
+    # len: at most k
+    # monotonically decreasing
     dq = deque()
 
     for i in range(len(nums)):
