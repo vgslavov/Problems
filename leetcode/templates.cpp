@@ -4,6 +4,7 @@
 #include <iostream>
 #include <iterator>
 #include <map>
+#include <numeric>
 #include <queue>
 #include <set>
 #include <stack>
@@ -273,12 +274,21 @@ std::vector<int> diffArray(
 
         diff[start] += 1;
 
+        // if inclusive
         if (end + 1 < diff.size()) {
             diff[end + 1] -= 1;
         }
     }
 
     return diff;
+}
+
+// Build a prefix sum: using STL
+std::vector<int> prefixSumPartialSum(const std::vector<int>& v)
+{
+    std::vector<int> prefix(v.size());
+    std::partial_sum(v.begin(), v.end(), prefix.begin());
+    return prefix;
 }
 
 // Build a prefix sum
@@ -320,13 +330,6 @@ int queryPrefixSum(const std::vector<int>& prefix, int left, int right)
     }
 
     return prefix[right] - prefix[left - 1];
-}
-
-// Efficient string building
-// v is a list of chars
-std::string buildString(const std::vector<std::string>& v)
-{
-    return std::string(v.begin(), v.end());
 }
 
 // recursive
@@ -373,6 +376,13 @@ int factorialStack(int n)
     }
 
     return ans;
+}
+
+// Efficient string building
+// v is a list of chars
+std::string buildString(const std::vector<std::string>& v)
+{
+    return std::string(v.begin(), v.end());
 }
 
 struct ListNode {

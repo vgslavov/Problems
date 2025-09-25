@@ -140,8 +140,7 @@ def diff_array(arr, shifts):
 
     return diff
 
-# Build a prefix sum
-#pythonic
+# Build a prefix sum: Pythonic
 def prefix_sum_accumulate(arr):
     return list(accumulate(arr))
 
@@ -292,6 +291,8 @@ def fn(arr, k):
     return ans
 
 # Monotonic increasing stack/queue
+# run-time: O(n)
+# space: O(n)
 def mono_stack(arr):
     stack = []
     ans = 0
@@ -303,6 +304,58 @@ def mono_stack(arr):
             stack.pop()
 
         stack.append(num)
+
+    return ans
+
+# Monotonic increasing/decreasing sliding window using heap
+# run-time: O(n*log k)
+# space: O(k)
+def mono_heap(arr, k):
+    heap = []
+    left = 0
+    ans = []
+
+    for right in range(len(arr)):
+        # max heap: value, index
+        heapq.heappush(heap, (-arr[right], right))
+
+        # reached window size
+        if right >= k - 1:
+            # pop all indices outside window
+            while heap[0][1] < left:
+                heapq.heappop(heap)
+
+            # window max
+            ans.append(-heap[0][0])
+
+            # slide window
+            left += 1
+
+    return ans
+
+# Monotonic increasing/decreasing sliding window using deque
+# run-time: O(n)
+# space: O(k)
+def mono_deque(arr, k):
+    dq = deque()
+    ans = []
+
+    for i in range(len(arr)):
+        # 1. remove elements not in the window
+        if dq and dq[0] < i - k + 1:
+            dq.popleft()
+
+        # 2. remove smaller elements:
+        # monotonically decreasing
+        while dq and arr[dq[-1]] < arr[i]:
+            dq.pop()
+
+        # 3. add to deque
+        dq.append(i)
+
+        # reached window size
+        if i >= k - 1:
+            ans.append(arr[dq[0]])
 
     return ans
 
