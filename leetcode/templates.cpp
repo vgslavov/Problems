@@ -765,30 +765,30 @@ public:
     using ChildrenMap = std::map<char, Trie>;
 
     void insert(const std::string& word) {
-        Trie* curr = this;
+        Trie* node = this;
 
         for (const auto& c: word) {
-            ChildrenMap& children = curr->d_children;
+            ChildrenMap& children = node->d_children;
             auto it = children.find(c);
             if (it == children.end()) {
                 children[c] = Trie();
             }
 
-            curr = &curr->d_children[c];
+            node = &children[c];
         }
     }
 
     bool search(const std::string& word) {
-        Trie* curr = this;
+        Trie* node = this;
 
         for (const auto& c: word) {
-            ChildrenMap& children = curr->d_children;
+            ChildrenMap& children = node->d_children;
             const auto cit = children.find(c);
             if (cit == children.end()) {
                 return false;
             }
 
-            curr = &curr->d_children[c];
+            node = &children[c];
         }
 
         return true;

@@ -320,6 +320,23 @@ TODO
 |Transitive relationship|BFS, Union Find|
 |Interval|Greedy|
 
+## AlgoMonster Topics
+
+| Topic                | Difficulty | ROI      | Completed |
+|-----------------------|------------|---------|-----------|
+| Two Pointers          | Easy       | High    | done: -adv|
+| Sliding Window        | Easy       | High    | done: -adv|
+| Breadth-First Search  | Easy       | High    | done      |
+| Depth-First Search    | Medium     | High    | done      |
+| Backtracking          | High       | High    |
+| Heap                  | Medium     | Medium  | done: -moving best |
+| Binary Search         | Easy       | Medium  | done: -adv|
+| Dynamic Programming   | High       | Medium  |
+| Divide and Conquer    | Medium     | Low     |
+| Trie                  | Medium     | Low     | done: -autocomplete |
+| Union Find            | Medium     | Low     |
+| Greedy                | High       | Low     |
+
 ## Time Complexity
 
 * in-place != `O(1)`: if using recursion, space can be `O(n)` or `O(log n)`

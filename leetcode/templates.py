@@ -878,18 +878,23 @@ class TrieNode:
     def __init__(self):
         # you can store data at nodes if you wish
         self.data = None
+
+        # key: char, value: TrieNode
         self.children = {}
 
 def build_trie(words):
     root = TrieNode()
+
     for word in words:
-        curr = root
+        node = root
+
         for c in word:
-            if c not in curr.children:
-                curr.children[c] = TrieNode()
-            curr = curr.children[c]
-        # at this point, you have a full word at curr
-        # you can perform more logic here to give curr an attribute if you want
+            if c not in node.children:
+                node.children[c] = TrieNode()
+            node = node.children[c]
+
+        # at this point, you have a full word at node
+        # you can perform more logic here to give node an attribute if you want
 
     return root
 
@@ -897,25 +902,27 @@ def build_trie(words):
 class Trie:
     def __init__(self, value=None):
         self.data = value
+
+        # key: char, value: Trie
         self.children = {}
 
     def insert(self, word):
-        curr = self
+        node = self
 
         for c in word:
-            if c not in curr.children:
-                curr.children[c] = Trie()
+            if c not in node.children:
+                node.children[c] = Trie()
 
-            curr = curr.children[c]
+            node = node.children[c]
 
     def search(self, word):
-        curr = self
+        node = self
 
         for c in word:
-            if c not in curr.children:
+            if c not in node.children:
                 return False
 
-            curr = curr.children[c]
+            node = node.children[c]
 
         return True
 

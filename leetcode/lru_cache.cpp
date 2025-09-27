@@ -82,9 +82,10 @@ private:
         return value;
     }
 
-    // key, value tuples
+    // (key, value) tuples
     using ListTuples = std::list<std::tuple<int, int>>;
-    // key: List iterator
+    // key: cache key
+    // value: List iterator of the tuple (key, value)
     using KeyListMap = std::unordered_map<int, ListTuples::iterator>;
     KeyListMap d_cache;
     ListTuples d_list;
