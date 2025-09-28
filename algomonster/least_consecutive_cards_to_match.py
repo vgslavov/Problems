@@ -6,9 +6,9 @@ import math
 import sys
 import unittest
 
-# number: sliding window, shortest
+# tags: sliding window
 
-# solution: sliding window
+# solution: sliding window, shortest
 # complexity:
 # run-time: O(n)
 # space: O(n)

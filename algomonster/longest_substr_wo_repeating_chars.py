@@ -5,9 +5,9 @@ import argparse
 import sys
 import unittest
 
-# tags: sliding window, longest
+# tags: sliding window
 
-# solution: sliding window + dict
+# solution: sliding window, longest + dict
 # complexity
 # run-time: O(n)
 # space: O(n)

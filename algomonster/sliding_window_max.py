@@ -23,7 +23,7 @@ def sliding_window_max(nums: list[int], k: int) -> list[int]:
 
         # reached window size
         if right >= k - 1:
-            # pop all indices outside window
+            # pop all indices outside window: O(log k)
             while heap[0][1] < left:
                 heapq.heappop(heap)
 
@@ -103,5 +103,5 @@ if __name__ == "__main__":
 
     nums = [int(x) for x in input().split()]
     k = int(input())
-    res = sliding_window_maximum(nums, k)
+    res = sliding_window_max(nums, k)
     print(" ".join(map(str, res)))

@@ -22,11 +22,14 @@ def subarray_sum(arr: list[int], target: int) -> list[int]:
 
     for i in range(len(arr)):
         curr_sum += arr[i]
+
         # sum([i, j]) = sum([0, j]) - sum([0, i-1])
-        # 0-----[i<----k---->j]---->
+        # 0-----[i<-------->j]---->
+        # target = curr_sum - complement
         complement = curr_sum - target
 
         if complement in prefix_sums:
+            # right-exclusive: [start, end)
             return [prefix_sums[complement], i+1]
 
         # right exclusive index: [)
