@@ -5,7 +5,7 @@
 // url: https://leetcode.com/problems/find-the-duplicate-number/
 // section:
 // difficulty: medium
-// tags: array, two pointers, binary search, bit manipulation
+// tags: array, two pointers, binary search, bit manipulation, citadel
 
 // constraints
 // 1 <= n <= 10^5

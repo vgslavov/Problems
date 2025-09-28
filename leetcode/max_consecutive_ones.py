@@ -8,7 +8,7 @@ import unittest
 # url: https://leetcode.com/problems/max-consecutive-ones-iii/
 # section: sliding window
 # difficulty: medium
-# tags: array, binary search, sliding window, prefix sum, leetcode 75, meta
+# tags: array, binary search, sliding window, prefix sum, leetcode 75, meta, citadel
 
 # constraints
 # 1 <= nums.length <= 10^5

@@ -10,7 +10,7 @@ import unittest
 # url: https://leetcode.com/problems/longest-palindromic-substring/
 # section: meta
 # difficulty: medium
-# tags: meta, two pointers, string, dp, grind 75
+# tags: meta, two pointers, string, dp, grind 75, citadel
 
 # constraints
 # 1 <= s.length <= 1000

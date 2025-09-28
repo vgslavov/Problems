@@ -8,7 +8,7 @@ import unittest
 # url: https://leetcode.com/problems/merge-intervals/
 # section: intervals
 # difficulty: medium
-# tags: array, sorting, top 150, meta, grind 75
+# tags: array, sorting, top 150, meta, grind 75, citadel
 
 # constraints
 # 1 <= intervals.length <= 10^4
