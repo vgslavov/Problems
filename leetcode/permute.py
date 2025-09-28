@@ -9,7 +9,7 @@ import unittest
 # url: https://leetcode.com/problems/permutations/
 # section: backtracking
 # difficulty: medium
-# tags: array, backtracking, top 150, meta, grind 75
+# tags: array, backtracking, top 150, meta, grind 75, citadel
 
 # constraints
 # 1 <= nums.length <= 6
@@ -36,20 +36,22 @@ def permute(nums: list[int]) -> list[list[int]]:
 # space: O(n)
 # TODO: understand better
 def permute2(nums: list[int]) -> list[list[int]]:
-    def backtrack(curr):
+    def backtrack(path):
         # base case: permutation as long as input
-        if len(curr) == len(nums):
+        if len(path) == len(nums):
             # append a *copy* of the current permutation to the answer
-            ans.append(curr[:])
+            ans.append(path[:])
             return
 
         # iterate through input on each level of the tree
         for n in nums:
             # TODO: put in dict to optimize: O(n*n!)
-            if n not in curr:
-                curr.append(n)
-                backtrack(curr)
-                curr.pop()
+            if n in path:
+                continue
+
+            path.append(n)
+            backtrack(path)
+            path.pop()
 
     # root of the backtracking tree is an empty list
     # nodes are the leaves of the tree

@@ -10,7 +10,7 @@ import unittest
 # url: https://leetcode.com/problems/3sum/
 # section: two pointers
 # difficulty: medium
-# tags: array, two pointers, sorting, top 150, meta, grind 75
+# tags: array, two pointers, sorting, top 150, meta, grind 75, citadel
 
 # constraints
 # 3 <= nums.length <= 3000
