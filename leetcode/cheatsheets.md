@@ -20,6 +20,7 @@
   - [Combinations & Permutations](#combinations--permutations)
   - [Intervals](#intervals)
 - [Patterns](#patterns)
+- [AlgoMonster Topics](#algomonster-topics)
 - [Time Complexity](#time-complexity)
   - [Arrays (dynamic array/list)](#arrays-dynamic-arraylist)
   - [Strings (immutable)](#strings-immutable)

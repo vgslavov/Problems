@@ -4,7 +4,7 @@ import argparse
 import sys
 import unittest
 
-# tags: backtracking
+# tags: backtracking, dfs
 
 # solution: AlgoMonster backtracking basic
 # complexity:

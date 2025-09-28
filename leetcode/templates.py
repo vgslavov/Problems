@@ -753,37 +753,37 @@ def backtrack(curr, OTHER_ARGUMENTS...):
 
     return ans
 
-# Backtracking: basic
-ans = []
-def backtrack_basic(start_index, path, [...additional states]):
+def is_leaf(start_index):
+    # define the base case
+    return start_index == len(INPUT)
+
+def is_valid(edge):
+    # define the pruning condition
+    return True
+
+def get_edges(start_index, states):
+    # define how to get edges from current state
+    return EDGES
+
+# Backtracking: basic pruning
+def backtrack_pruning(start_index, path, [...additional states]):
     if is_leaf(start_index):
         ans.append(path[:]) # add a copy of the path to the result
+        #report(path)
         return
 
     for edge in get_edges(start_index, [...additional states]):
         # prune if needed
         if not is_valid(edge):
             continue
+
         path.add(edge)
         if additional states:
-            update(...additional states)
-        backtrack_basic(start_index + len(edge), path, [...additional states])
-        # revert(...additional states) if necessary e.g. permutations
-        path.pop()
+            update([...additional states])
 
-# Backtracking: pruning
-def backtrack_pruning(start_index, path):
-    if is_leaf(start_index):
-        report(path)
-        return
-
-    for edge in get_edges(start_index):
-        # prune if needed
-        if not is_valid(edge):
-            continue
-        path.add(edge)
         # increment start_index
-        backtrack_pruning(start_index + len(edge), path)
+        backtrack_pruning(start_index + len(edge), path, [...additional states])
+        # revert(states) if necessary e.g. permutations
         path.pop()
 
 # Backtracking: aggregation
@@ -801,19 +801,19 @@ def backtrack_agg(start_index, [...additional states]):
 
 # Backtracking: permutations
 def permute(nums):
-    def backtrack(curr):
+    def backtrack(path):
         # base case
-        if len(curr) == len(nums):
-            ans.append(curr[:])
+        if len(path) == len(nums):
+            ans.append(path[:])
             return
 
         for n in nums:
-            if n in curr:
+            if n in path:
                 continue
 
-            curr.append(n)
-            backtrack(curr)
-            curr.pop()
+            path.append(n)
+            backtrack(path)
+            path.pop()
 
     ans = []
     backtrack([])
@@ -821,19 +821,19 @@ def permute(nums):
 
 # Backtracking: combinations
 def combine(n, k):
-    def backtrack(curr, i):
+    def backtrack(start_index, path):
         # base case
-        if len(curr) == k:
-            ans.append(curr[:])
+        if len(path) == k:
+            ans.append(path[:])
             return
 
-        for num in range(i, n+1):
-            curr.append(num)
-            backtrack(curr, num + 1)
-            curr.pop()
+        for num in range(start_index, n+1):
+            path.append(num)
+            backtrack(num + 1, path)
+            path.pop()
 
     ans = []
-    backtrack([], 1)
+    backtrack(1, [])
     return ans
 
 # Dynamic programming: recursive top-down memoization
