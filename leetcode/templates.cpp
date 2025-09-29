@@ -286,7 +286,8 @@ std::vector<int> diffArray(
 // Build a prefix sum: using STL
 std::vector<int> prefixSumPartialSum(const std::vector<int>& v)
 {
-    std::vector<int> prefix(v.size());
+    std::vector<int> prefix(v.size()+1);
+    prefix[0] = 0;
     std::partial_sum(v.begin(), v.end(), prefix.begin());
     return prefix;
 }
@@ -567,11 +568,14 @@ int bfs(TreeNode* root)
         // do logic for current level
 
         while (size) {
+            // front of queue is leftmost
             TreeNode* node_p = level.front();
+            // pop *front* of queue
             level.pop();
 
             // do logic
             if (node_p->left) {
+                // back of queue is rightmost
                 level.push(node_p->left);
             }
 
@@ -627,6 +631,7 @@ int dfs(int node,
 std::vector<int> findTopk(const std::vector<int>& v, int k)
 {
     std::priority_queue<int, std::vector<int>, std::greater<int>> minHeap;
+    //std::priority_queue<int> maxHeap;
 
     for (const auto& num : v) {
         // do some logic to push onto heap according to problem's criteria
@@ -665,7 +670,7 @@ bool binarySearchLeft(const std::vector<int>& v, int target)
 }
 
 // Binary search: using lower_bound, return index of element
-int binarySearchLeft(const std::vector<int>& v, int target)
+int binarySearchLeft2(const std::vector<int>& v, int target)
 {
     auto it = std::lower_bound(v.begin(), v.end(), target);
     if (it == v.end() || *it != target) {

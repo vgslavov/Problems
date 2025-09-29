@@ -20,7 +20,6 @@
   - [Combinations & Permutations](#combinations--permutations)
   - [Intervals](#intervals)
 - [Patterns](#patterns)
-- [AlgoMonster Topics](#algomonster-topics)
 - [Time Complexity](#time-complexity)
   - [Arrays (dynamic array/list)](#arrays-dynamic-arraylist)
   - [Strings (immutable)](#strings-immutable)
@@ -323,20 +322,20 @@ TODO
 
 ## AlgoMonster Topics
 
-| Topic                | Difficulty | ROI      | Completed |
-|-----------------------|------------|---------|-----------|
-| Two Pointers          | Easy       | High    | done: -adv|
-| Sliding Window        | Easy       | High    | done: -adv|
-| Breadth-First Search  | Easy       | High    | done      |
-| Depth-First Search    | Medium     | High    | done      |
-| Backtracking          | High       | High    |
-| Heap                  | Medium     | Medium  | done: -moving best |
-| Binary Search         | Easy       | Medium  | done: -adv|
-| Dynamic Programming   | High       | Medium  |
-| Divide and Conquer    | Medium     | Low     |
-| Trie                  | Medium     | Low     | done: -autocomplete |
-| Union Find            | Medium     | Low     |
-| Greedy                | High       | Low     |
+| Topic                | Difficulty | ROI    |Lang  | Completed |
+|----------------------|------------|--------|------|-----------|
+| Two Pointers         | Easy       | High   |py/cpp| done: -adv|
+| Sliding Window       | Easy       | High   |py/cpp| done: -adv|
+| Breadth-First Search | Easy       | High   |py/cpp| done      |
+| Depth-First Search   | Medium     | High   |py/cpp| done      |
+| Backtracking         | High       | High   |py    | pruning & states|
+| Heap                 | Medium     | Medium |py/cpp| done: -moving best |
+| Binary Search        | Easy       | Medium |py/cpp| done: -adv|
+| Dynamic Programming  | High       | Medium |
+| Divide and Conquer   | Medium     | Low    |
+| Trie                 | Medium     | Low    |py    | done: -autocomplete |
+| Union Find           | Medium     | Low    |
+| Greedy               | High       | Low    |
 
 ## Time Complexity
 
