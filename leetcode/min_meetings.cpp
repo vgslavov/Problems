@@ -26,7 +26,7 @@ int minMeetingRooms(std::vector<std::vector<int>>& intervals)
     // sort by start time
     std::sort(intervals.begin(), intervals.end());
 
-    // min heap
+    // min heap for storing *end* times of concurrent meetings
     std::priority_queue<int, std::vector<int>, std::greater<int>> rooms;
     // add end time of 1st meeting
     rooms.push(intervals[0][1]);

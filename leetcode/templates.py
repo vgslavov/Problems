@@ -246,6 +246,12 @@ def string(arr):
     #return ''.join(c for c in arr)
     return ''.join(arr)
 
+# Definition for singly-linked list.
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
 # Linked list: fast and slow pointer
 # traversing: iteratively more common
 def fn(head):
@@ -275,12 +281,6 @@ def fn(head, k):
         fast = fast.next
 
     return slow
-
-# Definition for singly-linked list.
-class ListNode:
-    def __init__(self, val=0, next=None):
-        self.val = val
-        self.next = next
 
 # Linked list: dummy nodes
 def fn(head):
@@ -827,9 +827,9 @@ def combine(n, k):
             ans.append(path[:])
             return
 
-        for num in range(start_index, n+1):
-            path.append(num)
-            backtrack(num + 1, path)
+        for i in range(start_index, n+1):
+            path.append(i)
+            backtrack(i + 1, path)
             path.pop()
 
     ans = []

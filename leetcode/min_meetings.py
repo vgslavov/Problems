@@ -26,7 +26,7 @@ def min_meetings(intervals: list[list[int]]) -> int:
     # sort by start time
     intervals.sort(key=lambda x: x[0])
 
-    # min heap for storing start/end times
+    # min heap for storing *end* times of concurrent meetings
     rooms = []
 
     # add end time of first meeting

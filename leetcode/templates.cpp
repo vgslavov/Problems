@@ -204,7 +204,7 @@ int slidingWindowLongest(const std::vector<int>& v)
             ++left;
         }
 
-        // windows is guaranteed to be valid here
+        // window is guaranteed to be valid here
         ans = std::max(ans, right - left + 1);
 
     }

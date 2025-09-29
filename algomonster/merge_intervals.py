@@ -18,7 +18,7 @@ def merge_intervals(intervals: list[list[int]]) -> list[list[int]]:
     ans = []
 
     for start, end in intervals:
-        # start of current is before previous
+        # start of current is before previou end
         if ans and overlap(ans[-1], [start, end]):
             ans[-1][1] = max(ans[-1][1], end)
         else:
