@@ -22,6 +22,7 @@ def binary_tree_min_depth(root: Node) -> int:
         return 0
 
     queue = deque([root])
+    # 0-based depth
     depth = 0
 
     while queue:

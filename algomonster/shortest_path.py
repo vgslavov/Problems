@@ -12,8 +12,10 @@ import unittest
 # run-time: O(n+m)
 # space: O(n)
 def shortest_path(graph: list[list[int]], a: int, b: int) -> int:
+    # start at a
     queue = deque([a])
     seen = {a}
+
     ans = 0
 
     while queue:
@@ -22,6 +24,7 @@ def shortest_path(graph: list[list[int]], a: int, b: int) -> int:
         for _ in range(n):
             node = queue.popleft()
     
+            # reach b
             if node == b:
                 return ans
     

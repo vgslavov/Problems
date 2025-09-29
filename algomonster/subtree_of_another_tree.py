@@ -66,7 +66,7 @@ def is_same_tree(tree1, tree2):
 def subtree_of_another_tree2(root: Node, sub_root: Node) -> bool:
     if not root:
         return False
-    return is_same_tree(root, sub_root) or subtree_of_another_tree(root.left, sub_root) or subtree_of_another_tree(root.right, sub_root)
+    return is_same_tree(root, sub_root) or subtree_of_another_tree2(root.left, sub_root) or subtree_of_another_tree2(root.right, sub_root)
 
 # this function builds a tree from input; you don't have to modify it
 # learn more about how trees are encoded in https://algo.monster/problems/serializing_tree
