@@ -9,7 +9,7 @@ import unittest
 
 # solution: min & max heaps
 # complexity:
-# run-time: O(q*log q), where q is the number of queries
+# run-time: O(q*log q), where q is # of queries
 # space: O(n)
 class MedianOfStream:
     def __init__(self):
@@ -44,6 +44,8 @@ class MedianOfStream:
         #print(f"get_median: max_heap:{self.max_heap}, min_heap:{self.min_heap}")
 
         if len(self.min_heap) == len(self.max_heap):
+            # median is average of two middle values
+            # subtract because max_heap stores negative values
             return (self.min_heap[0] - self.max_heap[0]) / 2
         elif len(self.min_heap) > len(self.max_heap):
             return self.min_heap[0]

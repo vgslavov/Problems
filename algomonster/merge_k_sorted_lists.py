@@ -25,11 +25,14 @@ def merge_k_sorted_lists2(lists: list[list[int]]) -> list[int]:
 
     return ans
 
-# solution: AlgoMonster min heap
+# solution: AlgoMonster min heap, uses sorting requirement
 # complexity:
 # run-time: O(n*log k)
 # space: O(k)
 def merge_k_sorted_lists(lists: list[list[int]]) -> list[int]:
+    # min heap
+    # values: value, list index, element index
+    # maintains only k elements in heap at any time
     heap = []
     ans = []
 
@@ -37,7 +40,7 @@ def merge_k_sorted_lists(lists: list[list[int]]) -> list[int]:
         if not lists[i]:
             continue
 
-        # (1st value, list num, 1st index)
+        # push first element of each list
         heapq.heappush(heap, (lists[i][0], i, 0))
 
     while heap:

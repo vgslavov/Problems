@@ -23,6 +23,7 @@ def find_kth_largest(nums: list[int], k: int) -> int:
         if len(heap) > k:
             heapq.heappop(heap)
     
+    # kth largest will be on top of min heap
     return heap[0]
 
 # solution: AlgoMonster max heap
@@ -33,10 +34,11 @@ def find_kth_largest2(nums: list[int], k: int) -> int:
     if not nums:
         return 0
 
-    # max heap
+    # max heap: O(n)
     nums = [-x for x in nums]
     heapq.heapify(nums)
 
+    # O(k*log n)
     for _ in range(k - 1):
         heapq.heappop(nums)
 

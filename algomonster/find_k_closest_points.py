@@ -18,7 +18,10 @@ def find_k_closest_points(points: list[list[int]], k: int) -> list[list[int]]:
     for x,y in points:
         # distance b/w 2 points: sqrt((x1-x2)^2 + (y1-y2)^2)
         # origin: (0, 0)
-        distance = (x**2 + y**2) ** 0.5
+        # optimization: no need to take sqrt!
+        distance = (x**2 + y**2)
+        # actual distance
+        #distance = (x**2 + y**2) ** 0.5
         #distance = math.sqrt(pow(x, 2) + pow(y, 2))
 
         # heapq is min heap by default
