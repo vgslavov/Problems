@@ -66,7 +66,7 @@ def two_pointers(arr1, arr2):
 
     return ans
 
-# divide & conquer: recursive *stable* merge sort
+# Divide & conquer: recursive *stable* merge sort
 def merge_sort(arr):
     # base case
     if len(arr) < 2:
@@ -97,6 +97,23 @@ def merge_sort(arr):
         r += 1
 
     return result
+
+# Two pointers: opposite direction
+# run-time: O(n)
+# space: O(1)
+def two_sum(nums, target):
+    # assumes nums is sorted
+    pass
+
+# Deduplication: sort + two pointers
+# run-time: O(n*log n) + O(n^2) ~ O(n^2)
+# space: O(1)
+def three_sum(nums, target):
+  nums.sort()
+  for i in range(len(nums)):
+      if i > 0 and nums[i-1] == nums[i]: continue     # skip duplicate inputs
+      tuples = two_sum(nums[i+1:], target - nums[i])  # restrict twoSum's search interval
+      # code to construct triplets using num[i] and tuples
 
 # Sliding window
 SOME_THRESHOLD = 10  # Example threshold, adjust as needed

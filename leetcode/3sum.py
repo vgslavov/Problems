@@ -196,7 +196,7 @@ def three_sum3(nums):
 # number: 167
 # complexity
 # run-time: O(n)
-# space: O(n)
+# space: O(1)
 def two_sum2(nums, k, ans):
     left = 0
     right = len(nums)-1
