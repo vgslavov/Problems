@@ -157,6 +157,17 @@ def mod(x, y):
 * bitmasking
     * setting bits: use OR & shift left
     * reading bits: use AND & shift left
+* common operations
+    * test kth bit: `n & (1 << k) != 0`
+    * set kth bit: `n |= (1 << k)`
+    * clear kth bit: `n &= ~(1 << k)`
+    * toggle kth bit: `n ^= (1 << k)`
+    * multiply by `2^k`: `n << k`
+    * divide by `2^k`: `n >> k`
+    * check if power of 2: `n & (n - 1) == 0`
+    * swap two numbers: `a ^= b; b ^= a; a ^= b`
+    * count 1s: `count += (n & 1); n >>= 1`
+
 
 ### Priority Queue / Heap
 
@@ -284,13 +295,14 @@ TODO
 ### Intervals
 
 1. Determine if there's an overlap between two intervals
-    * intervals: `[x1, x2]`, `[y1, y2]`
+    * intervals: `[x[0], x[1]]`, `[y[0], y[1]]`
     * overlapping condition
-        * `not (x2 < y1 or y2 < x1)`
-        * or `x2 >= y1 and y2 >= x1` (Demorgan's Law)
-    * `max(x1, y1) <= min(x2, y2)`
-2. Finding the overlap
-    * `[max(x1, y1), min(x2, y2)]`
+        * `not (x[1] < y[0] or y[1] < x[0])`
+        * or `x[1] >= y[0] and y[1] >= x[0]` (Demorgan's Law)
+        * if end/start cannot overlap: `max(x[0], y[0]) <= min(x[1], y[1])`
+        * if end/start can overlap: `max(x[0], y[0]) < min(x[1], y[1])`
+2. Finding/merging overlapping intervals
+    * `[max(x[0], y[0]), min(x[1], y[1])]`
 3. Sort by start time
 
 ## Patterns
