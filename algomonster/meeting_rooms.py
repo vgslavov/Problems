@@ -5,6 +5,7 @@ import sys
 import unittest
 
 # tags: merge intervals
+# leetcode: 252
 
 def overlap(x, y):
     return not (x[1] <= y[0] or y[1] <= x[0])
