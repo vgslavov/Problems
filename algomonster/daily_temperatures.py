@@ -5,12 +5,12 @@ import sys
 import unittest
 
 # tags: stack, monotonic stack
+# leetcode: 739
 
-# solution: AlgoMonster stack
+# solution: AlgoMonster monotonic stack
 # complexity:
 # run-time: O(n)
 # space: O(n)
-# TODO: understand better
 def daily_temperatures(t: list[int]) -> list[int]:
     # store visited indices of t w/o solution
     stack = []
