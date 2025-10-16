@@ -18,24 +18,30 @@ import unittest
 # -10^4 <= nums[i] <= 10^4
 # k is in the range [1, the number of unique elements in the array].
 # It is guaranteed that the answer is unique.
+# May return the answer in any order (no sorting necessary)
 
 # solution: dict + min heap
 # complexity
 # run-time: O(n + u*log k) where u is unique
-# space: O(n)
+# space: O(u)
 def topk_freq(nums, k):
     counts = defaultdict(int)
 
+    # O(n)
     for n in nums:
         counts[n] += 1
 
+    # min heap of (count, number)
     heap = []
+
+    # O(u*log k)
     for key,val in counts.items():
         heapq.heappush(heap, (val, key))
 
         if len(heap) > k:
             heapq.heappop(heap)
 
+    # O(k)
     return [key for _,key in heap]
 
 class TestTopKFreq(unittest.TestCase):
