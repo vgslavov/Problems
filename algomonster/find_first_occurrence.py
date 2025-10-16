@@ -27,6 +27,23 @@ def find_first_occurrence(arr: list[int], target: int) -> int:
     
     return first
 
+def find_last_occurrence(arr: list[int], target: int) -> int:
+    left = 0
+    right = len(arr) - 1
+    last = -1
+
+    while left <= right:
+        mid = (left + right) // 2
+        if arr[mid] == target:
+            last = mid
+            left = mid + 1      # keep searching right half
+        elif arr[mid] < target:
+            left = mid + 1
+        else:
+            right = mid - 1
+
+    return last
+
 class TestFindFirstOccurrence(unittest.TestCase):
     def test_example_1(self):
         arr = [1, 2, 2, 2, 3, 4, 5]

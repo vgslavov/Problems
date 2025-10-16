@@ -657,8 +657,7 @@ def find_topk(arr, k):
 
     return [num for num in heap]
 
-# Binary search: using bisect, ascending sorted only!
-#pythonic
+# Binary search: using Pythonic bisect, ascending sorted only!
 def binary_search_bisect_left(arr, target):
     i = bisect.bisect_left(arr, target)
     if i < len(arr) and arr[i] == target:
@@ -692,6 +691,38 @@ def binary_search(arr, target):
 
     # left is the insertion point
     return left
+
+def feasible(num, target):
+    # not greater
+    return num <= target
+
+    # find boundary
+    #return num == target
+
+    # not smaller
+    #return num >= target
+
+# Binary search: feasible conditions
+def binary_search_feasible(arr, target):
+    left = 0
+    right = len(arr)-1
+    ans = -1
+
+    while left <= right:
+        mid = (left + right) // 2
+
+        if feasible(arr[mid], target):
+            # record!
+            ans = mid
+
+            # go left or go right depending on the problem
+            right = mid - 1
+            #left = mid + 1
+        else:
+            left = mid + 1
+            #right = mid - 1
+
+    return ans
 
 # Binary search: duplicate elements, left-most insertion point
 def binary_search_left(arr, target):

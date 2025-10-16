@@ -28,6 +28,18 @@ def first_not_smaller(arr: list[int], target: int) -> int:
             
     return first
 
+def find_last_not_greater(arr: list[int], target: int) -> int:
+    left, right = 0, len(arr) - 1
+    last = -1
+    while left <= right:
+        mid = (left + right) // 2
+        if arr[mid] <= target:
+            last = mid       # arr[mid] is not greater; try to go right to find the last such
+            left = mid + 1
+        else:
+            right = mid - 1
+    return last
+
 class TestFirstNotSmaller(unittest.TestCase):
     def test_example_1(self):
         arr = [1, 3, 3, 5, 8, 8, 10]

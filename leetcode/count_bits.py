@@ -12,6 +12,8 @@ import unittest
 # constraints:
 # 0 <= n <= 10^5
 
+# complexity:
+# run-time: O(log n)
 def count(n):
     ones = 0
 
