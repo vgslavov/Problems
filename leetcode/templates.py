@@ -409,8 +409,15 @@ def mono_deque(arr, k):
     return ans
 
 def overlap(x, y):
+    # if end/start cannot overlap
+    return max(x[0], y[0]) <= min(x[1], y[1])
+
+    # if end/start can overlap
+    #return max(x[0], y[0]) < min(x[1], y[1])
+
     # 2nd interval starts before 1st ends and vice versa
-    return not (x[1] < y[0] or y[1] < x[0])
+    #return not (x[1] < y[0] or y[1] < x[0])
+
     # if inclusive: [1, 5], [5, 6] not considered overlapping
     #return not (x[1] <= y[0] or y[1] <= x[0])
 
@@ -462,7 +469,7 @@ def bst_insert(tree, val):
 
 # Binary tree: recursive DFS (more common)
 # data struct: recursion stack (LIFO)
-def dfs(root, target=None):
+def dfs_tree_recursive(root, target=None):
     # base case
     if not root:
         return None
@@ -474,7 +481,7 @@ def dfs(root, target=None):
     #print("preorder: ".format(root.val))
 
     # do logic
-    left = dfs(root.left, target)
+    left = dfs_tree_recursive(root.left, target)
 
     if left:
         return left
@@ -483,14 +490,14 @@ def dfs(root, target=None):
     # on BST: traversal is in sorted order
     #print("inorder: ".format(root.val))
 
-    return dfs(root.right, target)
+    return dfs_tree_recursive(root.right, target)
 
     # postorder: root is last to be traversed
     #print("postorder: ".format(root.val))
 
 # Binary tree: iterative DFS (less common)
 # data struct: recursion stack (LIFO)
-def dfs(root, target=None):
+def dfs_tree_iterative(root, target=None):
     stack = [root]
 
     while stack:
@@ -509,7 +516,7 @@ def dfs(root, target=None):
 
 # Binary tree: iterative BFS (more common)
 # data struct: queue (FIFO)
-def bfs(root):
+def bfs_tree_iterative(root):
     # list of root!
     queue = deque([root])
     ans = 0
@@ -534,7 +541,9 @@ def bfs(root):
 
 # Graph: build adjacency list/dict
 # input: array of edges
+EDGES = [[0,1],[1,2],[2,0],[2,3]]
 # output: adjacency list/dict
+GRAPH = {0: [1], 1: [0, 2], 2: [1, 0, 3], 3: [2]}
 def build_adjlist(edges):
     graph = defaultdict(list)
 
@@ -546,16 +555,13 @@ def build_adjlist(edges):
     return graph
 
 # basic
-EDGES = [[0,1],[1,2],[2,0],[2,3]]
-GRAPH = {0: [1], 1: [0, 2], 2: [1, 0, 3], 3: [2]}
 def get_neighbors(node):
     return GRAPH[node]
 
-# Graph: DFS (recursive)
+# Graph: recursive DFS
 # data struct: recursion stack (LIFO)
-def dfs_recursive(root):
+def dfs_graph_recursive(root):
     def dfs(node):
-        ans = 0
         # do some logic
         for neighbor in get_neighbors(node):
             if neighbor in seen:
@@ -567,14 +573,15 @@ def dfs_recursive(root):
 
         return ans
 
-    seen = {root}
+    ans = 0
+    seen = set([root])
     return dfs(root)
 
-# Graph: DFS (iterative)
+# Graph: iterative DFS
 # data struct: stack (LIFO)
-def dfs_iterative(root):
+def dfs_graph_iterative(root):
     stack = [root]
-    seen = {root}
+    seen = set([root])
     ans = 0
 
     while stack:
@@ -613,13 +620,13 @@ def get_neighbors_matrix(coord):
 
     return ans
 
-# Graph: BFS
+# Graph: iterative BFS
 # data struct: queue (FIFO)
 # input: adjacency list/dict
-def bfs(root):
+def bfs_graph_iterative(root):
     queue = deque([root])
-    seen = {root}
-    #seen = set([root])
+    seen = set([root])
+    #seen = {root}
     level = 0
 
     while queue:
@@ -650,12 +657,18 @@ CRITERIA = 0
 def find_topk(arr, k):
     heap = []
     for num in arr:
+        # min heap
         # do some logic to push onto heap according to problem's criteria
         heapq.heappush(heap, (CRITERIA, num))
+
+        # max heap
+        #heapq.heappush(heap, (-CRITERIA, num))
+
+        # limit size to O(k)
         if len(heap) > k:
             heapq.heappop(heap)
 
-    return [num for num in heap]
+    return [num for _, num in heap]
 
 # Binary search: using Pythonic bisect, ascending sorted only!
 def binary_search_bisect_left(arr, target):
