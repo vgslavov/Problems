@@ -654,7 +654,7 @@ def bfs_graph_iterative(root):
 
     return level
 
-def find_indegree(graph):
+def calc_indegree(graph):
     # init
     indegree = { node:0 for node in graph }
 
@@ -668,7 +668,7 @@ def find_indegree(graph):
 def topo_sort(graph):
     ans = []
     queue = deque()
-    indegree = find_indegree(graph)
+    indegree = calc_indegree(graph)
 
     for node in indegree:
         if indegree[node] == 0:
