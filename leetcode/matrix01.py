@@ -19,14 +19,14 @@ import unittest
 # 1 <= m * n <= 10^4
 # mat[i][j] is either 0 or 1.
 
-# solution: multi-source BFS
+# solution: multi-source iterative BFS
 # complexity:
 # run-time: O(m*n) for m x n matrix
 # space: O(m*n)
 def update_matrix(mat: list[list[int]]) -> list[list[int]]:
     def get_neighbors(node):
         row,col,steps = node
-        delta_row =[-1,0,1,0]
+        delta_row = [-1,0,1,0]
         delta_col = [0,1,0,-1]
 
         for i in range(len(delta_row)):

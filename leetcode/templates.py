@@ -607,7 +607,10 @@ NUM_ROWS, NUM_COLS = len(GRID), len(GRID[0])
 
 def get_neighbors_matrix(coord):
     row, col = coord
+    # go up, right, down, left:
+    # previous row, same row, next row, same row
     delta_row = [-1, 0, 1, 0]
+    # same col, next col, same col, previous col
     delta_col = [0, 1, 0, -1]
     ans = []
 
@@ -650,6 +653,38 @@ def bfs_graph_iterative(root):
         level += 1
 
     return level
+
+def find_indegree(graph):
+    # init
+    indegree = { node:0 for node in graph }
+
+    for node in graph:
+        for neighbor in graph[node]:
+            indegree[neighbor] += 1
+
+    return indegree
+
+# Topological sort (ala BFS)
+def topo_sort(graph):
+    ans = []
+    queue = deque()
+    indegree = find_indegree(graph)
+
+    for node in indegree:
+        if indegree[node] == 0:
+            queue.append(node)
+
+    while queue:
+        node = queue.popleft()
+        ans.append(node)
+
+        for neighbor in graph[node]:
+            indegree[neighbor] -= 1
+            if indegree[neighbor] == 0:
+                queue.append(neighbor)
+
+    # if unprocessed nodes, cycle exists, no topological sort
+    return ans if len(graph) == len(ans) else None
 
 CRITERIA = 0
 
