@@ -18,7 +18,7 @@ def build_adjlist(edges, tasks):
 
     return graph
 
-def find_indegree(graph):
+def calc_indegree(graph):
     indegree = { node: 0 for node in graph }
 
     for node in graph:
@@ -32,10 +32,11 @@ def find_indegree(graph):
 # run-time: O(V + E)
 # space: O(V)
 def topo_sort(graph):
-    indegree = find_indegree(graph)
+    indegree = calc_indegree(graph)
     queue = deque()
     ans = []
 
+    # add all nodes with indegree 0 to queue
     for node in indegree:
         if indegree[node] == 0:
             queue.append(node)
