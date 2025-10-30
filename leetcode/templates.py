@@ -612,16 +612,19 @@ def get_neighbors_matrix(coord):
     delta_row = [-1, 0, 1, 0]
     # same col, next col, same col, previous col
     delta_col = [0, 1, 0, -1]
-    ans = []
+    #ans = []
 
     for i in range(len(delta_row)):
         neighbor_row = row + delta_row[i]
         neighbor_col = col + delta_col[i]
 
         if 0 <= neighbor_row < NUM_ROWS and 0 <= neighbor_col < NUM_COLS:
-            ans.append((neighbor_row, neighbor_col))
+            # generate:
+            yield (neighbor_row, neighbor_col)
+            # or append to list:
+            #ans.append((neighbor_row, neighbor_col))
 
-    return ans
+    #return ans
 
 # Graph: iterative BFS
 # data struct: queue (FIFO)
@@ -670,6 +673,7 @@ def topo_sort(graph):
     queue = deque()
     indegree = calc_indegree(graph)
 
+    # enqueue all nodes with indegree 0
     for node in indegree:
         if indegree[node] == 0:
             queue.append(node)
