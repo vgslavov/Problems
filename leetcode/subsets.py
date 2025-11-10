@@ -44,6 +44,28 @@ def subsets(nums: list[int]) -> list[list[int]]:
     ans.sort()
     return ans
 
+# solution: Neetcode backtracking
+# complexity:
+# run-time: O(n*n^2)
+# space: O(n)
+def subsets2(nums: list[int]) -> list[list[int]]:
+    def dfs(i):
+        if i >= len(nums):
+            ans.append(subset[:])
+            return
+
+        # decision to include nums[i]
+        subset.append(nums[i])
+        dfs(i+1)
+
+        # decision NOT to include nums[i]
+        subset.pop()
+        dfs(i+1)
+
+    ans = []
+    subset = []
+    dfs(0)
+    return ans
 class TestSubsets(unittest.TestCase):
     def test_empty(self):
         nums = []
