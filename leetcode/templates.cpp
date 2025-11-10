@@ -181,6 +181,71 @@ int twoPointers(const std::vector<int>& v1, const std::vector<int>& v2)
     return ans;
 }
 
+std::vector<int> merge(const std::vector<int>& nums, int left_i, int right_i)
+{
+    // base case
+    if (nums.size() < 2) {
+        return nums;
+    }
+
+    // 1. divide: split array into 2
+    size_t mid = nums.size() / 2;
+    std::vector<int> left = merge(nums, left_i, mid-1);
+    std::vector<int> right = merge(nums, mid, right_i);
+
+    // 2. merge: combine
+    int l = 0;
+    int r = 0;
+    std::vector<int> ans;
+
+    while (l < left.size() && r < right.size()) {
+        if (left[l] <= right[r]) {
+            ans.push_back(left[l]);
+            ++l;
+        } else {
+            ans.push_back(right[r]);
+            ++r;
+        }
+    }
+
+    // add remaining
+    while (l < left.size()) {
+        ans.push_back(left[l]);
+        ++l;
+    }
+
+    while (r < right.size()) {
+        ans.push_back(right[r]);
+        ++r;
+    }
+
+    return ans;
+}
+
+// Divide & conquer: recursive *stable* merge sort
+std::vector<int> mergeSort(const std::vector<int>& nums)
+{
+    return merge(nums, 0, nums.size());
+}
+
+void twoSum(const std::vector<int>& nums, int target, int left, int right)
+{}
+
+void threeSum(const std::vector<int>& nums, int target)
+{
+    std::sort(nums.begin(), nums.end());
+
+    for (size_t i = 0; i != nums.size(); ++i) {
+        // optimization: skip duplicates
+        if (i > 0 && nums[i-1] == nums[i]) {
+            continue;
+        }
+
+        // restrict search interval
+        twoSum(nums, target-nums[i], i+1, nums.size()-1);
+    }
+}
+
 const int SOME_THRESHOLD = 10;
 
 bool invalidCondition(int curr)
