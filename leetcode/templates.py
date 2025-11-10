@@ -11,6 +11,7 @@ import math
 # Sources:
 # - https://leetcode.com/explore/interview/card/cheatsheets/720/resources/4723/
 # - https://algo.monster/templates
+# - https://neetcode.io/
 
 # Two pointers: one input, opposite direction
 def condition(a, b):
@@ -114,6 +115,43 @@ def three_sum(nums, target):
       if i > 0 and nums[i-1] == nums[i]: continue     # skip duplicate inputs
       tuples = two_sum(nums[i+1:], target - nums[i])  # restrict twoSum's search interval
       # code to construct triplets using num[i] and tuples
+
+# Kadane's algorithm: maximum subarray sum
+def max_subarray(nums):
+    max_sum = -math.inf
+    curr_sum = 0
+
+    for n in nums:
+        curr_sum = max(curr_sum, 0)
+        curr_sum += n
+        # or
+        #curr_sum = max(curr_sum+n, n)
+
+        max_sum = max(max_sum, curr_sum)
+
+    return max_sum
+
+# Kadane's algorithm: explicit sliding window
+def max_subarray_sliding(nums):
+    max_sum = -math.inf
+    curr_sum = 0
+    left = 0
+    max_left, max_right = 0, 0
+
+    for right in range(len(nums)):
+        # negative sum: reset current sum & slide window
+        if curr_sum < 0:
+            curr_sum = 0
+            left = right
+
+        curr_sum += nums[right]
+
+        # found new max
+        if curr_sum > max_sum:
+            max_sum = curr_sum
+            max_left, max_right = left, right
+
+    return [max_left, max_right]
 
 # Sliding window
 SOME_THRESHOLD = 10  # Example threshold, adjust as needed
