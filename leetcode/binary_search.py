@@ -8,7 +8,7 @@ import unittest
 # title: Binary Search
 # url: https://leetcode.com/problems/binary-search/
 # difficulty: easy
-# tags: array, binary search, top 150, grind 75
+# tags: array, binary search, top 150, grind 75, neetcode 150
 
 # constraints:
 # 1 <= nums.length <= 10^4

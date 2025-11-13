@@ -8,7 +8,7 @@ import unittest
 # url: https://leetcode.com/problems/subsets/
 # section: backtracking
 # difficulty: medium
-# tags: backtracking, grind 75
+# tags: backtracking, grind 75, neetcode 150
 
 # constraints
 # 0 <= nums.length <= 10
@@ -66,6 +66,7 @@ def subsets2(nums: list[int]) -> list[list[int]]:
     subset = []
     dfs(0)
     return ans
+
 class TestSubsets(unittest.TestCase):
     def test_empty(self):
         nums = []

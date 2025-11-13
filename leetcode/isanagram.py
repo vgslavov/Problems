@@ -28,10 +28,9 @@ def isanagram(s, t):
         count[c] += 1
 
     for c in t:
-        if c in count and count[c]:
-            count[c] -= 1
-        else:
+        if c not in count or not count[c]:
             return False
+        count[c] -= 1
 
     return True
 
@@ -43,7 +42,7 @@ def isanagram2(s, t):
     if len(s) != len(t):
         return False
 
-    return ''.join(sorted(s)) == ''.join(sorted(t))
+    return sorted(s) == sorted(t)
 
 # TODO: extra
 # What if the inputs contain Unicode characters? How would you adapt

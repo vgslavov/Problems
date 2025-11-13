@@ -8,7 +8,7 @@ import unittest
 # url: https://leetcode.com/problems/single-number/
 # section: bit manipulation
 # difficulty: easy
-# tags: array, bit manipulation, top 150, leetcode 75
+# tags: array, bit manipulation, top 150, leetcode 75, neetcode 150
 
 # constraints
 # 1 <= nums.length <= 3 * 10^4
@@ -20,6 +20,7 @@ import unittest
 # complexity
 # run-time: O(n), slow
 # space: O(1)
+# TODO: understand better
 def toggle_bit(value, offset):
     return value ^ (1 << offset)
 

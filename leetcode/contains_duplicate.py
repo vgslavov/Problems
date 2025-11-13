@@ -8,7 +8,7 @@ import unittest
 # title: Contains Duplicate
 # url: https://leetcode.com/problems/contains-duplicate/
 # difficulty: easy
-# tags: array, hash table, sliding window, grind 75
+# tags: array, hash table, sliding window, grind 75, neetcode 150
 
 # constraints
 # 1 <= nums.length <= 10^5
@@ -30,22 +30,51 @@ def contains_duplicate(nums: list[int]) -> bool:
     # key with max value
     return d[max(d, key=d.get)] > 1 if d else False
 
+# solution: set
+# complexity:
+# run-time: O(n)
+# space: O(n)
+def contains_duplicate2(nums: list[int]) -> bool:
+        s = set()
+
+        for n in nums:
+            if n in s:
+                return True
+            s.add(n)
+
+        return False
+
+# solution: Neetcode set len
+# complexity:
+# run-time: O(n)
+# space: O(n)
+def contains_duplicate3(nums: list[int]) -> bool:
+    return len(set(nums)) < len(nums)
+
 class TestContainsDuplicate(unittest.TestCase):
     def test_empty(self):
         nums = []
         self.assertFalse(contains_duplicate(nums))
+        self.assertFalse(contains_duplicate2(nums))
+        self.assertFalse(contains_duplicate3(nums))
 
     def test_no_duplicates(self):
         nums = [1, 2, 3, 4, 5]
         self.assertFalse(contains_duplicate(nums))
+        self.assertFalse(contains_duplicate2(nums))
+        self.assertFalse(contains_duplicate3(nums))
 
     def test_with_duplicates(self):
         nums = [1, 2, 3, 1]
         self.assertTrue(contains_duplicate(nums))
+        self.assertTrue(contains_duplicate2(nums))
+        self.assertTrue(contains_duplicate3(nums))
 
     def test_large_input(self):
         nums = list(range(100000)) + [99999]
         self.assertTrue(contains_duplicate(nums))
+        self.assertTrue(contains_duplicate2(nums))
+        self.assertTrue(contains_duplicate3(nums))
 
 if __name__ == '__main__':
     sys.exit(unittest.main())
