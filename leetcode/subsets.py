@@ -54,12 +54,14 @@ def subsets2(nums: list[int]) -> list[list[int]]:
             ans.append(subset[:])
             return
 
-        # decision to include nums[i]
+        # left subtree: decision to include nums[i]
         subset.append(nums[i])
+        # go to next element
         dfs(i+1)
 
-        # decision NOT to include nums[i]
+        # right subtree: decision NOT to include nums[i]
         subset.pop()
+        # go to next element
         dfs(i+1)
 
     ans = []

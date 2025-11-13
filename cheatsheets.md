@@ -17,7 +17,6 @@
   - [Recursion](#recursion)
   - [DP](#dp)
   - [Backtracking](#backtracking)
-  - [Combinations & Permutations](#combinations--permutations)
   - [Intervals](#intervals)
 - [Patterns](#patterns)
 - [AlgoMonster Topics](#algomonster-topics)
@@ -284,14 +283,11 @@ Dynamic Programming = Recursion + Memoization
 * implemented using recursion (almost always)
 * `backtracking = dfs(tree)`
 * `backtracking + memoization = DP`
-* construct tree
+* construct decision tree
 * complexity
     * run-time: `O(total nodes) ~ O(# of children^h)`
     * space: `O(h)`
 
-### Combinations & Permutations
-
-TODO
 
 ### Intervals
 

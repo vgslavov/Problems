@@ -110,11 +110,17 @@ def two_sum(nums, target):
 # run-time: O(n*log n) + O(n^2) ~ O(n^2)
 # space: O(1)
 def three_sum(nums, target):
-  nums.sort()
-  for i in range(len(nums)):
-      if i > 0 and nums[i-1] == nums[i]: continue     # skip duplicate inputs
-      tuples = two_sum(nums[i+1:], target - nums[i])  # restrict twoSum's search interval
-      # code to construct triplets using num[i] and tuples
+    nums.sort()
+    ans = []
+    for i in range(len(nums)):
+        if i > 0 and nums[i-1] == nums[i]: continue     # skip duplicate inputs
+        # nums[i] + nums[j] + nums[k] = target
+        # nums[i] is fixed, find pairs that sum to target - nums[i]
+        tuples = two_sum(nums[i+1:], target - nums[i])  # restrict twoSum's search interval
+        for t in tuples:
+            ans.append((nums[i], t[0], t[1]))
+
+    return ans
 
 # Kadane's algorithm: maximum subarray sum
 def max_subarray(nums):
@@ -864,7 +870,7 @@ def binary_search_min(arr):
 def binary_search_max(arr):
     def check(x):
         # this function is implemented depending on the problem
-        return BOOLEAN
+        return True
 
     left = MINIMUM_POSSIBLE_ANSWER
     right = MAXIMUM_POSSIBLE_ANSWER
@@ -879,7 +885,7 @@ def binary_search_max(arr):
 
 # Backtracking
 def backtrack(curr, OTHER_ARGUMENTS...):
-    if (BASE_CASE):
+    if BASE_CASE:
         # modify the answer
         return
 
