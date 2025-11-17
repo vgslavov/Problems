@@ -113,10 +113,15 @@ def three_sum(nums, target):
     nums.sort()
     ans = []
     for i in range(len(nums)):
-        if i > 0 and nums[i-1] == nums[i]: continue     # skip duplicate inputs
+        # skip duplicate inputs
+        if i > 0 and nums[i-1] == nums[i]: continue
+
         # nums[i] + nums[j] + nums[k] = target
         # nums[i] is fixed, find pairs that sum to target - nums[i]
-        tuples = two_sum(nums[i+1:], target - nums[i])  # restrict twoSum's search interval
+        # nums[i] <= nums[j] <= nums[k]
+
+        # restrict twoSum's search interval
+        tuples = two_sum(nums[i+1:], target - nums[i])
         for t in tuples:
             ans.append((nums[i], t[0], t[1]))
 

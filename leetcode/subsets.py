@@ -16,9 +16,8 @@ import unittest
 
 # solution: LeetCode backtracking
 # complexity
-# run-time: O(n*2^n)
+# run-time: O(n*2^n), for each element in n, 2^n subsets
 # space: O(n)
-# TODO: understand better
 def subsets(nums: list[int]) -> list[list[int]]:
     def backtrack(curr, i):
         # subsets have variable length (unlike permutations)
@@ -46,27 +45,29 @@ def subsets(nums: list[int]) -> list[list[int]]:
 
 # solution: Neetcode backtracking
 # complexity:
-# run-time: O(n*n^2)
+# run-time: O(n*2^n), for each element in n, 2^n subsets
 # space: O(n)
 def subsets2(nums: list[int]) -> list[list[int]]:
-    def dfs(i):
+    def dfs(i, cur):
         if i >= len(nums):
-            ans.append(subset[:])
+            ans.append(cur[:])
             return
 
         # left subtree: decision to include nums[i]
-        subset.append(nums[i])
+        cur.append(nums[i])
         # go to next element
-        dfs(i+1)
+        dfs(i+1, cur)
 
         # right subtree: decision NOT to include nums[i]
-        subset.pop()
+        cur.pop()
         # go to next element
-        dfs(i+1)
+        dfs(i+1, cur)
 
     ans = []
-    subset = []
-    dfs(0)
+    dfs(0, [])
+
+    # for unit tests
+    ans.sort()
     return ans
 
 class TestSubsets(unittest.TestCase):
@@ -74,21 +75,26 @@ class TestSubsets(unittest.TestCase):
         nums = []
         expected = [[]]
         self.assertEqual(subsets(nums), expected)
+        self.assertEqual(subsets2(nums), expected)
 
     def test_single_element(self):
         nums = [1]
         expected = [[], [1]]
         self.assertEqual(subsets(nums), expected)
+        self.assertEqual(subsets2(nums), expected)
+
 
     def test_two_elements(self):
         nums = [1, 2]
         expected = [[], [1], [1, 2], [2]]
         self.assertEqual(subsets(nums), expected)
+        self.assertEqual(subsets2(nums), expected)
 
     def test_three_elements(self):
         nums = [1, 2, 3]
         expected = [[], [1], [1, 2], [1, 2, 3], [1, 3], [2], [2, 3], [3]]
         self.assertEqual(subsets(nums), expected)
+        self.assertEqual(subsets2(nums), expected)
 
 if __name__ == "__main__":
     sys.exit(unittest.main())

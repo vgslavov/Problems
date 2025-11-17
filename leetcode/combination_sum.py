@@ -17,8 +17,9 @@ import unittest
 
 # solution: backtracking using dfs
 # complexity:
-# run-time: O(2^(n + t/m)), n is number of candidates, t is target, m is minimum value in candidates
-# space: O(t/m), maximum depth of recursion tree
+# run-time: O(n^(t/min(candidates)))
+# where n is number of candidates, t is target, m is minimum value in candidates
+# space: O(t/min(candidates)) 
 def combination_sum(candidates: list[int], target: int) -> list[list[int]]:
     def dfs(i, total, cur):
         # base cases
@@ -40,10 +41,11 @@ def combination_sum(candidates: list[int], target: int) -> list[list[int]]:
     dfs(0, 0, [])
     return ans
 
-# solution: backtracking using dfs, template
+# solution: backtracking using dfs+sort, template
 # complexity:
-# run-time: O(2^(t/m)), n is number of candidates, t is target, m is minimum value in candidates
-# space: O(t/m), maximum depth of recursion tree
+# run-time: O(n^(t/min(candidates)))
+# where n is number of candidates, t is target, m is minimum value in candidates
+# space: O(t/min(candidates))
 def combination_sum2(candidates: list[int], target: int) -> list[list[int]]:
     def dfs(i, total, cur):
         # base cases
