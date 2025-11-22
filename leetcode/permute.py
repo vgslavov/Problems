@@ -9,12 +9,12 @@ import unittest
 # url: https://leetcode.com/problems/permutations/
 # section: backtracking
 # difficulty: medium
-# tags: array, backtracking, top 150, meta, grind 75, citadel
+# tags: array, backtracking, top 150, meta, grind 75, citadel, neetcode 150
 
 # constraints
 # 1 <= nums.length <= 6
 # -10 <= nums[i] <= 10
-# All the integers of nums are unique.
+# All the integers of nums are *unique*.
 
 # solution: itertools
 # complexity

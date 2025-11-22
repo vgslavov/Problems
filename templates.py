@@ -948,7 +948,7 @@ def backtrack_agg(start_index, [...additional states]):
             revert([...additional states])
     return ans
 
-# Backtracking: permutations
+# Backtracking: permutations of *unique* numbers
 def permute(nums):
     def backtrack(path):
         # base case
