@@ -102,9 +102,27 @@ def merge_sort(arr):
 # Two pointers: opposite direction
 # run-time: O(n)
 # space: O(1)
-def two_sum(nums, target):
+def two_sum(nums, left, right, target):
     # assumes nums is sorted
-    pass
+    ans = []
+
+    while left < right:
+        cur_sum = nums[left] + nums[right]
+        if cur_sum == target:
+            ans.append([nums[left], nums[right]])
+            # skip dupes
+            while left < right and nums[left] == nums[left+1]:
+                left += 1
+            while left < right and nums[right] == nums[right-1]:
+                right -= 1
+            left += 1
+            right -= 1
+        elif cur_sum < target:
+            left += 1
+        else:
+            right -= 1
+
+    return ans
 
 # Deduplication: sort + two pointers
 # run-time: O(n*log n) + O(n^2) ~ O(n^2)
@@ -118,10 +136,12 @@ def three_sum(nums, target):
 
         # nums[i] + nums[j] + nums[k] = target
         # nums[i] is fixed, find pairs that sum to target - nums[i]
-        # nums[i] <= nums[j] <= nums[k]
+        # nums is sorted: nums[i] <= nums[j] <= nums[k]
 
-        # restrict twoSum's search interval
-        tuples = two_sum(nums[i+1:], target - nums[i])
+        # restrict two_sum's search interval
+        tuples = two_sum(nums, i+1, len(nums)-1, target-nums[i])
+        # slicing creates new list: O(n) space
+        #tuples = two_sum(nums[i+1:], target - nums[i])
         for t in tuples:
             ans.append((nums[i], t[0], t[1]))
 
