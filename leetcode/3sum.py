@@ -241,6 +241,53 @@ def three_sum4(nums):
 
     return sorted([list(v) for v in ans])
 
+# solution: two pointers
+# complexity:
+# run-time: O(n)
+# space: O(1)
+def two_sum3(nums, left, right, target):
+    ans = []
+
+    while left < right:
+        cur_sum = nums[left] + nums[right]
+        if cur_sum == target:
+            ans.append([nums[left], nums[right]])
+            # skip dupes
+            while left < right and nums[left] == nums[left+1]:
+                left += 1
+            while left < right and nums[right] == nums[right-1]:
+                right -= 1
+            left += 1
+            right -= 1
+        elif cur_sum < target:
+            left += 1
+        else:
+            right -= 1
+
+    return ans
+
+# solution: Algomonster, sort + two pointers + dedupe
+# complexity:
+# run-time: O(n*log n) + O(n^2) ~ O(n^2)
+# space: O(1)
+def three_sum5(nums):
+    nums.sort()
+    ans = []
+
+    for k in range(len(nums)):
+        # optimization: can't add to 0 w/o negative number
+        if nums[k] > 0:
+            break
+
+        # optimization: skip dupes
+        if k and nums[k] == nums[k-1]:
+            continue
+
+        tuples = two_sum3(nums, k+1, len(nums)-1, -nums[k])
+        for t in tuples:
+            ans.append([nums[k],t[0],t[1]])
+
+    return ans
 class TestThreeSum(unittest.TestCase):
     def test_none(self):
         nums = [0,1,1]
@@ -249,6 +296,7 @@ class TestThreeSum(unittest.TestCase):
         self.assertEqual(three_sum2(nums), expected)
         self.assertEqual(three_sum3(nums), expected)
         self.assertEqual(three_sum4(nums), expected)
+        self.assertEqual(three_sum5(nums), expected)
 
     def test_0s(self):
         nums = [0,0,0]
@@ -257,6 +305,7 @@ class TestThreeSum(unittest.TestCase):
         self.assertEqual(three_sum2(nums), expected)
         self.assertEqual(three_sum3(nums), expected)
         self.assertEqual(three_sum4(nums), expected)
+        self.assertEqual(three_sum5(nums), expected)
 
     def test_many_0s(self):
         nums = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -284,6 +333,7 @@ class TestThreeSum(unittest.TestCase):
         self.assertEqual(three_sum2(nums), expected)
         self.assertEqual(three_sum3(nums), expected)
         self.assertEqual(three_sum4(nums), expected)
+        self.assertEqual(three_sum5(nums), expected)
 
     def test1(self):
         nums = [-1,0,1,2,-1,-4]
@@ -292,6 +342,7 @@ class TestThreeSum(unittest.TestCase):
         self.assertEqual(three_sum2(nums), expected)
         self.assertEqual(three_sum3(nums), expected)
         self.assertEqual(three_sum4(nums), expected)
+        self.assertEqual(three_sum5(nums), expected)
 
     def test2(self):
         nums = [3,0,-2,-1,1,2]
@@ -300,6 +351,7 @@ class TestThreeSum(unittest.TestCase):
         self.assertEqual(three_sum2(nums), expected)
         self.assertEqual(three_sum3(nums), expected)
         self.assertEqual(three_sum4(nums), expected)
+        self.assertEqual(three_sum5(nums), expected)
 
 if __name__ == '__main__':
     sys.exit(unittest.main())
