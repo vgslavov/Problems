@@ -21,8 +21,8 @@ digit2letters = {
 
 # solution: AlgoMonster basic backtracking
 # complexity:
-# run-time: O(4^n * n) 4 choices per digit, n digits, O(n) to join
-# space: O(4^n * n) O(4^n) strings, O(n) for path
+# run-time: O(4^n * n) max of 4 choices per digit, n digits, O(n) to join
+# space: O(4^n * n), O(4^n) strings, O(n) for path
 def letter_combinations_of_phone_number(digits: str) -> list[str]:
     def dfs(start_index, path):
         # base case
