@@ -15,7 +15,7 @@ import unittest
 # all elements of candidates are distinct.
 # 1 <= target <= 40
 
-# solution: backtracking using dfs
+# solution: Neetcode backtracking using dfs
 # complexity:
 # run-time: O(n^(t/min(candidates)))
 # where n is number of candidates, t is target, m is minimum value in candidates

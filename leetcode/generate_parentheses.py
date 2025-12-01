@@ -38,7 +38,28 @@ def generate_parenthesis(n: int) -> list[str]:
     dfs(0, 0)
     return ans
 
-# TODO: solve using algomerithmic approach
+# TODO: solve using Alogmonster approach
+
+class TestGenerateParenthesis(unittest.TestCase):
+    def test_example1(self):
+        n = 3
+        expected = ["((()))","(()())","(())()","()(())","()()()"]
+        self.assertCountEqual(generate_parenthesis(n), expected)
+
+    def test_example2(self):
+        n = 1
+        expected = ["()"]
+        self.assertCountEqual(generate_parenthesis(n), expected)
+
+    def test_example3(self):
+        n = 4
+        expected = [
+            "(((())))","((()()))","((())())","((()))()",
+            "(()(()))","(()()())","(()())()","(())(())",
+            "(())()()","()((()))","()(()())","()(())()",
+            "()()(())","()()()()"
+        ]
+        self.assertCountEqual(generate_parenthesis(n), expected)
 
 if __name__ == "__main__":
     sys.exit(unittest.main())

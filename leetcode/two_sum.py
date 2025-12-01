@@ -7,6 +7,7 @@ import unittest
 # number: 1
 # title: Two Sum
 # url: https://leetcode.com/problems/two-sum/
+# similar: 167
 # section: hashmap
 # difficulty: easy
 # tags: array, hash table, top 150, grind 75, neetcode 150
@@ -16,6 +17,7 @@ import unittest
 # -10^9 <= nums[i] <= 10^9
 # -10^9 <= target <= 10^9
 # Only one valid answer exists.
+# input is NOT sorted
 
 # solution: brute-force
 # complexity
