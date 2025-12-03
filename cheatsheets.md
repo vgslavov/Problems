@@ -337,7 +337,7 @@ Dynamic Programming = Recursion + Memoization
 | Sliding Window       | Easy       | High   |py/cpp| done: -adv|
 | Breadth-First Search | Easy       | High   |py/cpp| done      |
 | Depth-First Search   | Medium     | High   |py/cpp| done      |
-| Backtracking         | High       | High   |py    | pruning, states, dedupe|
+| Backtracking         | High       | High   |py    | -agg & memo |
 | Heap                 | Medium     | Medium |py/cpp| done: -moving best |
 | Binary Search        | Easy       | Medium |py/cpp| done: -adv|
 | Dynamic Programming  | High       | Medium |
