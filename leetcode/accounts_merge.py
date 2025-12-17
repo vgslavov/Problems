@@ -20,9 +20,11 @@ import unittest
 
 # solution: recursive dfs
 # complexity:
-# run-time: O(a * e log e) where a is number of accounts, e
-#          is average number of emails per account (for sorting)
-# space: O(a * e)
+# run-time: O(a * e^2 + a * e log e) where a is number of accounts, e
+#          is average number of emails per account
+#          - O(a * e^2) for graph building (all pairs within each account)
+#          - O(a * e log e) for DFS traversal and sorting
+# space: O(a * e^2) for graph adjacency list + O(a * e) for seen set and DFS
 def accounts_merge(accounts: list[list[str]]) -> list[list[str]]:
     def dfs(node, cur):
         for neighbor in graph[node]:
@@ -74,6 +76,30 @@ class TestAccountsMerge(unittest.TestCase):
              ["John", "johnnybravo@mail.com"],
              ["Mary", "mary@mail.com"]]
         )
+
+    def test_single_email_accounts(self):
+        result = accounts_merge([["John", "e1@mail.com"],
+                                 ["Jane", "e2@mail.com"]])
+        # Should return both accounts separately
+        self.assertEqual(len(result), 2)
+        self.assertIn(["John", "e1@mail.com"], result)
+        self.assertIn(["Jane", "e2@mail.com"], result)
+
+    def test_chained_emails(self):
+        # e1 connects to e2, e2 connects to e3, so all should merge
+        result = accounts_merge([["John", "e1@mail.com", "e2@mail.com"],
+                                 ["John", "e2@mail.com", "e3@mail.com"],
+                                 ["John", "e3@mail.com", "e4@mail.com"]])
+        # All emails should be in one merged account
+        self.assertEqual(len(result), 1)
+        merged_emails = set(result[0][1:])  # Skip name
+        self.assertEqual(merged_emails, {"e1@mail.com", "e2@mail.com", "e3@mail.com", "e4@mail.com"})
+
+    def test_no_merging(self):
+        result = accounts_merge([["John", "e1@mail.com"],
+                                 ["Jane", "e2@mail.com"],
+                                 ["Bob", "e3@mail.com"]])
+        self.assertEqual(len(result), 3)
 
 if __name__ == "__main__":
     sys.exit(unittest.main())
