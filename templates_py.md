@@ -1,4 +1,4 @@
-# Algorithm Templates
+# Algorithm Templates (Python)
 
 ## Table of Contents
 
