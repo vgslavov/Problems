@@ -1,5 +1,7 @@
-// Hello Interview: Observer
+// Observer Pattern
 // source: https://www.hellointerview.com/learn/low-level-design/in-a-hurry/patterns
+// type: behavioral
+// use: when you need to notify multiple objects about changes in a subject
 
 #include <iostream>
 #include <string>

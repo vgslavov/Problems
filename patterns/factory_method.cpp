@@ -1,5 +1,7 @@
-// Hello Interview: Factory Method
+// Factory Method Pattern
 // source: https://www.hellointerview.com/learn/low-level-design/in-a-hurry/patterns
+// type: creational
+// use: when you want to hide internal complexity behind a simple entry point
 
 #include <memory>
 #include <stdexcept>

@@ -1,5 +1,7 @@
-// Hello Interview: Singleton
+// Singleton Pattern
 // source: https://www.hellointerview.com/learn/low-level-design/in-a-hurry/patterns
+// type: creational
+// use: when you truly need one global instance (rare)
 
 #include <string>
  

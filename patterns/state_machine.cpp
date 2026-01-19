@@ -1,5 +1,7 @@
-// Hello Interview: State Machine
+// State Machine Pattern
 // source: https://www.hellointerview.com/learn/low-level-design/in-a-hurry/patterns
+// type: behavioral
+// use: when an object's behavior depends on its current state and transitions get messy
 
 #include <iostream>
 #include <memory>

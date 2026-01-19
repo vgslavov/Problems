@@ -1,5 +1,7 @@
-// Hello Interview: Strategy
+// Strategy Pattern
 // source: https://www.hellointerview.com/learn/low-level-design/in-a-hurry/patterns
+// type: behavioral
+// use: when you're replacing if/else logic with interchangeable behaviors
 
 #include <iostream>
 #include <memory>

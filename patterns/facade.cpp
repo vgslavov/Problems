@@ -1,5 +1,7 @@
-// Hello Interview: Facade
+// Facade Pattern
 // source: https://www.hellointerview.com/learn/low-level-design/in-a-hurry/patterns
+// type: structural
+// use: when you want to hide internal complexity behind a simple entry point
 
 #include <string>
  

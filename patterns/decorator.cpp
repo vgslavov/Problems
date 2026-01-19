@@ -1,5 +1,7 @@
-// Hello Interview: Decorator
+// Decorator Pattern
 // source: https://www.hellointerview.com/learn/low-level-design/in-a-hurry/patterns
+// type: structural
+// use: when you need to layer optional behaviors at runtime without subclass explosion
 
 #include <memory>
 #include <string>

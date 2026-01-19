@@ -1,5 +1,7 @@
-// Hello Interview: Builder
+// Builder Pattern
 // source: https://www.hellointerview.com/learn/low-level-design/in-a-hurry/patterns
+// type: creational
+// use: when an object has lots of optional fields or messy construction details
 
 #include <map>
 #include <stdexcept>
