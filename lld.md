@@ -17,6 +17,11 @@
   - [Problem Types](#problem-types)
   - [Language Reference](#language-reference)
   - [Correctness](#correctness)
+    - [Course-Grained Locking](#course-grained-locking)
+    - [Fine-Grained Locking](#fine-grained-locking)
+    - [Atomic Variables](#atomic-variables)
+    - [Thread Confinement / Shared Nothing / Isolation](#thread-confinement--shared-nothing--isolation)
+    - [Common Bugs](#common-bugs)
   - [Coordination](#coordination)
   - [Scarcity](#scarcity)
     - [Semaphores](#semaphores)
@@ -54,7 +59,9 @@ std::atomic<int> counter(0);
 counter++;  // Thread-safe increment
 ```
 * **Locks (Mutexes)**: ensure only one thread can access a resource at a time
-    * `std::lock_guard` is a RAII wrapper for `std::mutex`
+    * `std::lock_guard<std::mutex>` is a RAII *wrapper* of `std::mutex`
+    * instead of manually calling `mutex.lock()` and `mutex.unlock()`
+    * unlocks automatically when the scope is exited
     ```cpp
     std::mutex mtx;
     {
@@ -63,7 +70,9 @@ counter++;  // Thread-safe increment
         balance += amount;
     }
     ```
-    * `std::unique_lock` is a more flexible version of `std::lock_guard`
+    * `std::shared_lock`: for read access, multiple threads allowed
+    * `std::unique_lock`: for write access, only one thread allowed
+        * a more flexible version of `std::lock_guard`
         * can be used to temporarily release the lock
         * can be used to wait for a condition to be met
 * **Semaphores**: counting locks
@@ -126,6 +135,99 @@ public:
 |Concurrent Map|N/A (GIL)|Intel TBB: `tbb::concurrent_hash_map`|
 
 ### Correctness
+
+#### Course-Grained Locking
+
+* protects all related state with one lock
+* `std::lock_guard<std::mutex>`
+* mistakes
+    * releasing the lock too early
+    * using different lock objects for operations that need to be atomic together
+* all operations that maintain an invariant must be protected by the same lock
+* if you hold the lock during the check, you must still hold it during the update
+* read/write locks (shared-exclusive locks): when `reads >> writes`
+```cpp
+// mutable: lock can be used in const methods!
+mutable std::shared_mutex rwMutex;
+
+// multiple threads can read at the same time
+std::shared_lock<std::shared_mutex> readLock(rwMutex);
+
+// only one thread can write at a time
+std::unique_lock<std::shared_mutex> writeLock(rwMutex);
+```
+
+#### Fine-Grained Locking
+
+* allows concurrent access to independent resources while protecting related ones
+* scales better than course-grained locking for large number of threads/resources
+* use when processing machine-generated data (e.g., logs, metrics, events)
+```cpp
+std::mutex locksMutex;
+
+// unique_ptr to mutex not lock_guard!
+std::unordered_map<std::string, std::unique_ptr<std::mutex>> seatLocks;
+
+// create lock_guard from mutex on the fly!
+std::lock_guard<std::mutex> lock(getLock(seatId));
+```
+* mistakes
+    * not acquiring locks in the correct/consistent order to prevent deadlocks
+    * not clearing dynamically allocated locks not in use
+
+#### Atomic Variables
+
+* work for single variables but fail for multi-field invariants
+* use special CPU instructions to perform read-modify-write operations in a single, uninterruptible step w/o needing a lock
+* CAS (Compare-And-Swap)
+    * an atomic instruction that compares the value of a memory location with an expected value
+    * if they are the same, it replaces the value with a new one
+    * if they are different, it does nothing
+* with a regular integer, incrementing is unsafe because increment operations are actually three steps (read, add, write) that can interleave b/w threads
+* faster & simpler than locks
+```cpp
+std::atomic<int> bookedCount{0};
+// increment by 1
+bookedCount.fetch_add(1);
+// or use the increment operator
+//++bookedCount;
+// read
+bookedCount.load();
+```
+* optimistic concurrency control
+    * try to update the value, if it fails, retry
+    * `compare_exchange_strong`: stronger, more reliable, but may fail spuriously
+    * `compare_exchange_weak`: weaker, may fail spuriously, but faster
+    ```cpp
+    std::atomic<int> bookedCount{0};
+    // try to increment by 1
+    if (bookedCount.compare_exchange_strong(0, 1)) {
+    // use in loop to handle spurious failures
+    //if (bookedCount.compare_exchange_weak(0, 1)) {
+        // success
+    } else {
+        // retry
+    }
+    ```
+* mistakes
+    * using atomic for multiple variables that need to be updated together
+    * not using atomic variables for counters/flags/stats only
+
+#### Thread Confinement / Shared Nothing / Isolation
+
+* eliminates concurrency entirely for related data
+* avoid sharing data between threads in the first place
+* trades synchronization complexity for architecture complexity
+* partition data and assign to different threads
+* overkill unless need scalability
+
+#### Common Bugs
+
+* check-then-act
+    * check a condition, make a decision based on that check, then act on it
+    * another thread invalidates the check between when you read it and when you act on it
+* read-modify-write
+    * when two threads read the same value, both compute from it, and both write back, causing one update to get lost
 
 ### Coordination
 
