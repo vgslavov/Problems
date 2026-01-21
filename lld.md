@@ -231,6 +231,104 @@ bookedCount.load();
 
 ### Coordination
 
+#### Common Bugs
+
+* busy-waiting: repeatedly check a condition without sleeping
+* sleep-polling: sleep for a short time, then check the condition again
+
+#### Goals
+
+1. Efficient waiting — consumers should sleep when there's no work, waking immediately when work arrives
+2. Backpressure — producers should slow down when consumers can't keep up, preventing memory exhaustion
+3. Thread safety — the coordination mechanism itself must handle concurrent access without corruption
+
+#### Shared State
+
+* wait/notify (condition variables)
+    * `wait`
+        * thread releases the lock and goes to sleep.
+        * thread stops consuming CPU entirely: paused until explicitly woken
+    ```cpp
+    {
+        std::mutex mutex;
+        // not a lock_guard: wait needs to unlock
+        std::unique_lock<std::mutex> lock(mutex);
+        std::condition_variable cv;
+
+        // recheck condition after waking up in case another thread modified it
+        while (!conditionIsMet()) {
+            cv.wait(lock);  // Releases lock, sleeps until notified
+        }
+        doWork();
+
+        // wake up all threads to prevent a deadlock:
+        // if you wake only one, you may wake up another consumer instead of producer
+        cv.notify_all();
+    }
+    ```
+* blocking queues (semaphore with N permits)
+```cpp
+#include <queue>
+#include <mutex>
+#include <condition_variable>
+#include <functional>
+
+class TaskScheduler {
+    std::queue<std::function<void()>> queue_;
+    std::mutex mutex_;
+    std::condition_variable not_empty_;
+    std::condition_variable not_full_;
+    static constexpr size_t MAX_SIZE = 1000;
+
+public:
+    void submitTask(std::function<void()> task) {
+        std::unique_lock<std::mutex> lock(mutex_);
+        not_full_.wait(lock, [this] { return queue_.size() < MAX_SIZE; });
+        queue_.push(std::move(task));
+        not_empty_.notify_one();
+    }
+
+    void workerLoop() {
+        while (true) {
+            std::function<void()> task;
+            {
+                std::unique_lock<std::mutex> lock(mutex_);
+                not_empty_.wait(lock, [this] { return !queue_.empty(); });
+                task = std::move(queue_.front());
+                queue_.pop();
+                not_full_.notify_one();
+            }
+            task();
+        }
+    }
+};
+```
+* common mistakes
+    * creating an unbounded queue: set capacity
+        * **block producers** if queue is full w/ `put`
+        * **timeout & reject** `offer(timeout)`
+        * **drop & log** `offer` without timeout, returns false
+    * not graceful shutdown
+        * interrupt the worker thread: `throw`
+        * use poll w/ timeout: `wait_for`
+        * use poison pill: special task to signal shutdown
+
+#### Message Passing
+
+* actor model: an object w/ a mailbox & message handler
+* actor pulls messages from mailbox 1 at-a-time
+* internal state is thread-confined
+* challenges
+    * mailbox overlfow
+    * messsage ordering
+    * debugging
+    * request-response patterns
+
+#### Use Cases
+
+* process requests asynchronously
+* handle bursty traffic
+
 ### Scarcity
 
 * managing limited resources
