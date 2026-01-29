@@ -32,6 +32,7 @@ def topk_freq(nums, k):
         counts[n] += 1
 
     # min heap of (count, number)
+    # maintain k largest by removing the smallest (root)
     heap = []
 
     # O(u*log k)

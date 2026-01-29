@@ -8,7 +8,7 @@ import unittest
 # url: https://leetcode.com/problems/roman-to-integer/
 # section: array/string, meta
 # difficulty: easy
-# tags: hash table, math, string, top 150, meta
+# tags: hash table, math, string, top 150, meta, grind 75
 
 # reference
 # Symbol       Value

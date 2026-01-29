@@ -10,7 +10,7 @@ import unittest
 # url: https://leetcode.com/problems/find-all-anagrams-in-a-string/
 # section: meta
 # difficulty: medium
-# tags: hash table, string, sliding window, meta
+# tags: hash table, string, sliding window, meta, grind 75
 
 # constraints
 # 1 <= s.length, p.length <= 3 * 10^4

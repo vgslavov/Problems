@@ -9,7 +9,7 @@ import unittest
 # url: https://leetcode.com/problems/number-of-islands/
 # section: graph matrix
 # difficulty: medium
-# tags: array, bfs, dfs, union find, matrix
+# tags: array, bfs, dfs, union find, matrix, grind 75
 
 # constraints
 # m == grid.length

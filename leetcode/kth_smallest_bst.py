@@ -8,7 +8,7 @@ import unittest
 # url: https://leetcode.com/problems/kth-smallest-element-in-a-bst/
 # section: binary search tree
 # difficulty: medium
-# tags: tree, dfs, bst, binary tree, top 150
+# tags: tree, dfs, bst, binary tree, top 150, grind 75
 
 # constraints
 # The number of nodes in the tree is n.

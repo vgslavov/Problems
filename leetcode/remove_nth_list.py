@@ -8,7 +8,7 @@ import unittest
 # url: https://leetcode.com/problems/remove-nth-node-from-end-of-list/
 # section: linked list
 # difficulty: medium
-# tags: linked list, two pointers, top 150
+# tags: linked list, two pointers, top 150, grind 75
 
 # constraints
 # The number of nodes in the list is sz.

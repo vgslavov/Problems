@@ -7,7 +7,7 @@ import unittest
 # title: Daily Temperatures
 # url: https://leetcode.com/problems/daily-temperatures/
 # difficulty: medium
-# tags: stack, array, monotonic stack
+# tags: stack, array, monotonic stack, grind 75
 
 # constraints
 # 1 <= temperatures.length <= 10^5

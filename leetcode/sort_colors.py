@@ -8,7 +8,7 @@ import unittest
 # title: Sort Colors
 # url: https://leetcode.com/problems/sort-colors/
 # difficulty: medium
-# tags: array, two-pointers, sorting
+# tags: array, two-pointers, sorting, grind 75
 
 # constraints:
 # 1 <= nums.length <= 300

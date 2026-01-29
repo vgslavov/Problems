@@ -8,7 +8,7 @@
 // url: https://leetcode.com/problems/group-anagrams/
 // section: hashmap
 // difficulty: medium
-// tags: array, hash table, string, sorting, top 150, meta, citadel
+// tags: array, hash table, string, sorting, top 150, meta, citadel, grind 75
 
 // constraints
 // k: len(strs[i])

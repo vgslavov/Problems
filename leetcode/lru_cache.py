@@ -9,8 +9,7 @@ import unittest
 # url: https://leetcode.com/problems/lru-cache/
 # section: linked list
 # difficulty: medium
-# tags: hash table, linked list, design, doubly-linked list, top 150, meta,
-# optiver, citadel
+# tags: hash table, linked list, design, doubly-linked list, top 150, meta, optiver, citadel, grind 75
 
 # constraints
 # 1 <= capacity <= 3000

@@ -6,7 +6,7 @@
 // url: https://leetcode.com/problems/container-with-most-water/
 // section: two pointers
 // difficulty: medium
-// tags: array, two pointers, greedy, top 150
+// tags: array, two pointers, greedy, top 150, grind 75
 
 // constraints
 // n == height.length

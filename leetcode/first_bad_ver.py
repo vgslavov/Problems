@@ -8,7 +8,7 @@ import unittest
 # url: https://leetcode.com/problems/first-bad-version/
 # section: meta
 # difficulty: easy
-# tags: binary search, interactive, meta
+# tags: binary search, interactive, meta, grind 75
 
 # constraints
 # 1 <= bad <= n <= 2^31 - 1

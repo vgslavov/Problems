@@ -222,6 +222,12 @@ def mod(x, y):
 ```
 Dynamic Programming = Recursion + Memoization
 ```
+* multistage planning
+    * a simple concept of solving bigger problems
+    * using smaller problems
+    * while saving results
+    * to avoid repeated calculations
+* `DP == DFS + memoization + pruning`
 * if you don't know where to start: use DFS + memoization
 * characteristics
     * optimal substructure
