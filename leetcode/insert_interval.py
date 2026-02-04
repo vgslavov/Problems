@@ -61,7 +61,8 @@ def insert_intervals(intervals, new_interval):
     return ans
 
 def overlap(x, y):
-    return not (x[1] < y[0] or y[1] < x[0])
+    return max(x[0], y[0]) <= min(x[1], y[1])
+    #return not (x[1] < y[0] or y[1] < x[0])
     
 # solution: append, sort & max
 # complexity:
@@ -82,6 +83,37 @@ def insert_intervals2(intervals, new_interval):
             ans.append([start,end])
         
     return ans
+
+# solution: AlgoMonster iterate
+# complexity:
+# run-time: O(n)
+# space: O(n)
+def insert_intervals3(intervals, new_interval):
+    ans = []
+    i = 0
+
+    # 1. add all intervals before start of new
+    while i < len(intervals) and intervals[i][1] < new_interval[0]:
+        ans.append(intervals[i])
+        i += 1
+
+    # 2. intervals overlapping with new interval: expand new intervals start & end
+    while i < len(intervals) and overlap(intervals[i], new_interval):
+        new_interval[0] = min(intervals[i][0], new_interval[0])
+        new_interval[1] = max(intervals[i][1], new_interval[1])
+        i += 1
+
+    # 3. add new interval
+    ans.append(new_interval)
+
+    # 4. append the rest
+    ans.extend(intervals[i:])
+    #while i < len(intervals):
+    #    ans.append(intervals[i])
+    #    i += 1
+
+    return ans
+
 class TestInsertIntervals(unittest.TestCase):
     def test_empty_intervals(self):
         intervals = []
@@ -89,6 +121,7 @@ class TestInsertIntervals(unittest.TestCase):
         expected = [new]
         self.assertEqual(insert_intervals(intervals, new), expected)
         self.assertEqual(insert_intervals2(intervals, new), expected)
+        self.assertEqual(insert_intervals3(intervals, new), expected)
 
     def test_empty_all(self):
         intervals = []
@@ -96,6 +129,7 @@ class TestInsertIntervals(unittest.TestCase):
         expected = [new]
         self.assertEqual(insert_intervals(intervals, new), expected)
         self.assertEqual(insert_intervals2(intervals, new), expected)
+        self.assertEqual(insert_intervals3(intervals, new), expected)
 
     def test_empty_all(self):
         intervals = []
@@ -103,6 +137,7 @@ class TestInsertIntervals(unittest.TestCase):
         expected = [new]
         self.assertEqual(insert_intervals(intervals, new), expected)
         self.assertEqual(insert_intervals2(intervals, new), expected)
+        self.assertEqual(insert_intervals3(intervals, new), expected)
 
     def test_1(self):
         intervals = [[1,3],[6,9]]
@@ -110,6 +145,7 @@ class TestInsertIntervals(unittest.TestCase):
         expected = [[1,5],[6,9]]
         self.assertEqual(insert_intervals(intervals, new), expected)
         self.assertEqual(insert_intervals2(intervals, new), expected)
+        self.assertEqual(insert_intervals3(intervals, new), expected)
 
     def test_2(self):
         intervals = [[1,2],[3,5],[6,7],[8,10],[12,16]]
@@ -117,6 +153,7 @@ class TestInsertIntervals(unittest.TestCase):
         expected = [[1,2],[3,10],[12,16]]
         self.assertEqual(insert_intervals(intervals, new), expected)
         self.assertEqual(insert_intervals2(intervals, new), expected)
+        self.assertEqual(insert_intervals3(intervals, new), expected)
 
     def test_3(self):
         intervals = [[1,5]]
@@ -124,6 +161,7 @@ class TestInsertIntervals(unittest.TestCase):
         expected = [[1,7]]
         self.assertEqual(insert_intervals(intervals, new), expected)
         self.assertEqual(insert_intervals2(intervals, new), expected)
+        self.assertEqual(insert_intervals3(intervals, new), expected)
 
 if __name__ == '__main__':
     sys.exit(unittest.main())

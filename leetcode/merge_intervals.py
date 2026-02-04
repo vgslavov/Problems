@@ -37,7 +37,8 @@ def merge_intervals(intervals):
     return intervals
 
 def overlap(x, y):
-    return not (x[1] < y[0] or y[1] < x[0])
+    return max(x[0], y[0]) <= min(x[1], y[1])
+    #return not (x[1] < y[0] or y[1] < x[0])
 
 # solution: sort + max
 # complexity
