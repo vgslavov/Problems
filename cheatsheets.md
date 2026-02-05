@@ -140,7 +140,7 @@ def mod(x, y):
         * neighbors: `(row - 1, col), (row, col - 1), (row + 1, col), (row, col + 1)`
 * DFS
     * recursive more common
-    * O(n + e)
+    * O(v + e)
     * easier to implement
     * can use to detect cycles
     * can use less memory for wide graphs

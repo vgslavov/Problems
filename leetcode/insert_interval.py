@@ -18,11 +18,10 @@ import unittest
 # new_interval.length == 2
 # 0 <= start <= end <= 10^5
 
-# solution: intervals
+# solution: ugly
 # complexity
 # run-time: O(n)
 # space: O(n)
-# TODO: refactor
 def insert_intervals(intervals, new_interval):
     ans = []
     inserted = False

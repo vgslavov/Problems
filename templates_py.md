@@ -1004,6 +1004,9 @@ def bfs_graph_iterative(root):
 
 ### Topological Sort (ala BFS)
 
+* run-time: O(v + e)
+* space: O(v)
+
 ```python
 def calc_indegree(graph):
     # init

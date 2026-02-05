@@ -5,7 +5,7 @@ from collections import defaultdict, deque
 import sys
 import unittest
 
-# tags: topological sort, kahn's algorithm
+# tags: topological sort, kahn's algorithm, graphs
 
 def build_adjlist(edges, tasks):
     graph = defaultdict(list)
