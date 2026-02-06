@@ -193,7 +193,8 @@ def three_sum3(nums):
 
     return sorted([list(v) for v in ans])
 
-# number: 167
+# solution: two pointers
+# similar: 167
 # complexity
 # run-time: O(n)
 # space: O(1)
@@ -242,6 +243,7 @@ def three_sum4(nums):
     return sorted([list(v) for v in ans])
 
 # solution: two pointers
+# similar: 167
 # complexity:
 # run-time: O(n)
 # space: O(1)

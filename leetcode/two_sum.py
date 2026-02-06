@@ -94,6 +94,38 @@ def two_sum4(nums, target):
 
     return [-1,-1]
 
+# solution: sort + two pointers
+# similar: 167
+# complexity
+# run-time: O(n*log n), if sorted, O(n)
+# space: O(n), if sorted, O(1)
+def two_sum5(nums, target):
+    left = 0
+    right = len(nums)-1
+
+    # save original indices of each value
+    d = defaultdict(list)
+    for i,v in enumerate(nums):
+        d[v].append(i)
+
+    nums.sort()
+
+    while left < right:
+        cur_sum = nums[left] + nums[right]
+
+        if cur_sum == target:
+            lo, ro = d[nums[left]], d[nums[right]]
+            # same value → two indices from same bucket
+            if nums[left] == nums[right]:
+                return [lo[0], lo[1]]
+            return [lo[0], ro[0]]
+        elif cur_sum < target:
+            left += 1
+        else:
+            right -= 1
+
+    return [-1,-1]
+
 class TestTwoSum(unittest.TestCase):
     def test_empty(self):
         nums = []
@@ -103,6 +135,7 @@ class TestTwoSum(unittest.TestCase):
         self.assertEqual(two_sum2(nums, target), expected)
         self.assertEqual(two_sum3(nums, target), expected)
         self.assertEqual(two_sum4(nums, target), expected)
+        self.assertEqual(two_sum5(nums, target), expected)
 
     def test1(self):
         nums = [2,7,11,15]
@@ -112,6 +145,7 @@ class TestTwoSum(unittest.TestCase):
         self.assertEqual(two_sum2(nums, target), expected)
         self.assertEqual(two_sum3(nums, target), expected)
         self.assertEqual(two_sum4(nums, target), expected)
+        self.assertEqual(two_sum5(nums, target), expected)
 
     def test2(self):
         nums = [3,2,4]
@@ -121,6 +155,7 @@ class TestTwoSum(unittest.TestCase):
         self.assertEqual(two_sum2(nums, target), expected)
         self.assertEqual(two_sum3(nums, target), expected)
         self.assertEqual(two_sum4(nums, target), expected)
+        self.assertEqual(two_sum5(nums, target), expected)
 
     def test3(self):
         nums = [3,3]
@@ -130,6 +165,7 @@ class TestTwoSum(unittest.TestCase):
         self.assertEqual(two_sum2(nums, target), expected)
         self.assertEqual(two_sum3(nums, target), expected)
         self.assertEqual(two_sum4(nums, target), expected)
+        self.assertEqual(two_sum5(nums, target), expected)
 
     def test4(self):
         nums = [2,5,5,11]
@@ -139,6 +175,7 @@ class TestTwoSum(unittest.TestCase):
         self.assertEqual(two_sum2(nums, target), expected)
         self.assertEqual(two_sum3(nums, target), expected)
         self.assertEqual(two_sum4(nums, target), expected)
+        self.assertEqual(two_sum5(nums, target), expected)
 
 if __name__ == '__main__':
     sys.exit(unittest.main())
