@@ -19,7 +19,8 @@ import unittest
 # complexity:
 # run-time: O(n^(t/min(candidates)))
 # where n is number of candidates, t is target, m is minimum value in candidates
-# space: O(t/min(candidates)) 
+# space: O(t/min(candidates))
+# TODO: understand better
 def combination_sum(candidates: list[int], target: int) -> list[list[int]]:
     def dfs(i, total, cur):
         # base cases

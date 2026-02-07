@@ -76,7 +76,7 @@ def product_except_self(nums):
 
     return nums
 
-# solution: prefix sum + deque
+# solution: prefix & suffix products arrays
 # complexity
 # run-time: O(n), slow!
 # space: O(n)
@@ -86,55 +86,80 @@ def product_except_self2(nums):
 
     ans = []
     # forward
-    prefix_sum1 = [1]
+    prefix_prod = [1]
 
+    # skip first
     for i in range(1, len(nums)):
-        prefix_sum1.append(prefix_sum1[-1]*nums[i-1])
-
-    #print(f"prefix_sum1:{prefix_sum1}")
+        prefix_prod.append(prefix_prod[-1]*nums[i-1])
 
     # backward
-    prefix_sum2 = deque([1])
+    suffix_prod = deque([1])
+
+    # skip last
     for i in reversed(range(len(nums)-1)):
-        prefix_sum2.appendleft(prefix_sum2[0]*nums[i+1])
+        suffix_prod.appendleft(suffix_prod[0]*nums[i+1])
 
-    #print(f"prefix_sum2:{prefix_sum2}")
-
-    for i in range(len(prefix_sum1)):
-        ans.append(prefix_sum1[i]*prefix_sum2[i])
+    for i in range(len(prefix_prod)):
+        ans.append(prefix_prod[i]*suffix_prod[i])
 
     return ans
 
-# TODO: refactor & solve w/ O(1) space
+# solution: prefix & suffix products variables
+# complexity
+# run-time: O(n)
+# space: O(1)
+def product_except_self3(nums):
+    if not nums:
+        return []
+
+    ans = [1] * len(nums)
+    prefix = suffix = 1
+
+    # forward
+    for i in range(len(nums)):
+        ans[i] *= prefix
+        prefix *= nums[i]
+
+    # backward
+    for i in reversed(range(len(nums))):
+        ans[i] *= suffix
+        suffix *= nums[i]
+
+    return ans
 
 class TestProductExceptSelf(unittest.TestCase):
     def test_empty(self):
         nums = []
         expected = []
+        self.assertEqual(product_except_self3(nums), expected)
         self.assertEqual(product_except_self2(nums), expected)
         self.assertEqual(product_except_self(nums), expected)
 
     def test_1(self):
         nums = [1,2,3,4]
         expected = [24,12,8,6]
+        self.assertEqual(product_except_self3(nums), expected)
         self.assertEqual(product_except_self2(nums), expected)
         self.assertEqual(product_except_self(nums), expected)
 
     def test_2(self):
         nums = [-1,1,0,-3,3]
         expected = [0,0,9,0,0]
+        self.assertEqual(product_except_self3(nums), expected)
         self.assertEqual(product_except_self2(nums), expected)
         self.assertEqual(product_except_self(nums), expected)
 
     def test_3(self):
         nums = [1,-1]
         expected = [-1,1]
+        self.assertEqual(product_except_self3(nums), expected)
         self.assertEqual(product_except_self2(nums), expected)
         self.assertEqual(product_except_self(nums), expected)
 
     def test_4(self):
         nums = [9,0,-2]
         expected = [0,-18,0]
+        self.assertEqual(product_except_self3(nums), expected)
         self.assertEqual(product_except_self2(nums), expected)
         self.assertEqual(product_except_self(nums), expected)
 
