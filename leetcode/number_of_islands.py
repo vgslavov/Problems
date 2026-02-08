@@ -17,50 +17,94 @@ import unittest
 # 1 <= m, n <= 300
 # grid[i][j] is '0' or '1'.
 
+def get_neighbors(node, grid):
+    row, col = node
+    delta_row = [-1,0,1,0]
+    delta_col = [0,1,0,-1]
+
+    for i in range(len(delta_row)):
+        n_row = row + delta_row[i]
+        n_col = col + delta_col[i]
+
+        if 0 <= n_row < len(grid) and 0 <= n_col < len(grid[0]):
+            yield n_row, n_col
+
+def skip(node, value, grid, seen):
+    r,c = node
+    return grid[r][c] == value or node in seen
+
 # solution: iterative BFS
 # complexity:
 # run-time: O(m*n) for m x n grid
-# space: O(m*n)
+# space: O(m*n) + O(m+n) = O(m*n)
+#   * O(m*n) for seen set
+#   * O(m+n) for queue (all nodes)
 def number_of_islands(grid: list[list[str]]) -> int:
-    def get_neighbors(node):
-        row, col = node
-        delta_row = [-1,0,1,0]
-        delta_col = [0,1,0,-1]
-
-        for i in range(len(delta_row)):
-            n_row = row + delta_row[i]
-            n_col = col + delta_col[i]
-
-            if 0 <= n_row < len(grid) and 0 <= n_col < len(grid[0]):
-                yield n_row, n_col
-
     def bfs(node):
         queue = deque([node])
 
         while queue:
             node = queue.popleft()
 
-            for neighbor in get_neighbors(node):
-                if skip(neighbor, '0'):
+            for neighbor in get_neighbors(node, grid):
+                if skip(neighbor, '0', grid, seen):
                     continue
 
+                # keep visiting, don't count!
                 seen.add(neighbor)
                 queue.append(neighbor)
 
-    def skip(node, value):
-        r,c = node
-        return grid[r][c] == value or node in seen
+    if not grid:
+        return 0
 
     ans = 0
     seen = set()
 
     for row in range(len(grid)):
         for col in range(len(grid[0])):
-            if skip((row, col), '0'):
+            if skip((row, col), '0', grid, seen):
                 continue
 
             seen.add((row, col))
             bfs((row, col))
+
+            # count islands, not nodes!
+            ans += 1
+
+    return ans
+
+# solution: recursive DFS
+# complexity:
+# run-time: O(m*n) for m x n grid
+# space: O(m*n) + O(m+n) = O(m*n)
+#   * O(m*n) for seen set
+#   * O(m+n) for stack (all nodes)
+def number_of_islands2(grid: list[list[str]]) -> int:
+    if not grid:
+        return 0
+
+    def dfs(node):
+        for neighbor in get_neighbors(node, grid):
+            if skip(neighbor, '0', grid, seen):
+                continue
+
+            # keep visiting, don't count!
+            seen.add(neighbor)
+            dfs(neighbor)
+
+    ans = 0
+    seen = set()
+
+    # iterate over grid
+    for row in range(len(grid)):
+        for col in range(len(grid[0])):
+            if skip((row, col), '0', grid, seen):
+                continue
+            
+            seen.add((row, col))
+            dfs((row, col))
+
+            # count islands, not nodes!
             ans += 1
 
     return ans
@@ -77,6 +121,7 @@ class TestNumberOfIslands(unittest.TestCase):
         ]
         expected = 1
         self.assertEqual(number_of_islands(grid), expected)
+        self.assertEqual(number_of_islands2(grid), expected)
 
     def test_example_2(self):
         grid = [
@@ -87,6 +132,7 @@ class TestNumberOfIslands(unittest.TestCase):
         ]
         expected = 3
         self.assertEqual(number_of_islands(grid), expected)
+        self.assertEqual(number_of_islands2(grid), expected)
 
     def test_example_3(self):
         grid = [
@@ -94,6 +140,7 @@ class TestNumberOfIslands(unittest.TestCase):
         ]
         expected = 3
         self.assertEqual(number_of_islands(grid), expected)
+        self.assertEqual(number_of_islands2(grid), expected)
 
 if __name__ == "__main__":
     sys.exit(unittest.main())

@@ -10,7 +10,9 @@ import unittest
 # solution: iterative BFS
 # complexity:
 # run-time: O(m*n) for m x n grid
-# space: O(m*n)
+# space: O(m*n) + O(m+n) = O(m*n)
+#   * O(m*n) for seen set
+#   * O(m+n) for queue
 def count_number_of_islands(grid: list[list[int]]) -> int:
     def get_neighbors(node):
         row, col = node
