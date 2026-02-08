@@ -19,16 +19,16 @@
   - [Kadane's Algorithm: Maximum Subarray Sum](#kadanes-algorithm-maximum-subarray-sum)
   - [Kadane's Algorithm: Explicit Sliding Window](#kadanes-algorithm-explicit-sliding-window)
 - [Sliding Window](#sliding-window)
-  - [Sliding Longest Window](#sliding-longest-window)
-  - [Sliding Shortest Window](#sliding-shortest-window)
-  - [Sliding Fixed Window](#sliding-fixed-window)
+  - [Longest](#longest)
+  - [Shortest](#shortest)
+  - [Fixed](#fixed)
 - [Prefix Sum](#prefix-sum)
   - [Build a Diff Array, Calculate Prefix Sum on It](#build-a-diff-array-calculate-prefix-sum-on-it)
   - [Build a Prefix Sum: Pythonic](#build-a-prefix-sum-pythonic)
   - [Build a Prefix Sum](#build-a-prefix-sum)
   - [Build a Prefix Sum for Range Queries](#build-a-prefix-sum-for-range-queries)
   - [Query Sum of Range Using Prefix Sum](#query-sum-of-range-using-prefix-sum)
-- [Factorial](#factorial)
+- [Recursive vs Iterative](#recursive-vs-iterative)
   - [Recursive](#recursive)
   - [Iterative](#iterative)
   - [Iterative: Stack](#iterative-stack)
@@ -329,7 +329,7 @@ def max_subarray_sliding(nums):
 
 ## Sliding Window
 
-### Sliding Longest Window
+### Longest
 
 ```python
 SOME_THRESHOLD = 10  # Example threshold, adjust as needed
@@ -355,7 +355,7 @@ def sliding_window_longest(arr):
     return ans
 ```
 
-### Sliding Shortest Window
+### Shortest
 
 ```python
 SOME_THRESHOLD = 10  # Example threshold, adjust as needed
@@ -381,7 +381,7 @@ def sliding_window_shortest(arr):
     return ans
 ```
 
-### Sliding Fixed Window
+### Fixed
 
 ```python
 def sliding_window_fixed(arr, k):
@@ -469,7 +469,7 @@ def query_prefix_sum(prefix, left, right):
 
 ---
 
-## Factorial
+## Recursive vs Iterative
 
 ### Recursive
 

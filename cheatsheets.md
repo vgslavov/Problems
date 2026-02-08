@@ -154,6 +154,7 @@ def mod(x, y):
     * can use to detect cycles
     * can use less memory for wide graphs
     * finding nodes far away from the root
+    * doesn't guarantee shortest path
 * BFS
     * iterative more common
     * use to find shortest path from a node
