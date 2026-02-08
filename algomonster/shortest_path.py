@@ -11,35 +11,41 @@ import unittest
 # complexity:
 # run-time: O(n+m)
 # space: O(n)
+# input: adjacency list
 def shortest_path(graph: list[list[int]], a: int, b: int) -> int:
-    # start at a
-    queue = deque([a])
-    seen = {a}
+    def get_neighbors(node: int) -> list[int]:
+        return graph[node]
 
-    ans = 0
+    def bfs(start: int, end: int) -> int:
+        # start node
+        queue = deque([start])
+        seen = {start}
 
-    while queue:
-        n = len(queue)
+        level = 0
 
-        for _ in range(n):
-            node = queue.popleft()
-    
-            # reach b
-            if node == b:
-                return ans
-    
-            for neighbor in graph[node]:
-                if neighbor in seen:
-                    continue
-    
-                seen.add(neighbor)
-                queue.append(neighbor)
+        while queue:
+            n = len(queue)
 
-        ans += 1
+            for _ in range(n):
+                node = queue.popleft()
+        
+                # found end node
+                if node == end:
+                    return level
+        
+                for neighbor in get_neighbors(node):
+                    if neighbor in seen:
+                        continue
+        
+                    seen.add(neighbor)
+                    queue.append(neighbor)
 
-    return ans
+            level += 1
 
-# TODO: fix unit tests
+        return -1
+
+    return bfs(a, b)
+
 class TestShortestPath(unittest.TestCase):
     def test_shortest_path(self):
         graph = [
