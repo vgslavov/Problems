@@ -138,16 +138,27 @@ def mod(x, y):
     * matrix
         * `(row, col)` is node
         * neighbors: `(row - 1, col), (row, col - 1), (row + 1, col), (row, col + 1)`
+* complexity
+    * `v`: number of vertices/nodes
+    * `e`: number of edges
+    * run-time:`O(v + e)`
+    * space: `O(v + e)`
+    * matrix
+        * `m x n` matrix
+        * `m*n` nodes, `m*n` edges
+        * run-time: `O(m*n + m*n) ~ O(m*n)`
+        * space: `O(m*n)`
 * DFS
     * recursive more common
-    * O(v + e)
     * easier to implement
     * can use to detect cycles
     * can use less memory for wide graphs
     * finding nodes far away from the root
 * BFS
     * iterative more common
-    * use to find shortest path from a node (unweighted only, weighted: Dijkstra's)
+    * use to find shortest path from a node
+      * *unweighted* only
+      * *weighted*: Dijkstra's
     * when graph is of unknown size
 
 ### Binary
