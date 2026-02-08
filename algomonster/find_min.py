@@ -5,12 +5,13 @@ import sys
 import unittest
 
 # tags: binary search
+# leetcode: 153
 
 # ugly solution
 # complexity:
 # run-time: O(log n)
 # space: O(1)
-def find_min_rotated2(arr: list[int]) -> int:
+def find_min2(arr: list[int]) -> int:
     left = 0
     right = len(arr)-1
 
@@ -31,7 +32,7 @@ def find_min_rotated2(arr: list[int]) -> int:
 # complexity:
 # run-time: O(log n)
 # space: O(1)
-def find_min_rotated(arr: list[int]) -> int:
+def find_min(arr: list[int]) -> int:
     left = 0
     right = len(arr)-1
     boundary = 0
@@ -52,20 +53,20 @@ def find_min_rotated(arr: list[int]) -> int:
 class TestFindMinRotated(unittest.TestCase):
 
     def test_find_min_rotated(self):
-        self.assertEqual(find_min_rotated([4, 5, 6, 7, 0, 1, 2]), 4)
-        self.assertEqual(find_min_rotated2([4, 5, 6, 7, 0, 1, 2]), 4)
+        self.assertEqual(find_min([4, 5, 6, 7, 0, 1, 2]), 4)
+        self.assertEqual(find_min2([4, 5, 6, 7, 0, 1, 2]), 4)
 
-        self.assertEqual(find_min_rotated([1, 2, 3, 4, 5]), 0)
-        self.assertEqual(find_min_rotated2([1, 2, 3, 4, 5]), 0)
+        self.assertEqual(find_min([1, 2, 3, 4, 5]), 0)
+        self.assertEqual(find_min2([1, 2, 3, 4, 5]), 0)
 
-        self.assertEqual(find_min_rotated([5, 1, 2, 3, 4]), 1)
-        self.assertEqual(find_min_rotated2([5, 1, 2, 3, 4]), 1)
+        self.assertEqual(find_min([5, 1, 2, 3, 4]), 1)
+        self.assertEqual(find_min2([5, 1, 2, 3, 4]), 1)
 
-        self.assertEqual(find_min_rotated([2, 3, 4, 5, 1]), 4)
-        self.assertEqual(find_min_rotated2([2, 3, 4, 5, 1]), 4)
+        self.assertEqual(find_min([2, 3, 4, 5, 1]), 4)
+        self.assertEqual(find_min2([2, 3, 4, 5, 1]), 4)
 
-        self.assertEqual(find_min_rotated([3, 4, 5, 1, 2]), 3)
-        self.assertEqual(find_min_rotated2([3, 4, 5, 1, 2]), 3)
+        self.assertEqual(find_min([3, 4, 5, 1, 2]), 3)
+        self.assertEqual(find_min2([3, 4, 5, 1, 2]), 3)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -76,5 +77,5 @@ if __name__ == "__main__":
         sys.exit(unittest.main(argv=[sys.argv[0]]))
 
     arr = [int(x) for x in input().split()]
-    res = find_min_rotated(arr)
+    res = find_min(arr)
     print(res)

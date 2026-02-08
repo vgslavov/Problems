@@ -2,14 +2,14 @@
 #include <unordered_map>
 #include <vector>
 
-// leetcode: 438
 // tags: sliding window
+// leetcode: 438
 
 // solution: sliding window + map
 // complexity:
 // run-time: O(n)
 // space: O(26) ~ O(1)
-std::vector<int> findAllAnagrams(
+std::vector<int> findAnagrams(
     const std::string& original,
     const std::string& check)
 {

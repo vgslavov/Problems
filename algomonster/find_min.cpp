@@ -5,7 +5,7 @@
 // complexity:
 // run-time: O(log n)
 // space: O(1)
-int findMinRotated(const std::vector<int>& v)
+int findMin(const std::vector<int>& v)
 {
     int left = 0;
     int right = v.size()-1;

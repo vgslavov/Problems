@@ -7,12 +7,13 @@ import sys
 import unittest
 
 # tags: heap
+# leetcode: 973
 
 # solution: max heap
 # complexity:
 # run-time: O(n*log k)
 # space: O(k)
-def find_k_closest_points(points: list[list[int]], k: int) -> list[list[int]]:
+def find_k_closest(points: list[list[int]], k: int) -> list[list[int]]:
     heap = []
 
     for x,y in points:
@@ -38,16 +39,16 @@ def find_k_closest_points(points: list[list[int]], k: int) -> list[list[int]]:
     return sorted([p for _,p in heap])
 
 class TestKClosestPoints(unittest.TestCase):
-    def test_find_k_closest_points(self):
+    def test_find_k_closest(self):
         points = [(1, 2), (3, 4), (5, 6)]
         k = 2
         expected = [(1, 2), (3, 4)]
-        self.assertEqual(find_k_closest_points(points, k), expected)
+        self.assertEqual(find_k_closest(points, k), expected)
 
         points = [(1, 2), (3, 4), (5, 6)]
         k = 3
         expected = [(1, 2), (3, 4), (5, 6)]
-        self.assertEqual(find_k_closest_points(points, k), expected)
+        self.assertEqual(find_k_closest(points, k), expected)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -59,6 +60,6 @@ if __name__ == "__main__":
 
     points = [[int(x) for x in input().split()] for _ in range(int(input()))]
     k = int(input())
-    res = find_k_closest_points(points, k)
+    res = find_k_closest(points, k)
     for row in res:
         print(" ".join(map(str, row)))

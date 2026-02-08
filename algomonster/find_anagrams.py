@@ -5,14 +5,14 @@ from collections import defaultdict
 import sys
 import unittest
 
-# leetcode: 438
 # tags: sliding window
+# leetcode: 438
 
 # solution: sliding window + defaultdict
 # complexity:
 # run-time: O(n)
 # space: O(26) ~ O(1)
-def find_all_anagrams(original: str, check: str) -> list[int]:
+def find_anagrams(original: str, check: str) -> list[int]:
     if len(check) > len(original):
         return []
 
@@ -51,25 +51,25 @@ class TestFindAllAnagrams(unittest.TestCase):
         original = ""
         check = ""
         expected = []
-        self.assertEqual(find_all_anagrams(original, check), expected)
+        self.assertEqual(find_anagrams(original, check), expected)
 
     def test_1(self):
         original = "cbaebabacd"
         check = "abc"
         expected = [0, 6]
-        self.assertEqual(find_all_anagrams(original, check), expected)
+        self.assertEqual(find_anagrams(original, check), expected)
 
     def test_2(self):
         original = "abab"
         check = "ab"
         expected = [0, 1, 2]
-        self.assertEqual(find_all_anagrams(original, check), expected)
+        self.assertEqual(find_anagrams(original, check), expected)
 
     def test_3(self):
         original = "nabanabannaabbaanana"
         check = "banana"
         expected = [0, 3, 5, 6, 7, 13]
-        self.assertEqual(find_all_anagrams(original, check), expected)
+        self.assertEqual(find_anagrams(original, check), expected)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -81,5 +81,5 @@ if __name__ == "__main__":
 
     original = input()
     check = input()
-    res = find_all_anagrams(original, check)
+    res = find_anagrams(original, check)
     print(" ".join(map(str, res)))
