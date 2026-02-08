@@ -6,6 +6,7 @@ import sys
 import unittest
 
 # tags: bfs, tree
+# leetcode: 111
 
 class Node:
     def __init__(self, val, left=None, right=None):
@@ -17,7 +18,7 @@ class Node:
 # complexity:
 # run-time: O(n)
 # space: O(n)
-def binary_tree_min_depth(root: Node) -> int:
+def min_depth(root: Node) -> int:
     if not root:
         return 0
 
@@ -50,21 +51,21 @@ class TestBinaryTreeMinDepth(unittest.TestCase):
         root = Node(1)
         root.left = Node(2)
         root.right = Node(3)
-        self.assertEqual(binary_tree_min_depth(root), 1)
+        self.assertEqual(min_depth(root), 1)
 
         # Test case 2: Minimum depth is 0
         root = Node(1)
-        self.assertEqual(binary_tree_min_depth(root), 0)
+        self.assertEqual(min_depth(root), 0)
 
         # Test case 3: Minimum depth is 2
         root = Node(1)
         root.left = Node(2)
         root.left.left = Node(3)
-        self.assertEqual(binary_tree_min_depth(root), 2)
+        self.assertEqual(min_depth(root), 2)
 
         # Test case 4: Empty tree
         root = None
-        self.assertEqual(binary_tree_min_depth(root), 0)
+        self.assertEqual(min_depth(root), 0)
 
 # this function builds a tree from input; you don't have to modify it
 # learn more about how trees are encoded in https://algo.monster/problems/serializing_tree

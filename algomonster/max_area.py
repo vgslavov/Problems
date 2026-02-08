@@ -5,12 +5,13 @@ import sys
 import unittest
 
 # tags: two pointers
+# leetcode: 11
 
 # solution: two pointers, opposite direction
 # complexity:
 # run-time: O(n)
 # space: O(1)
-def container_with_most_water(arr: list[int]) -> int:
+def max_area(arr: list[int]) -> int:
     left = 0
     right = len(arr)-1
     max_area = 0
@@ -30,10 +31,10 @@ def container_with_most_water(arr: list[int]) -> int:
 class TestContainerWithMostWater(unittest.TestCase):
     
     def test_container_with_most_water(self):
-        self.assertEqual(container_with_most_water([1, 8, 6, 2, 5, 4, 8, 3, 7]), 49)
-        self.assertEqual(container_with_most_water([1, 1]), 1)
-        self.assertEqual(container_with_most_water([4, 3, 2, 1, 4]), 16)
-        self.assertEqual(container_with_most_water([1, 2, 1]), 2)
+        self.assertEqual(max_area([1, 8, 6, 2, 5, 4, 8, 3, 7]), 49)
+        self.assertEqual(max_area([1, 1]), 1)
+        self.assertEqual(max_area([4, 3, 2, 1, 4]), 16)
+        self.assertEqual(max_area([1, 2, 1]), 2)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -44,5 +45,5 @@ if __name__ == "__main__":
         sys.exit(unittest.main(argv=[sys.argv[0]]))
 
     arr = [int(x) for x in input().split()]
-    res = container_with_most_water(arr)
+    res = max_area(arr)
     print(res)

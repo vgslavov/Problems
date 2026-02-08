@@ -3,6 +3,7 @@
 #include <vector>
 
 // tags: bfs, tree
+// leetcode: 199
 
 struct TreeNode {
     int val;
@@ -17,7 +18,7 @@ struct TreeNode {
 // complexity:
 // run-time: O(n)
 // space: O(n)
-std::vector<int> binaryTreeRightSideView(TreeNode* root)
+std::vector<int> rightSideView(TreeNode* root)
 {
     if (!root) {
         return std::vector<int>{};

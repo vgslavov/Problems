@@ -2,12 +2,13 @@
 #include <vector>
 
 // tags: two pointers
+// leetcode: 11
 
 // solution: two pointers, opposite direction
 // complexity:
 // run-time: O(n)
 // space: O(1)
-int containerWithMostWater(const std::vector<int>& v)
+int maxArea(const std::vector<int>& v)
 {
     int left = 0;
     int right = v.size()-1;

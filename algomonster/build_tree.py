@@ -5,6 +5,7 @@ import sys
 import unittest
 
 # tags: dfs, tree
+# leetcode: 105
 
 class Node:
     def __init__(self, val, left=None, right=None):
@@ -16,7 +17,7 @@ class Node:
 # complexity:
 # run-time: O(n)
 # space: O(n)
-def construct_binary_tree(preorder: list[int], inorder: list[int]) -> Node:
+def build_tree(preorder: list[int], inorder: list[int]) -> Node:
     def array2tree(left, right):
         # base case
         if left > right:
@@ -64,7 +65,7 @@ def build_tree_recursive(preorder_index: int, inorder_start: int, size: int, val
 # complexity:
 # run-time: O(n)
 # space: O(n)
-def construct_binary_tree2(preorder: list[int], inorder: list[int]) -> Node:
+def build_tree2(preorder: list[int], inorder: list[int]) -> Node:
     value_to_index = {val: idx for idx, val in enumerate(inorder)}
 
     return build_tree_recursive(0, 0, len(preorder), value_to_index)
@@ -82,7 +83,7 @@ class TestConstructBinaryTree(unittest.TestCase):
         # Test case 1: Simple tree
         preorder = [1, 2, 4, 5, 3, 6, 7]
         inorder = [4, 2, 5, 1, 6, 3, 7]
-        tree = construct_binary_tree(preorder, inorder)
+        tree = build_tree(preorder, inorder)
         self.assertEqual(tree.val, 1)
         self.assertEqual(tree.left.val, 2)
         self.assertEqual(tree.right.val, 3)
@@ -90,7 +91,7 @@ class TestConstructBinaryTree(unittest.TestCase):
         # Test case 2: Tree with only left children
         preorder = [1, 2, 3, 4]
         inorder = [4, 3, 2, 1]
-        tree = construct_binary_tree(preorder, inorder)
+        tree = build_tree(preorder, inorder)
         self.assertEqual(tree.val, 1)
         self.assertEqual(tree.left.val, 2)
         self.assertEqual(tree.left.left.val, 3)
@@ -99,7 +100,7 @@ class TestConstructBinaryTree(unittest.TestCase):
         # Test case 3: Tree with only right children
         preorder = [1, 2, 3, 4]
         inorder = [1, 2, 3, 4]
-        tree = construct_binary_tree(preorder, inorder)
+        tree = build_tree(preorder, inorder)
         self.assertEqual(tree.val, 1)
         self.assertEqual(tree.right.val, 2)
         self.assertEqual(tree.right.right.val, 3)
@@ -115,5 +116,5 @@ if __name__ == "__main__":
 
     preorder = [int(x) for x in input().split()]
     inorder = [int(x) for x in input().split()]
-    res = construct_binary_tree(preorder, inorder)
+    res = build_tree(preorder, inorder)
     print(" ".join(format_tree(res)))

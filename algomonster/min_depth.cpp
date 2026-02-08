@@ -2,6 +2,7 @@
 #include <queue>
 
 // tags: bfs, tree
+// leetcode: 111
 
 struct TreeNode {
     int val;
@@ -16,7 +17,7 @@ struct TreeNode {
 // complexity:
 // run-time: O(n)
 // space: O(n)
-int binaryTreeMinDepth(TreeNode* root)
+int minDepth(TreeNode* root)
 {
     if (!root) {
         return 0;

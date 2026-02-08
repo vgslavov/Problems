@@ -6,6 +6,7 @@ import sys
 import unittest
 
 # tags: bfs, tree
+# leetcode: 199
 
 class Node:
     def __init__(self, val, left=None, right=None):
@@ -17,7 +18,7 @@ class Node:
 # complexity:
 # run-time: O(n)
 # space: O(n)
-def binary_tree_right_side_view(root: Node) -> list[int]:
+def right_side_view(root: Node) -> list[int]:
     if not root:
         return []
 
@@ -51,7 +52,7 @@ class TestBinaryTreeRightSideView(unittest.TestCase):
         root.left.right = Node(5)
         root.right.right = Node(4)
         expected = [1, 3, 4]
-        self.assertEqual(binary_tree_right_side_view(root), expected)
+        self.assertEqual(right_side_view(root), expected)
 
         # Test case 2
         root = Node(1)
@@ -59,12 +60,12 @@ class TestBinaryTreeRightSideView(unittest.TestCase):
         root.right = Node(3)
         root.left.right = Node(5)
         expected = [1, 3, 5]
-        self.assertEqual(binary_tree_right_side_view(root), expected)
+        self.assertEqual(right_side_view(root), expected)
 
         # Test case 3
         root = None
         expected = []
-        self.assertEqual(binary_tree_right_side_view(root), expected)
+        self.assertEqual(right_side_view(root), expected)
 
 # this function builds a tree from input; you don't have to modify it
 # learn more about how trees are encoded in https://algo.monster/problems/serializing_tree
