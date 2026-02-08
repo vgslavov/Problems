@@ -36,7 +36,7 @@ def get_neighbors(node, image, old_color):
 
 # solution: iterative BFS
 # complexity:
-# run-time: O(m*n) for m x n image
+# run-time: O(m*n) for m x n image (O(V+E) ~ O(m*n + m*n) ~ O(m*n))
 # space: O(m*n)
 def flood_fill(image: list[list[int]], sr: int, sc: int, color: int) -> list[list[int]]:
 
@@ -58,16 +58,17 @@ def flood_fill(image: list[list[int]], sr: int, sc: int, color: int) -> list[lis
         while queue:
             node = queue.popleft()
 
+            # neighbors with matching old color
             for neighbor in get_neighbors(node, image, old_color):
                 if neighbor in seen:
                     continue
 
+                # fill neighbor with new color
                 nr, nc = neighbor
                 image[nr][nc] = color
                 
                 seen.add(neighbor)
                 queue.append(neighbor)
-
 
     bfs((sr,sc))
     return image
@@ -78,12 +79,15 @@ def flood_fill(image: list[list[int]], sr: int, sc: int, color: int) -> list[lis
 # space: O(m*n)
 def flood_fill2(image: list[list[int]], sr: int, sc: int, color: int) -> list[list[int]]:
     def dfs(node, old_color):
+        # neighbors with matching old color
         for neighbor in get_neighbors(node, image, old_color):
             if neighbor in seen:
                 continue
 
-            nr,nc = neighbor
+            # fill neighbor with new color
+            nr, nc = neighbor
             image[nr][nc] = color
+
             seen.add(neighbor)
             dfs(neighbor, old_color)
 
