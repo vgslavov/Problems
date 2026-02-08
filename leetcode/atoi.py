@@ -50,7 +50,7 @@ def atoi(s: str) -> int:
         digit *= 10
 
     # round
-    max_num = pow(2, 31)
+    max_num = 1 << 31  # 2**31
     if num >= max_num:
         if isneg:
             num = max_num

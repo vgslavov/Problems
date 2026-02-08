@@ -324,7 +324,7 @@ def max_subarray_sliding(nums):
 
 ## Sliding Window
 
-### Sliding Window
+### Sliding Longest Window
 
 ```python
 SOME_THRESHOLD = 10  # Example threshold, adjust as needed
@@ -348,6 +348,12 @@ def sliding_window_longest(arr):
         ans = max(ans, right-left+1)
 
     return ans
+```
+
+### Sliding Shortest Window
+
+```python
+SOME_THRESHOLD = 10  # Example threshold, adjust as needed
 
 def valid_condition(curr):
     # define the condition for the sliding window to be valid

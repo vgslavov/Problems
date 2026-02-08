@@ -32,6 +32,7 @@ def longest_palindrome(s: str) -> int:
         if v % 2 == 0:
             ans += v
         # odd: subtract 1 but add it later
+        # (don't use all odd chars, use 1 for center)
         else:
             ans += v-1
             has_odd = True

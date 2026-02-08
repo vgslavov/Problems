@@ -70,6 +70,7 @@ def longest_substr2(s):
             if counts[s[left]] == 0:
                 del counts[s[left]]
 
+            # shrink window
             left += 1
 
         ans = max(ans, right-left+1)
