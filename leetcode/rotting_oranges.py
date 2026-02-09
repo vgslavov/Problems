@@ -63,7 +63,6 @@ def rotting_oranges(grid: list[list[int]]) -> int:
     if fresh == 0:
         return 0
 
-    # 1 level = 1 minute
     while queue and fresh > 0:
         n = len(queue)
 
@@ -80,8 +79,10 @@ def rotting_oranges(grid: list[list[int]]) -> int:
                 seen.add(neighbor)
                 queue.append(neighbor)
 
+        # 1 level = 1 minute
         ans += 1
 
+    # if there are still fresh oranges, we failed
     return ans if fresh == 0 else -1
 
 class TestRottingOranges(unittest.TestCase):

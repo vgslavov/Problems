@@ -27,7 +27,7 @@ class Node:
 # solution: recursive DFS
 # complexity
 # run-time: O(V + E)
-# space: O(V)
+# space: O(V), not counting output
 def clone_graph(node):
     def dfs(node):
         # base case
@@ -45,28 +45,33 @@ def clone_graph(node):
 
         # recursively clone all neighbors
         for neighbor in node.neighbors:
+            # clone the neighbor's neighbors recursively
+            # O(V) space for the recursion stack
             clone_node.neighbors.append(dfs(neighbor))
 
         # or the cloned node
         return clone_node
 
     # original node to cloned
+    # O(V) space
     visited = {}
     return dfs(node)
 
 # solution: iterative BFS
 # complexity
 # run-time: O(V + E)
-# space: O(V)
+# space: O(V), not counting output
 def clone_graph2(node):
     def bfs(root):
         if not root:
             return None
 
+        # O(V) space
         queue = deque([root])
         clone_root = Node(root.val)
 
         # key: old node, value: cloned node
+        # O(V) space
         visited = {}
         visited[root] = clone_root
 
