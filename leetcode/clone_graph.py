@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+from collections import deque
 import sys
 import unittest
 
@@ -23,7 +24,7 @@ class Node:
         self.val = val
         self.neighbors = neighbors if neighbors is not None else []
 
-# solution: recursive dfs
+# solution: recursive DFS
 # complexity
 # run-time: O(V + E)
 # space: O(V)
@@ -35,23 +36,59 @@ def clone_graph(node):
 
         # look up clone node given original node
         if node in visited:
+            # either return the visited node
             return visited[node]
 
         # create a clone node and add it to visited
-        clone_node = Node(node.val, [])
+        clone_node = Node(node.val)
         visited[node] = clone_node
 
         # recursively clone all neighbors
         for neighbor in node.neighbors:
             clone_node.neighbors.append(dfs(neighbor))
 
+        # or the cloned node
         return clone_node
 
     # original node to cloned
     visited = {}
     return dfs(node)
 
-# TODO: solve using bfs
+# solution: iterative BFS
+# complexity
+# run-time: O(V + E)
+# space: O(V)
+def clone_graph2(node):
+    def bfs(root):
+        if not root:
+            return None
+
+        queue = deque([root])
+        clone_root = Node(root.val)
+
+        # key: old node, value: cloned node
+        visited = {}
+        visited[root] = clone_root
+
+        while queue:
+            node = queue.popleft()
+            # invariant: every node in the queue is already in visited
+            clone_node = visited[node]
+
+            for neighbor in node.neighbors:
+                # not cloned yet
+                if neighbor not in visited:
+                    visited[neighbor] = Node(neighbor.val)
+                    # to process the neighbor's neighbors
+                    queue.append(neighbor)
+
+                clone_neighbor = visited[neighbor]
+                # map neighbor's clone to node's clone
+                clone_node.neighbors.append(clone_neighbor)
+
+        return clone_root
+
+    return bfs(node)
 
 class TestCloneGraph(unittest.TestCase):
     def test_clone_graph(self):
@@ -66,13 +103,34 @@ class TestCloneGraph(unittest.TestCase):
         node3.neighbors = [node2, node4]
         node4.neighbors = [node1, node3]
 
-        cloned_graph = cloneGraph(node1)
+        cloned_graph = clone_graph(node1)
 
         # Check if the cloned graph has the same structure
         self.assertEqual(cloned_graph.val, 1)
         self.assertEqual(len(cloned_graph.neighbors), 2)
         self.assertEqual(cloned_graph.neighbors[0].val, 2)
         self.assertEqual(cloned_graph.neighbors[1].val, 4)
+
+    def test_clone_graph2(self):
+        # Create a simple graph
+        node1 = Node(1)
+        node2 = Node(2)
+        node3 = Node(3)
+        node4 = Node(4)
+
+        node1.neighbors = [node2, node4]
+        node2.neighbors = [node1, node3]
+        node3.neighbors = [node2, node4]
+        node4.neighbors = [node1, node3]
+
+        cloned_graph = clone_graph2(node1)
+
+        # Check if the cloned graph has the same structure
+        self.assertEqual(cloned_graph.val, 1)
+        self.assertEqual(len(cloned_graph.neighbors), 2)
+        self.assertEqual(cloned_graph.neighbors[0].val, 2)
+        self.assertEqual(cloned_graph.neighbors[1].val, 4)
+
 
 if __name__ == "__main__":
     sys.exit(unittest.main())
