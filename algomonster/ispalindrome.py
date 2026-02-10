@@ -5,12 +5,13 @@ import sys
 import unittest
 
 # tags: two pointers
+# leetcode: 125
 
 # solution: two pointers, opposite direction
 # complexity:
 # run-time: O(n)
 # space: O(1)
-def is_palindrome(s: str) -> bool:
+def ispalindrome(s: str) -> bool:
     left = 0
     right = len(s)-1
 
@@ -34,15 +35,15 @@ def is_palindrome(s: str) -> bool:
 class TestIsPalindrome(unittest.TestCase):
     def test_example_1(self):
         s = "A man, a plan, a canal: Panama"
-        self.assertTrue(is_palindrome(s))
+        self.assertTrue(ispalindrome(s))
 
     def test_example_2(self):
         s = "race a car"
-        self.assertFalse(is_palindrome(s))
+        self.assertFalse(ispalindrome(s))
 
     def test_example_3(self):
         s = " "
-        self.assertTrue(is_palindrome(s))
+        self.assertTrue(ispalindrome(s))
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -53,5 +54,5 @@ if __name__ == "__main__":
         sys.exit(unittest.main(argv=[sys.argv[0]]))
 
     s = input()
-    res = is_palindrome(s)
+    res = ispalindrome(s)
     print("true" if res else "false")

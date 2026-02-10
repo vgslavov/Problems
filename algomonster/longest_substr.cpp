@@ -3,12 +3,13 @@
 #include <unordered_map>
 
 // tags: sliding window
+// leetcode: 3
 
 // solution: sliding window, longest + map
 // complexity:
 // run-time: O(n)
 // space: O(n)
-int longestSubstrWoRepeatingChars(const std::string& s)
+int longestSubstr(const std::string& s)
 {
     int left = 0;
     int ans = 0;

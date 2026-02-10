@@ -6,12 +6,13 @@ import sys
 import unittest
 
 # tags: sliding window
+# leetcode: 3
 
 # solution: sliding window, longest + dict
 # complexity
 # run-time: O(n)
 # space: O(n)
-def longest_substring_wo_repeating_characters2(s: str) -> int:
+def longest_substr(s: str) -> int:
     left = 0
     ans = 0
     curr_win = defaultdict(int)
@@ -38,7 +39,7 @@ def longest_substring_wo_repeating_characters2(s: str) -> int:
 # complexity
 # run-time: O(n)
 # space: O(n)
-def longest_substring_wo_repeating_characters(s: str) -> int:
+def longest_substr2(s: str) -> int:
     left = 0
     ans = 0
     curr_win = defaultdict(int)
@@ -57,20 +58,20 @@ def longest_substring_wo_repeating_characters(s: str) -> int:
 
 class TestLongestSubstringWithoutRepeatingCharacters(unittest.TestCase):
     def test_empty(self):
-        self.assertEqual(longest_substring_wo_repeating_characters(""), 0)
-        self.assertEqual(longest_substring_wo_repeating_characters2(""), 0)
+        self.assertEqual(longest_substr(""), 0)
+        self.assertEqual(longest_substr2(""), 0)
 
     def test_1(self):
-        self.assertEqual(longest_substring_wo_repeating_characters("abcabcbb"), 3)
-        self.assertEqual(longest_substring_wo_repeating_characters2("abcabcbb"), 3)
+        self.assertEqual(longest_substr("abcabcbb"), 3)
+        self.assertEqual(longest_substr2("abcabcbb"), 3)
 
     def test_2(self):
-        self.assertEqual(longest_substring_wo_repeating_characters("bbbbb"), 1)
-        self.assertEqual(longest_substring_wo_repeating_characters2("bbbbb"), 1)
+        self.assertEqual(longest_substr("bbbbb"), 1)
+        self.assertEqual(longest_substr2("bbbbb"), 1)
 
     def test_3(self):
-        self.assertEqual(longest_substring_wo_repeating_characters("pwwkew"), 3)
-        self.assertEqual(longest_substring_wo_repeating_characters2("pwwkew"), 3)
+        self.assertEqual(longest_substr("pwwkew"), 3)
+        self.assertEqual(longest_substr2("pwwkew"), 3)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -81,5 +82,5 @@ if __name__ == "__main__":
         sys.exit(unittest.main(argv=[sys.argv[0]]))
 
     s = input()
-    res = longest_substring_wo_repeating_characters(s)
+    res = longest_substr(s)
     print(res)

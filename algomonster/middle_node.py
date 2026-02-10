@@ -5,6 +5,7 @@ import sys
 import unittest
 
 # tags: two pointers
+# leetcode: 876
 
 class Node:
     def __init__(self, val, next=None):
@@ -15,7 +16,7 @@ class Node:
 # complexity:
 # run-time: O(n)
 # space: O(1)
-def middle_of_linked_list(head: Node) -> int:
+def middle_node(head: Node) -> int:
     slow, fast = head, head
 
     # check both fast & fast.next to avoid NoneType errors
@@ -35,15 +36,15 @@ def build_list(nodes, f):
 class TestMiddleOfLinkedList(unittest.TestCase):
     def test_example_1(self):
         head = Node(1, Node(2, Node(3, Node(4, Node(5)))))
-        self.assertEqual(middle_of_linked_list(head), 3)
+        self.assertEqual(middle_node(head), 3)
         
     def test_example_2(self):
         head = Node(1, Node(2, Node(3, Node(4))))
-        self.assertEqual(middle_of_linked_list(head), 3)
+        self.assertEqual(middle_node(head), 3)
 
     def test_example_3(self):
         head = Node(1)
-        self.assertEqual(middle_of_linked_list(head), 1)
+        self.assertEqual(middle_node(head), 1)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -54,5 +55,5 @@ if __name__ == "__main__":
         sys.exit(unittest.main(argv=[sys.argv[0]]))
 
     head = build_list(iter(input().split()), int)
-    res = middle_of_linked_list(head)
+    res = middle_node(head)
     print(res)

@@ -9,6 +9,7 @@ struct Node {
 };
 
 // tags: two pointers
+// leetcode: 876
 
 // solution: two pointers, slow & fast, same direction
 // complexity:

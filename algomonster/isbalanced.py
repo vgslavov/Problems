@@ -5,6 +5,7 @@ import sys
 import unittest
 
 # tags: dfs, tree
+# leetcode: 110
 
 class Node:
     def __init__(self, val, left=None, right=None):
@@ -26,14 +27,14 @@ def max_depth(node):
 # complexity
 # run-time: O(n^2)
 # space: O(h) average, O(n) worst if tree skewed
-def is_balanced(tree: Node) -> bool:
+def isbalanced(tree: Node) -> bool:
     if not tree:
         return True
 
     return (
         abs(max_depth(tree.left)-max_depth(tree.right)) <= 1
-        and is_balanced(tree.left)
-        and is_balanced(tree.right)
+        and isbalanced(tree.left)
+        and isbalanced(tree.right)
     )
 
 # Returns -1 if is not a balanced binary tree. The height if it is.
@@ -55,7 +56,7 @@ def tree_height(tree):
 # complexity
 # run-time: O(n)
 # space: O(h) average, O(n) worst if tree skewed
-def is_balanced2(tree: Node) -> bool:
+def isbalanced2(tree: Node) -> bool:
     return tree_height(tree) != -1
 
 class TestIsBalanced(unittest.TestCase):
@@ -66,32 +67,32 @@ class TestIsBalanced(unittest.TestCase):
         root.right = Node(3)
         root.left.left = Node(4)
         root.left.right = Node(5)
-        self.assertTrue(is_balanced(root))
-        self.assertTrue(is_balanced2(root))
+        self.assertTrue(isbalanced(root))
+        self.assertTrue(isbalanced2(root))
 
         # Test case 2: Unbalanced tree
         root = Node(1)
         root.left = Node(2)
         root.left.left = Node(3)
-        self.assertFalse(is_balanced(root))
-        self.assertFalse(is_balanced2(root))
+        self.assertFalse(isbalanced(root))
+        self.assertFalse(isbalanced2(root))
 
         # Test case 3: Single node
         root = Node(1)
-        self.assertTrue(is_balanced(root))
-        self.assertTrue(is_balanced2(root))
+        self.assertTrue(isbalanced(root))
+        self.assertTrue(isbalanced2(root))
 
         # Test case 4: Empty tree
         root = None
-        self.assertTrue(is_balanced(root))
-        self.assertTrue(is_balanced2(root))
+        self.assertTrue(isbalanced(root))
+        self.assertTrue(isbalanced2(root))
 
         # Test case 5: Right heavy tree
         root = Node(1)
         root.right = Node(2)
         root.right.right = Node(3)
-        self.assertFalse(is_balanced(root))
-        self.assertFalse(is_balanced2(root))
+        self.assertFalse(isbalanced(root))
+        self.assertFalse(isbalanced2(root))
 
 # this function builds a tree from input; you don't have to modify it
 # learn more about how trees are encoded in https://algo.monster/problems/serializing_tree
@@ -112,5 +113,5 @@ if __name__ == "__main__":
         sys.exit(unittest.main(argv=[sys.argv[0]]))
 
     tree = build_tree(iter(input().split()), int)
-    res = is_balanced(tree)
+    res = isbalanced(tree)
     print("true" if res else "false")

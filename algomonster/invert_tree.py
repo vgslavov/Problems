@@ -5,6 +5,7 @@ import sys
 import unittest
 
 # tags: dfs, tree
+# leetcode: 226
 
 class Node:
     def __init__(self, val, left=None, right=None):

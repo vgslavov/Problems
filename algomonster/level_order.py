@@ -6,6 +6,7 @@ import sys
 import unittest
 
 # tags: bfs, tree
+# leetcode: 102
 
 class Node:
     def __init__(self, val, left=None, right=None):
@@ -17,18 +18,18 @@ class Node:
 # complexity:
 # run-time: O(n)
 # space: O(n)
-def level_order_traversal(root: Node) -> list[list[int]]:
+def level_order(root: Node) -> list[list[int]]:
     queue = deque([root])
     ans = []
 
     while queue:
         n = len(queue)
-        curr = []
+        level = []
 
         for _ in range(n):
             node = queue.popleft()
 
-            curr.append(node.val)
+            level.append(node.val)
 
             if node.left:
                 queue.append(node.left)
@@ -36,18 +37,18 @@ def level_order_traversal(root: Node) -> list[list[int]]:
             if node.right:
                 queue.append(node.right)
 
-        ans.append(curr)
+        ans.append(level)
 
     return ans
 
 class TestLevelOrderTraversal(unittest.TestCase):
-    def test_level_order_traversal(self):
+    def test_level_order(self):
         # Test case 1: Simple tree
         root = Node(1)
         root.left = Node(2)
         root.right = Node(3)
         expected = [[1], [2, 3]]
-        self.assertEqual(level_order_traversal(root), expected)
+        self.assertEqual(level_order(root), expected)
 
         # Test case 2: More complex tree
         root = Node(1)
@@ -56,7 +57,7 @@ class TestLevelOrderTraversal(unittest.TestCase):
         root.left.left = Node(4)
         root.left.right = Node(5)
         expected = [[1], [2, 3], [4, 5]]
-        self.assertEqual(level_order_traversal(root), expected)
+        self.assertEqual(level_order(root), expected)
 
 # this function builds a tree from input; you don't have to modify it
 # learn more about how trees are encoded in https://algo.monster/problems/serializing_tree
@@ -77,6 +78,6 @@ if __name__ == "__main__":
         sys.exit(unittest.main(argv=[sys.argv[0]]))
 
     root = build_tree(iter(input().split()), int)
-    res = level_order_traversal(root)
+    res = level_order(root)
     for row in res:
         print(" ".join(map(str, row)))
