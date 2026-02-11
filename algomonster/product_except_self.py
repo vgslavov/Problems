@@ -6,6 +6,7 @@ import sys
 import unittest
 
 # tags: prefix sum
+# leetcode: 238
 
 # non-solution: division
 # * compute product of all numbers
@@ -19,7 +20,7 @@ import unittest
 # complexity
 # run-time: O(n)
 # space: O(n)
-def product_of_array_except_self(nums: list[int]) -> list[int]:
+def product_except_self(nums: list[int]) -> list[int]:
     # forward prefix sum
     prefix_prod = [1]
 
@@ -47,7 +48,7 @@ def product_of_array_except_self(nums: list[int]) -> list[int]:
 # complexity
 # run-time: O(n)
 # space: O(n)
-def product_of_array_except_self2(nums: list[int]) -> list[int]:
+def product_except_self2(nums: list[int]) -> list[int]:
     # preallocate & initialize to 1!
     ans = [1] * len(nums)
 
@@ -67,20 +68,20 @@ def product_of_array_except_self2(nums: list[int]) -> list[int]:
 
     return ans
 
-class TestProductOfArrayExceptSelf(unittest.TestCase):
+class TestProductExceptSelf(unittest.TestCase):
 
     def test_cases(self):
-        self.assertEqual(product_of_array_except_self([1, 2, 3, 4]), [24, 12, 8, 6])
-        self.assertEqual(product_of_array_except_self2([1, 2, 3, 4]), [24, 12, 8, 6])
+        self.assertEqual(product_except_self([1, 2, 3, 4]), [24, 12, 8, 6])
+        self.assertEqual(product_except_self2([1, 2, 3, 4]), [24, 12, 8, 6])
 
-        self.assertEqual(product_of_array_except_self([0, 0, 0, 0]), [0, 0, 0, 0])
-        self.assertEqual(product_of_array_except_self2([0, 0, 0, 0]), [0, 0, 0, 0])
+        self.assertEqual(product_except_self([0, 0, 0, 0]), [0, 0, 0, 0])
+        self.assertEqual(product_except_self2([0, 0, 0, 0]), [0, 0, 0, 0])
 
-        self.assertEqual(product_of_array_except_self([1]), [1])
-        self.assertEqual(product_of_array_except_self2([1]), [1])
+        self.assertEqual(product_except_self([1]), [1])
+        self.assertEqual(product_except_self2([1]), [1])
 
-        self.assertEqual(product_of_array_except_self([-1, 1, 0, -3, 3]), [0, 0, 9, 0, 0])
-        self.assertEqual(product_of_array_except_self2([-1, 1, 0, -3, 3]), [0, 0, 9, 0, 0])
+        self.assertEqual(product_except_self([-1, 1, 0, -3, 3]), [0, 0, 9, 0, 0])
+        self.assertEqual(product_except_self2([-1, 1, 0, -3, 3]), [0, 0, 9, 0, 0])
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -91,5 +92,5 @@ if __name__ == "__main__":
         sys.exit(unittest.main(argv=[sys.argv[0]]))
 
     nums = [int(x) for x in input().split()]
-    res = product_of_array_except_self(nums)
+    res = product_except_self(nums)
     print(" ".join(map(str, res)))

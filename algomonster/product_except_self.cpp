@@ -1,12 +1,13 @@
 #include <vector>
 
 // tags: prefix sum
+// leetcode: 238
 
 // solution: AlgoMonster in-place prefix & suffix running products
 // complexity:
 // run-time: O(n)
 // space: O(n)
-std::vector<int> productOfArrayExceptSelf(const std::vector<int>& nums)
+std::vector<int> productExceptSelf(const std::vector<int>& nums)
 {
     std::vector<int> ans(nums.size(), 1);
 

@@ -5,12 +5,13 @@ import sys
 import unittest
 
 # tags: backtracking, dfs
+# leetcode: 46
 
 # solution: backtracking
 # complexity:
 # run-time: O(n * n!) where n is length of input string letters
 # space: O(n) for recursion stack
-def permutations(letters: str) -> list[str]:
+def permute(letters: str) -> list[str]:
     def backtrack(path):
         # base case
         if len(path) == len(letters):
@@ -34,7 +35,7 @@ def permutations(letters: str) -> list[str]:
 # run-time: O(n * n!) where n is length of input string letters
 # space: O(n) for recursion stack
 # TODO: understand better
-def permutations2(letters: str) -> list[str]:
+def permute2(letters: str) -> list[str]:
     def backtrack(start_index, path):
         # base case
         if start_index == len(letters):
@@ -63,20 +64,20 @@ def permutations2(letters: str) -> list[str]:
     backtrack(0, [])
     return ans
 
-class TestPermutations(unittest.TestCase):
+class TestPermute(unittest.TestCase):
     
-    def test_permutations(self):
-        self.assertEqual(sorted(permutations("abc")), sorted(["abc","acb","bac","bca","cab","cba"]))
-        self.assertEqual(sorted(permutations2("abc")), sorted(["abc","acb","bac","bca","cab","cba"]))
+    def test_permute(self):
+        self.assertEqual(sorted(permute("abc")), sorted(["abc","acb","bac","bca","cab","cba"]))
+        self.assertEqual(sorted(permute2("abc")), sorted(["abc","acb","bac","bca","cab","cba"]))
 
-        self.assertEqual(permutations("a"), ["a"])
-        self.assertEqual(permutations2("a"), ["a"])
+        self.assertEqual(permute("a"), ["a"])
+        self.assertEqual(permute2("a"), ["a"])
 
-        self.assertEqual(permutations(""), [""])
-        self.assertEqual(permutations2(""), [""])
+        self.assertEqual(permute(""), [""])
+        self.assertEqual(permute2(""), [""])
 
-        self.assertEqual(permutations("ab"), ["ab", "ba"])
-        self.assertEqual(permutations2("ab"), ["ab", "ba"])
+        self.assertEqual(permute("ab"), ["ab", "ba"])
+        self.assertEqual(permute2("ab"), ["ab", "ba"])
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -87,6 +88,6 @@ if __name__ == "__main__":
         sys.exit(unittest.main(argv=[sys.argv[0]]))
 
     letters = input()
-    res = permutations(letters)
+    res = permute(letters)
     for line in sorted(res):
         print(line)
