@@ -1,11 +1,12 @@
 #include <vector>
 
 // tags: binary search
+// leetcode: 69
 
 // complexity
 // run-time: O(log n)
 // space: O(1)
-int squareRoot(long int n)
+int sqrt(long int n)
 {
     if (n == 0) {
         return 0;

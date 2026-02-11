@@ -5,12 +5,13 @@ import sys
 import unittest
 
 # tags: binary search
+# leetcode: 69
 
 # solution: binary search
 # complexity:
 # run-time: O(log n)
 # space: O(1)
-def square_root(n: int) -> int:
+def sqrt(n: int) -> int:
     if not n:
         return 0
 
@@ -34,18 +35,18 @@ def square_root(n: int) -> int:
     # square root is b/w ans and ans-1
     return ans-1
 
-class TestSquareRoot(unittest.TestCase):
+class TestSqrt(unittest.TestCase):
     def test_example_1(self):
         n = 16
-        self.assertEqual(square_root(n), 4)
+        self.assertEqual(sqrt(n), 4)
         
     def test_example_2(self):
         n = 14
-        self.assertEqual(square_root(n), 3)
+        self.assertEqual(sqrt(n), 3)
 
     def test_example_3(self):
         n = 0
-        self.assertEqual(square_root(n), 0)
+        self.assertEqual(sqrt(n), 0)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -56,5 +57,5 @@ if __name__ == "__main__":
         sys.exit(unittest.main(argv=[sys.argv[0]]))
 
     n = int(input())
-    res = square_root(n)
+    res = sqrt(n)
     print(res)
