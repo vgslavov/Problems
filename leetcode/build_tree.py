@@ -38,6 +38,7 @@ def build_tree(preorder, inorder):
         nonlocal preorder_i
 
         # create the node
+        # root is first in preorder
         root_val = preorder[preorder_i]
         root = TreeNode(root_val)
 
@@ -48,12 +49,14 @@ def build_tree(preorder, inorder):
 
         # split left & right subtrees from inorder but exclude root
         # left first!
+        # preorder: root, left, right
         root.left = array2tree(left, root_i-1)
         root.right = array2tree(root_i+1, right)
 
         return root
 
-    # value to index dict in inorder
+    # inorder: value to index mapping
+    # used for splitting left & right subtrees
     val2i = {inorder[i]:i for i in range(len(inorder))}
     preorder_i = 0
 

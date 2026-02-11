@@ -35,7 +35,7 @@ def build_tree2(inorder, postorder):
         if left > right:
             return None
 
-        # remove root from postorder!
+        # root is last in postorder
         root_val = postorder.pop()
         root = TreeNode(root_val)
 
@@ -44,12 +44,14 @@ def build_tree2(inorder, postorder):
 
         # split inorder tree at root
         # right subtree first!
+        # postorder: left, right, root
         root.right = array2tree(root_i+1, right)
         root.left = array2tree(left, root_i-1)
 
         return root
 
-    # value to index in inorder for fast lookup of root
+    # inorder: value to index mapping
+    # used for splitting left & right subtrees
     val2i = {inorder[i]:i for i in range(len(inorder))}
 
     return array2tree(0, len(inorder)-1)

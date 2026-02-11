@@ -55,7 +55,19 @@ def right_side_view(root):
 
     return ans
 
-# TODO: add unit tests
+class TestRightSideView(unittest.TestCase):
+    def test_right_side_view(self):
+        root = TreeNode(1)
+        root.left = TreeNode(2)
+        root.right = TreeNode(3)
+        root.left.right = TreeNode(5)
+        root.right.right = TreeNode(4)
+        self.assertEqual(right_side_view(root), [1, 3, 4])
+        self.assertEqual(right_side_view(None), [])
+        self.assertEqual(right_side_view(root.left), [2, 5])
+        self.assertEqual(right_side_view(root.right), [3, 4])
+        self.assertEqual(right_side_view(root.left.right), [5])
+        self.assertEqual(right_side_view(root.right.right), [4])
 
 if __name__ == '__main__':
     sys.exit(unittest.main())

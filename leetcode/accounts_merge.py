@@ -39,6 +39,7 @@ def accounts_merge(accounts: list[list[str]]) -> list[list[str]]:
     graph = defaultdict(list)
 
     for a in accounts:
+        # skip the name
         for i in range(1, len(a)):
             for j in range (i+1, len(a)):
                 graph[a[i]].append(a[j])

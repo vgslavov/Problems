@@ -54,11 +54,29 @@ def max_depth2(root):
 
         # visiting right first as stack is LIFO!
         if node.right:
-            stack.append((node.rigth, depth+1))
+            stack.append((node.right, depth+1))
 
     return ans
 
-# TODO: unit test
+
+class TestMaxDepth(unittest.TestCase):
+    def test_max_depth(self):
+        root = TreeNode(3)
+        root.left = TreeNode(9)
+        root.right = TreeNode(20)
+        root.right.left = TreeNode(15)
+        root.right.right = TreeNode(7)
+        self.assertEqual(max_depth(root), 3)
+        self.assertEqual(max_depth2(root), 3)
+        self.assertEqual(max_depth(None), 0)
+        self.assertEqual(max_depth2(None), 0)
+        self.assertEqual(max_depth(root.left), 1)
+        self.assertEqual(max_depth2(root.left), 1)
+        self.assertEqual(max_depth(root.right), 2)
+        self.assertEqual(max_depth2(root.right), 2)
+        self.assertEqual(max_depth(root.right.left), 1)
+        self.assertEqual(max_depth2(root.right.left), 1)
+        self.assertEqual(max_depth(root.right.right), 1)
 
 if __name__ == '__main__':
     sys.exit(unittest.main())

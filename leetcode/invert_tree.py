@@ -35,7 +35,26 @@ def invert_tree(root):
 
     return root
 
-# TODO: add unit tests & solve iteratively
+# TODO: solve iteratively
 
-if __name__ == '__name__':
+class TestInvertTree(unittest.TestCase):
+    def test_invert_tree(self):
+        root = TreeNode(4)
+        root.left = TreeNode(2)
+        root.right = TreeNode(7)
+        root.left.left = TreeNode(1)
+        root.left.right = TreeNode(3)
+        root.right.left = TreeNode(6)
+        root.right.right = TreeNode(9)
+
+        self.assertEqual(invert_tree(root), root)
+        self.assertEqual(invert_tree(None), None)
+        self.assertEqual(invert_tree(root.left), root.left)
+        self.assertEqual(invert_tree(root.right), root.right)
+        self.assertEqual(invert_tree(root.left.left), root.left.left)
+        self.assertEqual(invert_tree(root.left.right), root.left.right)
+        self.assertEqual(invert_tree(root.right.left), root.right.left)
+        self.assertEqual(invert_tree(root.right.right), root.right.right)
+
+if __name__ == '__main__':
     sys.exit(unittest.main())

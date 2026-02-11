@@ -29,7 +29,7 @@ class TreeNode:
 # run-time: O(n)
 # space: O(n)
 def lca(root, p, q):
-    # empty tree
+    # base case
     if not root:
         return None
 
@@ -50,7 +50,23 @@ def lca(root, p, q):
 
     return right
 
-# TODO: add unit tests
+class TestLCA(unittest.TestCase):
+    def test_lca(self):
+        root = TreeNode(3)
+        root.left = TreeNode(5)
+        root.right = TreeNode(1)
+        root.left.left = TreeNode(6)
+        root.left.right = TreeNode(2)
+        root.right.left = TreeNode(0)
+        root.right.right = TreeNode(8)
+        root.left.right.left = TreeNode(7)
+        root.left.right.right = TreeNode(4)
+
+        self.assertEqual(lca(root, root.left, root.right), root)
+        self.assertEqual(lca(root, root.left.right.left, root.left.right.right), root.left.right)
+        self.assertEqual(lca(root, root.left.left, root.left.right.right), root.left)
+        self.assertEqual(lca(root, root.right.left, root.right.right), root.right)
+        self.assertEqual(lca(root, root.left.left, root.right.right), root)
 
 if __name__ == '__main__':
     sys.exit(unittest.main())
