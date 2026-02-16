@@ -22,7 +22,9 @@ import unittest
 class MyQueue:
 
     def __init__(self):
+        # for poping
         self.__front = []
+        # for pushing new elements
         self.__back = []
 
     # run-time: O(1)

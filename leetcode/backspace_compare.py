@@ -17,7 +17,7 @@ import unittest
 
 # run-time: O(n)
 # space: O(n)
-def remove_char(s: str, pattern: str) -> str:
+def remove_char(s: str, pattern: str) -> list:
     stack = []
 
     for c in s:
@@ -33,8 +33,8 @@ def remove_char(s: str, pattern: str) -> str:
 
 # solution: stack
 # complexity:
-# run-time: O(n+m)?
-# space: O(n+m)?
+# run-time: O(n+m)
+# space: O(n+m)
 def backspace_compare(s: str, t: str) -> bool:
     return remove_char(s, '#') == remove_char(t, '#')
 

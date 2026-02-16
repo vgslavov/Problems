@@ -22,7 +22,7 @@ def add_bin(a, b):
     # convert binary string to int
     # add
     # convert int to binary string
-    # slice
+    # slice: drop "0b" prefix
     return bin(int(a, 2) + int(b, 2))[2:]
 
 # solution: Leetcode Pythonic int/bin & bitwise operators
