@@ -101,6 +101,66 @@ class LRUCache2:
         # add/update key
         self.__cache[key] = value
 
+class Node:
+    def __init__(self, key, val):
+        self.key = key
+        self.val = val
+        self.prev = self.next = None
+
+# solution: doubly-linked list
+# complexity
+# run-time: O(1) for both put/get
+# space: O(capacity)
+class LRUCache3:
+    def __init__(self, capacity):
+        self.__capacity = capacity
+        # key: key, value: Node
+        self.__cache = {}
+
+        # head & tail of list with dummy nodes
+        self.__head, self.__tail = Node(0, 0), Node(0, 0)
+        # head <-> tail
+        self.__head.next, self.__tail.prev = self.__tail, self.__head
+
+    # prev <-> node <-> next
+    def __remove(self, node):
+        prev, next = node.prev, node.next
+        prev.next, next.prev = next, prev
+
+    # append at end but before tail:
+    # node <-> tail
+    def __append(self, node):
+        # more readable
+        prev = self.__tail.prev
+        prev.next = node
+        node.prev = prev
+        node.next = self.__tail
+        self.__tail.prev = node
+
+    def get(self, key: int) -> int:
+        if key in self.__cache:
+            # don't recreate the node
+            # just remove & append to linked list
+            self.__remove(self.__cache[key])
+            self.__append(self.__cache[key])
+            return self.__cache[key].val
+
+        return -1
+
+    def put(self, key: int, value: int) -> None:
+        if key in self.__cache:
+            self.__remove(self.__cache[key])
+            self.__cache[key].val = value
+        else:
+            self.__cache[key] = Node(key, value)
+
+        self.__append(self.__cache[key])
+
+        if len(self.__cache) > self.__capacity:
+            lru = self.__head.next
+            self.__remove(lru)
+            del self.__cache[lru.key]
+
 class TestLRUCache(unittest.TestCase):
 
     def test_0_capacity(self):
@@ -135,6 +195,19 @@ class TestLRUCache(unittest.TestCase):
         obj.put(3, 3); # LRU key was 2, evicts key 2, cache is {1=1, 3=3}
         self.assertEqual(obj.get(2), -1)
         obj.put(4, 4); # LRU key was 1, evicts key 1, cache is {4=4, 3=3}
+        self.assertEqual(obj.get(1), -1)
+        self.assertEqual(obj.get(3), 3)
+        self.assertEqual(obj.get(4), 4)
+
+    def test_lrucache3(self):
+        capacity = 2
+        obj = LRUCache3(capacity)
+        obj.put(1, 1)
+        obj.put(2, 2)
+        self.assertEqual(obj.get(1), 1)
+        obj.put(3, 3)
+        self.assertEqual(obj.get(2), -1)
+        obj.put(4, 4)
         self.assertEqual(obj.get(1), -1)
         self.assertEqual(obj.get(3), 3)
         self.assertEqual(obj.get(4), 4)
