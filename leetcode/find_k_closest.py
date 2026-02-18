@@ -27,7 +27,9 @@ def find_k_closest(points, k):
     heap = []
 
     for p in points:
-        dist = math.sqrt(pow(p[0] - 0, 2) + pow(p[1] - 0, 2))
+        # optimization: don't need exact distance
+        dist = p[0] ** 2 + p[1] ** 2
+        #dist = math.sqrt(pow(p[0] - 0, 2) + pow(p[1] - 0, 2))
 
         heapq.heappush(heap, (dist, p))
 
@@ -50,7 +52,9 @@ def find_k_closest2(points, k):
     heap = []
 
     for p in points:
-        dist = math.sqrt(pow(p[0] - 0, 2) + pow(p[1] - 0, 2))
+        # optimization: don't need exact distance
+        dist = p[0] ** 2 + p[1] ** 2
+        #dist = math.sqrt(pow(p[0] - 0, 2) + pow(p[1] - 0, 2))
 
         # max heap!
         heapq.heappush(heap, (-dist, p))
