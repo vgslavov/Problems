@@ -107,7 +107,7 @@ class Node:
         self.val = val
         self.prev = self.next = None
 
-# solution: doubly-linked list
+# solution: Neetcode doubly-linked list
 # complexity
 # run-time: O(1) for both put/get
 # space: O(capacity)

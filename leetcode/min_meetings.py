@@ -9,7 +9,7 @@ import unittest
 # url: https://leetcode.com/problems/meeting-rooms-ii/
 # section: meta
 # difficulty: medium
-# tags: array, two pointers, greedy, sorting, heap, prefix sum, citadel
+# tags: array, two pointers, greedy, sorting, heap, prefix sum, citadel, design
 
 # constraints
 # 1 <= intervals.length <= 10^4
