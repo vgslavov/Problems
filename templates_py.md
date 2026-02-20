@@ -7,23 +7,23 @@
 - [Sources](#sources)
 - [Imports](#imports)
 - [Two Pointers](#two-pointers)
-  - [Two Pointers: One Input, Opposite Direction](#two-pointers-one-input-opposite-direction)
-  - [Two Pointers: One Input, Same Direction](#two-pointers-one-input-same-direction)
-  - [Two Pointers: Two Inputs, Exhaust Both](#two-pointers-two-inputs-exhaust-both)
-  - [Two Pointers: Opposite Direction (Two Sum)](#two-pointers-opposite-direction-two-sum)
+  - [One Input, Opposite Direction](#one-input-opposite-direction)
+  - [One Input, Same Direction](#one-input-same-direction)
+  - [Two Inputs, Exhaust Both](#two-inputs-exhaust-both)
+  - [Opposite Direction (Two Sum)](#opposite-direction-two-sum)
 - [Divide & Conquer](#divide--conquer)
-  - [Divide & Conquer: Recursive Stable Merge Sort](#divide--conquer-recursive-stable-merge-sort)
+  - [Recursive Stable Merge Sort](#recursive-stable-merge-sort)
 - [Deduplication](#deduplication)
-  - [Deduplication: Sort + Two Pointers](#deduplication-sort--two-pointers)
+  - [Sort + Two Pointers](#sort--two-pointers)
 - [Kadane's Algorithm](#kadanes-algorithm)
-  - [Kadane's Algorithm: Maximum Subarray Sum](#kadanes-algorithm-maximum-subarray-sum)
-  - [Kadane's Algorithm: Explicit Sliding Window](#kadanes-algorithm-explicit-sliding-window)
+  - [Maximum Subarray Sum](#maximum-subarray-sum)
+  - [Explicit Sliding Window](#explicit-sliding-window)
 - [Sliding Window](#sliding-window)
   - [Longest](#longest)
   - [Shortest](#shortest)
   - [Fixed](#fixed)
 - [Prefix Sum](#prefix-sum)
-  - [Build a Diff Array, Calculate Prefix Sum on It](#build-a-diff-array-calculate-prefix-sum-on-it)
+  - [Build a Diff Array](#build-a-diff-array)
   - [Build a Prefix Sum: Pythonic](#build-a-prefix-sum-pythonic)
   - [Build a Prefix Sum](#build-a-prefix-sum)
   - [Build a Prefix Sum for Range Queries](#build-a-prefix-sum-for-range-queries)
@@ -36,9 +36,9 @@
   - [Efficient String Building](#efficient-string-building)
 - [Linked Lists](#linked-lists)
   - [Definition for Singly-Linked List](#definition-for-singly-linked-list)
-  - [Linked List: Fast and Slow Pointer](#linked-list-fast-and-slow-pointer)
-  - [Linked List: Fast & Slow K Apart](#linked-list-fast--slow-k-apart)
-  - [Linked List: Dummy Nodes](#linked-list-dummy-nodes)
+  - [Fast & Slow Pointer](#fast--slow-pointer)
+  - [Fast & Slow K Apart](#fast--slow-k-apart)
+  - [Dummy Nodes](#dummy-nodes)
   - [Reversing a Linked List](#reversing-a-linked-list)
 - [Subarrays](#subarrays)
   - [Find Number of Subarrays That Fit an Exact Criteria](#find-number-of-subarrays-that-fit-an-exact-criteria)
@@ -52,41 +52,40 @@
   - [BST: Find](#bst-find)
   - [BST: Insert](#bst-insert)
 - [Binary Trees](#binary-trees)
-  - [Binary Tree: Recursive DFS (More Common)](#binary-tree-recursive-dfs-more-common)
-  - [Binary Tree: Iterative DFS (Less Common)](#binary-tree-iterative-dfs-less-common)
-  - [Binary Tree: Iterative BFS (More Common)](#binary-tree-iterative-bfs-more-common)
+  - [Recursive DFS](#recursive-dfs)
+  - [Iterative DFS](#iterative-dfs)
+  - [Iterative BFS](#iterative-bfs)
 - [Graphs](#graphs)
-  - [Graph: Build Adjacency List/Dict](#graph-build-adjacency-listdict)
-  - [Graph: Recursive DFS](#graph-recursive-dfs)
-  - [Graph: Iterative DFS](#graph-iterative-dfs)
-  - [Graph: Iterative BFS](#graph-iterative-bfs)
+  - [Build Adjacency List/Dict](#build-adjacency-listdict)
+  - [Recursive DFS](#recursive-dfs-1)
+  - [Iterative DFS](#iterative-dfs-1)
+  - [Iterative BFS](#iterative-bfs-1)
   - [Topological Sort (ala BFS)](#topological-sort-ala-bfs)
 - [Heaps](#heaps)
   - [Find Top K Elements with Heap](#find-top-k-elements-with-heap)
 - [Binary Search](#binary-search)
-  - [Binary Search: Using Pythonic Bisect, Ascending Sorted Only!](#binary-search-using-pythonic-bisect-ascending-sorted-only)
-  - [Binary Search](#binary-search-1)
-  - [Binary Search: Feasible Conditions](#binary-search-feasible-conditions)
-  - [Binary Search: Duplicate Elements, Left-Most Insertion Point](#binary-search-duplicate-elements-left-most-insertion-point)
-  - [Binary Search: Duplicate Elements, Right-Most Insertion Point](#binary-search-duplicate-elements-right-most-insertion-point)
-  - [Binary Search: Find Min (For Greedy Problems)](#binary-search-find-min-for-greedy-problems)
-  - [Binary Search: Find Max](#binary-search-find-max)
+  - [Pythonic `bisect`, Ascending Sorted Only!](#pythonic-bisect-ascending-sorted-only)
+  - [Manual](#manual)
+  - [Feasible Conditions](#feasible-conditions)
+  - [Duplicate Elements, Left-Most Insertion Point](#duplicate-elements-left-most-insertion-point)
+  - [Duplicate Elements, Right-Most Insertion Point](#duplicate-elements-right-most-insertion-point)
+  - [Find Min (For Greedy Problems)](#find-min-for-greedy-problems)
+  - [Find Max](#find-max)
 - [Backtracking](#backtracking)
-  - [Backtracking](#backtracking-1)
-  - [Backtracking: Basic Pruning](#backtracking-basic-pruning)
-  - [Backtracking: Aggregation](#backtracking-aggregation)
-  - [Backtracking: Permutations of Unique Numbers](#backtracking-permutations-of-unique-numbers)
-  - [Backtracking: Combinations](#backtracking-combinations)
+  - [Basic Pruning](#basic-pruning)
+  - [Aggregation](#aggregation)
+  - [Permutations](#permutations)
+  - [Combinations](#combinations)
 - [Dynamic Programming](#dynamic-programming)
-  - [Dynamic Programming: Recursive Top-Down Memoization](#dynamic-programming-recursive-top-down-memoization)
-  - [Dynamic Programming: Iterative Bottom-Up 1D](#dynamic-programming-iterative-bottom-up-1d)
+  - [DP: Recursive Top-Down Memoization](#dp-recursive-top-down-memoization)
+  - [DP: Iterative Bottom-Up 1D](#dp-iterative-bottom-up-1d)
 - [Tries](#tries)
   - [Build a Trie](#build-a-trie)
-  - [Build a Trie: Insert & Search](#build-a-trie-insert--search)
+  - [Insert & Search](#insert--search)
 - [Shortest Path](#shortest-path)
   - [Dijkstra's Algorithm](#dijkstras-algorithm)
 - [Union-Find](#union-find)
-  - [Union-Find: DSU (Disjoint Set Union)](#union-find-dsu-disjoint-set-union)
+  - [DSU (Disjoint Set Union)](#dsu-disjoint-set-union)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -116,7 +115,7 @@ import math
 
 ## Two Pointers
 
-### Two Pointers: One Input, Opposite Direction
+### One Input, Opposite Direction
 
 ```python
 def condition(a, b):
@@ -138,7 +137,7 @@ def two_pointers_opposite(arr):
     return ans
 ```
 
-### Two Pointers: One Input, Same Direction
+### One Input, Same Direction
 
 ```python
 def two_pointers_same(arr):
@@ -155,7 +154,7 @@ def two_pointers_same(arr):
         fast += 1
 ```
 
-### Two Pointers: Two Inputs, Exhaust Both
+### Two Inputs, Exhaust Both
 
 ```python
 def two_pointers(arr1, arr2):
@@ -179,7 +178,7 @@ def two_pointers(arr1, arr2):
     return ans
 ```
 
-### Two Pointers: Opposite Direction (Two Sum)
+### Opposite Direction (Two Sum)
 
 **Run-time:** O(n)  
 **Space:** O(1)
@@ -212,7 +211,7 @@ def two_sum(nums, left, right, target):
 
 ## Divide & Conquer
 
-### Divide & Conquer: Recursive Stable Merge Sort
+### Recursive Stable Merge Sort
 
 ```python
 def merge_sort(arr):
@@ -251,7 +250,7 @@ def merge_sort(arr):
 
 ## Deduplication
 
-### Deduplication: Sort + Two Pointers
+### Sort + Two Pointers
 
 **Run-time:** O(n*log n) + O(n^2) ~ O(n^2)  
 **Space:** O(1)
@@ -282,7 +281,7 @@ def three_sum(nums, target):
 
 ## Kadane's Algorithm
 
-### Kadane's Algorithm: Maximum Subarray Sum
+### Maximum Subarray Sum
 
 ```python
 def max_subarray(nums):
@@ -300,7 +299,7 @@ def max_subarray(nums):
     return max_sum
 ```
 
-### Kadane's Algorithm: Explicit Sliding Window
+### Explicit Sliding Window
 
 ```python
 def max_subarray_sliding(nums):
@@ -407,7 +406,7 @@ def sliding_window_fixed(arr, k):
 
 ## Prefix Sum
 
-### Build a Diff Array, Calculate Prefix Sum on It
+### Build a Diff Array
 
 ```python
 def diff_array(arr, shifts):
@@ -541,7 +540,7 @@ class ListNode:
         self.next = next
 ```
 
-### Linked List: Fast and Slow Pointer
+### Fast & Slow Pointer
 
 **Traversing:** iteratively more common
 
@@ -559,7 +558,7 @@ def fn(head):
     return ans
 ```
 
-### Linked List: Fast & Slow K Apart
+### Fast & Slow K Apart
 
 ```python
 def fn(head, k):
@@ -578,7 +577,7 @@ def fn(head, k):
     return slow
 ```
 
-### Linked List: Dummy Nodes
+### Dummy Nodes
 
 ```python
 def fn(head):
@@ -716,6 +715,33 @@ def mono_deque(arr, k):
     return ans
 ```
 
+```py
+# n reqs/sec
+def mono_deque2(arr, size, duration):
+    win = deque()
+    ans = []
+
+    for a in arr:
+        # 1. shink window: evict older entries
+        while win and a - win[0] >= duration:
+            win.popleft()
+
+        # 2. expand window
+        if len(win) < size:
+            win.append(a)
+
+            # do stuff
+
+            # process
+            ans.append(True)
+        else:
+            # reject
+            ans.append(False)
+
+    return ans
+
+```
+
 ---
 
 ## Intervals
@@ -790,9 +816,9 @@ def bst_insert(tree, val):
 
 ## Binary Trees
 
-### Binary Tree: Recursive DFS (More Common)
+### Recursive DFS
 
-**Data struct:** recursion stack (LIFO)
+**Data struct:** recursion stack (LIFO), more common
 
 ```python
 def dfs_tree_recursive(root, target=None):
@@ -822,7 +848,7 @@ def dfs_tree_recursive(root, target=None):
     #print("postorder: ".format(root.val))
 ```
 
-### Binary Tree: Iterative DFS (Less Common)
+### Iterative DFS
 
 **Data struct:** recursion stack (LIFO)
 
@@ -845,9 +871,9 @@ def dfs_tree_iterative(root, target=None):
     return None
 ```
 
-### Binary Tree: Iterative BFS (More Common)
+### Iterative BFS
 
-**Data struct:** queue (FIFO)
+**Data struct:** queue (FIFO), more common
 
 ```python
 def bfs_tree_iterative(root):
@@ -878,7 +904,7 @@ def bfs_tree_iterative(root):
 
 ## Graphs
 
-### Graph: Build Adjacency List/Dict
+### Build Adjacency List/Dict
 
 **Input:** array of edges  
 **Output:** adjacency list/dict
@@ -902,7 +928,7 @@ def get_neighbors(node):
     return GRAPH[node]
 ```
 
-### Graph: Recursive DFS
+### Recursive DFS
 
 **Data struct:** recursion stack (LIFO)
 
@@ -925,7 +951,7 @@ def dfs_graph_recursive(root):
     return dfs(root)
 ```
 
-### Graph: Iterative DFS
+### Iterative DFS
 
 **Data struct:** stack (LIFO)
 
@@ -950,7 +976,7 @@ def dfs_graph_iterative(root):
     return ans
 ```
 
-### Graph: Iterative BFS
+### Iterative BFS
 
 **Data struct:** queue (FIFO)  
 **Input:** adjacency list/dict
@@ -1082,7 +1108,7 @@ def find_topk(arr, k):
 
 ## Binary Search
 
-### Binary Search: Using Pythonic Bisect, Ascending Sorted Only!
+### Pythonic `bisect`, Ascending Sorted Only!
 
 ```python
 def binary_search_bisect_left(arr, target):
@@ -1093,7 +1119,7 @@ def binary_search_bisect_left(arr, target):
     return False
 ```
 
-### Binary Search
+### Manual
 
 **Complexity:**  
 **Run-time:** O(log n)  
@@ -1124,7 +1150,7 @@ def binary_search(arr, target):
     return left
 ```
 
-### Binary Search: Feasible Conditions
+### Feasible Conditions
 
 ```python
 def feasible(num, target):
@@ -1159,7 +1185,7 @@ def binary_search_feasible(arr, target):
     return ans
 ```
 
-### Binary Search: Duplicate Elements, Left-Most Insertion Point
+### Duplicate Elements, Left-Most Insertion Point
 
 ```python
 def binary_search_left(arr, target):
@@ -1175,7 +1201,7 @@ def binary_search_left(arr, target):
     return left
 ```
 
-### Binary Search: Duplicate Elements, Right-Most Insertion Point
+### Duplicate Elements, Right-Most Insertion Point
 
 ```python
 def binary_search_right(arr, target):
@@ -1191,7 +1217,7 @@ def binary_search_right(arr, target):
     return left
 ```
 
-### Binary Search: Find Min (For Greedy Problems)
+### Find Min (For Greedy Problems)
 
 ```python
 MINIMUM_POSSIBLE_ANSWER = -math.inf
@@ -1214,7 +1240,7 @@ def binary_search_min(arr):
     return left
 ```
 
-### Binary Search: Find Max
+### Find Max
 
 ```python
 def binary_search_max(arr):
@@ -1238,8 +1264,6 @@ def binary_search_max(arr):
 
 ## Backtracking
 
-### Backtracking
-
 ```python
 def backtrack(curr, OTHER_ARGUMENTS...):
     if BASE_CASE:
@@ -1255,7 +1279,7 @@ def backtrack(curr, OTHER_ARGUMENTS...):
     return ans
 ```
 
-### Backtracking: Basic Pruning
+### Basic Pruning
 
 ```python
 def is_leaf(start_index):
@@ -1291,7 +1315,7 @@ def backtrack_pruning(start_index, path, [...additional states]):
         path.pop()
 ```
 
-### Backtracking: Aggregation
+### Aggregation
 
 ```python
 def backtrack_agg(start_index, [...additional states]):
@@ -1307,7 +1331,7 @@ def backtrack_agg(start_index, [...additional states]):
     return ans
 ```
 
-### Backtracking: Permutations of Unique Numbers
+### Permutations
 
 ```python
 def permute(nums):
@@ -1330,7 +1354,7 @@ def permute(nums):
     return ans
 ```
 
-### Backtracking: Combinations
+### Combinations
 
 ```python
 def combine(n, k):
@@ -1354,7 +1378,7 @@ def combine(n, k):
 
 ## Dynamic Programming
 
-### Dynamic Programming: Recursive Top-Down Memoization
+### DP: Recursive Top-Down Memoization
 
 ```python
 def fn(arr):
@@ -1376,7 +1400,7 @@ def fn(arr):
     return dp(STATE_FOR_WHOLE_INPUT)
 ```
 
-### Dynamic Programming: Iterative Bottom-Up 1D
+### DP: Iterative Bottom-Up 1D
 
 ```python
 def fn(arr):
@@ -1429,7 +1453,7 @@ def build_trie(words):
     return root
 ```
 
-### Build a Trie: Insert & Search
+### Insert & Search
 
 ```python
 class Trie:
@@ -1490,7 +1514,7 @@ def shortest_path(graph, source):
 
 ## Union-Find
 
-### Union-Find: DSU (Disjoint Set Union)
+### DSU (Disjoint Set Union)
 
 ```python
 class UnionFind:
