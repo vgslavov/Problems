@@ -26,9 +26,11 @@
     - [Commands](#commands)
   - [Caching](#caching)
     - [Goals](#goals)
+    - [Cache Locations](#cache-locations)
+    - [Read Patterns](#read-patterns)
+    - [Write Patterns](#write-patterns)
     - [Eviction Policies](#eviction-policies)
-    - [Cache Invalidation Strategies](#cache-invalidation-strategies)
-    - [Cache Write Strategies](#cache-write-strategies)
+    - [Invalidation Strategies](#invalidation-strategies)
     - [Hot Keys](#hot-keys)
     - [High-Performant Caches](#high-performant-caches)
   - [Database Indexes](#database-indexes)
@@ -377,29 +379,48 @@ Real-world systems frequently need both availability and consistency - just for 
 * Reduce # of db queries
 * Speed up expensive queries
 
+#### Cache Locations
+
+* Client (browser)
+* CDN / edge
+* Web server (reverse proxy)
+* Application (in-process, e.g. local LRU)
+* Database (query cache, buffer pool)
+* Object cache (e.g. Redis, Memcached) at query level or object level
+
+#### Read Patterns
+
+How the application reads through the cache.
+
+* **Cache-aside (lazy loading)**: app checks cache first; on miss, reads from datastore, populates cache, returns. Most common. Stale data possible until invalidated/expired.
+* **Read-through**: app reads from cache; cache itself loads from datastore on miss. Same effect as cache-aside but logic lives in the cache layer.
+* **Refresh-ahead**: cache proactively refreshes hot entries before TTL expires. Hides latency for predictable hot keys; wasted work if predictions are wrong.
+
+#### Write Patterns
+
+How writes propagate between cache and datastore.
+
+* **Write-through**: write to cache and datastore *synchronously*. Strong consistency; adds latency to writes.
+* **Write-around**: write directly to datastore, bypass cache. Avoids cache pollution from writes that won't be read; first read after write is a miss.
+* **Write-back (write-behind)**: write to cache, queue *async* write to datastore. Fastest writes; risk of data loss if cache fails before flush.
+
 #### Eviction Policies
 
-* **Least Recently Used (LRU)**: Evicts the least recently accessed items first.
-* **First In, First Out (FIFO)**: Evicts items in the order they were added.
-* **Least Frequently Used (LFU)**: Removes items that are least frequently accessed.
+**Space**: when the cache is full, which entry to drop.
 
-#### Cache Invalidation Strategies
+* **LRU (Least Recently Used)**: evict the least recently accessed item. Default choice.
+* **LFU (Least Frequently Used)**: evict the least frequently accessed item. Better for skewed access patterns.
+* **FIFO (First In, First Out)**: evict the oldest-inserted item. Simple but ignores access patterns.
 
-#TODO: cleanup
+#### Invalidation Strategies
 
-* **Time-based expiration (TTL)** - Set a fixed lifetime for cached entries. Simple to implement but means serving potentially stale data until expiration.
-* **Write-through invalidation** - Update or delete cache entries immediately when writing to the database. Ensures consistency but adds latency to write operations and requires careful error handling.
-* **Write-behind invalidation** - Queue invalidation events to process asynchronously. Reduces write latency but introduces a window where stale data might be served.
-* **Tagged invalidation** - Associate cache entries with tags (e.g., `user:123:posts`). Invalidate all entries with a specific tag when related data changes. Powerful for complex dependencies but requires maintaining tag relationships.
-* **Versioned keys** - Include version numbers in cache keys. Increment the version on updates, naturally invalidating old cache entries. Simple and reliable but requires version tracking.
+**Correctness**: how to keep cached data fresh when the underlying datastore changes.
 
-#### Cache Write Strategies
-
-#TODO: cleanup
-
-* **Write-Through Cache**: Writes data to both the cache and the underlying datastore simultaneously. Ensures consistency but can be slower for write operations.
-* **Write-Around Cache**: Writes data directly to the datastore, bypassing the cache. This can minimize cache pollution but might increase data fetch times on subsequent reads.
-* **Write-Back Cache**: Writes data to the cache and then asynchronously writes the data to the datastore. This can be faster for write operations but can lead to data loss if the cache fails before the data is written to the datastore.
+* **TTL (time-based expiration)**: fixed lifetime per entry. Simple; serves stale data until expiry.
+* **Write-through invalidation**: update/delete cache on every datastore write. Consistent; adds write latency and needs careful error handling.
+* **Write-behind invalidation**: queue invalidation events for *async* processing. Lower write latency; window of staleness.
+* **Tagged invalidation**: tag entries (e.g. `user:123:posts`) and invalidate all entries sharing a tag. Good for complex dependencies; requires tag tracking.
+* **Versioned keys**: embed a version in the key; bump on update so old keys are naturally orphaned. Simple and reliable; requires version tracking.
 
 #### Hot Keys
 
@@ -573,14 +594,14 @@ Key insight: goal is to **reduce throughput per component**.
     * sharding ~ partitioning
         * sharding: splitting data across multiple machines/nodes
         * partitioning: splitting data within a single db/sys
-    * horizontal sharding (partitioning): split *rows*
+    * horizontal *sharding* (partitioning): split *rows*
         * select a good partitioning key
             * `userId` vs `country`
             * minimize variance in # of writes/shard
         * rows for the same `userId` written to same shard
         * slot numbers: Redis
         * consistent hasing: Cassandra, DynamoDB
-    * vertical partitioning: split *columns*/tables
+    * vertical *partitioning*: split *columns*/tables
         * split tables (e.g. `post`) by reads/writes
         * core `post_content`: write-once, read-many
         * engagement `post_metrics`: high-frequency writes
@@ -618,7 +639,10 @@ Key insight: goal is to **reduce throughput per component**.
 
 #### Cache
 
-#TODO: add
+* see [Caching](#caching) for patterns, eviction, and invalidation
+* Redis-specific: `EXPIRE`/`SET ... EX` for TTL, `maxmemory-policy` for eviction (`allkeys-lru`, `allkeys-lfu`, etc.)
+* hash slots distribute keys across nodes in cluster mode
+* see [hot keys](#hot-keys) for skewed access patterns
 
 #### Distributed Lock
 
@@ -1212,24 +1236,7 @@ Alternatives for:
             AP [Unbounded size] => Cassandra, RIAK, Voldemort
             CP [Unbounded size] => HBase, MongoDB, Couchbase, DynamoDB
             ```
-    * Caches
-        - Client caching, CDN caching, Webserver caching, Database caching, Application caching, Cache @Query level, Cache @Object level
-        - Eviction policies
-            - Cache aside
-                * Look for entry in cache, resulting in a cache miss
-                * Load entry from the database
-                * Add entry to cache
-                * Return entry
-            - Write through
-                * Application adds/updates entry in cache
-                * Cache synchronously writes entry to data store
-                * Return
-            - Write behind
-                * Add/update entry in cache
-                * Add event to queue
-                * Return
-                * Asynchronously write entry to the data store, improving write performance
-            - Refresh ahead
+    * [Caches](#caching): locations, read/write patterns, eviction policies, invalidation strategies
     * Asynchronism
         - Message queues
         - Task queues
@@ -1548,23 +1555,6 @@ Notes
 1 ns = 10^-9 seconds
 1 µs = 10^-6 seconds = 1,000 ns
 1 ms = 10^-3 seconds = 1,000 µs = 1,000,000 ns
-```
-
-```
-L1 cache reference ......................... 0.5 ns
-Branch mispredict ............................ 5 ns
-L2 cache reference ........................... 7 ns
-Mutex lock/unlock ........................... 25 ns
-Main memory reference ...................... 100 ns
-Compress 1K bytes with Zippy ............. 3,000 ns  =   3 µs
-Send 2K bytes over 1 Gbps network ....... 20,000 ns  =  20 µs
-SSD random read ........................ 150,000 ns  = 150 µs
-Read 1 MB sequentially from memory ..... 250,000 ns  = 250 µs
-Round trip within same datacenter ...... 500,000 ns  = 0.5 ms
-Read 1 MB sequentially from SSD* ..... 1,000,000 ns  =   1 ms
-Disk seek ........................... 10,000,000 ns  =  10 ms
-Read 1 MB sequentially from disk .... 20,000,000 ns  =  20 ms
-Send packet CA->Netherlands->CA .... 150,000,000 ns  = 150 ms
 ```
 
 ### Formulas
