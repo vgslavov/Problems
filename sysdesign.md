@@ -254,6 +254,8 @@ Real-world systems frequently need both availability and consistency - just for 
 
 #### Consistency
 
+A.k.a. linearizability
+
 * **Distributed Transactions**: Ensuring multiple data stores (like cache and database) remain in sync through two-phase commit protocols.
 * **Single-Node Solutions**: Using a single database instance to avoid propagation issues entirely.
 * **Technology Choices**
@@ -328,6 +330,11 @@ Real-world systems frequently need both availability and consistency - just for 
 * performance cost
     * relax durability for speed
     * `synchronous_commit = off` writes not on disk can be lost on crash
+
+### ACID-C vs CAP-C
+
+* ACID-C: data obeys the rules
+* CAP-C: all replicas agree on what the data is
 
 ### SQL
 
