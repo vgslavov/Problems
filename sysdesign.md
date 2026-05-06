@@ -22,6 +22,7 @@
     - [Consistency](#consistency-1)
     - [Isolation](#isolation)
     - [Durability](#durability)
+  - [ACID-C vs CAP-C](#acid-c-vs-cap-c)
   - [SQL](#sql)
     - [Commands](#commands)
   - [Caching](#caching)
@@ -102,7 +103,13 @@
 - [Appendix](#appendix)
   - [Powers of 2](#powers-of-2)
   - [Powers of 10](#powers-of-10)
-  - [Time](#time)
+  - [Time Constants](#time-constants)
+  - [Traffic Estimates](#traffic-estimates)
+    - [QPS ↔ Traffic](#qps--traffic)
+    - [DAU → QPS](#dau-%E2%86%92-qps)
+    - [Storage Rate](#storage-rate)
+    - [Read/Write Ratios (typical defaults)](#readwrite-ratios-typical-defaults)
+    - [Common Object Sizes](#common-object-sizes)
   - [Modern Hardware Limits](#modern-hardware-limits)
   - [Storage](#storage)
   - [Latencies](#latencies)
@@ -1479,14 +1486,72 @@ Power of 1000	Number          Prefix
 5	            Quadrillion     Peta
 ```
 
-### Time
+### Time Constants
 
-* `86,400 s/day ~ 10^5 s`
-* 1 million reqs/s: `10^6 reqs/s / 10^5 s ~ 10 reqs/s` (= 12 reqs/s)
+Round numbers worth memorizing:
+* 1 day ≈ `10^5` s (exact: 86,400)
+* 1 month ≈ `2.5 × 10^6` s
+* 1 year ≈ `3 × 10^7` s (mnemonic: `π × 10^7`)
+
+Examples:
+* 1 million reqs/day: `10^6 reqs/day / 10^5 s ~ 10 reqs/s` (= 12 reqs/s)
 * 2.5 million secs/month
 * 1 reqs/second = 2.5 million req/month
 * 40 reqs/second = 100 million reqs/month
 * 400 reqs/second = 1 billion reqs/month
+
+### Traffic Estimates
+
+#### QPS ↔ Traffic
+
+```
+QPS         per day      per month    per year
+---------------------------------------------------
+1           ~86k         ~2.5M        ~30M
+10          ~1M          ~25M         ~300M
+100         ~10M         ~250M        ~3B
+1k          ~100M        ~2.5B        ~30B
+10k         ~1B          ~25B         ~300B
+```
+
+Inverse shortcuts:
+
+* 1 QPS = 2.5M reqs/month
+* 40 QPS = 100M reqs/month
+* 400 QPS = 1B reqs/month
+* 1M reqs/day ≈ 12 QPS
+
+#### DAU → QPS
+
+```
+avg QPS  ≈ DAU × actions_per_user / 86,400
+peak QPS ≈ 2-3 × avg QPS
+```
+
+Example: 100M DAU × 10 actions/day ≈ 1B/day ≈ 12k avg QPS, ~30k peak.
+
+#### Storage Rate
+
+Scales linearly — pick a unit and multiply:
+
+* 1 KB/event × 1k events/s = 1 MB/s ≈ 85 GB/day ≈ 30 TB/year
+* 1 MB/event × 1k events/s = 1 GB/s ≈ 85 TB/day ≈ 30 PB/year
+
+#### Read/Write Ratios (typical defaults)
+
+* Social feeds, news: 100:1 to 1000:1 (read-heavy)
+* E-commerce: ~10:1
+* Chat/messaging: ~1:1
+* Analytics ingest, logging: write-heavy (1:100+)
+
+#### Common Object Sizes
+
+* `int`: 4B, `long`/timestamp: 8B, UUID: 16B
+* typical DB row (few fields): ~100B – 1KB
+* tweet / short message: ~300B
+* HTTP req/resp headers: ~1KB
+* typical JSON API response: 1 – 10KB
+* (see [Storage](#storage) for media sizes)
 
 ### Modern Hardware Limits
 [as of 2025]
