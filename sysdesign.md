@@ -74,20 +74,21 @@
     - [Replication](#replication)
     - [Transactions](#transactions)
     - [Use Cases](#use-cases-1)
-- [LeetCode Design Template](#leetcode-design-template)
-  - [Feature Expectations](#feature-expectations)
-  - [Estimations](#estimations)
-  - [Design Goals](#design-goals)
-  - [High Level Design](#high-level-design)
-  - [Deep Dive](#deep-dive)
-  - [Justify](#justify)
-- [Hello Interview Design Template](#hello-interview-design-template)
-  - [Requirements](#requirements)
-  - [Core Entities](#core-entities)
-  - [API or System Interface](#api-or-system-interface)
-  - [Data Flow](#data-flow)
-  - [High-Level Design](#high-level-design)
-  - [Deep Dive](#deep-dive-1)
+- [Templates](#templates)
+  - [LeetCode Design Template](#leetcode-design-template)
+    - [Feature Expectations](#feature-expectations)
+    - [Estimations](#estimations)
+    - [Design Goals](#design-goals)
+    - [High Level Design](#high-level-design)
+    - [Deep Dive](#deep-dive)
+    - [Justify](#justify)
+  - [Hello Interview Design Template](#hello-interview-design-template)
+    - [Requirements](#requirements)
+    - [Core Entities](#core-entities)
+    - [API or System Interface](#api-or-system-interface)
+    - [Data Flow](#data-flow)
+    - [High-Level Design](#high-level-design)
+    - [Deep Dive](#deep-dive-1)
 - [System Requirements](#system-requirements)
 - [Non-functional Requirements](#non-functional-requirements)
   - [Availability](#availability-1)
@@ -1168,9 +1169,11 @@ Alternatives for:
     * DynamoDB for managed scalability
     * Cassandra for write-heavy workloads
 
-## LeetCode Design Template
+## Templates
 
-### Feature Expectations
+### LeetCode Design Template
+
+#### Feature Expectations
 [5 min]
 
 1. Use cases
@@ -1179,7 +1182,7 @@ Alternatives for:
 4. How many will use
 5. Usage patterns
 
-### Estimations
+#### Estimations
 [5 min]
 
 1. Throughput (QPS for read and write queries)
@@ -1194,7 +1197,7 @@ Alternatives for:
     - How much RAM and how many machines do we need for us to achieve this ?
     - Amount of data you want to store in disk/ssd
 
-### Design Goals
+#### Design Goals
 [5 min]
 
 1. Latency and Throughput requirements
@@ -1203,7 +1206,7 @@ Alternatives for:
     * Failover/replication => availability
 
 
-### High Level Design
+#### High Level Design
 [5-10 min]
 
 1. APIs for Read/Write scenarios for crucial components
@@ -1211,7 +1214,7 @@ Alternatives for:
 3. Basic algorithm
 4. High level design for Read/Write scenario
 
-### Deep Dive
+#### Deep Dive
 [15-20 min]
 
 1. Scaling the algorithm
@@ -1247,14 +1250,14 @@ Alternatives for:
         - REST
         - RPC
 
-### Justify
+#### Justify
 [5 min]
 
 1. Throughput of each layer
 2. Latency caused between each layer
 3. Overall latency justification
 
-## Hello Interview Design Template
+### Hello Interview Design Template
 
 * Product Design Questions
 ```
@@ -1269,7 +1272,7 @@ Requirements -> System Interface & Data Flow -> High-Level Design -> Deep Dive
     * and what you are NOT doing
     * and why
 
-### Requirements
+#### Requirements
 [5 min]
 
 1. Functional: *features* of system
@@ -1282,7 +1285,7 @@ Requirements -> System Interface & Data Flow -> High-Level Design -> Deep Dive
     * ask to come back to it during high-level design
     * if the result will have a direct influence on design
 
-### Core Entities
+#### Core Entities
 [2 min]
 
 * required for Product Design Qs
@@ -1291,7 +1294,7 @@ Requirements -> System Interface & Data Flow -> High-Level Design -> Deep Dive
 * tables in storage
 * define/document tables next to high-level design for easier updates
 
-### API or System Interface
+#### API or System Interface
 [5 min]
 
 * API for Product Design
@@ -1308,7 +1311,7 @@ Requirements -> System Interface & Data Flow -> High-Level Design -> Deep Dive
 * go over each functional requirement and define an API call
 * use core entities to satisfy functional requirements
 
-### Data Flow
+#### Data Flow
 [5 min]
 
 * optional for Product Design Qs
@@ -1316,7 +1319,7 @@ Requirements -> System Interface & Data Flow -> High-Level Design -> Deep Dive
 * should satisfy functional requirements
 * do for Web Crawler & data pipelineing: helps with high-level design
 
-### High-Level Design
+#### High-Level Design
 [10-15min]
 
 * satisfy functional requirements
@@ -1328,7 +1331,7 @@ Requirements -> System Interface & Data Flow -> High-Level Design -> Deep Dive
     * maintain/own by different teams
 * don't leave in design obviously non-scalable components
 
-### Deep Dive
+#### Deep Dive
 [10 min]
 
 * satisfy non-functional requirements
